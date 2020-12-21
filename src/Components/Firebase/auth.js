@@ -20,23 +20,17 @@ var provider = new firebase.auth.GoogleAuthProvider();
 
 //set up your function for the google sign in
 export function signInWithGoogle() {
-  auth
-    .signInWithRedirect(provider)
-    // .getRedirectResult()
-    .catch(function (error) {
-      var errorCode = error.code;
-    });
+  return (
+    auth
+      .signInWithRedirect(provider)
+      // .getRedirectResult()
+      .catch(function (error) {
+        var errorCode = error.code;
+      })
+  );
 }
 
 //the logout function - removes cookies etc
 export function logout() {
   return auth.signOut().then().catch(console.error);
 }
-
-var admin = require("firebase-admin");
-
-var serviceAccount = require("path/to/serviceAccountKey.json");
-
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
-});
