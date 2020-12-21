@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Redirect, Route } from "react-router-dom";
 import { useAuthContext } from "../authContext";
+import Loading from "../Pages/Loading/loading";
 
 export default function UserSignIn({
   component: Component,
@@ -25,7 +26,7 @@ export default function UserSignIn({
   }, [authUser]);
 
   if (loading) {
-    return <p>LOADING!!</p>;
+    return <Loading />;
   }
 
   return authUser ? (

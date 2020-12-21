@@ -10,9 +10,12 @@ export default function Homepage({ user, setUser }) {
   console.log(user);
 
   return (
-    <div>
-      <p>Homepage</p>
-      <button onClick={signOut}>Log Out</button>
-    </div>
+    user && (
+      <div>
+        <h1>Homepage</h1>
+        <p>Hello {user.username}</p>
+        <button onClick={signOut}>Log Out</button>
+      </div>
+    )
   );
 }
