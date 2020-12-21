@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { Redirect } from "react-router-dom";
+import { useAuthContext } from "../../authContext";
 
 //auth
 import firebase from "firebase/app";
@@ -8,37 +9,36 @@ import { signInWithGoogle } from "../../Components/Firebase/auth";
 import { logout } from "../../Components/Firebase/auth";
 
 export default function UserSignIn({ setUser }) {
-  const [authUser, loading, error] = useAuthState(firebase.apps[0].auth());
-  console.log(authUser);
+  const [authUser, loading, error] = useAuthContext();
+  // console.log(authUser);
 
-  useEffect(() => {
-    if (authUser) {
-      const newUser = {
-        username: authUser.displayName,
-        uid: authUser.uid,
-        email: authUser.email,
-        image: authUser.photoURL,
-        lastSignIn: authUser.metadata.lastSignInTime,
-      };
-      setUser(newUser);
-    }
-  }, [authUser]);
+  // useEffect(() => {
+  //   if (authUser) {
+  //     const newUser = {
+  //       username: authUser.displayName,
+  //       uid: authUser.uid,
+  //       email: authUser.email,
+  //       image: authUser.photoURL,
+  //       lastSignIn: authUser.metadata.lastSignInTime,
+  //     };
+  //     setUser(newUser);
+  //   }
+  // }, [authUser]);
 
   function handleGoogle() {
     signInWithGoogle();
   }
 
-  return (
+  if (loading) {
+    return <p>LOADING!!</p>;
+  }
+
+  return authUser ? (
+    <Redirect to={"/"}></Redirect>
+  ) : (
     <div>
-      {!authUser && !loading && <p>Hello random person</p>}
-      {!authUser && !loading && <button onClick={handleGoogle}>Log In</button>}
-
-      {authUser && <Redirect to="/"></Redirect>}
-      {/* {authUser && <button onClick={logout}>Log Out</button>} */}
-
-      {loading && <p>LOADING!!</p>}
-
-      {error && <p>Error!</p>}
+      <p>Hello random person</p>
+      <button onClick={handleGoogle}>Log In</button>
     </div>
   );
 }

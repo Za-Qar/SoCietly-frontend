@@ -1,12 +1,15 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
-import App from "./App/App";
+import Index from "./Pages/Index";
 import reportWebVitals from "./reportWebVitals";
+import { AuthProvider } from "./authContext";
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <AuthProvider>
+      <Index />
+    </AuthProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );
