@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { Redirect } from "react-router-dom";
 
 //auth
 import firebase from "firebase/app";
@@ -32,8 +33,8 @@ export default function UserSignIn({ setUser }) {
       {!authUser && !loading && <p>Hello random person</p>}
       {!authUser && !loading && <button onClick={handleGoogle}>Log In</button>}
 
-      {authUser && <p>Hello {authUser.displayName}</p>}
-      {authUser && <button onClick={logout}>Log Out</button>}
+      {authUser && <Redirect to="/"></Redirect>}
+      {/* {authUser && <button onClick={logout}>Log Out</button>} */}
 
       {loading && <p>LOADING!!</p>}
 

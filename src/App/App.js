@@ -15,7 +15,7 @@ function App() {
           <UserSignIn setUser={setUser} />
         </Route>
         <Route path="/">
-          <Homepage user={user} />
+          <Homepage user={user} setUser={setUser} />
         </Route>
       </Switch>
     </Router>
