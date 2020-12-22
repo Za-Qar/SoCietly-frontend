@@ -18,8 +18,6 @@ export default function UserSignIn({
   const [authUser, loading, error] = useAuthContext();
   const [user, setUser] = useUserContext();
 
-  console.log(props);
-
   useEffect(() => {
     if (authUser) {
       const newUser = {

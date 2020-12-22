@@ -7,13 +7,15 @@ import { useUserContext } from "../../Context/userContext";
 
 export default function ProfilePage() {
   const [user] = useUserContext();
-  console.log(user);
+
   return (
-    <div>
-      <UserInfo user={user} />
-      <UserSkills user={user} />
-      <UserIntro user={user} />
-      <UserJourney user={user} />
-    </div>
+    user && (
+      <div>
+        <UserInfo user={user} />
+        <UserSkills user={user} />
+        <UserIntro user={user} />
+        <UserJourney user={user} />
+      </div>
+    )
   );
 }

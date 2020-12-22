@@ -3,9 +3,9 @@ export default function UserJourney({ user }) {
   return (
     journey && (
       <div>
-        {journey.map((item) => {
+        {journey.map((item, index) => {
           return (
-            <div>
+            <div key={index}>
               <h4>{item.jobTitle}</h4>
               <h5>{item.employer}</h5>
               <h5>{item.startDate}</h5>

@@ -16,7 +16,7 @@ export default function Index() {
   return (
     <Router>
       <Switch>
-        <AuthGuard component={Homepage} path={"/"} exact />
+        <AuthGuard component={Homepage} path={"/"} props={user} exact />
         <Route path="/login" component={SignIn}></Route>
         <AuthGuard
           component={ProfilePage}
