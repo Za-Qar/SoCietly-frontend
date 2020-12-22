@@ -38,7 +38,7 @@ export default function UserSignIn({
   return authUser ? (
     <Route
       path={path}
-      render={() => <Component user={user} setUser={setUser} props={props} />}
+      render={() => <Component props={props} />}
       exact={exact}
     ></Route>
   ) : (
