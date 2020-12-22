@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Redirect } from "react-router-dom";
-import { useAuthContext } from "../../authContext";
-import Loading from "../Loading/loading";
+import { useAuthContext } from "../../Context/authContext";
+import Loading from "../../Components/Loading/loading";
 
 //auth
 import { signInWithGoogle } from "../../Components/Firebase/auth";

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Redirect, Route } from "react-router-dom";
-import { useAuthContext } from "../authContext";
-import Loading from "../Pages/Loading/loading";
+import { useAuthContext } from "../Context/authContext";
+import Loading from "../Components/Loading/loading";
 
 export default function UserSignIn({
   component: Component,
