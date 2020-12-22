@@ -7,8 +7,6 @@ export default function Homepage({ user, setUser }) {
     setUser(null);
   }
 
-  console.log(user);
-
   return (
     user && (
       <div>

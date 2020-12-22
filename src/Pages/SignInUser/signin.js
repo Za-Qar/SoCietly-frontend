@@ -1,10 +1,15 @@
-import React, { useEffect } from "react";
+//React
+import React from "react";
 import { Redirect } from "react-router-dom";
-import { useAuthContext } from "../../Context/authContext";
-import Loading from "../../Components/Loading/loading";
 
-//auth
+//Context
+import { useAuthContext } from "../../Context/authContext";
+
+//Auth
 import { signInWithGoogle } from "../../Components/Firebase/auth";
+
+//Components
+import Loading from "../../Components/Loading/loading";
 
 export default function UserSignIn({ setUser }) {
   const [authUser, loading, error] = useAuthContext();

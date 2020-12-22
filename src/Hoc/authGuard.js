@@ -1,6 +1,11 @@
+//React
 import React, { useEffect, useState } from "react";
 import { Redirect, Route } from "react-router-dom";
+
+//Context
 import { useAuthContext } from "../Context/authContext";
+
+//Component
 import Loading from "../Components/Loading/loading";
 
 export default function UserSignIn({
@@ -10,7 +15,6 @@ export default function UserSignIn({
 }) {
   const [authUser, loading, error] = useAuthContext();
   const [user, setUser] = useState(null);
-  console.log(authUser);
 
   useEffect(() => {
     if (authUser) {
