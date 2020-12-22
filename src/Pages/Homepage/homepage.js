@@ -1,7 +1,12 @@
 //components
 import { logout } from "../../Components/Firebase/auth";
 
-export default function Homepage({ user, setUser }) {
+//Context
+import { useUserContext } from "../../Context/userContext";
+
+export default function Homepage() {
+  const [user, setUser] = useUserContext();
+
   function signOut() {
     logout();
     setUser(null);

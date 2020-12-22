@@ -6,8 +6,8 @@ import AuthGuard from "../../Hoc/authGuard";
 import ProfilePage from "../Profile/profile";
 
 //Pages
-import App from "../../App/App";
 import SignIn from "../SignInUser/signin";
+import Homepage from "../Homepage/homepage";
 
 //Components
 import { user } from "../../Components/userData";
@@ -16,7 +16,7 @@ export default function Index() {
   return (
     <Router>
       <Switch>
-        <AuthGuard component={App} path={"/"} exact />
+        <AuthGuard component={Homepage} path={"/"} exact />
         <Route path="/login" component={SignIn}></Route>
         <AuthGuard
           component={ProfilePage}

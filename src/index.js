@@ -1,14 +1,17 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
-import Index from "./Pages/Index";
 import reportWebVitals from "./reportWebVitals";
 import { AuthProvider } from "./Context/authContext";
+import { UserProvider } from "./Context/userContext";
+import App from "./App/App";
 
 ReactDOM.render(
   <React.StrictMode>
     <AuthProvider>
-      <Index />
+      <UserProvider>
+        <App />
+      </UserProvider>
     </AuthProvider>
   </React.StrictMode>,
   document.getElementById("root")
