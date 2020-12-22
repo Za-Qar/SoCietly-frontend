@@ -1,10 +1,10 @@
 import "./App.css";
 
 //Page
-import Homepage from "../Pages/Homepage/homepage";
+import Index from "../Pages/Index";
 
-function App({ user, setUser }) {
-  return <Homepage user={user} setUser={setUser} />;
+function App() {
+  return <Index />;
 }
 
 export default App;

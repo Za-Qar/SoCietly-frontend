@@ -1,5 +1,5 @@
 //React
-import React, { useContext, createContext } from "react";
+import { useContext, createContext } from "react";
 
 //Firebase
 import { useAuthState } from "react-firebase-hooks/auth";
