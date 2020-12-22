@@ -2,7 +2,6 @@
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
 //Pages
-import App from "../../App/App";
 import SignIn from "../SignInUser/signin";
 import Homepage from "../Homepage/homepage";
 

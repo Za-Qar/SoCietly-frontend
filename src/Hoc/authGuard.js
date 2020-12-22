@@ -4,6 +4,7 @@ import { Redirect, Route } from "react-router-dom";
 
 //Context
 import { useAuthContext } from "../Context/authContext";
+import { useUserContext } from "../Context/userContext";
 
 //Component
 import Loading from "../Components/Loading/loading";
@@ -14,7 +15,7 @@ export default function UserSignIn({
   exact = false,
 }) {
   const [authUser, loading, error] = useAuthContext();
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useUserContext();
 
   useEffect(() => {
     if (authUser) {
@@ -34,11 +35,7 @@ export default function UserSignIn({
   }
 
   return authUser ? (
-    <Route
-      path={path}
-      render={() => <Component user={user} setUser={setUser} />}
-      exact={exact}
-    ></Route>
+    <Route path={path} render={() => <Component />} exact={exact}></Route>
   ) : (
     <Redirect to={"/login"}></Redirect>
   );
