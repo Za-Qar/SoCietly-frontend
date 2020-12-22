@@ -27,6 +27,7 @@ export function signInWithGoogle() {
       // .getRedirectResult()
       .catch(function (error) {
         var errorCode = error.code;
+        return errorCode;
       })
   );
 }

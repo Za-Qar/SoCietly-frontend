@@ -12,6 +12,7 @@ import Loading from "../Components/Loading/loading";
 export default function UserSignIn({
   component: Component,
   path = "/",
+  props,
   exact = false,
 }) {
   const [authUser, loading, error] = useAuthContext();
@@ -35,7 +36,11 @@ export default function UserSignIn({
   }
 
   return authUser ? (
-    <Route path={path} render={() => <Component />} exact={exact}></Route>
+    <Route
+      path={path}
+      render={() => <Component user={user} setUser={setUser} props={props} />}
+      exact={exact}
+    ></Route>
   ) : (
     <Redirect to={"/login"}></Redirect>
   );
