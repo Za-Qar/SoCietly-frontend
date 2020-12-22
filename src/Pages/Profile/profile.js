@@ -2,13 +2,18 @@
 import UserInfo from "../../Components/UserInfo/userinfo";
 import UserSkills from "../../Components/UserSkills/userskills";
 import UserIntro from "../../Components/UserIntro/userintro";
+import UserJourney from "../../Components/UserJourney/journey";
+import { useUserContext } from "../../Context/userContext";
 
-export default function ProfilePage({ props }) {
+export default function ProfilePage() {
+  const [user] = useUserContext();
+  console.log(user);
   return (
     <div>
-      <UserInfo user={props} />
-      <UserSkills user={props} />
-      <UserIntro user={props} />
+      <UserInfo user={user} />
+      <UserSkills user={user} />
+      <UserIntro user={user} />
+      <UserJourney user={user} />
     </div>
   );
 }

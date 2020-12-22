@@ -18,14 +18,23 @@ export default function UserSignIn({
   const [authUser, loading, error] = useAuthContext();
   const [user, setUser] = useUserContext();
 
+  console.log(props);
+
   useEffect(() => {
     if (authUser) {
       const newUser = {
+        uid: props.uid,
         username: authUser.displayName,
-        uid: authUser.uid,
         email: authUser.email,
-        image: authUser.photoURL,
+        profileImage: authUser.photoURL,
         lastSignIn: authUser.metadata.lastSignInTime,
+        admin: props.admin,
+        cohort: props.cohort,
+        currentRole: props.currentRole,
+        currentEmployer: props.currentEmployer,
+        skills: props.skills,
+        introduction: props.introduction,
+        journey: props.journey,
       };
       setUser(newUser);
     }
@@ -36,11 +45,7 @@ export default function UserSignIn({
   }
 
   return authUser ? (
-    <Route
-      path={path}
-      render={() => <Component props={props} />}
-      exact={exact}
-    ></Route>
+    <Route path={path} render={() => <Component />} exact={exact}></Route>
   ) : (
     <Redirect to={"/login"}></Redirect>
   );
