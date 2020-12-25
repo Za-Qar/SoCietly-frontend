@@ -8,6 +8,7 @@ import ProfilePage from "../Profile/profile";
 //Pages
 import SignIn from "../SignInUser/signin";
 import Homepage from "../Homepage/homepage";
+import Event from "../../Components/Event/event.js";
 
 //Components
 import { user } from "../../Components/userData";
@@ -18,6 +19,15 @@ export default function Index() {
       <Switch>
         <AuthGuard component={Homepage} path={"/"} props={user} exact />
         <Route path="/login" component={SignIn}></Route>
+        <AuthGuard
+          component={ProfilePage}
+          path={"/profile"}
+          props={user}
+          exact
+        />
+
+        <AuthGuard component={Event} path={"/event"} props={user} exact />
+        <Route path="/event" component={SignIn}></Route>
         <AuthGuard
           component={ProfilePage}
           path={"/profile"}
