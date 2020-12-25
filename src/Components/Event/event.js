@@ -39,7 +39,7 @@ function Event() {
     console.log(user);
   }
 
-  if (complete === false) {
+  if (!complete) {
     return (
       <div>
         <button onClick={consoleLog}>Get User</button>
@@ -92,7 +92,7 @@ function Event() {
         </form>
       </div>
     );
-  } else if (complete === true) {
+  } else if (complete) {
     return (
       <div>
         <p>Completed confirmation design comes here</p>
