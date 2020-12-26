@@ -9,6 +9,8 @@ import ProfilePage from "../Profile/profile";
 import SignIn from "../SignInUser/signin";
 import Homepage from "../Homepage/homepage";
 import Event from "../../Components/Event/event.js";
+import Map from "../../Components/Maps/maps.js";
+import MapTwo from "../../Components/Map/map.js";
 
 //Components
 import { user } from "../../Components/userData";
@@ -27,6 +29,24 @@ export default function Index() {
         />
 
         <AuthGuard component={Event} path={"/event"} props={user} exact />
+        <Route path="/event" component={SignIn}></Route>
+        <AuthGuard
+          component={ProfilePage}
+          path={"/profile"}
+          props={user}
+          exact
+        />
+
+        <AuthGuard component={Map} path={"/map"} props={user} exact />
+        <Route path="/event" component={SignIn}></Route>
+        <AuthGuard
+          component={ProfilePage}
+          path={"/profile"}
+          props={user}
+          exact
+        />
+
+        <AuthGuard component={MapTwo} path={"/mapTwo"} props={user} exact />
         <Route path="/event" component={SignIn}></Route>
         <AuthGuard
           component={ProfilePage}
