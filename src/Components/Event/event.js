@@ -1,12 +1,18 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 
+import Maps from "../Maps/maps.js";
+import "./event.css";
+
 import { useUserContext } from "../../Context/userContext";
 
 function Event() {
   const [user] = useUserContext();
   const { register, handleSubmit, watch, errors } = useForm();
   const [complete, setComplete] = useState(false);
+
+  //For Maps
+  const [markers, setMarkers] = useState([]);
 
   let createEvent = (msg) => {
     console.log("User Input recieved", msg);
@@ -20,7 +26,7 @@ function Event() {
         time: msg.time,
         description: msg.description,
         image: msg.image,
-        location: msg.location,
+        location: markers,
         enableVolunteers: msg.eventVolunteers,
         attendingList: [],
         likes: 0,
@@ -37,6 +43,7 @@ function Event() {
 
   function consoleLog() {
     console.log(user);
+    console.log(markers);
   }
 
   if (!complete) {
@@ -79,7 +86,12 @@ function Event() {
           </span>
           <span>
             <p>Location:</p>
-            <input name="location" ref={register} required />
+            <div>
+              <input name="location" ref={register} />
+              <Maps markers={markers} setMarkers={setMarkers} />
+
+              <button onClick={consoleLog}>Console.log</button>
+            </div>
           </span>
           <span>
             <p>Volunteers:</p>

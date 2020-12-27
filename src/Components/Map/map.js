@@ -20,8 +20,8 @@ import ReactMapGl from "react-map-gl";
 
 function MapTwo() {
   const [viewport, setViewport] = useState({
-    latitude: 45.4211,
-    longitude: -75.6903,
+    longitude: -1.890981567759743,
+    latitude: 52.47653701744309,
     width: "100vp",
     height: "100vh",
     zoom: 10,
