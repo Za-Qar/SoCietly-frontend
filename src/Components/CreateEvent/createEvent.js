@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 
 import Maps from "../Maps/maps.js";
-import "./event.css";
+import "./createEvent.css";
 
 import { useUserContext } from "../../Context/userContext";
 
-function Event() {
+function CreateEvent() {
   const [user] = useUserContext();
   const { register, handleSubmit, watch, errors } = useForm();
   const [complete, setComplete] = useState(false);
@@ -87,9 +87,7 @@ function Event() {
           <span>
             <p>Location:</p>
             <div>
-              <input name="location" ref={register} />
-              <Maps markers={markers} setMarkers={setMarkers} />
-
+              <Maps markers={markers} setMarkers={setMarkers} required />
               <button onClick={consoleLog}>Console.log</button>
             </div>
           </span>
@@ -113,7 +111,7 @@ function Event() {
   }
 }
 
-export default Event;
+export default CreateEvent;
 
 // onClick={(e) => {
 //     e.preventDefault();
