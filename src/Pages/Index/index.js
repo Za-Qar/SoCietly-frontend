@@ -35,31 +35,6 @@ export default function Index() {
           props={user}
           exact
         />
-        <Route path="/event" component={SignIn}></Route>
-        <AuthGuard
-          component={ProfilePage}
-          path={"/profile"}
-          props={user}
-          exact
-        />
-
-        <AuthGuard component={Maps} path={"/map"} props={user} exact />
-        <Route path="/event" component={SignIn}></Route>
-        <AuthGuard
-          component={ProfilePage}
-          path={"/profile"}
-          props={user}
-          exact
-        />
-
-        <AuthGuard component={MapTwo} path={"/mapTwo"} props={user} exact />
-        <Route path="/event" component={SignIn}></Route>
-        <AuthGuard
-          component={ProfilePage}
-          path={"/profile"}
-          props={user}
-          exact
-        />
 
         <AuthGuard
           component={GetAllEvents}
@@ -67,13 +42,10 @@ export default function Index() {
           props={user}
           exact
         />
-        <Route path="/event" component={SignIn}></Route>
-        <AuthGuard
-          component={ProfilePage}
-          path={"/profile"}
-          props={user}
-          exact
-        />
+
+        {/* For Development Purposes */}
+
+        <AuthGuard component={MapTwo} path={"/mapTwo"} props={user} exact />
       </Switch>
     </Router>
   );
