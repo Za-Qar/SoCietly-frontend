@@ -18,21 +18,50 @@ export default function UserSignIn({
   const [authUser, loading, error] = useAuthContext();
   const [user, setUser] = useUserContext();
 
-  const [userData, setUserData] = useState("");
+  const [userData, setUserData] = useState();
 
-  async function getUser() {
-    if (authUser) {
-      let res = await fetch(
-        `http://localhost:3000/user/email/${authUser.email}`
-      );
-      let data = await res.json();
-      setUserData(data.payload[0]);
-    }
-  }
+  console.log({ userData });
+  console.log({ authUser });
+  console.log({ user });
 
   useEffect(() => {
+    async function getUser() {
+      if (authUser) {
+        let res = await fetch(
+          `http://localhost:3000/user/email/${authUser.email}`
+        );
+        let data = await res.json();
+        setUserData(data.payload[0]);
+      }
+    }
     getUser();
   }, [authUser]);
+
+  // async function getUser() {
+  //   if (authUser) {
+  //     let res = await fetch(
+  //       `http://localhost:3000/user/email/${authUser.email}`
+  //     );
+  //     let data = await res.json();
+  //     setUserData(data.payload[0]);
+
+  //     const newUser = {
+  //       uid: userData.id,
+  //       username: userData.name,
+  //       email: authUser.email,
+  //       profileImage: authUser.photoURL,
+  //       lastSignIn: authUser.metadata.lastSignInTime,
+  //       admin: userData.admin,
+  //       cohort: userData.cohort,
+  //       currentRole: userData.currentrole,
+  //       currentEmployer: userData.currentemployer,
+  //       skills: userData.skills,
+  //       introduction: userData.introduction,
+  //       journey: props.journey,
+  //     };
+  //     setUser(newUser);
+  //   }
+  // }
 
   function logging() {
     console.log("it is logging");
@@ -40,9 +69,9 @@ export default function UserSignIn({
   }
 
   useEffect(() => {
-    if (authUser) {
+    if (authUser && userData) {
       const newUser = {
-        uid: props.uid,
+        uid: userData.id,
         username: userData.name,
         email: authUser.email,
         profileImage: authUser.photoURL,

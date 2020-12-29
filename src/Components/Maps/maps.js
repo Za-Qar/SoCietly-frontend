@@ -16,7 +16,7 @@ const options = {
 
 function Maps({ markers, setMarkers }) {
   const { isLoaded, loadError } = useLoadScript({
-    googleMapsApiKey: "AIzaSyBn62Gatuw8cbCB2LUcuNGv1mVGgakvh4Y",
+    // googleMapsApiKey: "AIzaSyBn62Gatuw8cbCB2LUcuNGv1mVGgakvh4Y",
     libraries,
   });
 
