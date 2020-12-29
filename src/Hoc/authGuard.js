@@ -50,6 +50,7 @@ export default function UserSignIn({
         currentRole: userData.currentrole,
         currentEmployer: userData.currentemployer,
         skills: userData.skills,
+        social: userData.social,
         introduction: userData.introduction,
         journey: props.journey,
       };
