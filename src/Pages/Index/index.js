@@ -8,10 +8,10 @@ import ProfilePage from "../Profile/profile";
 //Pages
 import SignIn from "../SignInUser/signin";
 import Homepage from "../Homepage/homepage";
-import CreateEvent from "../../Components/CreateEvent/createEvent.js";
+import CreateEvent from "../CreateEvent/createEvent.js";
 import Maps from "../../Components/Maps/maps.js";
 import MapTwo from "../../Components/Map/map.js";
-import GetAllEvents from "../../Components/Events/events.js";
+import GetAllEvents from "../Events/events.js";
 
 //Components
 import { user } from "../../Components/userData";
@@ -28,28 +28,24 @@ export default function Index() {
           props={user}
           exact
         />
-
         <AuthGuard
           component={CreateEvent}
           path={"/CreateEvent"}
           props={user}
           exact
         />
-
         <AuthGuard
           component={GetAllEvents}
           path={"/events"}
           props={user}
           exact
         />
-
         {/* For Development Purposes */}
 
-        <AuthGuard component={MapTwo} path={"/mapTwo"} props={user} exact />
+        {/* <AuthGuard component={MapTwo} path={"/mapTwo"} props={user} exact /> */}
       </Switch>
     </Router>
   );
 }
-
 
 //hello this is from laura
