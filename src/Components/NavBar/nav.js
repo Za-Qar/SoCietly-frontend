@@ -36,7 +36,7 @@ export default function NavBar() {
         <a href="http://localhost:3000/contact" className="links">
           <button>Contact</button>
         </a>
-        <a href="http://localhost:3000/contact" className="links">
+        <a href="http://localhost:3000/" className="links">
           <button onClick={signOut}>Log Out</button>
         </a>
       </ul>

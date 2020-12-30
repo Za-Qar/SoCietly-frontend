@@ -21,10 +21,10 @@ export default function JobUpdates() {
   }, []);
 
   return (
-    jobUpdates && (
-      <div>
-        <h4>Job Updates</h4>
-        {jobUpdates.map((item, index) => {
+    <div>
+      <h4>Job Updates</h4>
+      {jobUpdates &&
+        jobUpdates.map((item, index) => {
           return (
             <div key={index}>
               <h5>{item.startdate}</h5>
@@ -34,13 +34,15 @@ export default function JobUpdates() {
                 alt={`${item.name} profile`}
               />
               <p>
-                🎉 {item.name} {item.surname} started a new job at{" "}
-                {item.employer} as a {item.jobtitle}!
+                🎉 {item.name} {item.surname} started a new job!
               </p>
+              <h5>
+                {" "}
+                {item.jobtitle} at {item.employer}
+              </h5>
             </div>
           );
         })}
-      </div>
-    )
+    </div>
   );
 }
