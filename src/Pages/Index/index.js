@@ -15,10 +15,12 @@ import GetAllEvents from "../Events/events.js";
 
 //Components
 import { user } from "../../Components/userData";
+import NavBar from "../../Components/NavBar/nav";
 
 export default function Index() {
   return (
     <Router>
+      <NavBar />
       <Switch>
         <AuthGuard component={Homepage} path={"/"} props={user} exact />
         <Route path="/login" component={SignIn}></Route>
@@ -47,5 +49,3 @@ export default function Index() {
     </Router>
   );
 }
-
-//hello this is from laura
