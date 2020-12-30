@@ -12,6 +12,7 @@ import CreateEvent from "../CreateEvent/createEvent.js";
 import Maps from "../../Components/Maps/maps.js";
 import MapTwo from "../../Components/Map/map.js";
 import GetAllEvents from "../Events/events.js";
+import Contact from "../Contact/contact";
 
 //Components
 import { user } from "../../Components/userData";
@@ -42,6 +43,7 @@ export default function Index() {
           props={user}
           exact
         />
+        <AuthGuard component={Contact} path={"/contact"} exact />
         {/* For Development Purposes */}
 
         {/* <AuthGuard component={MapTwo} path={"/mapTwo"} props={user} exact /> */}
