@@ -46,7 +46,11 @@ export default function JobUpdates() {
                 />
               </Link>
 
-              <p>
+              <p
+                onClick={() => {
+                  setProfile(item);
+                }}
+              >
                 🎉 {item.name} {item.surname} started a new job!
               </p>
               <h5>

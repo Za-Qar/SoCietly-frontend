@@ -9,21 +9,12 @@ import { useState, useEffect } from "react";
 import { Redirect } from "react-router-dom";
 
 export default function BootcamperProfilePage({ profile }) {
-  const [bootcamper, setBootcamper] = useState();
   const [journey, setJourney] = useState();
+  const [userData, setUserData] = useState();
+  const [bootcamper, setBootcamper] = useState();
 
-  useEffect(() => {
-    async function getUserJourney() {
-      if (bootcamper) {
-        let res = await fetch(
-          `https://falcon5ives.herokuapp.com/journeys/?id=${profile.id}`
-        );
-        let data = await res.json();
-        setJourney(data.payload);
-      }
-    }
-    getUserJourney();
-  }, [bootcamper]);
+  console.log(userData);
+  console.log(journey);
 
   useEffect(() => {
     async function getUser() {
@@ -32,28 +23,47 @@ export default function BootcamperProfilePage({ profile }) {
           `https://falcon5ives.herokuapp.com/users/?email=${profile.email}`
         );
         let data = await res.json();
-        const userData = data.payload[0];
-        console.log(userData);
-        const newUser = {
-          uid: userData.id,
-          username: `${userData.name} ${userData.surname}`,
-          email: userData.email,
-          profileImage: userData.profileimage,
-          admin: userData.admin,
-          cohort: userData.cohort,
-          currentRole: userData.currentrole,
-          currentEmployer: userData.currentemployer,
-          skills: userData.skills,
-          social: userData.social,
-          introduction: userData.introduction,
-          journey: journey ? journey : null,
-        };
+        const user = data.payload[0];
+        // console.log(fetchData);
 
-        setBootcamper(newUser);
+        setUserData(user);
       }
     }
     getUser();
-  }, [journey]);
+  }, [profile]);
+
+  useEffect(() => {
+    async function getUserJourney() {
+      if (userData) {
+        let res = await fetch(
+          `https://falcon5ives.herokuapp.com/journeys/?id=${profile.id}`
+        );
+        let data = await res.json();
+        setJourney(data.payload);
+      }
+    }
+    getUserJourney();
+  }, [userData]);
+
+  useEffect(() => {
+    if (userData) {
+      const newUser = {
+        uid: userData.id,
+        username: `${userData.name} ${userData.surname}`,
+        email: userData.email,
+        profileImage: userData.profileimage,
+        admin: userData.admin,
+        cohort: userData.cohort,
+        currentRole: userData.currentrole,
+        currentEmployer: userData.currentemployer,
+        skills: userData.skills,
+        social: userData.social,
+        introduction: userData.introduction,
+        journey: journey ? journey : null,
+      };
+      setBootcamper(newUser);
+    }
+  }, [userData && journey]);
 
   return profile ? (
     <div>
