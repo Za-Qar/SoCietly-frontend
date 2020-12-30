@@ -18,22 +18,24 @@ function Event({
   volunteerlist,
 }) {
   const [markers, setMarkers] = useState([]);
-
-  return (
-    <div>
-      <p>Event</p>
-      <img src={image} />
-      <div>{likes}</div>
-      <Maps
-        markers={markers}
-        setMarkers={setMarkers}
-        eventMarker={JSON.parse(location[0])}
-      />
-      <button onClick={() => console.log(JSON.parse(location[0]))}>
-        Location
-      </button>
-    </div>
-  );
+  if (volunteerlist)
+    return (
+      <div>
+        <p>Event</p>
+        <h3>{eventname}</h3>
+        <h4>{date}</h4>
+        <h5>{time}</h5>
+        <img src={image} />
+        <div>{likes}</div>
+        <Maps
+          markers={markers}
+          setMarkers={setMarkers}
+          eventMarker={JSON.parse(location[0])}
+        />
+        <p>{description}</p>
+        <button onClick={() => console.log(volunteerlist)}>Location</button>
+      </div>
+    );
 }
 
 export default Event;
