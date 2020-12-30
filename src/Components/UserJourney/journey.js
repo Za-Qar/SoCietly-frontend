@@ -1,9 +1,10 @@
 export default function UserJourney({ user }) {
   const { journey } = user;
   return (
-    journey && (
-      <div>
-        {journey.map((item, index) => {
+    <div>
+      <h3>My Journey</h3>
+      {journey &&
+        journey.map((item, index) => {
           return (
             <div key={index}>
               <h4>{item.jobTitle}</h4>
@@ -13,7 +14,6 @@ export default function UserJourney({ user }) {
             </div>
           );
         })}
-      </div>
-    )
+    </div>
   );
 }
