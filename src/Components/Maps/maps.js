@@ -1,6 +1,8 @@
 import React, { useState, useCallback, useRef } from "react";
 import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
 
+import { v4 as uuidv4 } from "uuid";
+
 const libraries = ["places"];
 const mapContainerStyle = {
   height: "100vh",
@@ -54,7 +56,7 @@ function Maps({ markers, setMarkers }) {
       >
         {markers.map((marker) => (
           <Marker
-            key={`${marker.lat}-${marker.lng}`}
+            key={uuidv4()}
             position={{ lat: marker.lat, lng: marker.lng }}
             icon={{
               //we can add a url: "smth"; to change the location style

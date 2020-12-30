@@ -16,7 +16,7 @@ function CreateEvent() {
 
   let createEvent = (msg) => {
     console.log("User Input recieved", msg);
-    fetch(`http://localhost:3000/events`, {
+    fetch(`https://falcon5ives.herokuapp.com/events`, {
       method: "POST",
       body: JSON.stringify({
         eventName: msg.eventName,
