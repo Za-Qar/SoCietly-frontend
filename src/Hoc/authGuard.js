@@ -33,7 +33,7 @@ export default function UserSignIn({
     async function getUser() {
       if (authUser) {
         let res = await fetch(
-          `http://localhost:3000/users/?email=${authUser.email}`
+          `https://falcon5ives.herokuapp.com/users/?email=${authUser.email}`
         );
         let data = await res.json();
         setUserData(data.payload[0]);
@@ -46,7 +46,7 @@ export default function UserSignIn({
     async function getUserJourney() {
       if (userData) {
         let res = await fetch(
-          `http://localhost:3000/journeys/?id=${userData.id}`
+          `https://falcon5ives.herokuapp.com/journeys/?id=${userData.id}`
         );
         let data = await res.json();
         setJourney(data.payload);
