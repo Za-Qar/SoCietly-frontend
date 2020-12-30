@@ -1,3 +1,4 @@
+//social media images
 import dev from "../../Images/DEV.png";
 import fb from "../../Images/FB.png";
 import insta from "../../Images/Insta.png";

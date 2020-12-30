@@ -1,9 +1,6 @@
-//staff images
-import ben from "../../Images/BenLee.jpeg";
-import joe from "../../Images/JoeTrodden.jpeg";
-
 //components
 import Logo from "../../Components/SocialMedia/logo";
+import Photo from "../../Components/Photos/photos";
 
 export default function Contact() {
   return (
@@ -58,8 +55,10 @@ export default function Contact() {
           bootcamp@schoolofcode.co.uk
         </a>
       </p>
+      <br />
+      <Photo photo="chris" />
       <h3>Chris Meah</h3>
-      <p>Founder and Lead Coach</p>
+      <p>Founder and CEO</p>
       <a
         href="https://www.linkedin.com/in/chrismeah/"
         rel="noreferrer"
@@ -71,7 +70,7 @@ export default function Contact() {
         <Logo logo="twitter" />
       </a>
       <br />
-      <img src={ben} height="100" width="100" alt="Ben Lee" />
+      <Photo photo="ben" />
       <h3>Ben Lee</h3>
       <p>Code Coach</p>
       <a
@@ -84,6 +83,8 @@ export default function Contact() {
       <a href="https://twitter.com/mrbenbot" rel="noreferrer" target="_blank">
         <Logo logo="twitter" />
       </a>
+      <br />
+      <Photo photo="liz" />
       <h3>Liz Kaufman</h3>
       <p>Course Assistant/Coach</p>
       <a
@@ -100,6 +101,8 @@ export default function Contact() {
       >
         <Logo logo="twitter" />
       </a>
+      <br />
+      <Photo photo="tao" />
       <h3>Tao Sharma</h3>
       <p>Course Assistant/Coach</p>
       <a
@@ -109,6 +112,8 @@ export default function Contact() {
       >
         <Logo logo="linkedin" />
       </a>
+      <br />
+      <Photo photo="lizzie" />
       <h3>Liz Edrop</h3>
       <p>Marketing Executive</p>
       <a
@@ -161,17 +166,6 @@ export default function Contact() {
         target="_blank"
       >
         <Logo logo="twitter" />
-      </a>
-      <br />
-      <img src={joe} height="100" width="100" alt="Joe Trodden" />
-      <h3>Joe Trodden</h3>
-      <p>CEO - The Entrepreneur's Ally</p>
-      <a
-        href="https://www.linkedin.com/in/joetrodden/"
-        rel="noreferrer"
-        target="_blank"
-      >
-        <Logo logo="linkedin" />
       </a>
     </div>
   );
