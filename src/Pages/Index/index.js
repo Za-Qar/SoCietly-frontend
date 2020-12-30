@@ -12,12 +12,18 @@ import CreateEvent from "../CreateEvent/createEvent.js";
 import Maps from "../../Components/Maps/maps.js";
 import MapTwo from "../../Components/Map/map.js";
 import GetAllEvents from "../Events/events.js";
+import BootcamperProfilePage from "../BootcamperProfile/Bootcamper";
 
 //Components
 import { user } from "../../Components/userData";
 import NavBar from "../../Components/NavBar/nav";
 
+//Context
+import { useProfileContext } from "../../Context/profileContext";
+
 export default function Index() {
+  const [profile] = useProfileContext();
+
   return (
     <Router>
       <NavBar />
@@ -42,6 +48,10 @@ export default function Index() {
           props={user}
           exact
         />
+        <Route path={"/bootcamper"} exact>
+          <BootcamperProfilePage profile={profile} />
+        </Route>
+
         {/* For Development Purposes */}
 
         {/* <AuthGuard component={MapTwo} path={"/mapTwo"} props={user} exact /> */}
