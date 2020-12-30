@@ -59,7 +59,7 @@ export default function UserSignIn({
     if (authUser && userData) {
       const newUser = {
         uid: userData.id,
-        username: userData.name,
+        username: `${userData.name} ${userData.surname}`,
         email: authUser.email,
         profileImage: authUser.photoURL,
         lastSignIn: authUser.metadata.lastSignInTime,
