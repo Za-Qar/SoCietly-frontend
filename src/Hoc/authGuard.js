@@ -21,14 +21,19 @@ export default function UserSignIn({
   const [userData, setUserData] = useState();
   // user data returned from backend
 
+  const [userJourney, setJourney] = useState();
+  // user journey data returned from backend
+
   const [user, setUser] = useUserContext();
   // user context set with firebase and backend data - context
+
+  console.log(user);
 
   useEffect(() => {
     async function getUser() {
       if (authUser) {
         let res = await fetch(
-          `http://localhost:3000/user/email/${authUser.email}`
+          `http://localhost:3000/users/?email=${authUser.email}`
         );
         let data = await res.json();
         setUserData(data.payload[0]);
@@ -36,6 +41,19 @@ export default function UserSignIn({
     }
     getUser();
   }, [authUser]);
+
+  useEffect(() => {
+    async function getUserJourney() {
+      if (userData) {
+        let res = await fetch(
+          `http://localhost:3000/journeys/?id=${userData.id}`
+        );
+        let data = await res.json();
+        setJourney(data.payload);
+      }
+    }
+    getUserJourney();
+  }, [userData]);
 
   useEffect(() => {
     if (authUser && userData) {
@@ -52,11 +70,11 @@ export default function UserSignIn({
         skills: userData.skills,
         social: userData.social,
         introduction: userData.introduction,
-        journey: props.journey,
+        journey: userJourney,
       };
       setUser(newUser);
     }
-  }, [authUser && userData]);
+  }, [authUser && userData && userJourney]);
 
   if (loading) {
     return <Loading />;
