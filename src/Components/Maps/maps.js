@@ -11,51 +11,18 @@ const options = {
   zoomControl: true,
 };
 
-function Maps({ markers, setMarkers, eventMarker }) {
+function Maps({ marker, setMarker, isEditing }) {
   const { isLoaded, loadError } = useLoadScript({
     // googleMapsApiKey: "AIzaSyBn62Gatuw8cbCB2LUcuNGv1mVGgakvh4Y",
     libraries,
   });
 
-  function eventMarkers() {
-    if (eventMarker) {
-      console.log("setting markers");
-      setMarkers([
-        {
-          lat: eventMarker.lat,
-          lng: eventMarker.lng,
-        },
-      ]);
-    }
+  function onMapClick(e) {
+    setMarker({
+      lat: e.latLng.lat(),
+      lng: e.latLng.lng(),
+    });
   }
-
-  useEffect(() => {
-    eventMarkers();
-  }, []);
-
-  const onMapClick = useCallback((e) => {
-    {
-      console.log("Latitude: ", e.latLng.lat());
-      console.log("Longitude: ", e.latLng.lng());
-      setMarkers([
-        {
-          lat: e.latLng.lat(),
-          lng: e.latLng.lng(),
-        },
-      ]);
-    }
-  }, []);
-
-  // function onMapClick() {
-  //   console.log("Latitude: ", e.latLng.lat());
-  //   console.log("Longitude: ", e.latLng.lng());
-  //   setMarkers([
-  //     {
-  //       lat: e.latLng.lat(),
-  //       lng: e.latLng.lng(),
-  //     },
-  //   ]);
-  // }
 
   const mapRef = useRef();
   const onMapLoad = useCallback((map) => {
@@ -72,24 +39,23 @@ function Maps({ markers, setMarkers, eventMarker }) {
         mapContainerStyle={mapContainerStyle}
         zoom={13}
         center={
-          eventMarker || {
-            lat: 52.47653701744309,
-            lng: -1.890981567759743,
-          }
+          isEditing
+            ? {
+                lat: 52.47653701744309,
+                lng: -1.890981567759743,
+              }
+            : marker
         }
         options={options}
-        onClick={eventMarker ? eventMarkers : onMapClick}
+        onClick={(e) => {
+          isEditing && onMapClick(e);
+        }}
         onLoad={onMapLoad}
       >
-        {markers.map((marker) => (
+        {marker && (
           <Marker
             key={`${marker.lat}-${marker.lng}`}
-            position={
-              eventMarker || {
-                lat: marker.lat,
-                lng: marker.lng,
-              }
-            }
+            position={marker}
             icon={{
               //we can add a url: "smth"; to change the location style
               origin: new window.google.maps.Point(0, 0),
@@ -97,7 +63,7 @@ function Maps({ markers, setMarkers, eventMarker }) {
               scaledSize: new window.google.maps.Size(30, 30),
             }}
           />
-        ))}
+        )}
       </GoogleMap>
     </div>
   );

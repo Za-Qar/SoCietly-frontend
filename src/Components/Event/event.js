@@ -17,7 +17,7 @@ function Event({
   uid,
   volunteerlist,
 }) {
-  const [markers, setMarkers] = useState([]);
+  const [marker, setMarker] = useState(JSON.parse(location[0]));
   if (volunteerlist)
     return (
       <div>
@@ -27,11 +27,7 @@ function Event({
         <h5>{time}</h5>
         <img src={image} />
         <div>{likes}</div>
-        <Maps
-          markers={markers}
-          setMarkers={setMarkers}
-          eventMarker={JSON.parse(location[0])}
-        />
+        <Maps marker={marker} setMarker={setMarker} />
         <p>{description}</p>
         <button onClick={() => console.log(volunteerlist)}>Location</button>
       </div>
