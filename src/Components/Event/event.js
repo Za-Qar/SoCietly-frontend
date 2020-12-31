@@ -17,7 +17,7 @@ function Event({
   uid,
   volunteerlist,
 }) {
-  const [marker, setMarker] = useState(JSON.parse(location[0]));
+  const [marker, setMarker] = useState(JSON.parse(location));
   if (volunteerlist)
     return (
       <div>
