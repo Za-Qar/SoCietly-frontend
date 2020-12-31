@@ -12,11 +12,11 @@ function CreateEvent() {
   const [complete, setComplete] = useState(false);
 
   //For Maps
-  const [markers, setMarkers] = useState([]);
+  const [marker, setMarker] = useState(null);
 
   let createEvent = (msg) => {
     console.log("User Input recieved", msg);
-    fetch(`http://localhost:3000/events`, {
+    fetch(`https://falcon5ives.herokuapp.com/events`, {
       method: "POST",
       body: JSON.stringify({
         eventName: msg.eventName,
@@ -26,7 +26,7 @@ function CreateEvent() {
         time: msg.time,
         description: msg.description,
         image: msg.image,
-        location: markers,
+        location: marker,
         enableVolunteers: msg.eventVolunteers,
         attendingList: [],
         likes: 0,
@@ -43,7 +43,7 @@ function CreateEvent() {
 
   function consoleLog() {
     console.log(user);
-    console.log(markers);
+    console.log(marker);
   }
 
   if (!complete) {
@@ -87,7 +87,7 @@ function CreateEvent() {
           <span>
             <p>Location:</p>
             <div>
-              <Maps markers={markers} setMarkers={setMarkers} required />
+              <Maps marker={marker} setMarker={setMarker} isEditing />
               <button onClick={consoleLog}>Console.log</button>
             </div>
           </span>
