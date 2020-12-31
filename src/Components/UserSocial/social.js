@@ -9,9 +9,9 @@ export default function SocialMedia({ social }) {
             const [[social, link]] = Object.entries(newItem);
 
             return (
-              <a href={link} rel="noreferrer" target="_blank">
+              <a key={item} href={link} rel="noreferrer" target="_blank">
                 {" "}
-                <h6 key={item}>{social}</h6>{" "}
+                <h6>{social}</h6>{" "}
               </a>
             );
           })}
