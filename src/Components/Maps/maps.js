@@ -7,6 +7,11 @@ const mapContainerStyle = {
   width: "100vw",
 };
 
+const center = {
+  lat: 52.47653701744309,
+  lng: -1.890981567759743,
+};
+
 const options = {
   zoomControl: true,
 };
@@ -38,14 +43,7 @@ function Maps({ marker, setMarker, isEditing }) {
         id="map"
         mapContainerStyle={mapContainerStyle}
         zoom={13}
-        center={
-          isEditing
-            ? {
-                lat: 52.47653701744309,
-                lng: -1.890981567759743,
-              }
-            : marker
-        }
+        center={isEditing ? center : marker}
         options={options}
         onClick={(e) => {
           isEditing && onMapClick(e);
