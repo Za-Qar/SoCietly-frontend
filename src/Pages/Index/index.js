@@ -17,6 +17,8 @@ import Event from "../../Components/Event/event.js";
 
 import Contact from "../Contact/contact";
 
+import ReactUploadImage from "../../Components/Upload/upload.js";
+
 //Components
 import { user } from "../../Components/userData";
 import NavBar from "../../Components/NavBar/nav";
@@ -48,8 +50,10 @@ export default function Index() {
         />
 
         <AuthGuard component={Event} path={"/event"} props={user} exact />
-    
+
         <AuthGuard component={Contact} path={"/contact"} exact />
+
+        <AuthGuard component={ReactUploadImage} path={"/uploadimage"} exact />
 
         {/* For Development Purposes */}
 
