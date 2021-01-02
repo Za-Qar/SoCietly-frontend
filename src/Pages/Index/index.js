@@ -22,6 +22,7 @@ import ReactUploadImage from "../../Components/Upload/upload.js";
 //Components
 import { user } from "../../Components/userData";
 import NavBar from "../../Components/NavBar/nav";
+import CloudinaryImage from "../../Components/CloudinaryImage/cloudinaryImage.js";
 
 export default function Index() {
   return (
@@ -54,6 +55,8 @@ export default function Index() {
         <AuthGuard component={Contact} path={"/contact"} exact />
 
         <AuthGuard component={ReactUploadImage} path={"/uploadimage"} exact />
+
+        <AuthGuard component={CloudinaryImage} path={"/image"} exact />
 
         {/* For Development Purposes */}
 
