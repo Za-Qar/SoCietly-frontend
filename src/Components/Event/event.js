@@ -34,10 +34,9 @@ function Event({
   }, []);
 
   function addToAttending() {
-    console.log(attendinglist);
     for (let i = 0; i <= attendinglist.length; i++) {
       if (attendinglist[i] === `${user.username}`) {
-        return;
+        return alert("You've already decalred you're attending :)");
       }
     }
     let attending = [...attendinglist, `${user.username}`];
