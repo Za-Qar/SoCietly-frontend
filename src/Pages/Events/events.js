@@ -5,14 +5,36 @@ import Event from "../../Components/Event/event.js";
 
 function GetAllEvents() {
   const [allEvents, setAllEvents] = useState([]);
+  const [attendingList, setAttendingList] = useState([]);
+
+  /*---------------Increment Counter backend----------------*/
+  let addToAttend = (id, arr) => {
+    console.log(id, arr);
+    fetch(`https://falcon5ives.herokuapp.com/events/${id}`, {
+      method: "PATCH",
+      body: JSON.stringify({ attendingList: arr }),
+      headers: { "Content-Type": "application/json" },
+    })
+      .then((res) => res.json())
+      .then((data) => console.log(data, "this is the id buddy boy"))
+      .catch((error) => console.log(error, "incrementCounter error"));
+  };
+
   async function get() {
     let res = await fetch("https://falcon5ives.herokuapp.com/events");
     let data = await res.json();
+    console.log(data);
     setAllEvents(data.payload);
   }
 
   useEffect(() => {
     get();
+  }, []);
+
+  useEffect(() => {
+    setInterval(() => {
+      get();
+    }, 300000);
   }, []);
 
   return (
@@ -26,11 +48,12 @@ function GetAllEvents() {
         <h3>Education</h3>
         {allEvents.map((item, index) => {
           if (item.eventtype === "education") {
+            let date = new Date(item.date).toDateString();
             return (
               <Event
                 key={uuidv4()}
                 attendinglist={item.attendinglist}
-                date={item.date}
+                date={date}
                 description={item.description}
                 enablevolunteers={item.enablevolunteers}
                 eventname={item.eventname}
@@ -42,6 +65,8 @@ function GetAllEvents() {
                 time={item.time}
                 uid={item.uid}
                 volunteerlist={item.volunteerlist}
+                setAttending={setAttendingList}
+                addToAttend={addToAttend}
               />
             );
           }
@@ -52,11 +77,12 @@ function GetAllEvents() {
         <h3>Social</h3>
         {allEvents.map((item, index) => {
           if (item.eventtype === "social") {
+            let date = new Date(item.date).toDateString();
             return (
               <Event
                 key={uuidv4()}
                 attendinglist={item.attendinglist}
-                date={item.date}
+                date={date}
                 description={item.description}
                 enablevolunteers={item.enablevolunteers}
                 eventname={item.eventname}
@@ -68,6 +94,8 @@ function GetAllEvents() {
                 time={item.time}
                 uid={item.uid}
                 volunteerlist={item.volunteerlist}
+                setAttending={setAttendingList}
+                addToAttend={addToAttend}
               />
             );
           }
@@ -78,11 +106,12 @@ function GetAllEvents() {
         <h3>Community</h3>
         {allEvents.map((item, index) => {
           if (item.eventtype === "community") {
+            let date = new Date(item.date).toDateString();
             return (
               <Event
                 key={uuidv4()}
                 attendinglist={item.attendinglist}
-                date={item.date}
+                date={date}
                 description={item.description}
                 enablevolunteers={item.enablevolunteers}
                 eventname={item.eventname}
@@ -94,6 +123,8 @@ function GetAllEvents() {
                 time={item.time}
                 uid={item.uid}
                 volunteerlist={item.volunteerlist}
+                setAttending={setAttendingList}
+                addToAttend={addToAttend}
               />
             );
           }
