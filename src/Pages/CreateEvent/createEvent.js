@@ -15,8 +15,8 @@ function CreateEvent() {
   const [marker, setMarker] = useState(null);
 
   let createEvent = (msg) => {
-    console.log("User Input recieved", msg);
-    fetch(`https://falcon5ives.herokuapp.com/events`, {
+    console.log("User Input recieved", msg, marker);
+    fetch(`https://falcon5ives.herokuapp.com/events/`, {
       method: "POST",
       body: JSON.stringify({
         eventName: msg.eventName,

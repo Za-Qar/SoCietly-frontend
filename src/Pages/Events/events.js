@@ -5,6 +5,8 @@ import Event from "../../Components/Event/event.js";
 
 function GetAllEvents() {
   const [allEvents, setAllEvents] = useState([]);
+  const [attending, setAttending] = useState([]);
+
   async function get() {
     let res = await fetch("https://falcon5ives.herokuapp.com/events");
     let data = await res.json();
@@ -26,11 +28,12 @@ function GetAllEvents() {
         <h3>Education</h3>
         {allEvents.map((item, index) => {
           if (item.eventtype === "education") {
+            let date = new Date(item.date).toDateString();
             return (
               <Event
                 key={uuidv4()}
                 attendinglist={item.attendinglist}
-                date={item.date}
+                date={date}
                 description={item.description}
                 enablevolunteers={item.enablevolunteers}
                 eventname={item.eventname}
@@ -42,6 +45,7 @@ function GetAllEvents() {
                 time={item.time}
                 uid={item.uid}
                 volunteerlist={item.volunteerlist}
+                setAttending={setAttending}
               />
             );
           }
@@ -52,11 +56,12 @@ function GetAllEvents() {
         <h3>Social</h3>
         {allEvents.map((item, index) => {
           if (item.eventtype === "social") {
+            let date = new Date(item.date).toDateString();
             return (
               <Event
                 key={uuidv4()}
                 attendinglist={item.attendinglist}
-                date={item.date}
+                date={date}
                 description={item.description}
                 enablevolunteers={item.enablevolunteers}
                 eventname={item.eventname}
@@ -78,11 +83,12 @@ function GetAllEvents() {
         <h3>Community</h3>
         {allEvents.map((item, index) => {
           if (item.eventtype === "community") {
+            let date = new Date(item.date).toDateString();
             return (
               <Event
                 key={uuidv4()}
                 attendinglist={item.attendinglist}
-                date={item.date}
+                date={date}
                 description={item.description}
                 enablevolunteers={item.enablevolunteers}
                 eventname={item.eventname}

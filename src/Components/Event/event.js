@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 
 import Maps from "../../Components/Maps/maps.js";
 
+import { useUserContext } from "../../Context/userContext";
+
 function Event({
   attendinglist,
   date,
@@ -17,7 +19,18 @@ function Event({
   uid,
   volunteerlist,
 }) {
+  const [user] = useUserContext();
   const [marker, setMarker] = useState(JSON.parse(location));
+
+  function addToAttending() {
+    attendinglist.push(user.username);
+    console.log(attendinglist);
+  }
+
+  function logging() {
+    console.log(id);
+  }
+
   if (volunteerlist)
     return (
       <div>
@@ -29,7 +42,10 @@ function Event({
         <div>{likes}</div>
         <Maps marker={marker} setMarker={setMarker} />
         <p>{description}</p>
-        <button onClick={() => console.log(volunteerlist)}>Location</button>
+        <p>Attending:</p>
+        <p>{attendinglist.length}</p>
+        <button onClick={addToAttending}>Attend</button>
+        <button onClick={logging}>Log</button>
       </div>
     );
 }
