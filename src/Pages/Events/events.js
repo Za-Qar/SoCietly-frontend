@@ -16,8 +16,8 @@ function GetAllEvents() {
       headers: { "Content-Type": "application/json" },
     })
       .then((res) => res.json())
-      .then((data) => console.log(data, "this is the id buddy boy"))
-      .catch((error) => console.log(error, "incrementCounter error"));
+      .then((data) => console.log(data))
+      .catch((error) => console.log(error));
   };
 
   async function get() {
