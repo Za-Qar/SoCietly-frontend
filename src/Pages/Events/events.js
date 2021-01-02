@@ -5,7 +5,20 @@ import Event from "../../Components/Event/event.js";
 
 function GetAllEvents() {
   const [allEvents, setAllEvents] = useState([]);
-  const [attending, setAttending] = useState([]);
+  const [attendingList, setAttendingList] = useState([]);
+
+  /*---------------Increment Counter backend----------------*/
+  let addToAttend = (id, arr) => {
+    console.log(id, arr);
+    fetch(`http://localhost:3000/events/${id}`, {
+      method: "PATCH",
+      body: JSON.stringify({ attendingList: arr }),
+      headers: { "Content-Type": "application/json" },
+    })
+      .then((res) => res.json())
+      .then((data) => console.log(data, "this is the id buddy boy"))
+      .catch((error) => console.log(error, "incrementCounter error"));
+  };
 
   async function get() {
     let res = await fetch("https://falcon5ives.herokuapp.com/events");
@@ -15,6 +28,7 @@ function GetAllEvents() {
 
   useEffect(() => {
     get();
+    //set interval here
   }, []);
 
   return (
@@ -45,7 +59,8 @@ function GetAllEvents() {
                 time={item.time}
                 uid={item.uid}
                 volunteerlist={item.volunteerlist}
-                setAttending={setAttending}
+                setAttending={setAttendingList}
+                addToAttend={addToAttend}
               />
             );
           }
@@ -73,6 +88,8 @@ function GetAllEvents() {
                 time={item.time}
                 uid={item.uid}
                 volunteerlist={item.volunteerlist}
+                setAttending={setAttendingList}
+                addToAttend={addToAttend}
               />
             );
           }
@@ -100,6 +117,8 @@ function GetAllEvents() {
                 time={item.time}
                 uid={item.uid}
                 volunteerlist={item.volunteerlist}
+                setAttending={setAttendingList}
+                addToAttend={addToAttend}
               />
             );
           }
