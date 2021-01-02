@@ -10,7 +10,7 @@ function GetAllEvents() {
   /*---------------Increment Counter backend----------------*/
   let addToAttend = (id, arr) => {
     console.log(id, arr);
-    fetch(`http://localhost:3000/events/${id}`, {
+    fetch(`https://falcon5ives.herokuapp.com/events/${id}`, {
       method: "PATCH",
       body: JSON.stringify({ attendingList: arr }),
       headers: { "Content-Type": "application/json" },
