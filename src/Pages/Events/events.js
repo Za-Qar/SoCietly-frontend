@@ -23,12 +23,18 @@ function GetAllEvents() {
   async function get() {
     let res = await fetch("https://falcon5ives.herokuapp.com/events");
     let data = await res.json();
+    console.log(data);
     setAllEvents(data.payload);
   }
 
   useEffect(() => {
     get();
-    //set interval here
+  }, []);
+
+  useEffect(() => {
+    setInterval(() => {
+      get();
+    }, 300000);
   }, []);
 
   return (
