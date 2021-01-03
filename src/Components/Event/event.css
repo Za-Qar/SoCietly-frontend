@@ -1,0 +1,46 @@
+/*----------------myEvents styling----------------*/
+.myEventDiv {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.myEventName {
+  color: blue;
+}
+
+.myDateClass {
+  display: flex;
+}
+
+.myTimeClass {
+  display: flex;
+}
+
+.myImgClass {
+  display: flex;
+}
+
+.myLikesClass {
+}
+
+.myMapsClass {
+}
+
+.myDescClass {
+}
+
+.myAttLengthClass {
+}
+
+.myAttendButClass {
+}
+
+.myAttListClass {
+}
+
+.myEditButClass {
+}
+
+.myDelButClass {
+}

@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from "react";
 
+// import cn from "classnames";
+// import css from "./event.module.css";
+import "./event.css";
+
 import Maps from "../../Components/Maps/maps.js";
 
 import { useUserContext } from "../../Context/userContext";
@@ -20,7 +24,21 @@ function Event({
   volunteerlist,
   setAttendindList,
   addToAttend,
-  isEditing,
+  myEvents,
+
+  eventDiv,
+  eventNameClass,
+  dateClass,
+  timeClass,
+  imgClass,
+  likesClass,
+  mapsClass,
+  descClass,
+  attLengthClass,
+  attendButClass,
+  attListClass,
+  editButClass,
+  delButClass,
 }) {
   const [user] = useUserContext();
   const [marker, setMarker] = useState(JSON.parse(location));
@@ -54,22 +72,28 @@ function Event({
 
   if (volunteerlist)
     return (
-      <div>
-        <p>Event</p>
-        <h3>{eventname}</h3>
-        <h4>{date}</h4>
-        <h5>{time}</h5>
-        <img src={image} />
-        <div>{likes}</div>
-        <Maps marker={marker} setMarker={setMarker} />
-        <p>{description}</p>
-        <p>Attending:</p>
-        <p>{attendinglist.length}</p>
-        <button onClick={addToAttending}>Attend</button>
-        <button onClick={logging}>Log</button>
-        <p>{attentingGet.join(", ")}</p>
+      <div className={eventDiv}>
+        <h3 className={eventNameClass}>{eventname}</h3>
+        <h4 className={dateClass}>{date}</h4>
+        <h5 className={timeClass}>{time}</h5>
+        <img src={image} className={imgClass} />
+        <div className={likesClass}>{likes}</div>
+        {!myEvents && (
+          <Maps marker={marker} setMarker={setMarker} className={mapsClass} />
+        )}
+        <p className={descClass}>{description}</p>
+        <p className={attLengthClass}>Attending: {attendinglist.length}</p>
+        {!myEvents && (
+          <button onClick={addToAttending} className={attendButClass}>
+            Attend
+          </button>
+        )}
+        <p className={attListClass}>
+          Attending List: {attentingGet.join(", ")}
+        </p>
 
-        {isEditing && <button>Edit Event</button>}
+        {myEvents && <button className={editButClass}>Edit Event</button>}
+        {myEvents && <button className={delButClass}>Delete Event</button>}
       </div>
     );
 }

@@ -6,9 +6,25 @@ import { useUserContext } from "../../Context/userContext";
 import Event from "../../Components/Event/event.js";
 import CreateEvent from "../../Pages/CreateEvent/createEvent.js";
 
-export default function MyEvents(params) {
+export default function MyEvents() {
+  // Importing user data
   const [user] = useUserContext();
 
+  // Event classes
+  const [eventNameClass, setEventNameClass] = useState(null);
+  const [dateClass, setDateClass] = useState(null);
+  const [timeClass, setTimeClass] = useState(null);
+  const [imgClass, setImgClass] = useState(null);
+  const [likesClass, setLikesClass] = useState(null);
+  const [mapsClass, setMapsClass] = useState(null);
+  const [descClass, setDescClass] = useState(null);
+  const [attLengthClass, setAttLengthClass] = useState(null);
+  const [attendButClass, setAttendButClass] = useState(null);
+  const [attListClass, setAttListClass] = useState(null);
+  const [editButClass, setEditButClass] = useState(null);
+  const [delButClass, setDlButClass] = useState(null);
+
+  // fetchUserEvents function result
   const [userEvents, setUserEvents] = useState(null);
 
   async function fetchUserEvents() {
@@ -55,7 +71,7 @@ export default function MyEvents(params) {
   }
 
   return (
-    <div>
+    <div className="container">
       <button onClick={logging}>logging</button>
       <section>
         <h3>User events</h3>
@@ -78,7 +94,20 @@ export default function MyEvents(params) {
                 time={item.time}
                 uid={item.uid}
                 volunteerlist={item.volunteerlist}
-                isEditing
+                myEvents
+                eventDiv={"myEventDiv"}
+                eventNameClass={"myEventName"}
+                dateClass={"myDateClass"}
+                timeClass={"myTimeClass"}
+                imgClass={"myImgClass"}
+                likesClass={"myLikesClass"}
+                mapsClass={"myMapsClass"}
+                descClass={"myDescClass"}
+                attLengthClass={"myAttLengthClass"}
+                attendButClass={"myAttendButClass"}
+                attListClass={"myAttListClass"}
+                editButClass={"myEditButClass"}
+                delButClass={"myDelButClass"}
               />
             );
           })}
