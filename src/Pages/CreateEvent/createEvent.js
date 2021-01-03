@@ -6,7 +6,7 @@ import "./createEvent.css";
 
 import { useUserContext } from "../../Context/userContext";
 
-function CreateEvent(isEditing) {
+function CreateEvent({ myEvents }) {
   const [user] = useUserContext();
   const { register, handleSubmit, watch, errors } = useForm();
   const [complete, setComplete] = useState(false);
@@ -16,29 +16,33 @@ function CreateEvent(isEditing) {
 
   let createEvent = (msg) => {
     console.log("User Input recieved", msg, marker);
-    fetch(`https://falcon5ives.herokuapp.com/events/`, {
-      method: "POST",
-      body: JSON.stringify({
-        eventName: msg.eventName,
-        eventType: msg.eventTypes,
-        uid: user.uid,
-        date: msg.date,
-        time: msg.time,
-        description: msg.description,
-        image: msg.image,
-        location: marker,
-        enableVolunteers: msg.eventVolunteers,
-        attendingList: [],
-        likes: 0,
-        volunteerList: [],
-      }),
-      headers: { "Content-Type": "application/json" },
-    })
-      .then((res) => res.json())
-      .then((data) => console.log("this is the user data: ", data))
-      .catch((error) => console.log("user creation error error: ", error));
+    if (myEvents) {
+      patchEvent(msg);
+    } else if (!myEvents) {
+      fetch(`https://falcon5ives.herokuapp.com/events/`, {
+        method: "POST",
+        body: JSON.stringify({
+          eventName: msg.eventName,
+          eventType: msg.eventTypes,
+          uid: user.uid,
+          date: msg.date,
+          time: msg.time,
+          description: msg.description,
+          image: msg.image,
+          location: marker,
+          enableVolunteers: msg.eventVolunteers,
+          attendingList: [],
+          likes: 0,
+          volunteerList: [],
+        }),
+        headers: { "Content-Type": "application/json" },
+      })
+        .then((res) => res.json())
+        .then((data) => console.log("this is the user data: ", data))
+        .catch((error) => console.log("user creation error error: ", error));
 
-    setComplete(true);
+      setComplete(true);
+    }
   };
 
   function consoleLog() {

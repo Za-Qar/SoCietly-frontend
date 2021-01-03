@@ -10,20 +10,6 @@ export default function MyEvents() {
   // Importing user data
   const [user] = useUserContext();
 
-  // Event classes
-  const [eventNameClass, setEventNameClass] = useState(null);
-  const [dateClass, setDateClass] = useState(null);
-  const [timeClass, setTimeClass] = useState(null);
-  const [imgClass, setImgClass] = useState(null);
-  const [likesClass, setLikesClass] = useState(null);
-  const [mapsClass, setMapsClass] = useState(null);
-  const [descClass, setDescClass] = useState(null);
-  const [attLengthClass, setAttLengthClass] = useState(null);
-  const [attendButClass, setAttendButClass] = useState(null);
-  const [attListClass, setAttListClass] = useState(null);
-  const [editButClass, setEditButClass] = useState(null);
-  const [delButClass, setDlButClass] = useState(null);
-
   // fetchUserEvents function result
   const [userEvents, setUserEvents] = useState(null);
 
@@ -42,24 +28,27 @@ export default function MyEvents() {
 
   let patchEvent = (msg) => {
     console.log("User Input recieved", msg);
-    fetch(`https://falcon5ives.herokuapp.com/userevents/`, {
-      method: "PATCH",
-      body: JSON.stringify({
-        eventName: msg.eventName,
-        eventType: msg.eventTypes,
-        uid: user.uid,
-        date: msg.date,
-        time: msg.time,
-        description: msg.description,
-        image: msg.image,
-        // location: marker,
-        enableVolunteers: msg.eventVolunteers,
-        attendingList: [],
-        likes: 0,
-        volunteerList: [],
-      }),
-      headers: { "Content-Type": "application/json" },
-    })
+    fetch(
+      `https://falcon5ives.herokuapp.com/userevents/${userEvents.id}/${user?.uid}`,
+      {
+        method: "PATCH",
+        body: JSON.stringify({
+          eventName: msg.eventName,
+          eventType: msg.eventTypes,
+          uid: user.uid,
+          date: msg.date,
+          time: msg.time,
+          description: msg.description,
+          image: msg.image,
+          // location: marker,
+          enableVolunteers: msg.eventVolunteers,
+          attendingList: [],
+          likes: 0,
+          volunteerList: [],
+        }),
+        headers: { "Content-Type": "application/json" },
+      }
+    )
       .then((res) => res.json())
       .then((data) => console.log("this is the user data: ", data))
       .catch((error) => console.log("user creation error error: ", error));
@@ -112,6 +101,10 @@ export default function MyEvents() {
             );
           })}
       </section>
+
+      <secton>
+        <CreateEvent myEvents patchEvent={patchEvent} />
+      </secton>
     </div>
   );
 }
