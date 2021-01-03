@@ -23,6 +23,11 @@ function Maps({ marker, setMarker, isEditing }) {
   });
 
   function onMapClick(e) {
+    console.log({
+      lat: e.latLng.lat(),
+      lng: e.latLng.lng(),
+    });
+
     setMarker({
       lat: e.latLng.lat(),
       lng: e.latLng.lng(),

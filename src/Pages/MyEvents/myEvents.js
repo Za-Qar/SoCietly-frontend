@@ -25,9 +25,9 @@ export default function MyEvents(params) {
   }, [user]);
 
   let patchEvent = (msg) => {
-    console.log("User Input recieved", msg, marker);
-    fetch(`https://falcon5ives.herokuapp.com/events/`, {
-      method: "POST",
+    console.log("User Input recieved", msg);
+    fetch(`https://falcon5ives.herokuapp.com/userevents/`, {
+      method: "PATCH",
       body: JSON.stringify({
         eventName: msg.eventName,
         eventType: msg.eventTypes,
@@ -36,7 +36,7 @@ export default function MyEvents(params) {
         time: msg.time,
         description: msg.description,
         image: msg.image,
-        location: marker,
+        // location: marker,
         enableVolunteers: msg.eventVolunteers,
         attendingList: [],
         likes: 0,
