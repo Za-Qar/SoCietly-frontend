@@ -13,6 +13,9 @@ export default function MyEvents() {
   // fetchUserEvents function result
   const [userEvents, setUserEvents] = useState(null);
 
+  //To show and hide createEvents
+  const [hide, setHide] = useState("hide");
+
   async function fetchUserEvents() {
     let res = await fetch(
       `https://falcon5ives.herokuapp.com/userEvents/${user?.uid}`
@@ -26,33 +29,33 @@ export default function MyEvents() {
     fetchUserEvents();
   }, [user]);
 
-  let patchEvent = (msg) => {
-    console.log("User Input recieved", msg);
-    fetch(
-      `https://falcon5ives.herokuapp.com/userevents/${userEvents.id}/${user?.uid}`,
-      {
-        method: "PATCH",
-        body: JSON.stringify({
-          eventName: msg.eventName,
-          eventType: msg.eventTypes,
-          uid: user.uid,
-          date: msg.date,
-          time: msg.time,
-          description: msg.description,
-          image: msg.image,
-          // location: marker,
-          enableVolunteers: msg.eventVolunteers,
-          attendingList: [],
-          likes: 0,
-          volunteerList: [],
-        }),
-        headers: { "Content-Type": "application/json" },
-      }
-    )
-      .then((res) => res.json())
-      .then((data) => console.log("this is the user data: ", data))
-      .catch((error) => console.log("user creation error error: ", error));
-  };
+  //   let patchEvent = (msg) => {
+  //     console.log("User Input recieved", msg);
+  //     fetch(
+  //       `https://falcon5ives.herokuapp.com/userevents/${userEvents.id}/${user?.uid}`,
+  //       {
+  //         method: "PATCH",
+  //         body: JSON.stringify({
+  //           eventName: msg.eventName,
+  //           eventType: msg.eventTypes,
+  //           uid: user.uid,
+  //           date: msg.date,
+  //           time: msg.time,
+  //           description: msg.description,
+  //           image: msg.image,
+  //           // location: marker,
+  //           enableVolunteers: msg.eventVolunteers,
+  //           attendingList: [],
+  //           likes: 0,
+  //           volunteerList: [],
+  //         }),
+  //         headers: { "Content-Type": "application/json" },
+  //       }
+  //     )
+  //       .then((res) => res.json())
+  //       .then((data) => console.log("this is the user data: ", data))
+  //       .catch((error) => console.log("user creation error error: ", error));
+  //   };
 
   function logging() {
     console.log(user);
@@ -97,13 +100,20 @@ export default function MyEvents() {
                 attListClass={"myAttListClass"}
                 editButClass={"myEditButClass"}
                 delButClass={"myDelButClass"}
+                userId={user?.uid}
               />
             );
           })}
       </section>
 
-      <secton>
-        <CreateEvent myEvents patchEvent={patchEvent} />
+      <secton className={hide}>
+        <CreateEvent
+          myEvents
+          userEventsId={userEvents?.id}
+          userId={user?.uid}
+          hide={hide}
+          setHide={setHide}
+        />
       </secton>
     </div>
   );

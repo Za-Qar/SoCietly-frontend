@@ -6,10 +6,19 @@ import "./createEvent.css";
 
 import { useUserContext } from "../../Context/userContext";
 
-function CreateEvent({ myEvents, patchEvent }) {
+function CreateEvent({
+  myEvents,
+  patchEvent,
+  userEventsId,
+  userId,
+  hide,
+  setHide,
+}) {
   const [user] = useUserContext();
   const { register, handleSubmit, watch, errors } = useForm();
   const [complete, setComplete] = useState(false);
+
+  console.log("this is the userEventsId", userEventsId);
 
   //For Maps
   const [marker, setMarker] = useState(null);
@@ -17,8 +26,33 @@ function CreateEvent({ myEvents, patchEvent }) {
   let createEvent = (msg) => {
     console.log("User Input recieved", msg, marker);
     if (myEvents) {
-      console.log("this is patch");
-      patchEvent(msg);
+      console.log("User Input recieved for patch: ", msg);
+      console.log("this should be this events id: ", userEventsId);
+      console.log("this should be this users id: ", userId);
+      fetch(
+        `https://falcon5ives.herokuapp.com/userevents/${userEventsId}/${userId}`,
+        {
+          method: "PATCH",
+          body: JSON.stringify({
+            eventName: msg.eventName,
+            eventType: msg.eventTypes,
+            uid: user.uid,
+            date: msg.date,
+            time: msg.time,
+            description: msg.description,
+            image: msg.image,
+            // location: marker,
+            enableVolunteers: msg.eventVolunteers,
+            attendingList: [],
+            likes: 0,
+            volunteerList: [],
+          }),
+          headers: { "Content-Type": "application/json" },
+        }
+      )
+        .then((res) => res.json())
+        .then((data) => console.log("this is the user data: ", data))
+        .catch((error) => console.log("user creation error error: ", error));
     } else if (!myEvents) {
       console.log("this is create event");
       fetch(`https://falcon5ives.herokuapp.com/events/`, {
@@ -57,6 +91,15 @@ function CreateEvent({ myEvents, patchEvent }) {
       <div>
         <button onClick={consoleLog}>Get User</button>
         <form onSubmit={handleSubmit(createEvent)}>
+          {myEvents && (
+            <button
+              onClick={() =>
+                hide === "hide" ? setHide("show") : setHide("hide")
+              }
+            >
+              x
+            </button>
+          )}
           <span>
             <p>Event Name:</p>
             <input name="eventName" ref={register} required />
