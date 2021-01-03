@@ -6,7 +6,7 @@ import "./createEvent.css";
 
 import { useUserContext } from "../../Context/userContext";
 
-function CreateEvent() {
+function CreateEvent(isEditing) {
   const [user] = useUserContext();
   const { register, handleSubmit, watch, errors } = useForm();
   const [complete, setComplete] = useState(false);

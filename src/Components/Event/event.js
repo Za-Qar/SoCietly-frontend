@@ -68,6 +68,8 @@ function Event({
         <button onClick={addToAttending}>Attend</button>
         <button onClick={logging}>Log</button>
         <p>{attentingGet.join(", ")}</p>
+
+        {isEditing && <button>Edit Event</button>}
       </div>
     );
 }
