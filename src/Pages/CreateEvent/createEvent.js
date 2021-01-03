@@ -13,6 +13,22 @@ function CreateEvent({
   userId,
   hide,
   setHide,
+
+  attendinglist,
+  date,
+  description,
+  enablevolunteers,
+  eventname,
+  eventtype,
+  id,
+  image,
+  likes,
+  location,
+  time,
+  uid,
+  volunteerlist,
+  setAttendindList,
+  addToAttend,
 }) {
   const [user] = useUserContext();
   const { register, handleSubmit, watch, errors } = useForm();
@@ -26,30 +42,24 @@ function CreateEvent({
   let createEvent = (msg) => {
     console.log("User Input recieved", msg, marker);
     if (eventsEdit) {
-      console.log("User Input recieved for patch: ", msg);
-      console.log("this should be this events id: ", userEventsId);
-      console.log("this should be this users id: ", userId);
-      fetch(
-        `https://falcon5ives.herokuapp.com/userevents/${userEventsId}/${userId}`,
-        {
-          method: "PATCH",
-          body: JSON.stringify({
-            eventName: msg.eventName,
-            eventType: msg.eventTypes,
-            uid: user.uid,
-            date: msg.date,
-            time: msg.time,
-            description: msg.description,
-            image: msg.image,
-            location: marker,
-            enableVolunteers: msg.eventVolunteers,
-            attendingList: [],
-            likes: 0,
-            volunteerList: [],
-          }),
-          headers: { "Content-Type": "application/json" },
-        }
-      )
+      fetch(`https://falcon5ives.herokuapp.com/events/${userEventsId}`, {
+        method: "PATCH",
+        body: JSON.stringify({
+          eventName: msg.eventName,
+          eventType: msg.eventTypes,
+          uid: user.uid,
+          date: msg.date,
+          time: msg.time,
+          description: msg.description,
+          image: msg.image,
+          location: marker,
+          enableVolunteers: msg.eventVolunteers,
+          attendingList: null,
+          likes: null,
+          volunteerList: null,
+        }),
+        headers: { "Content-Type": "application/json" },
+      })
         .then((res) => res.json())
         .then((data) => console.log("this is the user data: ", data))
         .catch((error) => console.log("user creation error error: ", error));
@@ -102,7 +112,12 @@ function CreateEvent({
           )}
           <span>
             <p>Event Name:</p>
-            <input name="eventName" ref={register} required />
+            <input
+              name="eventName"
+              ref={register}
+              required
+              placeholder={eventname}
+            />
           </span>
           <span>
             <p>Event Type:</p>
@@ -127,6 +142,7 @@ function CreateEvent({
               rows="10"
               cols="30"
               ref={register}
+              placeholder={description}
             ></textarea>
           </span>
           <span>

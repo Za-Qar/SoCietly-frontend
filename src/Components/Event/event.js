@@ -112,6 +112,19 @@ function Event({
 
         <secton className={hide}>
           <CreateEvent
+            attendinglist={attendinglist}
+            date={date}
+            description={description}
+            enablevolunteers={enablevolunteers}
+            eventname={eventname}
+            eventtype={eventtype}
+            id={id}
+            image={image}
+            likes={likes}
+            location={location}
+            time={time}
+            uid={uid}
+            volunteerlist={volunteerlist}
             eventsEdit
             userEventsId={id}
             userId={user?.uid}
