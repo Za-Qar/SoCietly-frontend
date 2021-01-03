@@ -13,9 +13,6 @@ export default function MyEvents() {
   // fetchUserEvents function result
   const [userEvents, setUserEvents] = useState(null);
 
-  //To show and hide createEvents
-  const [hide, setHide] = useState("hide");
-
   async function fetchUserEvents() {
     let res = await fetch(
       `https://falcon5ives.herokuapp.com/userEvents/${user?.uid}`
@@ -105,16 +102,6 @@ export default function MyEvents() {
             );
           })}
       </section>
-
-      <secton className={hide}>
-        <CreateEvent
-          myEvents
-          userEventsId={userEvents?.id}
-          userId={user?.uid}
-          hide={hide}
-          setHide={setHide}
-        />
-      </secton>
     </div>
   );
 }

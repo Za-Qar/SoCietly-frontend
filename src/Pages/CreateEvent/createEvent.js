@@ -7,7 +7,7 @@ import "./createEvent.css";
 import { useUserContext } from "../../Context/userContext";
 
 function CreateEvent({
-  myEvents,
+  eventsEdit,
   patchEvent,
   userEventsId,
   userId,
@@ -25,7 +25,7 @@ function CreateEvent({
 
   let createEvent = (msg) => {
     console.log("User Input recieved", msg, marker);
-    if (myEvents) {
+    if (eventsEdit) {
       console.log("User Input recieved for patch: ", msg);
       console.log("this should be this events id: ", userEventsId);
       console.log("this should be this users id: ", userId);
@@ -41,7 +41,7 @@ function CreateEvent({
             time: msg.time,
             description: msg.description,
             image: msg.image,
-            // location: marker,
+            location: marker,
             enableVolunteers: msg.eventVolunteers,
             attendingList: [],
             likes: 0,
@@ -53,7 +53,7 @@ function CreateEvent({
         .then((res) => res.json())
         .then((data) => console.log("this is the user data: ", data))
         .catch((error) => console.log("user creation error error: ", error));
-    } else if (!myEvents) {
+    } else if (!eventsEdit) {
       console.log("this is create event");
       fetch(`https://falcon5ives.herokuapp.com/events/`, {
         method: "POST",
@@ -91,10 +91,10 @@ function CreateEvent({
       <div>
         <button onClick={consoleLog}>Get User</button>
         <form onSubmit={handleSubmit(createEvent)}>
-          {myEvents && (
+          {eventsEdit && (
             <button
               onClick={() =>
-                hide === "hide" ? setHide("show") : setHide("hide")
+                hide === "show" ? setHide("hide") : setHide("show")
               }
             >
               x

@@ -4,6 +4,8 @@ import React, { useState, useEffect } from "react";
 // import css from "./event.module.css";
 import "./event.css";
 
+import CreateEvent from "../../Pages/CreateEvent/createEvent.js";
+
 import Maps from "../../Components/Maps/maps.js";
 
 import { useUserContext } from "../../Context/userContext";
@@ -42,6 +44,9 @@ function Event({
 }) {
   const [user] = useUserContext();
   const [marker, setMarker] = useState(JSON.parse(location));
+
+  //To show and hide createEvents
+  const [hide, setHide] = useState("hide");
 
   const [attentingGet, setAttedingGet] = useState([]);
 
@@ -92,8 +97,28 @@ function Event({
           Attending List: {attentingGet.join(", ")}
         </p>
 
-        {myEvents && <button className={editButClass}>Edit Event</button>}
         {myEvents && <button className={delButClass}>Delete Event</button>}
+
+        {myEvents && (
+          <button
+            className={editButClass}
+            onClick={() =>
+              hide === "hide" ? setHide("show") : setHide("hide")
+            }
+          >
+            Edit Event
+          </button>
+        )}
+
+        <secton className={hide}>
+          <CreateEvent
+            eventsEdit
+            userEventsId={id}
+            userId={user?.uid}
+            hide={hide}
+            setHide={setHide}
+          />
+        </secton>
       </div>
     );
 }

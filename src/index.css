@@ -17,3 +17,7 @@ code {
   width: 70%;
   margin: auto;
 }
+
+.hide {
+  display: none;
+}
