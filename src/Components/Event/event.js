@@ -20,6 +20,7 @@ function Event({
   volunteerlist,
   setAttendindList,
   addToAttend,
+  isEditing,
 }) {
   const [user] = useUserContext();
   const [marker, setMarker] = useState(JSON.parse(location));
