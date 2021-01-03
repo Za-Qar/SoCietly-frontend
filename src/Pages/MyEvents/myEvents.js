@@ -67,6 +67,8 @@ export default function MyEvents() {
         {userEvents &&
           userEvents.map((item, index) => {
             let date = new Date(item.date).toDateString();
+
+            console.log(item);
             return (
               <Event
                 key={uuidv4()}
@@ -98,6 +100,7 @@ export default function MyEvents() {
                 editButClass={"myEditButClass"}
                 delButClass={"myDelButClass"}
                 userId={user?.uid}
+                fetchUserEvents={fetchUserEvents}
               />
             );
           })}

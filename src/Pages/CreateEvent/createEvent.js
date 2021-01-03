@@ -29,6 +29,7 @@ function CreateEvent({
   volunteerlist,
   setAttendindList,
   addToAttend,
+  fetchUserEvents,
 }) {
   const [user] = useUserContext();
   const { register, handleSubmit, watch, errors } = useForm();
@@ -64,6 +65,7 @@ function CreateEvent({
         .then((data) => console.log("this is the user data: ", data))
         .catch((error) => console.log("user creation error error: ", error));
 
+      fetchUserEvents();
       setComplete(true);
     } else if (!eventsEdit) {
       console.log("this is create event");
