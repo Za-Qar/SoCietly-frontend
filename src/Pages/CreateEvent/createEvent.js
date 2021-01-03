@@ -63,6 +63,8 @@ function CreateEvent({
         .then((res) => res.json())
         .then((data) => console.log("this is the user data: ", data))
         .catch((error) => console.log("user creation error error: ", error));
+
+      setComplete(true);
     } else if (!eventsEdit) {
       console.log("this is create event");
       fetch(`https://falcon5ives.herokuapp.com/events/`, {
