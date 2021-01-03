@@ -27,7 +27,6 @@ function Maps({ marker, setMarker, isEditing }) {
       lat: e.latLng.lat(),
       lng: e.latLng.lng(),
     });
-
     setMarker({
       lat: e.latLng.lat(),
       lng: e.latLng.lng(),

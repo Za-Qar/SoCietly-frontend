@@ -6,7 +6,7 @@ import "./createEvent.css";
 
 import { useUserContext } from "../../Context/userContext";
 
-function CreateEvent({ myEvents }) {
+function CreateEvent({ myEvents, patchEvent }) {
   const [user] = useUserContext();
   const { register, handleSubmit, watch, errors } = useForm();
   const [complete, setComplete] = useState(false);
@@ -17,8 +17,10 @@ function CreateEvent({ myEvents }) {
   let createEvent = (msg) => {
     console.log("User Input recieved", msg, marker);
     if (myEvents) {
+      console.log("this is patch");
       patchEvent(msg);
     } else if (!myEvents) {
+      console.log("this is create event");
       fetch(`https://falcon5ives.herokuapp.com/events/`, {
         method: "POST",
         body: JSON.stringify({
