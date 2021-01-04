@@ -8,7 +8,7 @@ import Event from "../../Components/Event/event.js";
 import CreateEvent from "../../Pages/CreateEvent/createEvent.js";
 
 //styling
-import style from "./contact.module.css";
+import style from "./myEvents.module.css";
 
 export default function MyEvents() {
   // Importing user data
