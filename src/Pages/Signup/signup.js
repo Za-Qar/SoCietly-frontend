@@ -8,23 +8,30 @@ import { useAuthContext } from "../../Context/authContext";
 import { useUserContext } from "../../Context/userContext";
 
 //Auth
-import { signInWithGoogle } from "../../Components/Firebase/auth";
+import { signInWithGoogle, logout } from "../../Components/Firebase/auth";
 
 //Components
 import Loading from "../../Components/Loading/loading";
 
 export default function Signup() {
+  // Context
   const [authUser, loading, error] = useAuthContext();
-
   const [user] = useUserContext();
-  const { register, handleSubmit, watch, errors } = useForm();
-  const [complete, setComplete] = useState(false);
 
+  // React Form
+  const { register, handleSubmit, watch, errors } = useForm();
+
+  // State
+  const [complete, setComplete] = useState(false);
   const [skills, setSkills] = useState([]);
   const [skillInput, setSkillInput] = useState("");
+  const [socialLinks, setSocialLinks] = useState([]);
+  const [socialLinkInput, setSocialLinkInput] = useState();
+  const [socialTypeInput, setSocialTypeInput] = useState();
 
-  console.log(authUser);
-  console.log(skills);
+  console.log(socialLinks);
+  console.log(socialTypeInput);
+  console.log(socialLinkInput);
 
   function handleSignup() {
     signInWithGoogle();
@@ -47,13 +54,25 @@ export default function Signup() {
     setSkills(newSkills);
   }
 
+  function addSocial() {
+    const newLink = { [socialTypeInput]: socialLinkInput };
+    console.log(newLink);
+    if (socialLinks.includes(newLink)) {
+      console.log("link already added");
+      return;
+    }
+    const newSocialLinks = [...socialLinks, newLink];
+    setSocialLinks(newSocialLinks);
+  }
+
   if (loading) {
     return <Loading />;
   }
 
-  return (
+  return authUser ? (
     <div>
       <h1>Sign Up</h1>
+      <button onClick={logout}>Return to Home</button>
       <div>
         <form>
           <span>
@@ -80,7 +99,7 @@ export default function Signup() {
               name="email"
               ref={register}
               required
-              value={authUser.email}
+              defaultValue={authUser.email}
             />
           </span>
           <span>
@@ -126,42 +145,42 @@ export default function Signup() {
               })}
             </ul>
           </span>
-          {/* <span>
-            <p>Date:</p>
-            <input name="date" type="date" ref={register} required />
+          <span>
+            <p>10 Second Intro:</p>
+            <textarea name="introduction" ref={register} required />
           </span>
           <span>
-            <p>Time:</p>
-            <input name="time" type="time" ref={register} required />
-          </span>
-          <span>
-            <p>Description:</p>
-            <textarea
-              name="description"
-              rows="10"
-              cols="30"
+            <p>Social Links:</p>
+            <select
+              name="social"
               ref={register}
-              placeholder={description}
-            ></textarea>
-          </span>
-          <span>
-            <p>Image:</p>
-            <input name="image" ref={register} required />
-          </span>
-          <span>
-            <p>Location:</p>
-          </span>
-          <span>
-            <p>Volunteers:</p>
-            <select id="eventVolunteers" name="eventVolunteers" ref={register}>
-              <option value="true">Yes</option>
-              <option value="false">No</option>
+              onChange={(e) => setSocialTypeInput(e.target.value)}
+            >
+              <option value="linkedin">linkedin</option>
+              <option value="github">github</option>
+              <option value="twitter">twitter</option>
+              <option value="portfolio">portfolio</option>
+              <option value="other">other</option>
             </select>
+            <input
+              onChange={(e) => setSocialLinkInput(e.target.value)}
+              type="url"
+              name="url"
+              id="url"
+              placeholder="https://example.com"
+              defaultValue="https://"
+              pattern="https://.*"
+              size="30"
+              required
+            ></input>
+
+            <button onClick={addSocial}>+</button>
           </span>
-          <input type="submit" /> */}
         </form>
       </div>
     </div>
+  ) : (
+    <Redirect to={"/login"}></Redirect>
   );
 }
 

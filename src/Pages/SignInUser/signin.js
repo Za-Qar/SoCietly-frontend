@@ -29,20 +29,20 @@ export default function UserSignIn() {
     <Redirect to={"/"}></Redirect>
   ) : (
     <div>
-      <h1>Sign In</h1>
+      <h1>Sign up or Login</h1>
       <h2>Hello random person</h2>
       <h3>Hello random person</h3>
       <h4>Hello random person</h4>
       <h5>Hello random person</h5>
       <h6>Hello random person</h6>
       <p>Hello random person</p>
-      <button onClick={handleGoogle}>Log In</button>
+      <button onClick={handleGoogle}>Continue with Google</button>
       {/* <form action="https://google.com">
         <input type="submit" value="Sign Up" />
       </form> */}
-      <Link to="/signup">
-        <button>Sign Up</button>
-      </Link>
+      {/* <Link to="/signup">
+        <button>Continue with Google</button>
+      </Link> */}
     </div>
   );
 }

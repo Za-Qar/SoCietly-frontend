@@ -87,7 +87,7 @@ export default function UserSignIn({
       };
       setUser(newUser);
     }
-  }, [authUser && userData && userJourney]);
+  }, [authUser, userData, userJourney]);
 
   if (loading) {
     return <Loading />;
