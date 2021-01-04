@@ -11,6 +11,9 @@ import { signInWithGoogle } from "../../Components/Firebase/auth";
 //Components
 import Loading from "../../Components/Loading/loading";
 
+//styling
+import style from "./signIn.module.css";
+
 export default function UserSignIn() {
   const [authUser, loading, error] = useAuthContext();
 

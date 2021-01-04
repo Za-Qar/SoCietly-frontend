@@ -1,3 +1,6 @@
+//styling
+import style from "./social.module.css";
+
 export default function SocialMedia({ social }) {
   return (
     social && (

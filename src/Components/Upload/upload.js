@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 
+//styling
+import style from "./upload.module.css";
+
 export default function ReactUploadImage() {
   const [fileInputState, setFileInputState] = useState("");
   const [selectedFile, setSelectedFile] = useState("");

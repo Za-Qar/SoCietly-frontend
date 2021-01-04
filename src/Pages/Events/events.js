@@ -3,6 +3,9 @@ import { v4 as uuidv4 } from "uuid";
 
 import Event from "../../Components/Event/event.js";
 
+//styling
+import style from "./events.module.css";
+
 function GetAllEvents() {
   const [allEvents, setAllEvents] = useState([]);
   const [attendingList, setAttendingList] = useState([]);

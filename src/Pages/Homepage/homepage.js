@@ -9,6 +9,9 @@ import Event from "../../Components/Event/event.js";
 //Context
 import { useUserContext } from "../../Context/userContext";
 
+//styling
+import style from "./homepage.module.css";
+
 export default function Homepage() {
   const [user, setUser] = useUserContext();
   const [allEvents, setAllEvents] = useState([]);

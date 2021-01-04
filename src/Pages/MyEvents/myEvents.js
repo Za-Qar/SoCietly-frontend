@@ -3,8 +3,12 @@ import { v4 as uuidv4 } from "uuid";
 
 import { useUserContext } from "../../Context/userContext";
 
+//components
 import Event from "../../Components/Event/event.js";
 import CreateEvent from "../../Pages/CreateEvent/createEvent.js";
+
+//styling
+import style from "./contact.module.css";
 
 export default function MyEvents() {
   // Importing user data
