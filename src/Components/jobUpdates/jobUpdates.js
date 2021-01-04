@@ -1,4 +1,9 @@
 import { useEffect, useState } from "react";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+
+import BootcamperProfilePage from "../../Pages/BootcamperProfile/Bootcamper";
+
+import { useProfileContext } from "../../Context/profileContext";
 
 //styling
 import style from "./jobUpdates.module.css";
@@ -6,7 +11,8 @@ import style from "./jobUpdates.module.css";
 export default function JobUpdates() {
   const [jobUpdates, setJobUpdates] = useState();
   // An array of objects containing user journey information
-  console.log(jobUpdates);
+
+  const [profile, setProfile] = useProfileContext();
 
   useEffect(() => {
     async function getJobUpdates() {
@@ -31,12 +37,23 @@ export default function JobUpdates() {
           return (
             <div key={index}>
               <h5>{item.startdate}</h5>
-              <img
-                width="50px"
-                src={item.profileimage}
-                alt={`${item.name} profile`}
-              />
-              <p>
+
+              <Link to="/bootcamper">
+                <img
+                  width="50px"
+                  src={item.profileimage}
+                  alt={`${item.name} profile`}
+                  onClick={() => {
+                    setProfile(item);
+                  }}
+                />
+              </Link>
+
+              <p
+                onClick={() => {
+                  setProfile(item);
+                }}
+              >
                 🎉 {item.name} {item.surname} started a new job!
               </p>
               <h5>
