@@ -8,6 +8,7 @@ import { useUserContext } from "../Context/userContext";
 
 //Component
 import Loading from "../Components/Loading/loading";
+import Signup from "../Pages/Signup/signup";
 
 export default function UserSignIn({
   component: Component,
@@ -27,19 +28,29 @@ export default function UserSignIn({
   const [user, setUser] = useUserContext();
   // user context set with firebase and backend data - context
 
+  const [signup, setSignup] = useState();
+
   console.log(user);
+
+  console.log(authUser);
 
   useEffect(() => {
     async function getUser() {
       if (authUser) {
-        let res = await fetch(
+        const res = await fetch(
           `https://falcon5ives.herokuapp.com/users/?email=${authUser.email}`
         );
-        let data = await res.json();
-        setUserData(data.payload[0]);
+        console.log("fetch");
+        const data = await res.json();
+        const payload = data.payload[0];
+
+        payload ? setUserData(payload) : setSignup(true);
+        // if data is null - set some not sign up to true
+        // if not sign up is true redirect to sign up form
       }
     }
-    getUser();
+    !user && getUser();
+    // checks if user context data has already been fetched from backend
   }, [authUser]);
 
   useEffect(() => {
@@ -48,11 +59,13 @@ export default function UserSignIn({
         let res = await fetch(
           `https://falcon5ives.herokuapp.com/journeys/?id=${userData.id}`
         );
+        console.log("fetch");
         let data = await res.json();
         setJourney(data.payload);
       }
     }
-    getUserJourney();
+    !user && getUserJourney();
+    // checks if user context data has already been fetched from backend
   }, [userData]);
 
   useEffect(() => {
@@ -78,6 +91,10 @@ export default function UserSignIn({
 
   if (loading) {
     return <Loading />;
+  }
+
+  if (signup) {
+    return <Signup />;
   }
 
   return authUser ? (

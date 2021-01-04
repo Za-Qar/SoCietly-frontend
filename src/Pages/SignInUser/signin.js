@@ -1,6 +1,6 @@
 //React
 import React from "react";
-import { Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 
 //Context
 import { useAuthContext } from "../../Context/authContext";
@@ -37,6 +37,12 @@ export default function UserSignIn() {
       <h6>Hello random person</h6>
       <p>Hello random person</p>
       <button onClick={handleGoogle}>Log In</button>
+      {/* <form action="https://google.com">
+        <input type="submit" value="Sign Up" />
+      </form> */}
+      <Link to="/signup">
+        <button>Sign Up</button>
+      </Link>
     </div>
   );
 }

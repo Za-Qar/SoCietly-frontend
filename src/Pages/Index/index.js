@@ -13,6 +13,7 @@ import Maps from "../../Components/Maps/maps.js";
 import MapTwo from "../../Components/Map/map.js";
 import GetAllEvents from "../Events/events.js";
 import BootcamperProfilePage from "../BootcamperProfile/Bootcamper";
+import Signup from "../Signup/signup";
 
 import Event from "../../Components/Event/event.js";
 
@@ -42,6 +43,7 @@ export default function Index() {
       <Switch>
         <AuthGuard component={Homepage} path={"/"} props={user} exact />
         <Route path="/login" component={SignIn}></Route>
+        <Route path="/signup" component={Signup}></Route>
         <AuthGuard
           component={ProfilePage}
           path={"/profile"}
