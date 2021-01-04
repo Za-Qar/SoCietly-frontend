@@ -45,6 +45,8 @@ function Event({
 }) {
   const [user] = useUserContext();
   const [marker, setMarker] = useState(JSON.parse(location));
+  const [like, setLike] = useState(0);
+  const [clicked, setClicked] = useState();
 
   //To show and hide createEvents
   const [hide, setHide] = useState("hide");
@@ -68,6 +70,38 @@ function Event({
     console.log(attending);
     setAttedingGet(attending);
     addToAttend(id, attending);
+  }
+
+  let backEndLike = (likes, id) => {
+    console.log("User Input recieved", likes);
+
+    fetch(`https://falcon5ives.herokuapp.com/events/${id}`, {
+      method: "PATCH",
+      body: JSON.stringify({
+        eventName: null,
+        eventType: null,
+        uid: user.uid,
+        date: null,
+        time: null,
+        description: null,
+        image: null,
+        location: marker,
+        enableVolunteers: null,
+        attendingList: null,
+        likes: likes,
+        volunteerList: null,
+      }),
+      headers: { "Content-Type": "application/json" },
+    })
+      .then((res) => res.json())
+      .then((data) => console.log("this is the user data: ", data))
+      .catch((error) => console.log("user creation error error: ", error));
+  };
+
+  function addLikes() {
+    console.log(like);
+    setLike(like + 1);
+    backEndLike(like, id);
   }
 
   let deleteEvent = (id) => {
@@ -109,7 +143,13 @@ function Event({
             <h5 className={timeClass}>{time}</h5>
           </div>
           <div className="column3">
-            <div className={likesClass}>{likes}</div>
+            <div className={likesClass}>
+              {likes}
+              {like}
+              <button onClick={addLikes} className="likeButton">
+                This is the like button
+              </button>
+            </div>
           </div>
         </div>
         {!myEvents && (
