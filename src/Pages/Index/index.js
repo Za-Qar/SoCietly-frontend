@@ -6,7 +6,7 @@ import AuthGuard from "../../Hoc/authGuard";
 import ProfilePage from "../Profile/profile";
 
 //Pages
-import SignIn from "../SignInUser/signin";
+import SignIn from "../SignInUser/signIn";
 import Homepage from "../Homepage/homepage";
 import CreateEvent from "../CreateEvent/createEvent.js";
 import Maps from "../../Components/Maps/maps.js";
@@ -14,9 +14,21 @@ import MapTwo from "../../Components/Map/map.js";
 import GetAllEvents from "../Events/events.js";
 import BootcamperProfilePage from "../BootcamperProfile/Bootcamper";
 
+import Event from "../../Components/Event/event.js";
+
+import Contact from "../Contact/contact";
+
+import ReactUploadImage from "../../Components/Upload/upload.js";
+
+import MyEvents from "../../Pages/MyEvents/myEvents.js";
+
 //Components
 import { user } from "../../Components/userData";
 import NavBar from "../../Components/NavBar/nav";
+import CloudinaryImage from "../../Components/CloudinaryImage/cloudinaryImage.js";
+
+//styling
+import style from "./index.module.css";
 
 //Context
 import { useProfileContext } from "../../Context/profileContext";
@@ -51,6 +63,16 @@ export default function Index() {
         <Route path={"/bootcamper"} exact>
           <BootcamperProfilePage profile={profile} />
         </Route>
+
+        <AuthGuard component={Event} path={"/event"} props={user} exact />
+
+        <AuthGuard component={Contact} path={"/contact"} exact />
+
+        <AuthGuard component={ReactUploadImage} path={"/uploadimage"} exact />
+
+        <AuthGuard component={CloudinaryImage} path={"/image"} exact />
+
+        <AuthGuard component={MyEvents} path={"/myevents"} exact />
 
         {/* For Development Purposes */}
 

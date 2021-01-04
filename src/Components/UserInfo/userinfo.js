@@ -1,5 +1,8 @@
 import SocialMedia from "../UserSocial/social";
 
+//styling
+import style from "./userInfo.module.css";
+
 export default function UserInfo({ user }) {
   const {
     username,

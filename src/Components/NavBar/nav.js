@@ -7,6 +7,9 @@ import { logout } from "../../Components/Firebase/auth";
 //Context
 import { useUserContext } from "../../Context/userContext";
 
+//styling
+import style from "./nav.module.css";
+
 export default function NavBar() {
   const [user, setUser] = useUserContext();
 

@@ -5,6 +5,9 @@ import BootcamperProfilePage from "../../Pages/BootcamperProfile/Bootcamper";
 
 import { useProfileContext } from "../../Context/profileContext";
 
+//styling
+import style from "./jobUpdates.module.css";
+
 export default function JobUpdates() {
   const [jobUpdates, setJobUpdates] = useState();
   // An array of objects containing user journey information

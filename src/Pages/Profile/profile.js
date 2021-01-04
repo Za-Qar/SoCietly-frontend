@@ -5,6 +5,9 @@ import UserIntro from "../../Components/UserIntro/userintro";
 import UserJourney from "../../Components/UserJourney/journey";
 import { useUserContext } from "../../Context/userContext";
 
+//styling
+import style from "./profile.module.css";
+
 export default function ProfilePage() {
   const [user] = useUserContext();
 

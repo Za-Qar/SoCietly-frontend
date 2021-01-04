@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useRef } from "react";
+import React, { useState, useCallback, useRef, useEffect } from "react";
 import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
 
 const libraries = ["places"];
@@ -6,32 +6,32 @@ const mapContainerStyle = {
   height: "100vh",
   width: "100vw",
 };
+
 const center = {
   lat: 52.47653701744309,
   lng: -1.890981567759743,
 };
+
 const options = {
   zoomControl: true,
 };
 
-function Maps({ markers, setMarkers }) {
+function Maps({ marker, setMarker, isEditing }) {
   const { isLoaded, loadError } = useLoadScript({
     // googleMapsApiKey: "AIzaSyBn62Gatuw8cbCB2LUcuNGv1mVGgakvh4Y",
     libraries,
   });
 
-  const onMapClick = useCallback((e) => {
-    {
-      console.log("Latitude: ", e.latLng.lat());
-      console.log("Longitude: ", e.latLng.lng());
-      setMarkers([
-        {
-          lat: e.latLng.lat(),
-          lng: e.latLng.lng(),
-        },
-      ]);
-    }
-  }, []);
+  function onMapClick(e) {
+    console.log({
+      lat: e.latLng.lat(),
+      lng: e.latLng.lng(),
+    });
+    setMarker({
+      lat: e.latLng.lat(),
+      lng: e.latLng.lng(),
+    });
+  }
 
   const mapRef = useRef();
   const onMapLoad = useCallback((map) => {
@@ -47,15 +47,17 @@ function Maps({ markers, setMarkers }) {
         id="map"
         mapContainerStyle={mapContainerStyle}
         zoom={13}
-        center={center}
+        center={isEditing ? center : marker}
         options={options}
-        onClick={onMapClick}
+        onClick={(e) => {
+          isEditing && onMapClick(e);
+        }}
         onLoad={onMapLoad}
       >
-        {markers.map((marker) => (
+        {marker && (
           <Marker
             key={`${marker.lat}-${marker.lng}`}
-            position={{ lat: marker.lat, lng: marker.lng }}
+            position={marker}
             icon={{
               //we can add a url: "smth"; to change the location style
               origin: new window.google.maps.Point(0, 0),
@@ -63,7 +65,7 @@ function Maps({ markers, setMarkers }) {
               scaledSize: new window.google.maps.Size(30, 30),
             }}
           />
-        ))}
+        )}
       </GoogleMap>
     </div>
   );
