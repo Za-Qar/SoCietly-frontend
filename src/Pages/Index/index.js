@@ -6,7 +6,7 @@ import AuthGuard from "../../Hoc/authGuard";
 import ProfilePage from "../Profile/profile";
 
 //Pages
-import SignIn from "../SignInUser/signIn";
+import SignIn from "../SignInUser/signin";
 import Homepage from "../Homepage/homepage";
 import CreateEvent from "../CreateEvent/createEvent.js";
 import Maps from "../../Components/Maps/maps.js";
