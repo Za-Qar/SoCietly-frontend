@@ -1,3 +1,6 @@
+//styling
+import style from "./journey.module.css";
+
 export default function UserJourney({ user }) {
   const { journey } = user;
   return (

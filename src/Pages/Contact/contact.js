@@ -2,6 +2,9 @@
 import Logo from "../../Components/SocialMedia/logo";
 import Photo from "../../Components/Photos/photos";
 
+//styling
+import style from "./contact.module.css";
+
 export default function Contact() {
   return (
     <div>

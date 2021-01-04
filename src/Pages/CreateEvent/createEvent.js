@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 
+//components
 import Maps from "../../Components/Maps/maps.js";
-import "./createEvent.css";
+
+//styling
+import style from "./createEvent.module.css";
 
 import { useUserContext } from "../../Context/userContext";
 

@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react";
 
+//styling
+import style from "./jobUpdates.module.css";
+
 export default function JobUpdates() {
   const [jobUpdates, setJobUpdates] = useState();
   // An array of objects containing user journey information

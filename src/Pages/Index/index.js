@@ -6,7 +6,7 @@ import AuthGuard from "../../Hoc/authGuard";
 import ProfilePage from "../Profile/profile";
 
 //Pages
-import SignIn from "../SignInUser/signin";
+import SignIn from "../SignInUser/signIn";
 import Homepage from "../Homepage/homepage";
 import CreateEvent from "../CreateEvent/createEvent.js";
 import Maps from "../../Components/Maps/maps.js";
@@ -25,6 +25,9 @@ import MyEvents from "../../Pages/MyEvents/myEvents.js";
 import { user } from "../../Components/userData";
 import NavBar from "../../Components/NavBar/nav";
 import CloudinaryImage from "../../Components/CloudinaryImage/cloudinaryImage.js";
+
+//styling
+import style from "./index.module.css";
 
 export default function Index() {
   return (

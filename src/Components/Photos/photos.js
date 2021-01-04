@@ -5,6 +5,9 @@ import liz from "../../Images/liz_headshot.jpg";
 import lizzie from "../../Images/lizzie_headshot.jpg";
 import tao from "../../Images/tao_headshot.jpg";
 
+//styling
+import style from "./photos.module.css";
+
 export default function Photo({ photo }) {
   switch (photo) {
     case "ben":

@@ -1,3 +1,6 @@
+//styling
+import style from "./userImage.module.css";
+
 export default function UserImage({ user }) {
   const { profileImage, name } = user;
   return (

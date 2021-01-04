@@ -1,3 +1,6 @@
+//styling
+import style from "./userIntro.module.css";
+
 export default function UserIntro({ user }) {
   const { name, introduction, profileImage } = user;
   return (
