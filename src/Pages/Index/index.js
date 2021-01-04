@@ -19,6 +19,8 @@ import Contact from "../Contact/contact";
 
 import ReactUploadImage from "../../Components/Upload/upload.js";
 
+import MyEvents from "../../Pages/MyEvents/myEvents.js";
+
 //Components
 import { user } from "../../Components/userData";
 import NavBar from "../../Components/NavBar/nav";
@@ -57,6 +59,8 @@ export default function Index() {
         <AuthGuard component={ReactUploadImage} path={"/uploadimage"} exact />
 
         <AuthGuard component={CloudinaryImage} path={"/image"} exact />
+
+        <AuthGuard component={MyEvents} path={"/myevents"} exact />
 
         {/* For Development Purposes */}
 

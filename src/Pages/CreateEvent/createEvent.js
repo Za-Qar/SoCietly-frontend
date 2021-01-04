@@ -6,39 +6,93 @@ import "./createEvent.css";
 
 import { useUserContext } from "../../Context/userContext";
 
-function CreateEvent() {
+function CreateEvent({
+  eventsEdit,
+  patchEvent,
+  userEventsId,
+  userId,
+  hide,
+  setHide,
+
+  attendinglist,
+  date,
+  description,
+  enablevolunteers,
+  eventname,
+  eventtype,
+  id,
+  image,
+  likes,
+  location,
+  time,
+  uid,
+  volunteerlist,
+  setAttendindList,
+  addToAttend,
+  fetchUserEvents,
+}) {
   const [user] = useUserContext();
   const { register, handleSubmit, watch, errors } = useForm();
   const [complete, setComplete] = useState(false);
+
+  console.log("this is the userEventsId", userEventsId);
 
   //For Maps
   const [marker, setMarker] = useState(null);
 
   let createEvent = (msg) => {
     console.log("User Input recieved", msg, marker);
-    fetch(`https://falcon5ives.herokuapp.com/events/`, {
-      method: "POST",
-      body: JSON.stringify({
-        eventName: msg.eventName,
-        eventType: msg.eventTypes,
-        uid: user.uid,
-        date: msg.date,
-        time: msg.time,
-        description: msg.description,
-        image: msg.image,
-        location: marker,
-        enableVolunteers: msg.eventVolunteers,
-        attendingList: [],
-        likes: 0,
-        volunteerList: [],
-      }),
-      headers: { "Content-Type": "application/json" },
-    })
-      .then((res) => res.json())
-      .then((data) => console.log("this is the user data: ", data))
-      .catch((error) => console.log("user creation error error: ", error));
+    if (eventsEdit) {
+      fetch(`https://falcon5ives.herokuapp.com/events/${userEventsId}`, {
+        method: "PATCH",
+        body: JSON.stringify({
+          eventName: msg.eventName,
+          eventType: msg.eventTypes,
+          uid: user.uid,
+          date: msg.date,
+          time: msg.time,
+          description: msg.description,
+          image: msg.image,
+          location: marker,
+          enableVolunteers: msg.eventVolunteers,
+          attendingList: null,
+          likes: null,
+          volunteerList: null,
+        }),
+        headers: { "Content-Type": "application/json" },
+      })
+        .then((res) => res.json())
+        .then((data) => console.log("this is the user data: ", data))
+        .catch((error) => console.log("user creation error error: ", error));
 
-    setComplete(true);
+      fetchUserEvents();
+      setComplete(true);
+    } else if (!eventsEdit) {
+      console.log("this is create event");
+      fetch(`https://falcon5ives.herokuapp.com/events/`, {
+        method: "POST",
+        body: JSON.stringify({
+          eventName: msg.eventName,
+          eventType: msg.eventTypes,
+          uid: user.uid,
+          date: msg.date,
+          time: msg.time,
+          description: msg.description,
+          image: msg.image,
+          location: marker,
+          enableVolunteers: msg.eventVolunteers,
+          attendingList: [],
+          likes: 0,
+          volunteerList: [],
+        }),
+        headers: { "Content-Type": "application/json" },
+      })
+        .then((res) => res.json())
+        .then((data) => console.log("this is the user data: ", data))
+        .catch((error) => console.log("user creation error error: ", error));
+
+      setComplete(true);
+    }
   };
 
   function consoleLog() {
@@ -51,9 +105,23 @@ function CreateEvent() {
       <div>
         <button onClick={consoleLog}>Get User</button>
         <form onSubmit={handleSubmit(createEvent)}>
+          {eventsEdit && (
+            <button
+              onClick={() =>
+                hide === "show" ? setHide("hide") : setHide("show")
+              }
+            >
+              x
+            </button>
+          )}
           <span>
             <p>Event Name:</p>
-            <input name="eventName" ref={register} required />
+            <input
+              name="eventName"
+              ref={register}
+              required
+              placeholder={eventname}
+            />
           </span>
           <span>
             <p>Event Type:</p>
@@ -78,6 +146,7 @@ function CreateEvent() {
               rows="10"
               cols="30"
               ref={register}
+              placeholder={description}
             ></textarea>
           </span>
           <span>
