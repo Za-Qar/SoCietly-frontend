@@ -46,7 +46,7 @@ function Event({
   const [user] = useUserContext();
   const [marker, setMarker] = useState(JSON.parse(location));
   const [like, setLike] = useState(0);
-  const [clicked, setClicked] = useState();
+  // const [clicked, setClicked] = useState(false);
 
   //To show and hide createEvents
   const [hide, setHide] = useState("hide");
@@ -72,37 +72,50 @@ function Event({
     addToAttend(id, attending);
   }
 
-  let backEndLike = (likes, id) => {
-    console.log("User Input recieved", likes);
+  // let backEndLike = (likes, id) => {
+  //   console.log("User Input recieved", likes);
 
-    fetch(`https://falcon5ives.herokuapp.com/events/${id}`, {
-      method: "PATCH",
-      body: JSON.stringify({
-        eventName: null,
-        eventType: null,
-        uid: user.uid,
-        date: null,
-        time: null,
-        description: null,
-        image: null,
-        location: marker,
-        enableVolunteers: null,
-        attendingList: null,
-        likes: likes,
-        volunteerList: null,
-      }),
-      headers: { "Content-Type": "application/json" },
-    })
-      .then((res) => res.json())
-      .then((data) => console.log("this is the user data: ", data))
-      .catch((error) => console.log("user creation error error: ", error));
-  };
-
+  //   fetch(`https://falcon5ives.herokuapp.com/events/${id}`, {
+  //     method: "PATCH",
+  //     body: JSON.stringify({
+  //       eventName: null,
+  //       eventType: null,
+  //       uid: user.uid,
+  //       date: null,
+  //       time: null,
+  //       description: null,
+  //       image: null,
+  //       location: marker,
+  //       enableVolunteers: null,
+  //       attendingList: null,
+  //       likes: likes,
+  //       volunteerList: null,
+  //     }),
+  //     headers: { "Content-Type": "application/json" },
+  //   })
+  //     .then((res) => res.json())
+  //     .then((data) => console.log("this is the user data: ", data))
+  //     .catch((error) => console.log("user creation error error: ", error));
+  // };
+  // Click like button to add to likes
   function addLikes() {
     console.log(like);
     setLike(like + 1);
-    backEndLike(like, id);
+    // backEndLike(like, id);
   }
+
+  // function likeClicked() {
+  //   console.log(clicked);
+  //   if (setClicked(clicked) === false) {
+  //     return "button not clicked";
+  //   }
+  //   return "button clicked";
+  // }
+
+  //When button is clicked it re renders backend and displays on front end
+  // create 2 states for button (clicked and not clicked)
+  //if like was added by click another click should minus click
+  //button should toggle between clicked and unclicked
 
   let deleteEvent = (id) => {
     console.log("delete", id);
@@ -144,10 +157,10 @@ function Event({
           </div>
           <div className="column3">
             <div className={likesClass}>
-              {likes}
+              {/* {likes} */}
               {like}
               <button onClick={addLikes} className="likeButton">
-                This is the like button
+                LIKE
               </button>
             </div>
           </div>
