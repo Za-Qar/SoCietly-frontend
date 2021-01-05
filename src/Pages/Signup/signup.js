@@ -12,11 +12,12 @@ import { signInWithGoogle, logout } from "../../Components/Firebase/auth";
 
 //Components
 import Loading from "../../Components/Loading/loading";
+import CreateJourney from "../../Components/CreateJourney/createJourney";
 
 export default function Signup() {
   // Context
   const [authUser, loading, error] = useAuthContext();
-  const [user] = useUserContext();
+  const [user, setUser] = useUserContext();
 
   // React Form
   const { register, handleSubmit, watch, errors } = useForm();
@@ -25,13 +26,9 @@ export default function Signup() {
   const [complete, setComplete] = useState(false);
   const [skills, setSkills] = useState([]);
   const [skillInput, setSkillInput] = useState("");
-  const [socialLinks, setSocialLinks] = useState([]);
-  const [socialLinkInput, setSocialLinkInput] = useState();
-  const [socialTypeInput, setSocialTypeInput] = useState();
-
-  console.log(socialLinks);
-  console.log(socialTypeInput);
-  console.log(socialLinkInput);
+  // const [socialLinks, setSocialLinks] = useState([]);
+  // const [socialLinkInput, setSocialLinkInput] = useState();
+  // const [socialTypeInput, setSocialTypeInput] = useState();
 
   function handleSignup() {
     signInWithGoogle();
@@ -54,19 +51,88 @@ export default function Signup() {
     setSkills(newSkills);
   }
 
-  function addSocial() {
-    const newLink = { [socialTypeInput]: socialLinkInput };
-    console.log(newLink);
-    if (socialLinks.includes(newLink)) {
-      console.log("link already added");
-      return;
-    }
-    const newSocialLinks = [...socialLinks, newLink];
-    setSocialLinks(newSocialLinks);
-  }
+  // function addSocial() {
+  //   const newLink = { [socialTypeInput]: socialLinkInput };
+  //   console.log(newLink);
+  //   if (socialLinks.includes(newLink)) {
+  //     console.log("link already added");
+  //     return;
+  //   }
+  //   const newSocialLinks = [...socialLinks, newLink];
+  //   setSocialLinks(newSocialLinks);
+  // }
+
+  let createUser = (msg) => {
+    console.log("User Input recieved", msg);
+
+    const {
+      admin,
+      name,
+      surname,
+      email,
+      cohort,
+      currentRole,
+      currentEmployer,
+      introduction,
+      linkedin = "",
+      github,
+      twitter,
+      portfolio,
+      other,
+    } = msg;
+
+    const socialArray = [
+      { linkedin: linkedin },
+      { github: github },
+      { twitter: twitter },
+      { portfolio: portfolio },
+      { other: other },
+    ];
+
+    const newUser = {
+      admin: admin,
+      name: name,
+      surname: surname,
+      email: email,
+      profileImage: authUser.photoURL,
+      cohort: cohort,
+      currentRole: currentRole,
+      currentEmployer: currentEmployer,
+      skills: skills,
+      introduction: introduction,
+      social: socialArray,
+    };
+
+    fetch(`https://falcon5ives.herokuapp.com/users`, {
+      method: "POST",
+      body: JSON.stringify({
+        admin: admin,
+        name: name,
+        surname: surname,
+        email: email,
+        profileImage: authUser.photoURL,
+        cohort: cohort,
+        currentRole: currentRole,
+        currentEmployer: currentEmployer,
+        skills: skills,
+        introduction: introduction,
+        social: socialArray,
+      }),
+      headers: { "Content-Type": "application/json" },
+    })
+      .then((res) => res.json())
+      .then((data) => console.log("this is the user data: ", data))
+      .catch((error) => console.log("user creation error error: ", error));
+
+    setComplete(true);
+  };
 
   if (loading) {
     return <Loading />;
+  }
+
+  if (complete) {
+    return <CreateJourney />;
   }
 
   return authUser ? (
@@ -74,7 +140,7 @@ export default function Signup() {
       <h1>Sign Up</h1>
       <button onClick={logout}>Return to Home</button>
       <div>
-        <form>
+        <form onSubmit={handleSubmit(createUser)}>
           <span>
             <img src={authUser?.photoURL} alt="user profile" />
           </span>
@@ -123,7 +189,6 @@ export default function Signup() {
             <p>Skills:</p>
             <input
               name="skills"
-              required
               onChange={(e) => setSkillInput(e.target.value)}
               value={skillInput}
             />
@@ -151,7 +216,7 @@ export default function Signup() {
           </span>
           <span>
             <p>Social Links:</p>
-            <select
+            {/* <select
               name="social"
               ref={register}
               onChange={(e) => setSocialTypeInput(e.target.value)}
@@ -161,21 +226,61 @@ export default function Signup() {
               <option value="twitter">twitter</option>
               <option value="portfolio">portfolio</option>
               <option value="other">other</option>
-            </select>
+            </select> */}
+            <label for="linkedin">Linkedin: </label>
             <input
-              onChange={(e) => setSocialLinkInput(e.target.value)}
-              type="url"
-              name="url"
-              id="url"
+              // onChange={(e) => setSocialLinkInput(e.target.value)}
+              // type="url"
+              name="linkedin"
               placeholder="https://example.com"
-              defaultValue="https://"
+              // defaultValue="https://"
               pattern="https://.*"
-              size="30"
-              required
+              ref={register}
             ></input>
 
-            <button onClick={addSocial}>+</button>
+            <label for="Github">Github: </label>
+            <input
+              // type="url"
+              name="github"
+              placeholder="https://example.com"
+              // defaultValue="https://"
+              pattern="https://.*"
+              ref={register}
+            ></input>
+
+            <label for="Twitter">Twitter: </label>
+            <input
+              // type="url"
+              name="twitter"
+              placeholder="https://example.com"
+              // defaultValue="https://"
+              pattern="https://.*"
+              ref={register}
+            ></input>
+
+            <label for="Portfolio">Portfolio: </label>
+            <input
+              // type="url"
+              name="portfolio"
+              placeholder="https://example.com"
+              // defaultValue="https://"
+              pattern="https://.*"
+              ref={register}
+            ></input>
+
+            <label for="Other">Other: </label>
+            <input
+              // type="url"
+              name="other"
+              placeholder="https://example.com"
+              // defaultValue="https://"
+              pattern="https://.*"
+              ref={register}
+            ></input>
+
+            {/* <button onClick={addSocial}>+</button> */}
           </span>
+          <input type="submit" value="Next" />
         </form>
       </div>
     </div>
@@ -186,7 +291,7 @@ export default function Signup() {
 
 ///////////////////////////////////
 
-//   let createEvent = (msg) => {
+//   let createUser = (msg) => {
 //     console.log("User Input recieved", msg, marker);
 //     if (eventsEdit) {
 //       fetch(`https://falcon5ives.herokuapp.com/user`, {

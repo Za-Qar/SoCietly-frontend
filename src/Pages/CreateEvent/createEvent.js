@@ -45,9 +45,12 @@ function CreateEvent({
 
   let createEvent = (msg) => {
     console.log("User Input recieved", msg, marker);
-    if (eventsEdit) {
-      fetch(`https://falcon5ives.herokuapp.com/events/${userEventsId}`, {
-        method: "PATCH",
+    fetch(
+      eventsEdit
+        ? `https://falcon5ives.herokuapp.com/events/${userEventsId}`
+        : `https://falcon5ives.herokuapp.com/events/`,
+      {
+        method: eventsEdit ? "PATCH" : "POST",
         body: JSON.stringify({
           eventName: msg.eventName,
           eventType: msg.eventTypes,
@@ -58,44 +61,17 @@ function CreateEvent({
           image: msg.image,
           location: marker,
           enableVolunteers: msg.eventVolunteers,
-          attendingList: null,
-          likes: null,
-          volunteerList: null,
+          attendingList: eventsEdit ? null : [],
+          likes: eventsEdit ? null : 0,
+          volunteerList: eventsEdit ? null : [],
         }),
         headers: { "Content-Type": "application/json" },
-      })
-        .then((res) => res.json())
-        .then((data) => console.log("this is the user data: ", data))
-        .catch((error) => console.log("user creation error error: ", error));
-
-      fetchUserEvents();
-      setComplete(true);
-    } else if (!eventsEdit) {
-      console.log("this is create event");
-      fetch(`https://falcon5ives.herokuapp.com/events/`, {
-        method: "POST",
-        body: JSON.stringify({
-          eventName: msg.eventName,
-          eventType: msg.eventTypes,
-          uid: user.uid,
-          date: msg.date,
-          time: msg.time,
-          description: msg.description,
-          image: msg.image,
-          location: marker,
-          enableVolunteers: msg.eventVolunteers,
-          attendingList: [],
-          likes: 0,
-          volunteerList: [],
-        }),
-        headers: { "Content-Type": "application/json" },
-      })
-        .then((res) => res.json())
-        .then((data) => console.log("this is the user data: ", data))
-        .catch((error) => console.log("user creation error error: ", error));
-
-      setComplete(true);
-    }
+      }
+    )
+      .then((res) => res.json())
+      .then((data) => console.log("this is the user data: ", data))
+      .catch((error) => console.log("user creation error error: ", error));
+    setComplete(true);
   };
 
   function consoleLog() {
