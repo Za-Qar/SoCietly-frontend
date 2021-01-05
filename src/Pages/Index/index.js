@@ -13,6 +13,7 @@ import Maps from "../../Components/Maps/maps.js";
 import MapTwo from "../../Components/Map/map.js";
 import GetAllEvents from "../Events/events.js";
 import BootcamperProfilePage from "../BootcamperProfile/Bootcamper";
+import Signup from "../Signup/signup";
 
 import Event from "../../Components/Event/event.js";
 
