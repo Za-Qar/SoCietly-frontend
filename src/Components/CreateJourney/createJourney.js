@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import { Redirect } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
 
 //Context
 import { useAuthContext } from "../../Context/authContext";
@@ -13,13 +14,15 @@ import { signInWithGoogle, logout } from "../../Components/Firebase/auth";
 //Components
 import Loading from "../../Components/Loading/loading";
 
-export default function CreateJourney() {
+export default function CreateJourney({ signup, setSignup }) {
   // Context
   const [authUser, loading, error] = useAuthContext();
   const [user, setUser] = useUserContext();
   const [waiting, setWaiting] = useState(true);
+  const [uid, setUid] = useState();
 
   console.log(user);
+  console.log(uid);
 
   // React Form
   const { register, handleSubmit, watch, errors } = useForm();
@@ -35,6 +38,7 @@ export default function CreateJourney() {
         const data = await res.json();
 
         const payload = data.payload[0];
+
         setUser(payload);
         // if data is null - set some not sign up to true
         // if not sign up is true redirect to sign up form
@@ -51,27 +55,34 @@ export default function CreateJourney() {
     }, 3000);
   }, []);
 
-  function createJourney() {
-    // fetch(`https://falcon5ives.herokuapp.com/users`, {
-    //   method: "POST",
-    //   body: JSON.stringify({
-    //     admin: admin,
-    //     name: name,
-    //     surname: surname,
-    //     email: email,
-    //     profileImage: authUser.photoURL,
-    //     cohort: cohort,
-    //     currentRole: currentRole,
-    //     currentEmployer: currentEmployer,
-    //     skills: skills,
-    //     introduction: introduction,
-    //     social: socialArray,
-    //   }),
-    //   headers: { "Content-Type": "application/json" },
-    // })
-    //   .then((res) => res.json())
-    //   .then((data) => console.log("this is the user data: ", data))
-    //   .catch((error) => console.log("user creation error error: ", error));
+  function createJourney(msg) {
+    console.log("User Input recieved", msg);
+
+    const { employer, jobTitle, startDate, endDate, description } = msg;
+
+    const newJourney = {
+      uid: user.uid,
+      employer: employer,
+      jobTitle: jobTitle,
+      startDate: startDate,
+      endDate: endDate ? endDate : null,
+      description: description,
+    };
+
+    console.log(newJourney);
+
+    fetch(`https://falcon5ives.herokuapp.com/journeys`, {
+      method: "POST",
+      body: JSON.stringify(newJourney),
+      headers: { "Content-Type": "application/json" },
+    })
+      .then((res) => res.json())
+      .then((data) => console.log("this is the user data: ", data))
+      .then(() => {
+        setUser(null);
+        setSignup(false);
+      })
+      .catch((error) => console.log("user creation error error: ", error));
   }
 
   if (waiting) {
@@ -81,8 +92,23 @@ export default function CreateJourney() {
   return (
     <div>
       <h2>Create Journey</h2>
-      <form>
-        <input name="name" ref={register} required />
+      <form onSubmit={handleSubmit(createJourney)}>
+        <label for="employer">Employer</label>
+        <input name="employer" ref={register} required />
+
+        <label for="jobTitle">Job Title</label>
+        <input name="jobTitle" ref={register} required />
+
+        <label for="startDate">Start Date</label>
+        <input type="date" name="startDate" ref={register} required />
+
+        <label for="endDate">End Date (if applicable)</label>
+        <input type="date" name="endDate" ref={register} />
+
+        <label for="description">Description</label>
+        <textarea name="description" ref={register} required></textarea>
+
+        <input type="submit" value="Submit" />
       </form>
     </div>
   );

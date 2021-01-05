@@ -40,7 +40,7 @@ export default function UserSignIn({
         const res = await fetch(
           `https://falcon5ives.herokuapp.com/users/?email=${authUser.email}`
         );
-        console.log("fetch");
+        console.log("fetch user");
         const data = await res.json();
         const payload = data.payload[0];
 
@@ -51,7 +51,7 @@ export default function UserSignIn({
     }
     !user && getUser();
     // checks if user context data has already been fetched from backend
-  }, [authUser]);
+  }, [authUser, user]);
 
   useEffect(() => {
     async function getUserJourney() {
@@ -59,8 +59,9 @@ export default function UserSignIn({
         let res = await fetch(
           `https://falcon5ives.herokuapp.com/journeys/?id=${userData.id}`
         );
-        console.log("fetch");
+        console.log("fetch journey");
         let data = await res.json();
+        console.log(data);
         setJourney(data.payload);
       }
     }
@@ -94,7 +95,7 @@ export default function UserSignIn({
   }
 
   if (signup) {
-    return <Signup />;
+    return <Signup signup={signup} setSignup={setSignup} />;
   }
 
   return authUser ? (

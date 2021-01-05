@@ -14,7 +14,7 @@ import { signInWithGoogle, logout } from "../../Components/Firebase/auth";
 import Loading from "../../Components/Loading/loading";
 import CreateJourney from "../../Components/CreateJourney/createJourney";
 
-export default function Signup() {
+export default function Signup({ signup, setSignup }) {
   // Context
   const [authUser, loading, error] = useAuthContext();
   const [user, setUser] = useUserContext();
@@ -132,7 +132,7 @@ export default function Signup() {
   }
 
   if (complete) {
-    return <CreateJourney />;
+    return <CreateJourney signup={signup} setSignup={setSignup} />;
   }
 
   return authUser ? (
