@@ -46,7 +46,7 @@ function Event({
   const [user] = useUserContext();
   const [marker, setMarker] = useState(JSON.parse(location));
   const [like, setLike] = useState(0);
-  // const [clicked, setClicked] = useState(false);
+  let [clicked, setClicked] = useState(false);
 
   //To show and hide createEvents
   const [hide, setHide] = useState("hide");
@@ -106,10 +106,8 @@ function Event({
 
   // function likeClicked() {
   //   console.log(clicked);
-  //   if (setClicked(clicked) === false) {
-  //     return "button not clicked";
-  //   }
-  //   return "button clicked";
+  //   clicked = false;
+  //   console.log("button clicked");
   // }
 
   //When button is clicked it re renders backend and displays on front end
