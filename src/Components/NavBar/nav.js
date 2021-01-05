@@ -10,6 +10,9 @@ import { useUserContext } from "../../Context/userContext";
 //styling
 import style from "./nav.module.css";
 
+//router
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+
 export default function NavBar() {
   const [user, setUser] = useUserContext();
 
@@ -19,30 +22,32 @@ export default function NavBar() {
   }
   return (
     <div>
-      <a href="http://localhost:3000/">
+      <Link to="/">
         <img src={soc} alt="School of Code Logo" height="100" width="100" />
-      </a>
+      </Link>
       {/* Search Bar */}
       <ul>
-        <a href="http://localhost:3000/" className="links">
+        <Link to="/">
           <button>Home</button>
-        </a>
-        <a href="http://localhost:3000/events" className="links">
+        </Link>
+        <Link to="/events">
           <button>Events</button>
-        </a>
-        <a href="http://localhost:3000/profile" className="links">
+        </Link>
+        <Link to="/profile">
           <button>Profile</button>
-        </a>
-        <a href="http://localhost:3000/alumni" className="links">
+        </Link>
+        <Link to="/alumni">
           <button>Alumni</button>
-        </a>
-        <a href="http://localhost:3000/contact" className="links">
+        </Link>
+        <Link to="/contact">
           <button>Contact</button>
-        </a>
+        </Link>
 
-        <button className="links" onClick={signOut}>
-          Log Out
-        </button>
+        {user && (
+          <button className="links" onClick={signOut}>
+            Log Out
+          </button>
+        )}
       </ul>
     </div>
   );
