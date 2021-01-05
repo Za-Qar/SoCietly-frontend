@@ -8,9 +8,6 @@ import { Link } from "react-router-dom";
 import { useAuthContext } from "../../Context/authContext";
 import { useUserContext } from "../../Context/userContext";
 
-//Auth
-import { signInWithGoogle, logout } from "../../Components/Firebase/auth";
-
 //Components
 import Loading from "../../Components/Loading/loading";
 
@@ -19,10 +16,8 @@ export default function CreateJourney({ signup, setSignup }) {
   const [authUser, loading, error] = useAuthContext();
   const [user, setUser] = useUserContext();
   const [waiting, setWaiting] = useState(true);
-  const [uid, setUid] = useState();
 
   console.log(user);
-  console.log(uid);
 
   // React Form
   const { register, handleSubmit, watch, errors } = useForm();
@@ -33,19 +28,15 @@ export default function CreateJourney({ signup, setSignup }) {
         const res = await fetch(
           `https://falcon5ives.herokuapp.com/users/?email=${authUser.email}`
         );
-        console.log(authUser.email);
         console.log("fetch");
         const data = await res.json();
 
         const payload = data.payload[0];
 
-        setUser(payload);
-        // if data is null - set some not sign up to true
-        // if not sign up is true redirect to sign up form
+        !user && setUser(payload);
       }
     }
-    !user && getUser();
-    // checks if user context data has already been fetched from backend
+    getUser();
   }, [authUser, waiting]);
 
   useEffect(() => {
@@ -61,7 +52,7 @@ export default function CreateJourney({ signup, setSignup }) {
     const { employer, jobTitle, startDate, endDate, description } = msg;
 
     const newJourney = {
-      uid: user.uid,
+      uid: user.id ? user.id : user.uid,
       employer: employer,
       jobTitle: jobTitle,
       startDate: startDate,

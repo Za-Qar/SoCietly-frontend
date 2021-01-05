@@ -26,29 +26,31 @@ export default function NavBar() {
         <img src={soc} alt="School of Code Logo" height="100" width="100" />
       </Link>
       {/* Search Bar */}
-      <ul>
-        <Link to="/">
-          <button>Home</button>
-        </Link>
-        <Link to="/events">
-          <button>Events</button>
-        </Link>
-        <Link to="/profile">
-          <button>Profile</button>
-        </Link>
-        <Link to="/alumni">
-          <button>Alumni</button>
-        </Link>
-        <Link to="/contact">
-          <button>Contact</button>
-        </Link>
+      {user && (
+        <ul>
+          <Link to="/">
+            <button>Home</button>
+          </Link>
+          <Link to="/events">
+            <button>Events</button>
+          </Link>
+          <Link to="/profile">
+            <button>Profile</button>
+          </Link>
+          <Link to="/alumni">
+            <button>Alumni</button>
+          </Link>
+          <Link to="/contact">
+            <button>Contact</button>
+          </Link>
 
-        {user && (
-          <button className="links" onClick={signOut}>
-            Log Out
-          </button>
-        )}
-      </ul>
+          {
+            <button className="links" onClick={signOut}>
+              Log Out
+            </button>
+          }
+        </ul>
+      )}
     </div>
   );
 }

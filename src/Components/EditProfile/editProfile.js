@@ -1,29 +1,48 @@
 //React
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Redirect } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
 //Context
 import { useAuthContext } from "../../Context/authContext";
-
-//Auth
-import { signInWithGoogle, logout } from "../../Components/Firebase/auth";
+import { useUserContext } from "../../Context/userContext";
 
 //Components
 import Loading from "../../Components/Loading/loading";
 import CreateJourney from "../../Components/CreateJourney/createJourney";
 
-export default function Signup({ signup, setSignup }) {
+export default function EditProfile({ setEdit }) {
   // Context
   const [authUser, loading, error] = useAuthContext();
+  const [user, setUser] = useUserContext();
 
   // React Form
   const { register, handleSubmit, watch, errors } = useForm();
 
   // State
-  const [complete, setComplete] = useState(false);
   const [skills, setSkills] = useState([]);
   const [skillInput, setSkillInput] = useState("");
+
+  useEffect(() => {
+    if (user) {
+      setSkills(user.skills);
+    }
+  }, [user]);
+
+  function findSocial(socialName) {
+    const { social } = user;
+    const newLink = social.reduce((acc, curr) => {
+      const newItem = JSON.parse(curr);
+
+      const [[social, link]] = Object.entries(newItem);
+      if (socialName === social) {
+        acc = link;
+      }
+      return acc;
+    }, []);
+
+    return newLink;
+  }
 
   function addToSkills() {
     if (skills.includes(skillInput)) {
@@ -41,7 +60,7 @@ export default function Signup({ signup, setSignup }) {
     setSkills(newSkills);
   }
 
-  function createUser(msg) {
+  function submitProfile(msg) {
     console.log("User Input recieved", msg);
 
     const {
@@ -83,64 +102,59 @@ export default function Signup({ signup, setSignup }) {
       social: socialArray,
     };
 
+    console.log(newUser);
+
     // Posts user data to backend
-    fetch(`https://falcon5ives.herokuapp.com/users`, {
-      method: "POST",
+    fetch(`https://falcon5ives.herokuapp.com/users/${user.uid}`, {
+      method: "PATCH",
       body: JSON.stringify(newUser),
       headers: { "Content-Type": "application/json" },
     })
       .then((res) => res.json())
       .then((data) => console.log("this is the user data: ", data))
+      .then(() => {
+        setEdit(false);
+        setUser(null);
+      })
       .catch((error) => console.log("user creation error error: ", error));
-
-    setComplete(true);
   }
 
   if (loading) {
     return <Loading />;
   }
 
-  // Renders journey signup form once user sign up is complete
-  if (complete) {
-    return <CreateJourney signup={signup} setSignup={setSignup} />;
-  }
+  // uid: userData.id,
+  // username: `${userData.name} ${userData.surname}`,
+  // email: authUser.email,
+  // profileImage: authUser.photoURL,
+  // lastSignIn: authUser.metadata.lastSignInTime,
+  // admin: userData.admin,
+  // cohort: userData.cohort,
+  // currentRole: userData.currentrole,
+  // currentEmployer: userData.currentemployer,
+  // skills: userData.skills,
+  // social: userData.social,
+  // introduction: userData.introduction,
+  // journey: userJourney,
 
   return authUser ? (
     <div>
-      <h1>Sign Up</h1>
-      <button onClick={logout}>Return to Home</button>
       <div>
-        <form onSubmit={handleSubmit(createUser)}>
+        <form onSubmit={handleSubmit(submitProfile)}>
           <span>
-            <img src={authUser?.photoURL} alt="user profile" />
-          </span>
-          <span>
-            <p>Admin:</p>
-            <select name="admin" ref={register}>
-              <option value="true">Yes</option>
-              <option value="false">No</option>
-            </select>
+            <img src={user?.profileImage} alt="user profile" />
           </span>
           <span>
             <p>Name:</p>
-            <input name="name" ref={register} required />
+            <input name="name" ref={register} defaultValue={user.name} />
           </span>
           <span>
             <p>Surname:</p>
-            <input name="surname" ref={register} required />
-          </span>
-          <span>
-            <p>Email:</p>
-            <input
-              name="email"
-              ref={register}
-              required
-              defaultValue={authUser.email}
-            />
+            <input name="surname" ref={register} defaultValue={user.surname} />
           </span>
           <span>
             <p>Cohort:</p>
-            <select name="cohort" ref={register}>
+            <select name="cohort" ref={register} defaultValue={user.cohort}>
               <option value="1">1</option>
               <option value="2">2</option>
               <option value="3">3</option>
@@ -149,11 +163,19 @@ export default function Signup({ signup, setSignup }) {
           </span>
           <span>
             <p>Current Role:</p>
-            <input name="currentRole" ref={register} required />
+            <input
+              name="currentRole"
+              ref={register}
+              defaultValue={user.currentRole}
+            />
           </span>
           <span>
             <p>Current Employer:</p>
-            <input name="currentEmployer" ref={register} required />
+            <input
+              name="currentEmployer"
+              ref={register}
+              defaultValue={user.currentEmployer}
+            />
           </span>
           <span>
             <p>Skills:</p>
@@ -182,7 +204,11 @@ export default function Signup({ signup, setSignup }) {
           </span>
           <span>
             <p>10 Second Intro:</p>
-            <textarea name="introduction" ref={register} required />
+            <textarea
+              name="introduction"
+              ref={register}
+              defaultValue={user.introduction}
+            />
           </span>
           <span>
             <p>Social Links:</p>
@@ -192,6 +218,7 @@ export default function Signup({ signup, setSignup }) {
               placeholder="https://example.com"
               pattern="https://.*"
               ref={register}
+              defaultValue={findSocial("linkedin")}
             ></input>
 
             <label for="Github">Github: </label>
@@ -200,6 +227,7 @@ export default function Signup({ signup, setSignup }) {
               placeholder="https://example.com"
               pattern="https://.*"
               ref={register}
+              defaultValue={findSocial("github")}
             ></input>
 
             <label for="Twitter">Twitter: </label>
@@ -208,6 +236,7 @@ export default function Signup({ signup, setSignup }) {
               placeholder="https://example.com"
               pattern="https://.*"
               ref={register}
+              defaultValue={findSocial("twitter")}
             ></input>
 
             <label for="Portfolio">Portfolio: </label>
@@ -216,6 +245,7 @@ export default function Signup({ signup, setSignup }) {
               placeholder="https://example.com"
               pattern="https://.*"
               ref={register}
+              defaultValue={findSocial("portfolio")}
             ></input>
 
             <label for="Other">Other: </label>
@@ -224,11 +254,12 @@ export default function Signup({ signup, setSignup }) {
               placeholder="https://example.com"
               pattern="https://.*"
               ref={register}
+              defaultValue={findSocial("other")}
             ></input>
           </span>
 
           {/* Submit form button */}
-          <input type="submit" value="Next" />
+          <input type="submit" value="Submit" />
         </form>
       </div>
     </div>
