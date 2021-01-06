@@ -60,7 +60,7 @@ export default function ProfilePage() {
         <button onClick={handleJourneyClick}>
           {addJourney ? "Cancel" : "Add New Journey"}
         </button>
-        <UserJourney user={user} />
+        <UserJourney />
       </div>
     )
   );
