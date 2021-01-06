@@ -1,21 +1,15 @@
 //React
-import { useState, useEffect } from "react";
-import { Redirect } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
 
 //Context
-import { useAuthContext } from "../../Context/authContext";
 import { useUserContext } from "../../Context/userContext";
-
-//Components
-import Loading from "../../Components/Loading/loading";
 
 export default function EditJourney({
   journeyItem,
   startDate,
   endDate,
   setEditJourney,
+  setJourneyIndex,
 }) {
   // Context
   const [user, setUser] = useUserContext();
@@ -24,20 +18,8 @@ export default function EditJourney({
 
   const { jobtitle, employer, description, id } = journeyItem;
 
-  //   <h4>{item.jobTitle}</h4>
-  //               <h5>{item.employer}</h5>
-  //               <h5>{item.startDate}</h5>
-  //               <p>{item.description}</p>
-
   // React Form
   const { register, handleSubmit, watch, errors } = useForm();
-
-  //   useEffect(() => {
-  //     setTimeout(() => {
-  //       setWaiting(false);
-  //       console.log("timeout complete");
-  //     }, 3000);
-  //   }, []);
 
   function submitJourney(msg) {
     console.log("User Input recieved", msg);
@@ -65,6 +47,7 @@ export default function EditJourney({
       .then(() => {
         setUser(null);
         setEditJourney(false);
+        setJourneyIndex(null);
       })
       .catch((error) => console.log("user creation error error: ", error));
   }

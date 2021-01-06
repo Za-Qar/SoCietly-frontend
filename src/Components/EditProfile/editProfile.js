@@ -125,20 +125,6 @@ export default function EditProfile({ setEdit }) {
     return <Loading />;
   }
 
-  // uid: userData.id,
-  // username: `${userData.name} ${userData.surname}`,
-  // email: authUser.email,
-  // profileImage: authUser.photoURL,
-  // lastSignIn: authUser.metadata.lastSignInTime,
-  // admin: userData.admin,
-  // cohort: userData.cohort,
-  // currentRole: userData.currentrole,
-  // currentEmployer: userData.currentemployer,
-  // skills: userData.skills,
-  // social: userData.social,
-  // introduction: userData.introduction,
-  // journey: userJourney,
-
   return authUser ? (
     <div>
       <div>
@@ -190,8 +176,8 @@ export default function EditProfile({ setEdit }) {
             <ul>
               {skills.map((item, index) => {
                 return (
-                  <div>
-                    <li key={`${item}${index}`}>{item}</li>
+                  <div key={index}>
+                    <li>{item}</li>
                     <button
                       onClick={(e) => {
                         deleteSkill(index, e);

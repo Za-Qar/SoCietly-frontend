@@ -13,21 +13,9 @@ import { DateTime } from "luxon";
 export default function UserJourney({ user }) {
   // Edit Journey State
   const [editJourney, setEditJourney] = useState(false);
+  const [journeyIndex, setJourneyIndex] = useState(null);
 
   const { journey } = user;
-
-  // if (editJourney) {
-  //   return (
-  //     <div>
-  //       <EditJourney />
-  //       <button onClick={() => setEditJourney(!editJourney)}>Cancel</button>
-  //     </div>
-  //   );
-  // }
-
-  // function editUserJourney(id){
-
-  // }
 
   return (
     <div>
@@ -42,25 +30,33 @@ export default function UserJourney({ user }) {
           const edt = DateTime.fromISO(item.enddate);
           const newEndDate = edt.toISODate();
 
-          return !editJourney ? (
+          return editJourney && journeyIndex === index ? (
+            <div key={index}>
+              <EditJourney
+                journeyItem={item}
+                startDate={newStartDate}
+                endDate={newEndDate}
+                setEditJourney={setEditJourney}
+                setJourneyIndex={setJourneyIndex}
+              />
+              <button onClick={() => setEditJourney(!editJourney)}>
+                Cancel
+              </button>
+            </div>
+          ) : (
             <div key={index}>
               <h4>{item.jobtitle}</h4>
               <h5>{item.employer}</h5>
               {newEndDate && <h5>Completed: {newEndDate}</h5>}
               <h5>Started: {newStartDate}</h5>
               <p>{item.description}</p>
-              <button onClick={() => setEditJourney(!editJourney)}>Edit</button>
-            </div>
-          ) : (
-            <div>
-              <EditJourney
-                journeyItem={item}
-                startDate={newStartDate}
-                endDate={newEndDate}
-                setEditJourney={setEditJourney}
-              />
-              <button onClick={() => setEditJourney(!editJourney)}>
-                Cancel
+              <button
+                onClick={() => {
+                  setJourneyIndex(index);
+                  setEditJourney(!editJourney);
+                }}
+              >
+                Edit
               </button>
             </div>
           );
