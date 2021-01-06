@@ -6,6 +6,8 @@ import style from "./userInfo.module.css";
 export default function UserInfo({ user }) {
   const {
     username,
+    name,
+    surname,
     email,
     cohort,
     currentRole,
