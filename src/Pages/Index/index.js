@@ -14,6 +14,10 @@ import MapTwo from "../../Components/Map/map.js";
 import GetAllEvents from "../Events/events.js";
 import BootcamperProfilePage from "../BootcamperProfile/Bootcamper";
 
+import Landing from "../Landing/landing";
+
+import Signup from "../../Components/Signup/signup";
+
 import Event from "../../Components/Event/event.js";
 
 import Contact from "../Contact/contact";
@@ -62,6 +66,10 @@ export default function Index() {
         />
         <Route path={"/bootcamper"} exact>
           <BootcamperProfilePage profile={profile} />
+        </Route>
+
+        <Route path={"/landing"} exact>
+          <Landing />
         </Route>
 
         <AuthGuard component={Event} path={"/event"} props={user} exact />
