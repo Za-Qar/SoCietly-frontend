@@ -8,7 +8,7 @@ import { useUserContext } from "../Context/userContext";
 
 //Component
 import Loading from "../Components/Loading/loading";
-import Signup from "../Pages/Signup/signup";
+import Signup from "../Components/Signup/signup";
 
 export default function UserSignIn({
   component: Component,

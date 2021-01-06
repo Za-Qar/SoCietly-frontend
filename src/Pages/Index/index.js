@@ -16,8 +16,7 @@ import BootcamperProfilePage from "../BootcamperProfile/Bootcamper";
 
 import Landing from "../Landing/landing";
 
-import Signup from "../Signup/signup";
-
+import Signup from "../../Components/Signup/signup";
 
 import Event from "../../Components/Event/event.js";
 
