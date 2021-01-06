@@ -7,11 +7,11 @@ import { useForm } from "react-hook-form";
 import { useAuthContext } from "../../Context/authContext";
 
 //Auth
-import { signInWithGoogle, logout } from "../../Components/Firebase/auth";
+import { signInWithGoogle, logout } from "../Firebase/auth";
 
 //Components
-import Loading from "../../Components/Loading/loading";
-import CreateJourney from "../../Components/CreateJourney/createJourney";
+import Loading from "../Loading/loading";
+import CreateJourney from "../CreateJourney/createJourney";
 
 export default function Signup({ signup, setSignup }) {
   // Context
@@ -25,8 +25,10 @@ export default function Signup({ signup, setSignup }) {
   const [skills, setSkills] = useState([]);
   const [skillInput, setSkillInput] = useState("");
 
-  function addToSkills() {
+  function addToSkills(e) {
+    e.preventDefault();
     if (skills.includes(skillInput)) {
+      e.preventDefault();
       console.log("item already added");
       return;
     }
@@ -35,7 +37,8 @@ export default function Signup({ signup, setSignup }) {
     setSkillInput("");
   }
 
-  function deleteSkill(index) {
+  function deleteSkill(index, e) {
+    e.preventDefault();
     console.log(index);
     const newSkills = [...skills.slice(0, index), ...skills.slice(index + 1)];
     setSkills(newSkills);
@@ -162,15 +165,15 @@ export default function Signup({ signup, setSignup }) {
               onChange={(e) => setSkillInput(e.target.value)}
               value={skillInput}
             />
-            <button onClick={addToSkills}>Add Skill</button>
+            <button onClick={(e) => addToSkills(e)}>Add Skill</button>
             <ul>
               {skills.map((item, index) => {
                 return (
                   <div>
                     <li key={`${item}${index}`}>{item}</li>
                     <button
-                      onClick={() => {
-                        deleteSkill(index);
+                      onClick={(e) => {
+                        deleteSkill(index, e);
                       }}
                     >
                       X

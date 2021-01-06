@@ -44,7 +44,8 @@ export default function EditProfile({ setEdit }) {
     return newLink;
   }
 
-  function addToSkills() {
+  function addToSkills(e) {
+    e.preventDefault();
     if (skills.includes(skillInput)) {
       console.log("item already added");
       return;
@@ -54,7 +55,8 @@ export default function EditProfile({ setEdit }) {
     setSkillInput("");
   }
 
-  function deleteSkill(index) {
+  function deleteSkill(index, e) {
+    e.preventDefault();
     console.log(index);
     const newSkills = [...skills.slice(0, index), ...skills.slice(index + 1)];
     setSkills(newSkills);
@@ -184,15 +186,15 @@ export default function EditProfile({ setEdit }) {
               onChange={(e) => setSkillInput(e.target.value)}
               value={skillInput}
             />
-            <button onClick={addToSkills}>Add Skill</button>
+            <button onClick={(e) => addToSkills(e)}>Add Skill</button>
             <ul>
               {skills.map((item, index) => {
                 return (
                   <div>
                     <li key={`${item}${index}`}>{item}</li>
                     <button
-                      onClick={() => {
-                        deleteSkill(index);
+                      onClick={(e) => {
+                        deleteSkill(index, e);
                       }}
                     >
                       X
