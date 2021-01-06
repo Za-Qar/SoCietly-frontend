@@ -36,6 +36,9 @@ export default function NavBar() {
         <a href="http://localhost:3000/alumni" className="links">
           <button>Alumni</button>
         </a>
+        <a href="http://localhost:3000/resources" className="links">
+          <button>Resources</button>
+        </a>
         <a href="http://localhost:3000/contact" className="links">
           <button>Contact</button>
         </a>
