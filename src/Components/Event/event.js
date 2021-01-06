@@ -11,38 +11,49 @@ import Maps from "../../Components/Maps/maps.js";
 import { useUserContext } from "../../Context/userContext";
 
 function Event({
-  attendinglist,
   date,
-  description,
-  enablevolunteers,
-  eventname,
-  eventtype,
-  id,
-  image,
-  likes,
-  location,
-  time,
-  uid,
-  volunteerlist,
+  item,
+
   setAttendindList,
   addToAttend,
   myEvents,
+  styling,
 
-  eventDiv,
-  eventNameClass,
-  dateClass,
-  timeClass,
-  imgClass,
-  likesClass,
-  mapsClass,
-  descClass,
-  attLengthClass,
-  attendButClass,
-  attListClass,
-  editButClass,
-  delButClass,
   fetchUserEvents,
 }) {
+  /*--------Props--------*/
+  const {
+    attendinglist,
+    description,
+    enablevolunteers,
+    eventname,
+    eventtype,
+    id,
+    image,
+    likes,
+    location,
+    time,
+    uid,
+    volunteerlist,
+  } = item;
+
+  /*--------Classes--------*/
+  const {
+    eventDiv,
+    eventNameClass,
+    dateClass,
+    timeClass,
+    imgClass,
+    likesClass,
+    mapsClass,
+    descClass,
+    attLengthClass,
+    attendButClass,
+    attListClass,
+    editButClass,
+    delButClass,
+  } = styling;
+
   const [user] = useUserContext();
   const [marker, setMarker] = useState(JSON.parse(location));
   const [like, setLike] = useState(0);
