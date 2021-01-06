@@ -30,10 +30,6 @@ export default function UserSignIn({
 
   const [signup, setSignup] = useState();
 
-  console.log(user);
-
-  console.log(authUser);
-
   useEffect(() => {
     async function getUser() {
       if (authUser) {

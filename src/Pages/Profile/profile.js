@@ -26,16 +26,16 @@ export default function ProfilePage() {
     setEdit(!edit);
   }
 
-  if (addJourney) {
-    return (
-      <div>
-        <button onClick={handleJourneyClick}>
-          {addJourney ? "Cancel" : "Add New Journey"}
-        </button>
-        <AddNewJourney setAddJourney={setAddJourney} />
-      </div>
-    );
-  }
+  // if (addJourney) {
+  //   return (
+  //     <div>
+  //       <button onClick={handleJourneyClick}>
+  //         {addJourney ? "Cancel" : "Add New Journey"}
+  //       </button>
+  //       <AddNewJourney setAddJourney={setAddJourney} />
+  //     </div>
+  //   );
+  // }
 
   if (edit) {
     return (
@@ -58,8 +58,13 @@ export default function ProfilePage() {
         <UserSkills user={user} />
         <UserIntro user={user} />
         <button onClick={handleJourneyClick}>
-          {addJourney ? "Cancel" : "Add New Journey"}
+          {addJourney ? "Cancel" : "Update My Journey"}
         </button>
+        {addJourney && (
+          <div>
+            <AddNewJourney setAddJourney={setAddJourney} />
+          </div>
+        )}
         <UserJourney />
       </div>
     )
