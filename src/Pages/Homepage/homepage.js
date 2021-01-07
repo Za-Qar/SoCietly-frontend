@@ -60,54 +60,56 @@ export default function Homepage() {
   // console.log("now: ", now.setDate(now.getDate()));
 
   return (
-    user && (
-      <div>
-        <h1>Homepage</h1>
-        <UserImage user={user} />
+    <div>
+      {user && (
+        <div>
+          <h1>Homepage</h1>
+          <UserImage user={user} width={"100px"} />
 
-        <section>
-          <h3>This week</h3>
-          <div>
-            {allEvents &&
-              allEvents.map((item, index) => {
-                let eventTrans = new Date(item.date);
-                let eventDate = eventTrans.setDate(eventTrans.getDate());
+          <section>
+            <h3>This week</h3>
+            <div>
+              {allEvents &&
+                allEvents.map((item, index) => {
+                  let eventTrans = new Date(item.date);
+                  let eventDate = eventTrans.setDate(eventTrans.getDate());
 
-                let date = new Date();
-                let inOneWeek = date.setDate(date.getDate() + 7);
+                  let date = new Date();
+                  let inOneWeek = date.setDate(date.getDate() + 7);
 
-                let nowTrans = new Date();
-                let now = nowTrans.setDate(nowTrans.getDate());
+                  let nowTrans = new Date();
+                  let now = nowTrans.setDate(nowTrans.getDate());
 
-                let displayDate = eventTrans.toDateString();
+                  let displayDate = eventTrans.toDateString();
 
-                if (eventDate >= now && eventDate <= inOneWeek) {
-                  return (
-                    <Event
-                      key={index}
-                      attendinglist={item.attendinglist}
-                      date={displayDate}
-                      description={item.description}
-                      enablevolunteers={item.enablevolunteers}
-                      eventname={item.eventname}
-                      eventtype={item.eventtype}
-                      id={item.id}
-                      image={item.image}
-                      likes={item.likes}
-                      location={item.location}
-                      time={item.time}
-                      uid={item.uid}
-                      volunteerlist={item.volunteerlist}
-                    />
-                  );
-                }
-              })}
-          </div>
-        </section>
+                  if (eventDate >= now && eventDate <= inOneWeek) {
+                    return (
+                      <Event
+                        key={index}
+                        attendinglist={item.attendinglist}
+                        date={displayDate}
+                        description={item.description}
+                        enablevolunteers={item.enablevolunteers}
+                        eventname={item.eventname}
+                        eventtype={item.eventtype}
+                        id={item.id}
+                        image={item.image}
+                        likes={item.likes}
+                        location={item.location}
+                        time={item.time}
+                        uid={item.uid}
+                        volunteerlist={item.volunteerlist}
+                      />
+                    );
+                  }
+                })}
+            </div>
+          </section>
 
-        <UserInfo user={user} />
-        <JobUpdates />
-      </div>
-    )
+          <UserInfo user={user} />
+          <JobUpdates />
+        </div>
+      )}
+    </div>
   );
 }

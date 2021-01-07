@@ -5,6 +5,7 @@ import React, { useState, useEffect } from "react";
 export default function UserImage({ user, width = "60px", onClick }) {
   const { profileimage, profileImage, name, cohort } = user;
   const [styling, setStyling] = useState(null);
+
   function styleCohort() {
     if (cohort === 1) {
       setStyling(style.cohort1);
@@ -18,9 +19,12 @@ export default function UserImage({ user, width = "60px", onClick }) {
       setStyling(style.cohort5);
     }
   }
+
   useEffect(() => {
     styleCohort();
   }, []);
+
+
   return (
     <div>
       <img
