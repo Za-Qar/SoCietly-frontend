@@ -57,8 +57,6 @@
 .cog {
   width: 2rem;
   border-radius: 100%;
-  position: absolute;
-  right: 0;
 }
 
 .navContainer {

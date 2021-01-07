@@ -12,4 +12,14 @@
   color: white;
   border-radius: 0.3rem;
   border: 0.5px solid rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+}
+
+.cog {
+  height: 5rem;
+}
+
+.menuContainer {
+  position: absolute;
+  right: 0;
 }
