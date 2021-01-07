@@ -24,6 +24,7 @@ export default function UserImage({ user, width = "60px", onClick }) {
     styleCohort();
   }, []);
 
+
   return (
     <div>
       <img
