@@ -86,3 +86,17 @@
   grid-template-columns: 1fr 1fr;
   grid-gap: 20px;
 }
+
+.row {
+  display: flex;
+}
+
+.column1 {
+  flex: 60%;
+  padding: 10px;
+}
+
+.column2 {
+  flex: 20%;
+  padding: 10px;
+}
