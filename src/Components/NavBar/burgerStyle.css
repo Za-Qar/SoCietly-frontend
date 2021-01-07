@@ -1,0 +1,15 @@
+.burgerContent {
+  text-align: center;
+}
+
+.burgerContent p {
+  padding: 1rem;
+  margin: 0;
+}
+
+.burgerContent p:hover {
+  background-color: #31986a;
+  color: white;
+  border-radius: 0.3rem;
+  border: 0.5px solid rgba(0, 0, 0, 0.5);
+}

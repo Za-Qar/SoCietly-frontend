@@ -1,3 +1,5 @@
+import React, { useState } from "react";
+
 //images
 import soc from "../../Images/soc.png";
 
@@ -9,27 +11,26 @@ import { useUserContext } from "../../Context/userContext";
 
 //styling
 import style from "./nav.module.css";
+import "./burgerStyle.css";
 
 //router
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
 export default function NavBar() {
   const [user, setUser] = useUserContext();
+  const [hide, setHide] = useState("hide");
 
   function signOut() {
     logout();
     setUser(null);
   }
+
+  function hideClass() {
+    hide === "hide" ? setHide("") : setHide("hide");
+  }
+
   return (
-    <div>
-      <input id="burger" type="checkbox" />
-
-      <label for="burger">
-        <span></span>
-        <span></span>
-        <span></span>
-      </label>
-
+    <div className={style.navDiv}>
       <nav className={style.nav}>
         <div className="container">
           <Link to="/"></Link>
@@ -70,7 +71,7 @@ export default function NavBar() {
                   <span>Contact</span>
                 </li>
               </Link>
-              <li>
+              <li onClick={hideClass}>
                 <img
                   className={style.cog}
                   src="https://www.flaticon.com/svg/static/icons/svg/3601/3601082.svg"
@@ -86,6 +87,12 @@ export default function NavBar() {
           </div>
         </div>
       </nav>
+      <div className={`burgerContent ${hide}`}>
+        <p>Hello </p>
+        <p>Hello </p>
+        <p>Hello </p>
+        <p>Hello </p>
+      </div>
     </div>
   );
 }
