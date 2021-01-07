@@ -33,7 +33,9 @@ export default function UserImage({ user, width = "60px", onClick }) {
         alt={`${name} profile`}
         width={width}
         onClick={onClick}
+//         className={style.profImg}
       />
     </div>
+
   );
 }

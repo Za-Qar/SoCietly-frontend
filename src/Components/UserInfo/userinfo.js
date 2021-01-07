@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 import { useProfileContext } from "../../Context/profileContext";
 import UserImage from "../userImage/userImage";
 
-export default function UserInfo({ user, link }) {
+export default function UserInfo({ user, link, homepageEdit }) {
   const [profile, setProfile] = useProfileContext();
 
   const {
@@ -45,11 +45,11 @@ export default function UserInfo({ user, link }) {
         ) : (
           <h3>{username ? username : `${name} ${surname}`}</h3>
         )}
-        <h4>Cohort {cohort}</h4>
-        <h4>{currentRole}</h4>
-        <h4>{currentEmployer}</h4>
-        <h5>{email}</h5>
-        <SocialMedia social={social} />
+        {!homepageEdit && <h4>Cohort {cohort}</h4>}
+        <h4 className={style.h4}>{currentRole} at</h4>
+        <h4 className={style.h4}>{currentEmployer}</h4>
+        {!homepageEdit && <h5>{email}</h5>}
+        {!homepageEdit && <SocialMedia social={social} />}
       </div>
     )
   );

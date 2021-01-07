@@ -1,0 +1,103 @@
+.userSec {
+  background-color: white;
+  width: 15%;
+  height: 100vh;
+  position: sticky;
+  top: 0;
+  /* z-index: -1; */
+  text-align: center;
+  margin-left: 0;
+
+  border: 0.5px solid rgba(0, 0, 0, 0.5);
+}
+
+.secContainer {
+  width: 90%;
+  margin: auto;
+}
+
+.columnTwo {
+  margin-top: 5rem;
+}
+
+.welcome h3 {
+  color: #31986a;
+}
+
+.welcome h4 {
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
+/* .columnTwoContainer {
+  width: 90%;
+  margin: auto;
+  padding-top: 60px;
+} */
+
+.eventImage {
+  width: 100%;
+  height: auto;
+}
+
+.eventSec {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.eventSecSpan {
+  background-color: #c4ecf3;
+  padding: 1rem;
+  margin: 0 1rem 1rem 0;
+  border-radius: 5px;
+  border: 0.5px solid rgba(0, 0, 0, 0.5);
+
+  flex-grow: 1;
+  width: 30%;
+  height: 10rem;
+  z-index: 1;
+}
+
+.eventSecSpan h4 {
+  margin: 0 0 1rem 0;
+}
+
+.eventSecSpan img {
+  transform: translateY(-4rem);
+}
+
+.img {
+  height: 70%;
+  overflow: hidden;
+  border-radius: 10px;
+}
+
+.weekEvents {
+  background-color: white;
+  border-radius: 5px;
+  padding: 1rem;
+  border: 0.5px solid rgba(0, 0, 0, 0.5);
+}
+
+.test {
+}
+
+.eventContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 20px;
+}
+
+.row {
+  display: flex;
+}
+
+.column1 {
+  flex: 80%;
+  /* padding: 10px; */
+  margin: 0 3rem 0 3rem;
+}
+
+.column2 {
+  flex: 20%;
+}

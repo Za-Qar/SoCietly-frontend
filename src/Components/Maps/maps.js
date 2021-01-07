@@ -1,6 +1,8 @@
 import React, { useState, useCallback, useRef, useEffect } from "react";
 import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
 
+import "./maps.css";
+
 const libraries = ["places"];
 const mapContainerStyle = {
   height: "100vh",
