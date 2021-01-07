@@ -1,5 +1,10 @@
 import React, { useState, useEffect } from "react";
 
+//Images
+import edu from "../../Images/edu.jpg";
+import social from "../../Images/social4.jpg";
+import social2 from "../../Images/social2.jpg";
+
 //components
 import UserInfo from "../../Components/UserInfo/userinfo";
 import UserImage from "../../Components/userImage/userImage";
@@ -59,55 +64,124 @@ export default function Homepage() {
   // var now = new Date();
   // console.log("now: ", now.setDate(now.getDate()));
 
+  const styling = {
+    eventDiv: "homeDiv",
+    eventNameClass: "homeName",
+    dateClass: "homeDate",
+    timeClass: "homeTime",
+    imgClass: "homeImg",
+    likesClass: "homeLikes",
+    mapsClass: "homeMaps",
+    descClass: "homeDesc",
+    attLengthClass: "homeAttLength",
+    attendButClass: "homeAttendBut",
+    attListClass: "homeAttList",
+    editButClass: "homeEditBut",
+    delButClass: "homeDelBut",
+  };
   return (
     <div>
       {user && (
         <div>
-          <h1>Homepage</h1>
-          <UserImage user={user} width={"100px"} />
+          <div class="left"></div>
 
-          <section>
-            <h3>This week</h3>
-            <div>
-              {allEvents &&
-                allEvents.map((item, index) => {
-                  let eventTrans = new Date(item.date);
-                  let eventDate = eventTrans.setDate(eventTrans.getDate());
+          <div className={style.row}>
+            <section className={style.userSec}>
+              <div className={style.column2}>
+                <UserImage user={user} />
+                <UserInfo user={user} homepageEdit />
+              </div>
+            </section>
 
-                  let date = new Date();
-                  let inOneWeek = date.setDate(date.getDate() + 7);
+            {/*--------- Column 1---------*/}
+            <div className={style.column1}>
+              <section className={style.columnTwo}>
+                <div className={style.welcome}>
+                  <h3>Hello {user.username}</h3>
+                  <h4>
+                    What’s new with you? Have a look around the SoC community
+                  </h4>
+                </div>
 
-                  let nowTrans = new Date();
-                  let now = nowTrans.setDate(nowTrans.getDate());
+                <section>
+                  <div className={style.eventSec}>
+                    <span className={style.eventSecSpan}>
+                      <h4>Guest Lectures</h4>
+                      <div className={style.img}>
+                        <img
+                          className={style.eventImage}
+                          src={edu}
+                          alt="education image"
+                        />
+                      </div>
+                    </span>
 
-                  let displayDate = eventTrans.toDateString();
+                    <span className={style.eventSecSpan}>
+                      <h4>Community</h4>
+                      <div className={style.img}>
+                        <img
+                          className={style.eventImage}
+                          src={social}
+                          alt="community image"
+                        />
+                      </div>
+                    </span>
 
-                  if (eventDate >= now && eventDate <= inOneWeek) {
-                    return (
-                      <Event
-                        key={index}
-                        attendinglist={item.attendinglist}
-                        date={displayDate}
-                        description={item.description}
-                        enablevolunteers={item.enablevolunteers}
-                        eventname={item.eventname}
-                        eventtype={item.eventtype}
-                        id={item.id}
-                        image={item.image}
-                        likes={item.likes}
-                        location={item.location}
-                        time={item.time}
-                        uid={item.uid}
-                        volunteerlist={item.volunteerlist}
-                      />
-                    );
-                  }
-                })}
+                    <span className={style.eventSecSpan}>
+                      <h4>Social</h4>
+                      <div className={style.img}>
+                        <img
+                          className={style.eventImage}
+                          src={social2}
+                          alt="social image"
+                        />
+                      </div>
+                    </span>
+                  </div>
+                </section>
+
+                <section className={style.weekEvents}>
+                  <h3>This week</h3>
+
+                  <div className={style.eventContainer}>
+                    {allEvents &&
+                      allEvents.map((item, index) => {
+                        let eventTrans = new Date(item.date);
+                        let eventDate = eventTrans.setDate(
+                          eventTrans.getDate()
+                        );
+
+                        let date = new Date();
+                        let inOneWeek = date.setDate(date.getDate() + 7);
+
+                        let nowTrans = new Date();
+                        let now = nowTrans.setDate(nowTrans.getDate());
+
+                        let displayDate = eventTrans.toDateString();
+
+                        if (eventDate >= now && eventDate <= inOneWeek) {
+                          console.log(item);
+                          return (
+                            <Event
+                              key={index}
+                              date={displayDate}
+                              item={item}
+                              styling={styling}
+                              homepageTrue
+                            />
+                          );
+                        }
+                      })}
+                  </div>
+                </section>
+              </section>
             </div>
-          </section>
 
-          <UserInfo user={user} />
-          <JobUpdates />
+            {/*--------- Column 2---------*/}
+            <div className={style.column2}>
+              <JobUpdates />
+            </div>
+          </div>
         </div>
       )}
     </div>

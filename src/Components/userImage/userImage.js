@@ -31,14 +31,18 @@ export default function UserImage({ user, width = "60px" }) {
 
   return (
     <div>
+
       <Link to={`/bootcamper/${id ? id : uid}`}>
         <img
           class={styling}
           src={profileImage ? profileImage : profileimage}
           alt={`${name} profile`}
           width={width}
+ className={`profImg ${styling}`}
         />
       </Link>
+
     </div>
+
   );
 }

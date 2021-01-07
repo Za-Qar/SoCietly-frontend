@@ -6,7 +6,7 @@
   background-color: #e5e7ea;
   padding: 2rem;
   margin-bottom: 1rem;
-  border: 1px solid rgba(0, 0, 0, 0.5);
+  border: 0.5px solid rgba(0, 0, 0, 0.5);
   border-radius: 3px;
 }
 
@@ -41,6 +41,16 @@
   flex-direction: column;
   flex-basis: 100%;
   flex: 1;
+  margin-left: 1rem;
+}
+
+.column2 h3 {
+  font-weight: 500;
+}
+
+.column2 p {
+  font-size: 0.9rem;
+  font-weight: 400;
 }
 
 .column3 {
@@ -75,4 +85,27 @@
 }
 
 .myDelButClass {
+}
+
+/*----------------Homepage event styling----------------*/
+.homeDiv {
+  background-color: #f0f7f4;
+  padding: 1rem;
+  margin: 1rem;
+  border: 0.5px solid rgba(0, 0, 0, 0.5);
+  border-radius: 5px;
+}
+
+.homeName {
+  margin: 0;
+}
+
+.homeImg {
+  height: 10rem;
+}
+
+.imgContainer {
+  width: 10rem;
+  height: 10rem;
+  overflow: hidden;
 }
