@@ -8,7 +8,7 @@ import { useUserContext } from "../Context/userContext";
 
 //Component
 import Loading from "../Components/Loading/loading";
-import Signup from "../Pages/Signup/signup";
+import Signup from "../Components/Signup/signup";
 
 export default function UserSignIn({
   component: Component,
@@ -29,10 +29,6 @@ export default function UserSignIn({
   // user context set with firebase and backend data - context
 
   const [signup, setSignup] = useState();
-
-  console.log(user);
-
-  console.log(authUser);
 
   useEffect(() => {
     async function getUser() {
@@ -74,6 +70,8 @@ export default function UserSignIn({
       const newUser = {
         uid: userData.id,
         username: `${userData.name} ${userData.surname}`,
+        name: userData.name,
+        surname: userData.surname,
         email: authUser.email,
         profileImage: authUser.photoURL,
         lastSignIn: authUser.metadata.lastSignInTime,

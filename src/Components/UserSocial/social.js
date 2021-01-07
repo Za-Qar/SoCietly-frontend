@@ -12,10 +12,12 @@ export default function SocialMedia({ social }) {
             const [[social, link]] = Object.entries(newItem);
 
             return (
-              <a key={item} href={link} rel="noreferrer" target="_blank">
-                {" "}
-                <h6>{social}</h6>{" "}
-              </a>
+              link && (
+                <a key={item} href={link} rel="noreferrer" target="_blank">
+                  {" "}
+                  <h6>{social}</h6>{" "}
+                </a>
+              )
             );
           })}
         </ul>
