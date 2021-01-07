@@ -63,9 +63,9 @@ export default function NavBar() {
 
               <div className="menuContainer">
                 {user && (
-                  <Link to="/contact">
+                  <Link to="/">
                     <li>
-                      <span>Logout</span>
+                      <span onClick={signOut}>Logout</span>
                     </li>
                   </Link>
                 )}
@@ -110,13 +110,7 @@ export default function NavBar() {
           <p>Contact</p>
         </Link>
       </div>
-      <div className={`burgerContent ${hideCog}`}>
-        {user && (
-          <p className="links" onClick={signOut}>
-            Log Out
-          </p>
-        )}
-      </div>
+      <div className={`burgerContent ${hideCog}`}></div>
     </div>
   );
 }
