@@ -10,6 +10,7 @@ import UserInfo from "../../Components/UserInfo/userinfo";
 import UserImage from "../../Components/userImage/userImage";
 import JobUpdates from "../../Components/jobUpdates/jobUpdates";
 import Event from "../../Components/Event/event.js";
+import Card from "../../MaterialUi/Card/card.js";
 
 //Context
 import { useUserContext } from "../../Context/userContext";

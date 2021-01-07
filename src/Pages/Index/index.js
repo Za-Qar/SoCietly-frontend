@@ -35,6 +35,9 @@ import { user } from "../../Components/userData";
 import NavBar from "../../Components/NavBar/nav";
 import CloudinaryImage from "../../Components/CloudinaryImage/cloudinaryImage.js";
 
+//Material Ui
+import EventCard from "../../MaterialUi/Card/card.js";
+
 //styling
 import style from "./index.module.css";
 
@@ -83,6 +86,8 @@ export default function Index() {
         <AuthGuard component={MyEvents} path={"/myevents"} exact />
 
         <AuthGuard component={Alumni} path={"/alumni"} exact />
+
+        <AuthGuard component={EventCard} path={"/card"} exact />
 
         <AuthGuard
           component={Resources}
