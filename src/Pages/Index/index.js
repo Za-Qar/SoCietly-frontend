@@ -12,7 +12,8 @@ import CreateEvent from "../CreateEvent/createEvent.js";
 import Maps from "../../Components/Maps/maps.js";
 import MapTwo from "../../Components/Map/map.js";
 import GetAllEvents from "../Events/events.js";
-import BootcamperProfilePage from "../BootcamperProfile/Bootcamper";
+import BootcamperProfilePage from "../../Components/BootcamperProfile/Bootcamper";
+import UserProfilePage from "../../Components/UserProfile/userProfile";
 
 import Resources from "../Resources/resources.js";
 
@@ -45,12 +46,7 @@ export default function Index() {
       <Switch>
         <AuthGuard component={Homepage} path={"/"} props={user} exact />
         <Route path="/login" component={SignIn}></Route>
-        <AuthGuard
-          component={ProfilePage}
-          path={"/profile"}
-          props={user}
-          exact
-        />
+        <AuthGuard component={ProfilePage} path={"/bootcamper/:id"} />
         <AuthGuard
           component={CreateEvent}
           path={"/CreateEvent"}
@@ -63,10 +59,6 @@ export default function Index() {
           props={user}
           exact
         />
-        <AuthGuard component={BootcamperProfilePage} path={"/bootcamper/:id"} />
-        {/* <Route path={"/bootcamper/:id"} exact>
-          <BootcamperProfilePage />
-        </Route> */}
 
         <Route path={"/landing"} exact>
           <Landing />
