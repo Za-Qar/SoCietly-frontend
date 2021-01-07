@@ -46,44 +46,20 @@ export default function NavBar() {
     <div className={style.navDiv}>
       <nav className={style.nav}>
         <div className="container">
-          <Link to="/"></Link>
           {/* Search Bar */}
           <div className={style.navContainer}>
             <ul>
               <li>
-                <img
-                  className={style.img}
-                  src={soc}
-                  alt="School of Code Logo"
-                  height="100"
-                  width="100"
-                />
+                <Link to="/">
+                  <img
+                    className={style.img}
+                    src={soc}
+                    alt="School of Code Logo"
+                    height="100"
+                    width="100"
+                  />
+                </Link>
               </li>
-              {/* <Link to="/">
-                <li>
-                  <span>Home</span>
-                </li>
-              </Link>
-              <Link to="/events">
-                <li>
-                  <span>Events</span>
-                </li>
-              </Link>
-              <Link to="/profile">
-                <li>
-                  <span>Profile</span>
-                </li>
-              </Link>
-              <Link to="/alumni">
-                <li>
-                  <span>Alumni</span>
-                </li>
-              </Link>
-              <Link to="/contact">
-                <li>
-                  <span>Contact</span>
-                </li>
-              </Link> */}
 
               <div className="menuContainer">
                 {user && (
