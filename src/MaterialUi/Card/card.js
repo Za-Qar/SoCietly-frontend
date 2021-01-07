@@ -18,7 +18,7 @@ import MoreVertIcon from "@material-ui/icons/MoreVert";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    maxWidth: 345,
+    maxWidth: "100%",
   },
   media: {
     height: 0,
@@ -39,7 +39,23 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function EventCard() {
+export default function EventCard({ date, item }) {
+  /*--------Props--------*/
+  const {
+    attendinglist,
+    description,
+    enablevolunteers,
+    eventname,
+    eventtype,
+    id,
+    image,
+    likes,
+    location,
+    time,
+    uid,
+    volunteerlist,
+  } = item;
+
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
 
