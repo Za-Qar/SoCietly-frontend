@@ -19,7 +19,9 @@ export default function UserInfo({ user, link }) {
     email,
     cohort,
     currentRole,
+    currentrole,
     currentEmployer,
+    currentemployer,
     social,
   } = user;
 
@@ -46,8 +48,8 @@ export default function UserInfo({ user, link }) {
           <h3>{username ? username : `${name} ${surname}`}</h3>
         )}
         <h4>Cohort {cohort}</h4>
-        <h4>{currentRole}</h4>
-        <h4>{currentEmployer}</h4>
+        <h4>{currentRole ? currentRole : currentrole}</h4>
+        <h4>{currentEmployer ? currentEmployer : currentemployer}</h4>
         <h5>{email}</h5>
         <SocialMedia social={social} />
       </div>

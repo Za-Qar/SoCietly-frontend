@@ -1,28 +1,32 @@
+//React
 import React, { useState, useEffect } from "react";
-
-//
 import { Link } from "react-router-dom";
-//
 
+// Style
 import style from "./alumni.module.css";
 
-import UserInfo from "../../Components/UserInfo/userinfo";
+// Components
+import CohortContainer from "../../Components/CohortContainer/cohortContainer";
 
-//
-import UserIntro from "../../Components/UserIntro/userintro";
-
-import UserImage from "../../Components/userImage/userImage";
-
-//
+//Context
 import { useProfileContext } from "../../Context/profileContext";
-//
 
 export default function GetAllAlumni() {
+  // Context
+  const [profile, setProfile] = useProfileContext();
+
   const [allAlumni, setAllAlumni] = useState([]);
 
-  //
-  const [profile, setProfile] = useProfileContext();
-  //
+  const [filter, setFilter] = useState(null);
+
+  // Creates an array containg cohort number values
+  // This will render a container for each cohort value
+  const cohortArray = allAlumni.reduce((acc, curr) => {
+    if (acc.find((value) => value === curr.cohort)) {
+      return acc;
+    }
+    return [...acc, curr.cohort];
+  }, []);
 
   async function getUserInfo() {
     let res = await fetch("https://falcon5ives.herokuapp.com/users");
@@ -38,14 +42,35 @@ export default function GetAllAlumni() {
   return (
     <div>
       <h3>Alumni</h3>
-      {allAlumni &&
-        allAlumni.map((item, index) => {
-          return (
-            <div>
-              {/* <UserImage user={item} /> */}
-              <UserInfo link={item} key={index} user={item} />
-            </div>
-          );
+      <div>
+        <label for="filter">Filter by Cohort</label>
+        <select
+          name="filter"
+          onChange={(e) => {
+            if (e.target.value === "all") {
+              setFilter(null);
+              return;
+            }
+            setFilter(parseInt(e.target.value));
+          }}
+        >
+          <option selected value={"all"}>
+            All
+          </option>
+          {cohortArray.map((value) => {
+            return <option value={value}>Cohort {value}</option>;
+          })}
+        </select>
+      </div>
+      {filter && <button onClick={() => setFilter(null)}>X</button>}
+      {cohortArray &&
+        cohortArray.map((value) => {
+          if (!filter || filter === value) {
+            return (
+              <CohortContainer allAlumni={allAlumni} cohortValue={value} />
+            );
+          }
+          return null;
         })}
     </div>
   );
