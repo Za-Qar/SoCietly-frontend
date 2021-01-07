@@ -26,6 +26,8 @@ export default function NavBar() {
         <img src={soc} alt="School of Code Logo" height="100" width="100" />
       </Link>
       {/* Search Bar */}
+        
+       
       {user && (
         <ul>
           <Link to="/">
@@ -43,7 +45,9 @@ export default function NavBar() {
           <Link to="/contact">
             <button>Contact</button>
           </Link>
-
+<a href="http://localhost:3000/resources" className="links">
+          <button>Resources</button>
+        </a>
           {
             <button className="links" onClick={signOut}>
               Log Out

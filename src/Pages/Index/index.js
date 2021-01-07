@@ -14,9 +14,12 @@ import MapTwo from "../../Components/Map/map.js";
 import GetAllEvents from "../Events/events.js";
 import BootcamperProfilePage from "../BootcamperProfile/Bootcamper";
 
+import Resources from "../Resources/resources.js";
+
 import Landing from "../Landing/landing";
 
 import Signup from "../../Components/Signup/signup";
+
 
 import Event from "../../Components/Event/event.js";
 
@@ -81,6 +84,13 @@ export default function Index() {
         <AuthGuard component={CloudinaryImage} path={"/image"} exact />
 
         <AuthGuard component={MyEvents} path={"/myevents"} exact />
+
+        <AuthGuard
+          component={Resources}
+          path={"/resources"}
+          props={user}
+          exact
+        />
 
         {/* For Development Purposes */}
 
