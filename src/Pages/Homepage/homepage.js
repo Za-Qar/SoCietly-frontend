@@ -175,10 +175,11 @@ export default function Homepage() {
                 </section>
               </div>
             </section>
+
+            <JobUpdates />
           </div>
         </div>
       )}
-      <JobUpdates />
     </div>
   );
 }

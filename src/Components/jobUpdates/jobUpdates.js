@@ -30,7 +30,7 @@ export default function JobUpdates() {
   }, []);
 
   return (
-    <div>
+    <div className={style.jobSec}>
       <h4>Job Updates</h4>
       {jobUpdates &&
         jobUpdates.map((item, index) => {
