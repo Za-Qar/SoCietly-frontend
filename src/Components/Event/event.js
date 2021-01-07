@@ -17,10 +17,14 @@ function Event({
   setAttendindList,
   addToAttend,
   myEvents,
+  homepageTrue,
   styling,
 
   fetchUserEvents,
 }) {
+  console.log(styling);
+  console.log(item);
+
   /*--------Props--------*/
   const {
     attendinglist,
@@ -54,8 +58,13 @@ function Event({
     delButClass,
   } = styling;
 
+  /*--------User context--------*/
   const [user] = useUserContext();
+
+  /*--------Maps marker state--------*/
   const [marker, setMarker] = useState(JSON.parse(location));
+
+  /*--------useStates--------*/
   const [like, setLike] = useState(0);
   let [clicked, setClicked] = useState(false);
 
@@ -146,13 +155,14 @@ function Event({
   if (volunteerlist)
     return (
       <div className={eventDiv}>
-        <h3 className={eventNameClass}>{eventname}</h3>
-
         <div className="row">
           <div className="column1">
-            <img src={image} className={imgClass} />
+            <div className="imgContainer">
+              <img src={image} className={imgClass} />
+            </div>
           </div>
           <div className="column2">
+            <h3 className={eventNameClass}>{eventname}</h3>
             <p className={descClass}>{description}</p>
           </div>
         </div>
@@ -174,9 +184,16 @@ function Event({
             </div>
           </div>
         </div>
-        {!myEvents && (
-          <Maps marker={marker} setMarker={setMarker} className={mapsClass} />
-        )}
+        <div className="mapsDiv">
+          {!myEvents ||
+            (homepageTrue && (
+              <Maps
+                marker={marker}
+                setMarker={setMarker}
+                className={mapsClass}
+              />
+            ))}
+        </div>
 
         <p className={attLengthClass}>Attending: {attendinglist.length}</p>
         {!myEvents && (

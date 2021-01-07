@@ -64,32 +64,33 @@ export default function Homepage() {
   // var now = new Date();
   // console.log("now: ", now.setDate(now.getDate()));
 
-  const styling = [
-    { eventDiv: "myEventDiv" },
-    { eventNameClass: "myEventName" },
-    { dateClass: "myDateClass" },
-    { timeClass: "myTimeClass" },
-    { imgClass: "myImgClass" },
-    { likesClass: "myLikesClass" },
-    { mapsClass: "myMapsClass" },
-    { descClass: "myDescClass" },
-    { attLengthClass: "myAttLengthClass" },
-    { attendButClass: "myAttendButClass" },
-    { attListClass: "myAttListClass" },
-    { editButClass: "myEditButClass" },
-    { delButClass: "myDelButClass" },
-  ];
-
+  const styling = {
+    eventDiv: "homeDiv",
+    eventNameClass: "homeName",
+    dateClass: "homeDate",
+    timeClass: "homeTime",
+    imgClass: "homeImg",
+    likesClass: "homeLikes",
+    mapsClass: "homeMaps",
+    descClass: "homeDesc",
+    attLengthClass: "homeAttLength",
+    attendButClass: "homeAttendBut",
+    attListClass: "homeAttList",
+    editButClass: "homeEditBut",
+    delButClass: "homeDelBut",
+  };
   return (
     <div>
       {user && (
         <div>
-          <section className={style.userSec}>
-            <div className={style.secContainer}>
-              <UserImage user={user} />
-              <UserInfo user={user} />
-            </div>
-          </section>
+          <div class="left">
+            <section className={style.userSec}>
+              <div className={style.secContainer}>
+                <UserImage user={user} />
+                <UserInfo user={user} homepageEdit />
+              </div>
+            </section>
+          </div>
 
           <div className="container">
             <section className={style.columnTwo}>
@@ -140,7 +141,8 @@ export default function Homepage() {
 
                 <section className={style.weekEvents}>
                   <h3>This week</h3>
-                  <div>
+
+                  <div className={style.eventContainer}>
                     {allEvents &&
                       allEvents.map((item, index) => {
                         let eventTrans = new Date(item.date);
@@ -164,6 +166,7 @@ export default function Homepage() {
                               date={displayDate}
                               item={item}
                               styling={styling}
+                              homepageTrue
                             />
                           );
                         }

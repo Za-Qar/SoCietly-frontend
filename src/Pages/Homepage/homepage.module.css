@@ -7,6 +7,7 @@
   z-index: -1;
   text-align: center;
   margin-left: 0;
+  border: 0.5px solid rgba(0, 0, 0, 0.5);
 }
 
 .secContainer {
@@ -48,6 +49,7 @@
   padding: 1rem;
   margin: 0 1rem 1rem 0;
   border-radius: 5px;
+  border: 0.5px solid rgba(0, 0, 0, 0.5);
 
   flex-grow: 1;
   width: 30%;
@@ -73,4 +75,14 @@
   background-color: white;
   border-radius: 5px;
   padding: 1rem;
+  border: 0.5px solid rgba(0, 0, 0, 0.5);
+}
+
+.test {
+}
+
+.eventContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 20px;
 }

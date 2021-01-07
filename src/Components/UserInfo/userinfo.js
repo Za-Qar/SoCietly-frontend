@@ -3,7 +3,7 @@ import SocialMedia from "../UserSocial/social";
 //styling
 import style from "./userInfo.module.css";
 
-export default function UserInfo({ user }) {
+export default function UserInfo({ user, homepageEdit }) {
   const {
     username,
     email,
@@ -17,11 +17,11 @@ export default function UserInfo({ user }) {
     user && (
       <div>
         <h3>{username}</h3>
-        <h4>Cohort {cohort}</h4>
-        <h4>{currentRole}</h4>
-        <h4>{currentEmployer}</h4>
-        <h5>{email}</h5>
-        <SocialMedia social={social} />
+        {!homepageEdit && <h4>Cohort {cohort}</h4>}
+        <h4 className={style.h4}>{currentRole} at</h4>
+        <h4 className={style.h4}>{currentEmployer}</h4>
+        {!homepageEdit && <h5>{email}</h5>}
+        {!homepageEdit && <SocialMedia social={social} />}
       </div>
     )
   );

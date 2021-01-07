@@ -58,6 +58,22 @@ export default function MyEvents() {
   //       .catch((error) => console.log("user creation error error: ", error));
   //   };
 
+  const styling = {
+    eventDiv: "myEventDiv",
+    eventNameClass: "myEventName",
+    dateClass: "myDateClass",
+    timeClass: "myTimeClass",
+    imgClass: "myImgClass",
+    likesClass: "myLikesClass",
+    mapsClass: "myMapsClass",
+    descClass: "myDescClass",
+    attLengthClass: "myAttLengthClass",
+    attendButClass: "myAttendButClass",
+    attListClass: "myAttListClass",
+    editButClass: "myEditButClass",
+    delButClass: "myDelButClass",
+  };
+
   function logging() {
     console.log(user);
     fetchUserEvents();
@@ -79,19 +95,7 @@ export default function MyEvents() {
                 date={date}
                 item={item}
                 myEvents
-                eventDiv={"myEventDiv"}
-                eventNameClass={"myEventName"}
-                dateClass={"myDateClass"}
-                timeClass={"myTimeClass"}
-                imgClass={"myImgClass"}
-                likesClass={"myLikesClass"}
-                mapsClass={"myMapsClass"}
-                descClass={"myDescClass"}
-                attLengthClass={"myAttLengthClass"}
-                attendButClass={"myAttendButClass"}
-                attListClass={"myAttListClass"}
-                editButClass={"myEditButClass"}
-                delButClass={"myDelButClass"}
+                styling={styling}
                 userId={user?.uid}
                 fetchUserEvents={fetchUserEvents}
               />
