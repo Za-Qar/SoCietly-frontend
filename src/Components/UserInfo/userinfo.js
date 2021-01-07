@@ -3,7 +3,15 @@ import SocialMedia from "../UserSocial/social";
 //styling
 import style from "./userInfo.module.css";
 
-export default function UserInfo({ user }) {
+//link
+import { Link } from "react-router-dom";
+
+import { useProfileContext } from "../../Context/profileContext";
+import UserImage from "../userImage/userImage";
+
+export default function UserInfo({ user, link }) {
+  const [profile, setProfile] = useProfileContext();
+
   const {
     username,
     name,
@@ -18,7 +26,25 @@ export default function UserInfo({ user }) {
   return (
     user && (
       <div>
-        <h3>{username ? username : `${name} ${surname}`}</h3>
+        {link ? (
+          <Link to="/bootcamper">
+            <UserImage
+              user={user}
+              onClick={() => {
+                setProfile(user);
+              }}
+            />
+            <h3
+              onClick={() => {
+                setProfile(user);
+              }}
+            >
+              {username ? username : `${name} ${surname}`}
+            </h3>
+          </Link>
+        ) : (
+          <h3>{username ? username : `${name} ${surname}`}</h3>
+        )}
         <h4>Cohort {cohort}</h4>
         <h4>{currentRole}</h4>
         <h4>{currentEmployer}</h4>

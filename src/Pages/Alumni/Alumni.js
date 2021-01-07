@@ -11,6 +11,8 @@ import UserInfo from "../../Components/UserInfo/userinfo";
 //
 import UserIntro from "../../Components/UserIntro/userintro";
 
+import UserImage from "../../Components/userImage/userImage";
+
 //
 import { useProfileContext } from "../../Context/profileContext";
 //
@@ -38,7 +40,12 @@ export default function GetAllAlumni() {
       <h3>Alumni</h3>
       {allAlumni &&
         allAlumni.map((item, index) => {
-          return <UserInfo key={index} user={item} />;
+          return (
+            <div>
+              {/* <UserImage user={item} /> */}
+              <UserInfo link={item} key={index} user={item} />
+            </div>
+          );
         })}
     </div>
   );
