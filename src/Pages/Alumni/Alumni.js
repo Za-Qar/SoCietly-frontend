@@ -8,15 +8,8 @@ import style from "./alumni.module.css";
 // Components
 import CohortContainer from "../../Components/CohortContainer/cohortContainer";
 
-//Context
-import { useProfileContext } from "../../Context/profileContext";
-
 export default function GetAllAlumni() {
-  // Context
-  const [profile, setProfile] = useProfileContext();
-
   const [allAlumni, setAllAlumni] = useState([]);
-
   const [filter, setFilter] = useState(null);
 
   // Creates an array containg cohort number values

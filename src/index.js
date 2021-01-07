@@ -4,16 +4,13 @@ import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 import { AuthProvider } from "./Context/authContext";
 import { UserProvider } from "./Context/userContext";
-import { ProfileProvider } from "./Context/profileContext";
 import App from "./App/App";
 
 ReactDOM.render(
   <React.StrictMode>
     <AuthProvider>
       <UserProvider>
-        <ProfileProvider>
-          <App />
-        </ProfileProvider>
+        <App />
       </UserProvider>
     </AuthProvider>
   </React.StrictMode>,
