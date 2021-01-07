@@ -31,6 +31,8 @@ export default function EditProfile({ setEdit }) {
 
   function findSocial(socialName) {
     const { social } = user;
+
+    // Refactor using find()
     const newLink = social.reduce((acc, curr) => {
       const newItem = JSON.parse(curr);
 

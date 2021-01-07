@@ -3,8 +3,11 @@
 import React, { useState, useEffect } from "react";
 import "./userImage.css";
 
-export default function UserImage({ user, width = "60px", onClick }) {
-  const { profileimage, profileImage, name, cohort } = user;
+//Link
+import { Link } from "react-router-dom";
+
+export default function UserImage({ user, width = "60px" }) {
+  const { profileimage, profileImage, name, cohort, id, uid } = user;
   const [styling, setStyling] = useState(null);
 
   function styleCohort() {
@@ -27,14 +30,15 @@ export default function UserImage({ user, width = "60px", onClick }) {
 
   return (
     <div>
-      <img
-        // class={styling}
-        src={profileImage ? profileImage : profileimage}
-        alt={`${name} profile`}
-        width={width}
-        onClick={onClick}
-        className={`profImg ${styling}`}
-      />
+      <Link to={`/bootcamper/${id ? id : uid}`}>
+        <img
+          class={styling}
+          src={profileImage ? profileImage : profileimage}
+          alt={`${name} profile`}
+          width={width}
+          className={`profImg ${styling}`}
+        />
+      </Link>
     </div>
   );
 }

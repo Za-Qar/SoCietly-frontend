@@ -1,12 +1,8 @@
 import { useEffect, useState } from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
-import BootcamperProfilePage from "../../Pages/BootcamperProfile/Bootcamper";
-
 // Components
 import UserImage from "../../Components/userImage/userImage";
-
-import { useProfileContext } from "../../Context/profileContext";
 
 // Luxon (Date/Time Module)
 import { DateTime } from "luxon";
@@ -17,8 +13,6 @@ import style from "./jobUpdates.module.css";
 export default function JobUpdates() {
   const [jobUpdates, setJobUpdates] = useState();
   // An array of objects containing user journey information
-
-  const [profile, setProfile] = useProfileContext();
 
   useEffect(() => {
     async function getJobUpdates() {
@@ -45,25 +39,14 @@ export default function JobUpdates() {
           const newStartDate = sdt.toLocaleString(
             DateTime.DATE_MED_WITH_WEEKDAY
           );
-          console.log(item);
 
           return (
             <div key={index}>
               <h5>{newStartDate}</h5>
-              <Link to="/bootcamper">
-                <UserImage
-                  onClick={() => {
-                    setProfile(item);
-                  }}
-                  user={item}
-                  alt={`${item.name} profile`}
-                />
-              </Link>
-              <p
-                onClick={() => {
-                  setProfile(item);
-                }}
-              >
+
+              <UserImage user={item} alt={`${item.name} profile`} />
+
+              <p>
                 🎉 {item.name} {item.surname} started a new job!
               </p>
               <h5>
