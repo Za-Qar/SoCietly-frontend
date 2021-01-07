@@ -20,6 +20,8 @@ import Event from "../../Components/Event/event.js";
 
 import Contact from "../Contact/contact";
 
+import Alumni from "../Alumni/Alumni";
+
 import ReactUploadImage from "../../Components/Upload/upload.js";
 
 import MyEvents from "../../Pages/MyEvents/myEvents.js";
@@ -75,6 +77,8 @@ export default function Index() {
         <AuthGuard component={CloudinaryImage} path={"/image"} exact />
 
         <AuthGuard component={MyEvents} path={"/myevents"} exact />
+
+        <AuthGuard component={Alumni} path={"/alumni"} exact />
 
         <AuthGuard
           component={Resources}

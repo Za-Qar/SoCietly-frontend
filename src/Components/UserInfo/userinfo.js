@@ -6,6 +6,8 @@ import style from "./userInfo.module.css";
 export default function UserInfo({ user }) {
   const {
     username,
+    name,
+    surname,
     email,
     cohort,
     currentRole,
@@ -16,7 +18,7 @@ export default function UserInfo({ user }) {
   return (
     user && (
       <div>
-        <h3>{username}</h3>
+        <h3>{username ? username : `${name} ${surname}`}</h3>
         <h4>Cohort {cohort}</h4>
         <h4>{currentRole}</h4>
         <h4>{currentEmployer}</h4>
