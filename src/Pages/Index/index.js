@@ -20,7 +20,6 @@ import Landing from "../Landing/landing";
 
 import Signup from "../../Components/Signup/signup";
 
-
 import Event from "../../Components/Event/event.js";
 
 import Contact from "../Contact/contact";
@@ -39,12 +38,7 @@ import CloudinaryImage from "../../Components/CloudinaryImage/cloudinaryImage.js
 //styling
 import style from "./index.module.css";
 
-//Context
-import { useProfileContext } from "../../Context/profileContext";
-
 export default function Index() {
-  const [profile] = useProfileContext();
-
   return (
     <Router>
       <NavBar />
@@ -69,9 +63,10 @@ export default function Index() {
           props={user}
           exact
         />
-        <Route path={"/bootcamper"} exact>
-          <BootcamperProfilePage profile={profile} />
-        </Route>
+        <AuthGuard component={BootcamperProfilePage} path={"/bootcamper/:id"} />
+        {/* <Route path={"/bootcamper/:id"} exact>
+          <BootcamperProfilePage />
+        </Route> */}
 
         <Route path={"/landing"} exact>
           <Landing />

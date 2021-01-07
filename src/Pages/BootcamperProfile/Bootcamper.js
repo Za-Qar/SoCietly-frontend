@@ -4,23 +4,25 @@ import UserSkills from "../../Components/UserSkills/userskills";
 import UserIntro from "../../Components/UserIntro/userintro";
 import UserJourney from "../../Components/UserJourney/journey";
 
+import { useUserContext } from "../../Context/userContext";
+
 import { useState, useEffect } from "react";
 
-import { Redirect } from "react-router-dom";
+import { Redirect, useParams } from "react-router-dom";
 
-export default function BootcamperProfilePage({ profile }) {
+export default function BootcamperProfilePage() {
+  const [user] = useUserContext();
   const [journey, setJourney] = useState();
   const [userData, setUserData] = useState();
   const [bootcamper, setBootcamper] = useState();
 
-  console.log(userData);
-  console.log(journey);
+  const { id } = useParams();
 
   useEffect(() => {
     async function getUser() {
-      if (profile) {
+      if (id) {
         let res = await fetch(
-          `https://falcon5ives.herokuapp.com/users/?email=${profile.email}`
+          `https://falcon5ives.herokuapp.com/users/?id=${id}`
         );
         let data = await res.json();
         const user = data.payload[0];
@@ -30,13 +32,13 @@ export default function BootcamperProfilePage({ profile }) {
       }
     }
     getUser();
-  }, [profile]);
+  }, [id]);
 
   useEffect(() => {
     async function getUserJourney() {
       if (userData) {
         let res = await fetch(
-          `https://falcon5ives.herokuapp.com/journeys/?id=${profile.id}`
+          `https://falcon5ives.herokuapp.com/journeys/?id=${id}`
         );
         let data = await res.json();
         setJourney(data.payload);
@@ -65,9 +67,14 @@ export default function BootcamperProfilePage({ profile }) {
     }
   }, [userData && journey]);
 
-  return profile ? (
+  if (user) {
+    if (id === user.uid) {
+      console.log("profile");
+    }
+  }
+
+  return (
     <div>
-      <h1>Profile Page</h1>
       {bootcamper && (
         <div>
           <UserInfo user={bootcamper} />
@@ -77,7 +84,5 @@ export default function BootcamperProfilePage({ profile }) {
         </div>
       )}
     </div>
-  ) : (
-    <Redirect to={"/"}></Redirect>
   );
 }
