@@ -3,7 +3,6 @@ import style from "./userSkills.module.css";
 
 export default function UserSkills({ user }) {
   const { skills } = user;
-  console.log(skills);
 
   return (
     skills && (

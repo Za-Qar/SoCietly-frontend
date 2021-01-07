@@ -1,6 +1,9 @@
 // React
 import { useState } from "react";
 
+//Context
+import { useUserContext } from "../../Context/userContext";
+
 //styling
 import style from "./journey.module.css";
 
@@ -10,12 +13,30 @@ import EditJourney from "../EditUserJourney/editUserJourney";
 // Luxon (Date/Time Module)
 import { DateTime } from "luxon";
 
-export default function UserJourney({ user }) {
+export default function UserJourney() {
+  // Context
+  const [user, setUser] = useUserContext();
+
   // Edit Journey State
   const [editJourney, setEditJourney] = useState(false);
   const [journeyIndex, setJourneyIndex] = useState(null);
 
   const { journey } = user;
+
+  function deleteJourney(id) {
+    const confirm = window.confirm("Are you sure?");
+
+    if (confirm) {
+      fetch(`https://falcon5ives.herokuapp.com/journeys/${id}`, {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+      })
+        .then((res) => res.json())
+        .then((data) => console.log("this is the user data: ", data))
+        .then(() => setUser(null))
+        .catch((error) => console.log("user creation error error: ", error));
+    }
+  }
 
   return (
     <div>
@@ -58,6 +79,7 @@ export default function UserJourney({ user }) {
               >
                 Edit
               </button>
+              <button onClick={() => deleteJourney(item.id)}>Delete</button>
             </div>
           );
         })}

@@ -64,7 +64,7 @@ export default function Homepage() {
       {user && (
         <div>
           <h1>Homepage</h1>
-          <UserImage user={user} />
+          <UserImage user={user} width={"100px"} />
 
           <section>
             <h3>This week</h3>
