@@ -7,7 +7,7 @@ export default function UserIntro({ user }) {
   return (
     <div>
       <h3>10 Second Intro</h3>
-      <UserImage user={user} alt={`${name} profile`} />
+      <UserImage width={"150px"} user={user} alt={`${name} profile`} />
 
       <p>{introduction}</p>
     </div>
