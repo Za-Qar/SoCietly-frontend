@@ -50,7 +50,7 @@ export default function AddNewJourney({ setAddJourney }) {
 
   return (
     <div>
-      <h2>Create Journey</h2>
+      <h3>My new role</h3>
       <form onSubmit={handleSubmit(createNewJourney)}>
         <label for="employer">Employer</label>
         <input name="employer" ref={register} required />

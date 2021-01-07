@@ -5,6 +5,9 @@ import BootcamperProfilePage from "../../Pages/BootcamperProfile/Bootcamper";
 
 import { useProfileContext } from "../../Context/profileContext";
 
+// Luxon (Date/Time Module)
+import { DateTime } from "luxon";
+
 //styling
 import style from "./jobUpdates.module.css";
 
@@ -34,9 +37,15 @@ export default function JobUpdates() {
       <h4>Job Updates</h4>
       {jobUpdates &&
         jobUpdates.map((item, index) => {
+          // Format start date
+          const sdt = DateTime.fromISO(item.startdate);
+          const newStartDate = sdt.toLocaleString(
+            DateTime.DATE_MED_WITH_WEEKDAY
+          );
+
           return (
             <div key={index}>
-              <h5>{item.startdate}</h5>
+              <h5>{newStartDate}</h5>
 
               <Link to="/bootcamper">
                 <img
