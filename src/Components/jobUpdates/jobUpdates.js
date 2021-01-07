@@ -3,6 +3,9 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
 import BootcamperProfilePage from "../../Pages/BootcamperProfile/Bootcamper";
 
+// Components
+import UserImage from "../../Components/userImage/userImage";
+
 import { useProfileContext } from "../../Context/profileContext";
 
 // Luxon (Date/Time Module)
@@ -42,22 +45,20 @@ export default function JobUpdates() {
           const newStartDate = sdt.toLocaleString(
             DateTime.DATE_MED_WITH_WEEKDAY
           );
+          console.log(item);
 
           return (
             <div key={index}>
               <h5>{newStartDate}</h5>
-
               <Link to="/bootcamper">
-                <img
-                  width="50px"
-                  src={item.profileimage}
-                  alt={`${item.name} profile`}
+                <UserImage
                   onClick={() => {
                     setProfile(item);
                   }}
+                  user={item}
+                  alt={`${item.name} profile`}
                 />
               </Link>
-
               <p
                 onClick={() => {
                   setProfile(item);

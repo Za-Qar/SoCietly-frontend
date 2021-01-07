@@ -2,8 +2,8 @@
 import style from "./userImage.module.css";
 import React, { useState, useEffect } from "react";
 
-export default function UserImage({ user }) {
-  const { profileImage, name, cohort } = user;
+export default function UserImage({ user, width = "60px", onClick }) {
+  const { profileimage, profileImage, name, cohort } = user;
   const [styling, setStyling] = useState(null);
 
   function styleCohort() {
@@ -26,7 +26,13 @@ export default function UserImage({ user }) {
 
   return (
     <div>
-      <img class={styling} src={profileImage} alt={`${name} profile`} />
+      <img
+        class={styling}
+        src={profileImage ? profileImage : profileimage}
+        alt={`${name} profile`}
+        width={width}
+        onClick={onClick}
+      />
     </div>
   );
 }
