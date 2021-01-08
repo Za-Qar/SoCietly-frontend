@@ -10,6 +10,7 @@ import UserInfo from "../../Components/UserInfo/userinfo";
 import UserImage from "../../Components/userImage/userImage";
 import JobUpdates from "../../Components/jobUpdates/jobUpdates";
 import Event from "../../Components/Event/event.js";
+import Card from "../../MaterialUi/Card/card.js";
 
 //Context
 import { useUserContext } from "../../Context/userContext";
@@ -162,7 +163,7 @@ export default function Homepage() {
                         if (eventDate >= now && eventDate <= inOneWeek) {
                           console.log(item);
                           return (
-                            <Event
+                            <Card
                               key={index}
                               date={displayDate}
                               item={item}
@@ -173,6 +174,37 @@ export default function Homepage() {
                         }
                       })}
                   </div>
+
+                  {/* <div className={style.eventContainer}>
+                    {allEvents &&
+                      allEvents.map((item, index) => {
+                        let eventTrans = new Date(item.date);
+                        let eventDate = eventTrans.setDate(
+                          eventTrans.getDate()
+                        );
+
+                        let date = new Date();
+                        let inOneWeek = date.setDate(date.getDate() + 7);
+
+                        let nowTrans = new Date();
+                        let now = nowTrans.setDate(nowTrans.getDate());
+
+                        let displayDate = eventTrans.toDateString();
+
+                        if (eventDate >= now && eventDate <= inOneWeek) {
+                          console.log(item);
+                          return (
+                            <Event
+                              key={index}
+                              date={displayDate}
+                              item={item}
+                              styling={styling}
+                              homepageTrue
+                            />
+                          );
+                        }
+                      })}
+                  </div> */}
                 </section>
               </section>
             </div>
