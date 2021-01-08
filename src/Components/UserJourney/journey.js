@@ -1,9 +1,6 @@
 // React
 import { useState } from "react";
 
-//Context
-import { useUserContext } from "../../Context/userContext";
-
 //styling
 import style from "./journey.module.css";
 
@@ -13,10 +10,7 @@ import EditJourney from "../EditUserJourney/editUserJourney";
 // Luxon (Date/Time Module)
 import { DateTime } from "luxon";
 
-export default function UserJourney() {
-  // Context
-  const [user, setUser] = useUserContext();
-
+export default function UserJourney({ showJourneyEdit, user, setUser }) {
   // Edit Journey State
   const [editJourney, setEditJourney] = useState(false);
   const [journeyIndex, setJourneyIndex] = useState(null);
@@ -67,19 +61,23 @@ export default function UserJourney() {
           ) : (
             <div key={index}>
               <h4>{item.jobtitle}</h4>
-              <h5>{item.employer}</h5>
+              <h5>@ {item.employer}</h5>
               {newEndDate && <h5>Completed: {newEndDate}</h5>}
               <h5>Started: {newStartDate}</h5>
               <p>{item.description}</p>
-              <button
-                onClick={() => {
-                  setJourneyIndex(index);
-                  setEditJourney(!editJourney);
-                }}
-              >
-                Edit
-              </button>
-              <button onClick={() => deleteJourney(item.id)}>Delete</button>
+              {showJourneyEdit && (
+                <div>
+                  <button
+                    onClick={() => {
+                      setJourneyIndex(index);
+                      setEditJourney(!editJourney);
+                    }}
+                  >
+                    Edit
+                  </button>
+                  <button onClick={() => deleteJourney(item.id)}>Delete</button>
+                </div>
+              )}
             </div>
           );
         })}

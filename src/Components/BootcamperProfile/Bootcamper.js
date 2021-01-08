@@ -1,8 +1,8 @@
 //Components
-import UserInfo from "../../Components/UserInfo/userinfo";
-import UserSkills from "../../Components/UserSkills/userskills";
-import UserIntro from "../../Components/UserIntro/userintro";
-import UserJourney from "../../Components/UserJourney/journey";
+import UserInfo from "../UserInfo/userinfo";
+import UserSkills from "../UserSkills/userskills";
+import UserIntro from "../UserIntro/userintro";
+import UserJourney from "../UserJourney/journey";
 
 import { useUserContext } from "../../Context/userContext";
 
@@ -11,7 +11,6 @@ import { useState, useEffect } from "react";
 import { Redirect, useParams } from "react-router-dom";
 
 export default function BootcamperProfilePage() {
-  const [user] = useUserContext();
   const [journey, setJourney] = useState();
   const [userData, setUserData] = useState();
   const [bootcamper, setBootcamper] = useState();
@@ -66,12 +65,6 @@ export default function BootcamperProfilePage() {
       setBootcamper(newUser);
     }
   }, [userData && journey]);
-
-  if (user) {
-    if (id === user.uid) {
-      console.log("profile");
-    }
-  }
 
   return (
     <div>

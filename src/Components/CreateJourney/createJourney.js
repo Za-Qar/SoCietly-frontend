@@ -10,12 +10,16 @@ import { useUserContext } from "../../Context/userContext";
 
 //Components
 import Loading from "../../Components/Loading/loading";
+import { set } from "date-fns";
+import UserJourney from "../UserJourney/journey";
 
 export default function CreateJourney({ signup, setSignup }) {
   // Context
   const [authUser, loading, error] = useAuthContext();
   const [user, setUser] = useUserContext();
   const [waiting, setWaiting] = useState(true);
+  const [pendingJourney, setPendingJourney] = useState(false);
+  const [addJourney, setAddJourney] = useState(false);
 
   console.log(user);
 
@@ -71,24 +75,68 @@ export default function CreateJourney({ signup, setSignup }) {
       .then((data) => console.log("this is the user data: ", data))
       .then(() => {
         setUser(null);
-        setSignup(false);
+        // setSignup(false);
+        setPendingJourney(true);
       })
       .catch((error) => console.log("user creation error error: ", error));
+  }
+
+  function handleAddJourney() {
+    setPendingJourney(false);
+    setAddJourney(true);
   }
 
   if (waiting) {
     return <Loading />;
   }
 
+  if (pendingJourney) {
+    return (
+      <div>
+        <p>Would you like to add another journey entry?</p>
+        <button onClick={handleAddJourney}>Yes</button>
+        <button
+          onClick={() => {
+            setUser(null);
+            setSignup(false);
+            setPendingJourney(false);
+          }}
+        >
+          No
+        </button>
+      </div>
+    );
+  }
+
   return (
     <div>
-      <h2>Create Journey</h2>
+      {addJourney ? (
+        <div>
+          <h2>Continue your journey...</h2>
+          <p>Look how far you have come</p>
+        </div>
+      ) : (
+        <div>
+          <h2>Start here...</h2>
+          <p>Tell us about your School of Code journey</p>
+        </div>
+      )}
       <form onSubmit={handleSubmit(createJourney)}>
         <label for="employer">Employer</label>
-        <input name="employer" ref={register} required />
+        <input
+          name="employer"
+          ref={register}
+          defaultValue={addJourney ? null : "School of Code"}
+          required
+        />
 
         <label for="jobTitle">Job Title</label>
-        <input name="jobTitle" ref={register} required />
+        <input
+          name="jobTitle"
+          ref={register}
+          defaultValue={addJourney ? null : "Student Developer"}
+          required
+        />
 
         <label for="startDate">Start Date</label>
         <input type="date" name="startDate" ref={register} required />
@@ -99,8 +147,9 @@ export default function CreateJourney({ signup, setSignup }) {
         <label for="description">Description</label>
         <textarea name="description" ref={register} required></textarea>
 
-        <input type="submit" value="Submit" />
+        <input type="submit" value="Continue" />
       </form>
+      {user?.journey && <UserJourney user={user} />}
     </div>
   );
 }

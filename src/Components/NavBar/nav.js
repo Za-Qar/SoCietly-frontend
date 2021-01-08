@@ -61,31 +61,33 @@ export default function NavBar() {
                 </Link>
               </li>
 
-              <div className="menuContainer">
-                {user && (
-                  <Link to="/">
-                    <li>
-                      <span onClick={signOut}>Logout</span>
-                    </li>
-                  </Link>
-                )}
-                <button
-                  class={`hamburger hamburger--spring ${burger} cog`}
-                  type="button"
-                  onClick={changeBurger}
-                >
-                  <span class="hamburger-box ">
-                    <span class="hamburger-inner"></span>
-                  </span>
-                </button>
+              {user && (
+                <div className="menuContainer">
+                  {user && (
+                    <Link to="/">
+                      <li>
+                        <span onClick={signOut}>Logout</span>
+                      </li>
+                    </Link>
+                  )}
+                  <button
+                    class={`hamburger hamburger--spring ${burger} cog`}
+                    type="button"
+                    onClick={changeBurger}
+                  >
+                    <span class="hamburger-box ">
+                      <span class="hamburger-inner"></span>
+                    </span>
+                  </button>
 
-                {/* <li onClick={changeHide}>
+                  {/* <li onClick={changeHide}>
                   <img
                     src="https://www.flaticon.com/svg/static/icons/svg/3601/3601082.svg"
                     className={style.cog}
                   />
                 </li> */}
-              </div>
+                </div>
+              )}
             </ul>
           </div>
         </div>
@@ -97,9 +99,11 @@ export default function NavBar() {
         <Link to="/events">
           <p>Events</p>
         </Link>
-        <Link to="/profile">
-          <p>Profile</p>
-        </Link>
+        {user && (
+          <Link to={`/bootcamper/${user.uid ? user.uid : user.id}`}>
+            <p>Profile</p>
+          </Link>
+        )}
         <Link to="/alumni">
           <p>Alumni</p>
         </Link>
