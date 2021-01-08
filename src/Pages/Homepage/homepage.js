@@ -11,6 +11,7 @@ import UserImage from "../../Components/userImage/userImage";
 import JobUpdates from "../../Components/jobUpdates/jobUpdates";
 import Event from "../../Components/Event/event.js";
 import Card from "../../MaterialUi/Card/card.js";
+import UserLeftSide from "../../Components/userLeftSide/userLeftSide.js";
 
 //Context
 import { useUserContext } from "../../Context/userContext";
@@ -87,12 +88,7 @@ export default function Homepage() {
           <div class="left"></div>
 
           <div className={style.row}>
-            <section className={style.userSec}>
-              <div className={style.column2}>
-                <UserImage user={user} />
-                <UserInfo user={user} homepageEdit />
-              </div>
-            </section>
+            <UserLeftSide />
 
             {/*--------- Column 1---------*/}
             <div className={style.column1}>
