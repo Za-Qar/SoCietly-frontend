@@ -13,6 +13,7 @@ import { DateTime } from "luxon";
 // Material UI
 import CustomizedTimeline from "../../MaterialUi/Timeline/timeline";
 import Timeline from "@material-ui/lab/Timeline";
+import IconButtons from "../../MaterialUi/Buttons/iconButton";
 
 export default function UserJourney({ showJourneyEdit, user, setUser }) {
   // Edit Journey State
@@ -56,12 +57,27 @@ export default function UserJourney({ showJourneyEdit, user, setUser }) {
                   journeyItem={item}
                   startDate={newStartDate}
                   endDate={newEndDate}
+                  visible={editJourney}
                   setEditJourney={setEditJourney}
                   setJourneyIndex={setJourneyIndex}
                 />
-                <button onClick={() => setEditJourney(!editJourney)}>
-                  Cancel
-                </button>
+                <CustomizedTimeline
+                  item={item}
+                  startDate={newStartDate}
+                  endDate={newEndDate}
+                  lastItem={journey.length - 1}
+                  index={index}
+                  edit={showJourneyEdit}
+                  editIcon={"edit"}
+                  deleteIcon={"delete"}
+                  handleEditClick={() => {
+                    setJourneyIndex(index);
+                    setEditJourney(!editJourney);
+                  }}
+                  handleDeleteClick={() => {
+                    deleteJourney(item.id);
+                  }}
+                />
               </div>
             ) : (
               <div key={index}>
@@ -71,22 +87,17 @@ export default function UserJourney({ showJourneyEdit, user, setUser }) {
                   endDate={newEndDate}
                   lastItem={journey.length - 1}
                   index={index}
+                  edit={showJourneyEdit}
+                  editIcon={"edit"}
+                  deleteIcon={"delete"}
+                  handleEditClick={() => {
+                    setJourneyIndex(index);
+                    setEditJourney(!editJourney);
+                  }}
+                  handleDeleteClick={() => {
+                    deleteJourney(item.id);
+                  }}
                 />
-                {showJourneyEdit && (
-                  <div>
-                    <button
-                      onClick={() => {
-                        setJourneyIndex(index);
-                        setEditJourney(!editJourney);
-                      }}
-                    >
-                      Edit
-                    </button>
-                    <button onClick={() => deleteJourney(item.id)}>
-                      Delete
-                    </button>
-                  </div>
-                )}
               </div>
             );
           })}

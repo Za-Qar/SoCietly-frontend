@@ -1,0 +1,20 @@
+.form-container {
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+}
+
+.date-input {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: 1px solid lightgray;
+  border-radius: 5px;
+}
+
+.form-label {
+  color: rgb(97, 96, 96);
+  font-size: 0.8rem;
+  margin-left: 12px;
+}

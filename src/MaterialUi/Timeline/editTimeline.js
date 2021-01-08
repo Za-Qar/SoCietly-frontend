@@ -11,6 +11,7 @@ import HomeRoundedIcon from "@material-ui/icons/HomeRounded";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import IconButtons from "../Buttons/iconButton";
+import TextField from "@material-ui/core/TextField";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -21,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function CustomizedTimeline({
+export default function EditTimeline({
   item,
   startDate,
   endDate,
@@ -36,6 +37,37 @@ export default function CustomizedTimeline({
   const classes = useStyles();
 
   const { employer, jobtitle, description } = item;
+
+  //   <label for="employer">Employer</label>
+  //         <input name="employer" ref={register} defaultValue={employer} />
+
+  //         <label for="jobTitle">Job Title</label>
+  //         <input name="jobTitle" ref={register} defaultValue={jobtitle} />
+
+  //         <label for="startDate">Start Date</label>
+  //         <input
+  //           type="date"
+  //           name="startDate"
+  //           ref={register}
+  //           defaultValue={startDate}
+  //         />
+
+  //         <label for="endDate">End Date (if applicable)</label>
+  //         <input
+  //           type="date"
+  //           name="endDate"
+  //           ref={register}
+  //           defaultValue={endDate}
+  //         />
+
+  //         <label for="description">Description</label>
+  //         <textarea
+  //           name="description"
+  //           ref={register}
+  //           defaultValue={description}
+  //         ></textarea>
+
+  //         <input type="submit" value="Submit" />
 
   return (
     <TimelineItem>
