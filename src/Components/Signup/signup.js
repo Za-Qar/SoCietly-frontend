@@ -12,6 +12,10 @@ import { signInWithGoogle, logout } from "../Firebase/auth";
 //Components
 import Loading from "../Loading/loading";
 import CreateJourney from "../CreateJourney/createJourney";
+import Tags from "../../MaterialUi/tags/tags.js";
+
+// css
+import "./signup.css";
 
 export default function Signup({ signup, setSignup }) {
   // Context
@@ -167,20 +171,18 @@ export default function Signup({ signup, setSignup }) {
             />
             <button onClick={(e) => addToSkills(e)}>Add Skill</button>
             <ul>
-              {skills.map((item, index) => {
-                return (
-                  <div>
-                    <li key={`${item}${index}`}>{item}</li>
-                    <button
-                      onClick={(e) => {
-                        deleteSkill(index, e);
-                      }}
-                    >
-                      X
-                    </button>
-                  </div>
-                );
-              })}
+              <div className="root">
+                {skills.map((item, index) => {
+                  return (
+                    <Tags
+                      key={`${item}${index}`}
+                      item={item}
+                      index={index}
+                      deleteSkill={deleteSkill}
+                    />
+                  );
+                })}
+              </div>
             </ul>
           </span>
           <span>
