@@ -5,14 +5,20 @@ import reportWebVitals from "./reportWebVitals";
 import { AuthProvider } from "./Context/authContext";
 import { UserProvider } from "./Context/userContext";
 import App from "./App/App";
+import { ThemeProvider } from "@material-ui/core/styles";
+import materialTheme from "./MaterialUi/Theme/theme";
+
+const theme = materialTheme();
 
 ReactDOM.render(
   <React.StrictMode>
-    <AuthProvider>
-      <UserProvider>
-        <App />
-      </UserProvider>
-    </AuthProvider>
+    <ThemeProvider theme={theme}>
+      <AuthProvider>
+        <UserProvider>
+          <App />
+        </UserProvider>
+      </AuthProvider>
+    </ThemeProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );
