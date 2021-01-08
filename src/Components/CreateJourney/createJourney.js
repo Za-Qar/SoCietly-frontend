@@ -134,7 +134,7 @@ export default function CreateJourney({ signup, setSignup }) {
         <input
           name="jobTitle"
           ref={register}
-          defaultValue={addJourney ? null : "School of Code"}
+          defaultValue={addJourney ? null : "Student Developer"}
           required
         />
 
@@ -147,7 +147,7 @@ export default function CreateJourney({ signup, setSignup }) {
         <label for="description">Description</label>
         <textarea name="description" ref={register} required></textarea>
 
-        <input type="submit" value="Submit" />
+        <input type="submit" value="Continue" />
       </form>
       {user?.journey && <UserJourney user={user} />}
     </div>
