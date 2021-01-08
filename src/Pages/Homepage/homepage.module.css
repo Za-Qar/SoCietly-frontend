@@ -1,16 +1,3 @@
-.userSec {
-  background-color: white;
-  width: 15%;
-  height: 100vh;
-  position: sticky;
-  top: 0;
-  /* z-index: -1; */
-  text-align: center;
-  margin-left: 0;
-
-  border: 0.5px solid rgba(0, 0, 0, 0.5);
-}
-
 .secContainer {
   width: 90%;
   margin: auto;
@@ -93,11 +80,28 @@
 }
 
 .column1 {
-  flex: 80%;
+  flex: 60%;
   /* padding: 10px; */
   margin: 0 3rem 0 3rem;
 }
 
 .column2 {
   flex: 20%;
+}
+
+.userSec {
+  background-color: white;
+  width: 20%;
+  height: 100vh;
+  position: sticky;
+  top: 0;
+  /* z-index: -1; */
+  text-align: center;
+  margin-left: 0;
+
+  border: 0.5px solid rgba(0, 0, 0, 0.5);
+}
+
+.eventCard {
+  margin-top: 2rem;
 }

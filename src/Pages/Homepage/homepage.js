@@ -144,25 +144,23 @@ export default function Homepage() {
                 <section className={style.weekEvents}>
                   <h3>This week</h3>
 
-                  <div className={style.eventContainer}>
-                    {allEvents &&
-                      allEvents.map((item, index) => {
-                        let eventTrans = new Date(item.date);
-                        let eventDate = eventTrans.setDate(
-                          eventTrans.getDate()
-                        );
+                  {allEvents &&
+                    allEvents.map((item, index) => {
+                      let eventTrans = new Date(item.date);
+                      let eventDate = eventTrans.setDate(eventTrans.getDate());
 
-                        let date = new Date();
-                        let inOneWeek = date.setDate(date.getDate() + 7);
+                      let date = new Date();
+                      let inOneWeek = date.setDate(date.getDate() + 7);
 
-                        let nowTrans = new Date();
-                        let now = nowTrans.setDate(nowTrans.getDate());
+                      let nowTrans = new Date();
+                      let now = nowTrans.setDate(nowTrans.getDate());
 
-                        let displayDate = eventTrans.toDateString();
+                      let displayDate = eventTrans.toDateString();
 
-                        if (eventDate >= now && eventDate <= inOneWeek) {
-                          console.log(item);
-                          return (
+                      if (eventDate >= now && eventDate <= inOneWeek) {
+                        console.log(item);
+                        return (
+                          <div className={style.eventCard}>
                             <Card
                               key={index}
                               date={displayDate}
@@ -170,10 +168,10 @@ export default function Homepage() {
                               styling={styling}
                               homepageTrue
                             />
-                          );
-                        }
-                      })}
-                  </div>
+                          </div>
+                        );
+                      }
+                    })}
 
                   {/* <div className={style.eventContainer}>
                     {allEvents &&
