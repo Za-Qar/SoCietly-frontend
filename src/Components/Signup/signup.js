@@ -1,150 +1,416 @@
+//React
 import React from "react";
+import { useState } from "react";
+import { Redirect } from "react-router-dom";
+import { useForm, Controller } from "react-hook-form";
 
-// css
-import "./signup.css";
+//Context
+import { useAuthContext } from "../../Context/authContext";
+
+//Auth
+import { signInWithGoogle, logout } from "../Firebase/auth";
+
+//Components
+import Loading from "../Loading/loading";
+import CreateJourney from "../CreateJourney/createJourney";
+import Tags from "../../MaterialUi/tags/tags.js";
 
 // Mat ui
-import { makeStyles } from "@material-ui/core/styles";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import Paper from "@material-ui/core/Paper";
-import Stepper from "@material-ui/core/Stepper";
-import Step from "@material-ui/core/Step";
-import StepLabel from "@material-ui/core/StepLabel";
-import Button from "@material-ui/core/Button";
-import Link from "@material-ui/core/Link";
+import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
-import AddressForm from "./addressFrom.js";
-import PaymentForm from "./paymentFrom/paymentFrom.js";
+import TextField from "@material-ui/core/TextField";
+import FormControl from "@material-ui/core/FormControl";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Checkbox from "@material-ui/core/Checkbox";
+import Select from "@material-ui/core/Select";
+import MenuItem from "@material-ui/core/MenuItem";
+import { makeStyles } from "@material-ui/core/styles";
+import InputLabel from "@material-ui/core/InputLabel";
 
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {"Copyright © "}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
-
-const useStyles = makeStyles((theme) => ({
-  appBar: {
-    position: "relative",
-  },
-  layout: {
-    width: "auto",
-    marginLeft: theme.spacing(2),
-    marginRight: theme.spacing(2),
-    [theme.breakpoints.up(600 + theme.spacing(2) * 2)]: {
-      width: 600,
-      marginLeft: "auto",
-      marginRight: "auto",
+export default function Signup({ signup, setSignup }) {
+  // Styling
+  const useStyles = makeStyles((theme) => ({
+    formControl: {
+      margin: theme.spacing(1),
+      width: "100%",
+      height: "1erm",
     },
-  },
-  paper: {
-    marginTop: theme.spacing(3),
-    marginBottom: theme.spacing(3),
-    padding: theme.spacing(2),
-    [theme.breakpoints.up(600 + theme.spacing(3) * 2)]: {
-      marginTop: theme.spacing(6),
-      marginBottom: theme.spacing(6),
-      padding: theme.spacing(3),
+    selectEmpty: {
+      marginTop: theme.spacing(2),
     },
-  },
-  stepper: {
-    padding: theme.spacing(3, 0, 5),
-  },
-  buttons: {
-    display: "flex",
-    justifyContent: "flex-end",
-  },
-  button: {
-    marginTop: theme.spacing(3),
-    marginLeft: theme.spacing(1),
-  },
-}));
+  }));
 
-const steps = ["Sign up info", "Add journey"];
-
-function getStepContent(step) {
-  switch (step) {
-    case 0:
-      return <AddressForm />;
-    case 1:
-      return <PaymentForm />;
-    default:
-      throw new Error("Unknown step");
-  }
-}
-
-export default function Signup() {
   const classes = useStyles();
-  const [activeStep, setActiveStep] = React.useState(0);
 
-  const handleNext = () => {
-    setActiveStep(activeStep + 1);
-  };
+  // Context
+  const [authUser, loading, error] = useAuthContext();
 
-  const handleBack = () => {
-    setActiveStep(activeStep - 1);
-  };
+  // React Form
+  const { register, handleSubmit, watch, errors, control } = useForm();
 
-  return (
-    <React.Fragment>
-      <CssBaseline />
+  // State
+  const [complete, setComplete] = useState(false);
+  const [skills, setSkills] = useState([]);
+  const [skillInput, setSkillInput] = useState("");
 
-      <main className={classes.layout}>
-        <Paper className={classes.paper}>
-          <Typography component="h1" variant="h4" align="center">
-            Sign up form
-          </Typography>
-          <Stepper activeStep={activeStep} className={classes.stepper}>
-            {steps.map((label) => (
-              <Step key={label}>
-                <StepLabel>{label}</StepLabel>
-              </Step>
-            ))}
-          </Stepper>
-          <React.Fragment>
-            {activeStep === steps.length ? (
-              <React.Fragment>
-                <Typography variant="h5" gutterBottom>
-                  Thank you for your order.
-                </Typography>
-                <Typography variant="subtitle1">
-                  Your order number is #2001539. We have emailed your order
-                  confirmation, and will send you an update when your order has
-                  shipped.
-                </Typography>
-              </React.Fragment>
-            ) : (
-              <React.Fragment>
-                {getStepContent(activeStep)}
-                <div className={classes.buttons}>
-                  {activeStep !== 0 && (
-                    <Button onClick={handleBack} className={classes.button}>
-                      Back
-                    </Button>
-                  )}
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={handleNext}
-                    className={classes.button}
+  function addToSkills(e) {
+    e.preventDefault();
+    if (skills.includes(skillInput)) {
+      e.preventDefault();
+      console.log("item already added");
+      return;
+    }
+    const newSkill = [...skills, skillInput];
+
+    console.log("this is skill input val: ", skillInput);
+    console.log("this is the newSkill val: ", newSkill);
+
+    setSkills(newSkill);
+    setSkillInput("");
+  }
+
+  function deleteSkill(index, e) {
+    e.preventDefault();
+    console.log(index);
+    const newSkills = [...skills.slice(0, index), ...skills.slice(index + 1)];
+    setSkills(newSkills);
+  }
+
+  function createUser(msg) {
+    console.log("User Input recieved", msg);
+
+    const {
+      admin,
+      name,
+      surname,
+      email,
+      cohort,
+      currentRole,
+      currentEmployer,
+      introduction,
+      linkedin = "",
+      github = "",
+      twitter = "",
+      portfolio = "",
+      other = "",
+    } = msg;
+
+    const socialArray = [
+      { linkedin: linkedin },
+      { github: github },
+      { twitter: twitter },
+      { portfolio: portfolio },
+      { other: other },
+    ];
+
+    // Sets new user object in correct format
+    const newUser = {
+      admin: admin,
+      name: name,
+      surname: surname,
+      email: email,
+      profileImage: authUser.photoURL,
+      cohort: cohort,
+      currentRole: currentRole,
+      currentEmployer: currentEmployer,
+      skills: skills,
+      introduction: introduction,
+      social: socialArray,
+    };
+
+    // Posts user data to backend
+    fetch(`https://falcon5ives.herokuapp.com/users`, {
+      method: "POST",
+      body: JSON.stringify(newUser),
+      headers: { "Content-Type": "application/json" },
+    })
+      .then((res) => res.json())
+      .then((data) => console.log("this is the user data: ", data))
+      .catch((error) => console.log("user creation error error: ", error));
+
+    setComplete(true);
+  }
+
+  if (loading) {
+    return <Loading />;
+  }
+
+  // Renders journey signup form once user sign up is complete
+  if (complete) {
+    return <CreateJourney signup={signup} setSignup={setSignup} />;
+  }
+
+  return authUser ? (
+    <form onSubmit={handleSubmit(createUser)}>
+      <button onClick={logout}>Return to Home</button>
+
+      <span>
+        <img src={authUser?.photoURL} alt="user profile" />
+      </span>
+
+      <React.Fragment>
+        {/*----------Name----------*/}
+        <Grid container spacing={3}>
+          <Grid item xs={12} sm={6}>
+            <FormControl variant="outlined" fullWidth>
+              <Controller
+                name="name"
+                as={<TextField id="firstName" label="Name" required />}
+                control={control}
+                rules={{ required: "Required" }}
+              />
+            </FormControl>
+          </Grid>
+
+          {/*----------Surname----------*/}
+          <Grid item xs={12} sm={6}>
+            <FormControl variant="outlined" fullWidth>
+              <Controller
+                name="surname"
+                as={
+                  <TextField id="surname" label="surname" fullWidth required />
+                }
+                control={control}
+                rules={{ required: "Required" }}
+              />
+            </FormControl>
+          </Grid>
+
+          {/*----------Email----------*/}
+          <Grid item xs={12}>
+            <FormControl variant="outlined" fullWidth>
+              <Controller
+                name="email"
+                as={<TextField id="email" label="email" fullWidth required />}
+                control={control}
+                rules={{ required: "Required" }}
+                defaultValue={authUser.email}
+              />
+            </FormControl>
+          </Grid>
+
+          {/*----------Cohort----------*/}
+          <Grid item xs={12} sm={6}>
+            <InputLabel id="demo-simple-select-label">Cohort</InputLabel>
+            <FormControl variant="outlined" fullWidth>
+              <Controller
+                name="cohort"
+                as={
+                  <Select
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    className={classes.formControl}
+                    name="cohort"
+                    ref={register}
                   >
-                    {activeStep === steps.length - 1 ? "Place order" : "Next"}
-                  </Button>
-                </div>
-              </React.Fragment>
-            )}
-          </React.Fragment>
-        </Paper>
-        <Copyright />
-      </main>
-    </React.Fragment>
+                    <MenuItem value="1">1</MenuItem>
+                    <MenuItem value="2">2</MenuItem>
+                    <MenuItem value="3">3</MenuItem>
+                    <MenuItem value="4">4</MenuItem>
+                    <MenuItem value="5">5</MenuItem>
+                  </Select>
+                }
+                control={control}
+                rules={{ required: "Required" }}
+              />
+            </FormControl>
+          </Grid>
+
+          {/*----------Admin----------*/}
+          <Grid item xs={12} sm={6}>
+            <InputLabel id="demo-simple-select-label">Admin</InputLabel>
+            <FormControl variant="outlined" fullWidth>
+              <Controller
+                name="admin"
+                as={
+                  <Select
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    className={classes.formControl}
+                    name="admin"
+                    ref={register}
+                  >
+                    <MenuItem value="yes">Yes</MenuItem>
+                    <MenuItem value="no">No</MenuItem>
+                  </Select>
+                }
+                control={control}
+                rules={{ required: "Required" }}
+              />
+            </FormControl>
+          </Grid>
+
+          {/*----------Current Role----------*/}
+          <Grid item xs={12} sm={6}>
+            <FormControl variant="outlined" fullWidth>
+              <Controller
+                name="currentRole"
+                as={
+                  <TextField
+                    id="currentRole"
+                    label="Current Role"
+                    fullWidth
+                    required
+                  />
+                }
+                control={control}
+                rules={{ required: "Required" }}
+              />
+            </FormControl>
+          </Grid>
+
+          {/*----------Current Employer----------*/}
+          <Grid item xs={12} sm={6}>
+            <FormControl variant="outlined" fullWidth>
+              <Controller
+                name="currentEmployer"
+                as={
+                  <TextField
+                    id="currentEmployer"
+                    label="Current Employer"
+                    fullWidth
+                    required
+                  />
+                }
+                control={control}
+                rules={{ required: "Required" }}
+              />
+            </FormControl>
+          </Grid>
+
+          {/*----------Skills Input----------*/}
+          <Grid item xs={12} sm={6}>
+            <FormControl
+              variant="outlined"
+              fullWidth
+              onChange={(e) => setSkillInput(e.target.value)}
+              value={skillInput}
+            >
+              <Controller
+                name="skills"
+                as={<TextField id="skills" label="skills" required />}
+                control={control}
+                rules={{ required: "Required" }}
+              />
+            </FormControl>
+          </Grid>
+
+          {/*----------Skills----------*/}
+          <Grid item xs={12} sm={6}>
+            <button onClick={(e) => addToSkills(e)}>Add Skill</button>
+            <FormControl variant="outlined" fullWidth>
+              <Controller
+                name="skills"
+                as={
+                  <ul>
+                    <div className="root">
+                      {skills.map((item, index) => {
+                        return (
+                          <Tags
+                            key={`${item}${index}`}
+                            item={item}
+                            index={index}
+                            deleteSkill={deleteSkill}
+                          />
+                        );
+                      })}
+                    </div>
+                  </ul>
+                }
+                control={control}
+                rules={{ required: "Required" }}
+              />
+            </FormControl>
+          </Grid>
+
+          {/*----------Scoial Links----------*/}
+          <Grid item xs={12}>
+            <TextField
+              required
+              id="state"
+              name="introduction"
+              label="10 Second Intro"
+              onChange={(e) => setSkillInput(e.target.value)}
+              fullWidth
+              placeholder="https://example.com"
+              pattern="https://.*"
+              ref={register}
+            />
+          </Grid>
+
+          <Grid item xs={12} sm={6}>
+            <TextField
+              id="state"
+              name="linkedIn"
+              label="linkedIn"
+              onChange={(e) => setSkillInput(e.target.value)}
+              fullWidth
+              placeholder="https://example.com"
+              pattern="https://.*"
+              ref={register}
+            />
+          </Grid>
+
+          <Grid item xs={12} sm={6}>
+            <TextField
+              id="state"
+              name="github"
+              label="github"
+              onChange={(e) => setSkillInput(e.target.value)}
+              fullWidth
+              placeholder="https://example.com"
+              pattern="https://.*"
+              ref={register}
+            />
+          </Grid>
+
+          <Grid item xs={12} sm={6}>
+            <TextField
+              id="state"
+              name="twitter"
+              label="twitter"
+              onChange={(e) => setSkillInput(e.target.value)}
+              fullWidth
+              placeholder="https://example.com"
+              pattern="https://.*"
+              ref={register}
+            />
+          </Grid>
+
+          <Grid item xs={12} sm={6}>
+            <TextField
+              id="state"
+              name="portfolio"
+              label="portfolio"
+              onChange={(e) => setSkillInput(e.target.value)}
+              fullWidth
+              placeholder="https://example.com"
+              pattern="https://.*"
+              ref={register}
+            />
+          </Grid>
+
+          <Grid item xs={12}>
+            <TextField
+              id="state"
+              name="other"
+              label="other"
+              onChange={(e) => setSkillInput(e.target.value)}
+              fullWidth
+              placeholder="https://example.com"
+              pattern="https://.*"
+              ref={register}
+            />
+          </Grid>
+        </Grid>
+      </React.Fragment>
+
+      <div>
+        {/* Submit form button */}
+        <input type="submit" value="Next" />
+      </div>
+    </form>
+  ) : (
+    <Redirect to={"/login"}></Redirect>
   );
 }
