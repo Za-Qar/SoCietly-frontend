@@ -7,3 +7,28 @@
   margin-right: 4rem;
   margin-top: 5rem;
 }
+
+.secTitle {
+  padding-bottom: 1rem;
+}
+
+.newJobSec {
+  border-bottom: 0.5px solid rgba(0, 0, 0, 0.5);
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.title {
+  margin: 0;
+}
+
+.date {
+  font-weight: 400;
+  font-size: 0.8rem;
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.img {
+  width: 1px;
+}
