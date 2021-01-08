@@ -10,6 +10,9 @@ import EditJourney from "../EditUserJourney/editUserJourney";
 // Luxon (Date/Time Module)
 import { DateTime } from "luxon";
 
+// Material UI
+import CustomizedTimeline from "../../MaterialUi/Timeline/timeline";
+
 export default function UserJourney({ showJourneyEdit, user, setUser }) {
   // Edit Journey State
   const [editJourney, setEditJourney] = useState(false);
@@ -35,6 +38,7 @@ export default function UserJourney({ showJourneyEdit, user, setUser }) {
   return (
     <div>
       <h3>My Journey</h3>
+      <CustomizedTimeline />
       {journey &&
         journey.map((item, index) => {
           // Format start date
