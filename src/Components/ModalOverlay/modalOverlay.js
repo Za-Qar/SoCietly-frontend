@@ -1,4 +1,4 @@
-import "./modalOverlay.css";
+import style from "./modalOverlay.module.css";
 
 export default function ModalOverlay({
   children,
@@ -9,15 +9,15 @@ export default function ModalOverlay({
 }) {
   if (visible) {
     return (
-      <div className="overlay">
-        <div className="modal">
+      <div className={style.overlay}>
+        <div className={style.modal}>
           {header && (
-            <div className="modal-header">
+            <div className={style.modalHeader}>
               <h3>{header}</h3>
             </div>
           )}
-          <div className="content">{children}</div>
-          <div className="actions">
+          <div className={style.content}>{children}</div>
+          <div className={style.actions}>
             <button onClick={onClose}>Cancel</button>
             <button onClick={onSave}>Save</button>
           </div>

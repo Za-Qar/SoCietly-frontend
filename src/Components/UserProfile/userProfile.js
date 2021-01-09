@@ -10,6 +10,10 @@ import { useUserContext } from "../../Context/userContext";
 import EditProfile from "../EditProfile/editProfile";
 import AddNewJourney from "../CreateJourney/addNewJourney";
 
+//Style
+import style from "./profile.module.css";
+import cn from "classnames";
+
 export default function UserProfilePage() {
   const [user, setUser] = useUserContext();
   const [edit, setEdit] = useState(false);
@@ -36,22 +40,28 @@ export default function UserProfilePage() {
 
   return (
     user && (
-      <div>
-        <button onClick={handleEditClick}>
-          {edit ? "Cancel" : "Edit Profile"}
-        </button>
-        <UserInfo user={user} />
-        <UserSkills user={user} />
-        <UserIntro user={user} />
-        <button onClick={handleJourneyClick}>
-          {addJourney ? "Cancel" : "Update My Journey"}
-        </button>
-        {addJourney && (
-          <div>
-            <AddNewJourney setAddJourney={setAddJourney} />
-          </div>
-        )}
-        <UserJourney showJourneyEdit={true} user={user} setUser={setUser} />
+      <div className={cn(style.row)}>
+        {/* ---column left--- */}
+        <div className={cn(style.column, style.left)}>
+          <UserInfo user={user} />
+          <UserSkills user={user} />
+        </div>
+        {/* ---column right--- */}
+        <div className={cn(style.column, style.right)}>
+          <button onClick={handleEditClick}>
+            {edit ? "Cancel" : "Edit Profile"}
+          </button>
+          <UserIntro user={user} />
+          <button onClick={handleJourneyClick}>
+            {addJourney ? "Cancel" : "Update My Journey"}
+          </button>
+          {addJourney && (
+            <div>
+              <AddNewJourney setAddJourney={setAddJourney} />
+            </div>
+          )}
+          <UserJourney showJourneyEdit={true} user={user} setUser={setUser} />
+        </div>
       </div>
     )
   );

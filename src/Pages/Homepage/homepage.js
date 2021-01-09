@@ -112,7 +112,7 @@ export default function Homepage() {
                         <img
                           className={style.eventImage}
                           src={edu}
-                          alt="education image"
+                          alt="education"
                         />
                       </div>
                     </span>
@@ -123,7 +123,7 @@ export default function Homepage() {
                         <img
                           className={style.eventImage}
                           src={social}
-                          alt="community image"
+                          alt="community"
                         />
                       </div>
                     </span>
@@ -134,7 +134,7 @@ export default function Homepage() {
                         <img
                           className={style.eventImage}
                           src={social2}
-                          alt="social image"
+                          alt="social"
                         />
                       </div>
                     </span>

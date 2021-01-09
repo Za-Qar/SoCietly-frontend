@@ -1,6 +1,11 @@
 .profImg {
-  margin-top: 5rem;
+  border-radius: 50px;
+  margin-top: 1rem;
   width: 4rem;
+}
+
+profImgContainer {
+  padding: 1rem;
 }
 
 .cohort1 {

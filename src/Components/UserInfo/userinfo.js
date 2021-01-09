@@ -2,6 +2,7 @@ import SocialMedia from "../UserSocial/social";
 
 //styling
 import style from "./userInfo.module.css";
+import cn from "classnames";
 
 //link
 import { Link } from "react-router-dom";
@@ -26,7 +27,7 @@ export default function UserInfo({ user, link, homepageEdit }) {
 
   return (
     user && (
-      <div>
+      <div className={cn(style.container)}>
         {link ? (
           <Link to={`/bootcamper/${id ? id : uid}`}>
             <UserImage user={user} />

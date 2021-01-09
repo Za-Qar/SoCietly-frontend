@@ -3,6 +3,7 @@ import { useState } from "react";
 
 //styling
 import style from "./journey.module.css";
+import cn from "classnames";
 
 //Components
 import EditJourney from "../EditUserJourney/editUserJourney";
@@ -39,69 +40,73 @@ export default function UserJourney({ showJourneyEdit, user, setUser }) {
 
   return (
     <div>
-      <h3>My Journey</h3>
-      <Timeline>
-        {journey &&
-          journey.map((item, index) => {
-            // Format start date
-            const sdt = DateTime.fromISO(item.startdate);
-            const newStartDate = sdt.toISODate();
+      <label className={cn(style.labelHeader)} for="journey">
+        My Journey
+      </label>
+      <div className={cn(style.container)}>
+        <Timeline>
+          {journey &&
+            journey.map((item, index) => {
+              // Format start date
+              const sdt = DateTime.fromISO(item.startdate);
+              const newStartDate = sdt.toISODate();
 
-            // Format end date
-            const edt = DateTime.fromISO(item.enddate);
-            const newEndDate = edt.toISODate();
+              // Format end date
+              const edt = DateTime.fromISO(item.enddate);
+              const newEndDate = edt.toISODate();
 
-            return editJourney && journeyIndex === index ? (
-              <div key={index}>
-                <EditJourney
-                  journeyItem={item}
-                  startDate={newStartDate}
-                  endDate={newEndDate}
-                  visible={editJourney}
-                  setEditJourney={setEditJourney}
-                  setJourneyIndex={setJourneyIndex}
-                />
-                <CustomizedTimeline
-                  item={item}
-                  startDate={newStartDate}
-                  endDate={newEndDate}
-                  lastItem={journey.length - 1}
-                  index={index}
-                  edit={showJourneyEdit}
-                  editIcon={"edit"}
-                  deleteIcon={"delete"}
-                  handleEditClick={() => {
-                    setJourneyIndex(index);
-                    setEditJourney(!editJourney);
-                  }}
-                  handleDeleteClick={() => {
-                    deleteJourney(item.id);
-                  }}
-                />
-              </div>
-            ) : (
-              <div key={index}>
-                <CustomizedTimeline
-                  item={item}
-                  startDate={newStartDate}
-                  endDate={newEndDate}
-                  lastItem={journey.length - 1}
-                  index={index}
-                  edit={showJourneyEdit}
-                  editIcon={"edit"}
-                  deleteIcon={"delete"}
-                  handleEditClick={() => {
-                    setJourneyIndex(index);
-                    setEditJourney(!editJourney);
-                  }}
-                  handleDeleteClick={() => {
-                    deleteJourney(item.id);
-                  }}
-                />
-              </div>
-            );
-          })}
-      </Timeline>
+              return editJourney && journeyIndex === index ? (
+                <div key={index}>
+                  <EditJourney
+                    journeyItem={item}
+                    startDate={newStartDate}
+                    endDate={newEndDate}
+                    visible={editJourney}
+                    setEditJourney={setEditJourney}
+                    setJourneyIndex={setJourneyIndex}
+                  />
+                  <CustomizedTimeline
+                    item={item}
+                    startDate={newStartDate}
+                    endDate={newEndDate}
+                    lastItem={journey.length - 1}
+                    index={index}
+                    edit={showJourneyEdit}
+                    editIcon={"edit"}
+                    deleteIcon={"delete"}
+                    handleEditClick={() => {
+                      setJourneyIndex(index);
+                      setEditJourney(!editJourney);
+                    }}
+                    handleDeleteClick={() => {
+                      deleteJourney(item.id);
+                    }}
+                  />
+                </div>
+              ) : (
+                <div key={index}>
+                  <CustomizedTimeline
+                    item={item}
+                    startDate={newStartDate}
+                    endDate={newEndDate}
+                    lastItem={journey.length - 1}
+                    index={index}
+                    edit={showJourneyEdit}
+                    editIcon={"edit"}
+                    deleteIcon={"delete"}
+                    handleEditClick={() => {
+                      setJourneyIndex(index);
+                      setEditJourney(!editJourney);
+                    }}
+                    handleDeleteClick={() => {
+                      deleteJourney(item.id);
+                    }}
+                  />
+                </div>
+              );
+            })}
+        </Timeline>
+      </div>
     </div>
   );
 }

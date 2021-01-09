@@ -1,14 +1,19 @@
+//React
+import { useState, useEffect } from "react";
+import { Redirect, useParams } from "react-router-dom";
+
 //Components
 import UserInfo from "../UserInfo/userinfo";
 import UserSkills from "../UserSkills/userskills";
 import UserIntro from "../UserIntro/userintro";
 import UserJourney from "../UserJourney/journey";
 
+//Context
 import { useUserContext } from "../../Context/userContext";
 
-import { useState, useEffect } from "react";
-
-import { Redirect, useParams } from "react-router-dom";
+//Style
+import style from "../UserProfile/profile.module.css";
+import cn from "classnames";
 
 export default function BootcamperProfilePage() {
   const [journey, setJourney] = useState();
@@ -69,11 +74,17 @@ export default function BootcamperProfilePage() {
   return (
     <div>
       {bootcamper && (
-        <div>
-          <UserInfo user={bootcamper} />
-          <UserSkills user={bootcamper} />
-          <UserIntro user={bootcamper} />
-          <UserJourney user={bootcamper} />
+        <div className={cn(style.row)}>
+          {/* ---Column Left--- */}
+          <div className={cn(style.column, style.left)}>
+            <UserInfo user={bootcamper} />
+            <UserSkills user={bootcamper} />
+          </div>
+          {/* ---Column Right--- */}
+          <div className={cn(style.column, style.right)}>
+            <UserIntro user={bootcamper} />
+            <UserJourney user={bootcamper} />
+          </div>
         </div>
       )}
     </div>
