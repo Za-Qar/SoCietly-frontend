@@ -16,6 +16,7 @@ import FavoriteIcon from "@material-ui/icons/Favorite";
 import ShareIcon from "@material-ui/icons/Share";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
+import AddCircleIcon from "@material-ui/icons/AddCircle";
 
 // Cloudinary
 import { Image } from "cloudinary-react";
@@ -81,11 +82,11 @@ export default function EventCard({ key, date, item }) {
             R
           </Avatar>
         }
-        action={
-          <IconButton aria-label="settings">
-            <MoreVertIcon />
-          </IconButton>
-        }
+        // action={
+        //   <IconButton aria-label="settings">
+        //     <MoreVertIcon />
+        //   </IconButton>
+        // }
         title={eventname}
         subheader={date}
       />
@@ -123,6 +124,9 @@ export default function EventCard({ key, date, item }) {
       <CardActions disableSpacing>
         <IconButton aria-label="add to favorites">
           <FavoriteIcon />
+        </IconButton>
+        <IconButton>
+          <AddCircleIcon />
         </IconButton>
         <IconButton
           className={clsx(classes.expand, {
