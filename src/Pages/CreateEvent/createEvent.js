@@ -26,15 +26,19 @@ import InputLabel from "@material-ui/core/InputLabel";
 
 function CreateEvent({
   eventsEdit,
-  patchEvent,
+
   userEventsId,
-  userId,
+
   hide,
   setHide,
 
+  description,
+}) {
+  /*
+  userId,
+  patchEvent,
   attendinglist,
   date,
-  description,
   enablevolunteers,
   eventname,
   eventtype,
@@ -47,8 +51,7 @@ function CreateEvent({
   volunteerlist,
   setAttendindList,
   addToAttend,
-  fetchUserEvents,
-}) {
+  fetchUserEvents,*/
   // Styling
   const useStyles = makeStyles((theme) => ({
     formControl: {
@@ -78,8 +81,22 @@ function CreateEvent({
   //For Maps
   const [marker, setMarker] = useState(null);
 
-  let createEvent = (msg) => {
-    console.log("User Input recieved", msg, marker);
+  // const createEvent = async (e) => {
+  //   e.preventDefault();
+  //   await fetch(`http://localhost:3000/users/imageupload`, {
+  //     method: "POST",
+  //     body: JSON.stringify({
+  //       image: imageSelected,
+  //     }),
+  //     headers: { "content-type": "application/json" },
+  //   })
+  //     .then((res) => res.json())
+  //     .then((data) => console.log("this is the image upload data: ", data))
+  //     .catch((error) => console.log("image upload error: ", error));
+  // };
+
+  let createEvent = async (msg) => {
+    console.log("Event data received", msg, marker);
 
     if (imageSelected === null) {
       alert(
@@ -88,7 +105,7 @@ function CreateEvent({
       return;
     }
 
-    fetch(
+    await fetch(
       eventsEdit
         ? `https://falcon5ives.herokuapp.com/events/${userEventsId}`
         : `http://localhost:3000/events/`,
