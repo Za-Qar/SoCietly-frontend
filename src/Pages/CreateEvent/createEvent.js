@@ -1,13 +1,27 @@
+// React
 import React, { useState } from "react";
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 
-//components
+// Components
 import Maps from "../../Components/Maps/maps.js";
 
 //styling
 import style from "./createEvent.module.css";
 
+// userContext
 import { useUserContext } from "../../Context/userContext";
+
+// Mat ui
+import Grid from "@material-ui/core/Grid";
+import Typography from "@material-ui/core/Typography";
+import TextField from "@material-ui/core/TextField";
+import FormControl from "@material-ui/core/FormControl";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Checkbox from "@material-ui/core/Checkbox";
+import Select from "@material-ui/core/Select";
+import MenuItem from "@material-ui/core/MenuItem";
+import { makeStyles } from "@material-ui/core/styles";
+import InputLabel from "@material-ui/core/InputLabel";
 
 function CreateEvent({
   eventsEdit,
@@ -34,8 +48,27 @@ function CreateEvent({
   addToAttend,
   fetchUserEvents,
 }) {
+  // Styling
+  const useStyles = makeStyles((theme) => ({
+    formControl: {
+      margin: theme.spacing(1),
+      width: "100%",
+      height: "1erm",
+    },
+    selectEmpty: {
+      marginTop: theme.spacing(2),
+    },
+  }));
+
+  const classes = useStyles();
+
+  // Context
   const [user] = useUserContext();
-  const { register, handleSubmit, watch, errors } = useForm();
+
+  // React Form
+  const { register, handleSubmit, watch, errors, control } = useForm();
+
+  // State
   const [complete, setComplete] = useState(false);
 
   console.log("this is the userEventsId", userEventsId);
@@ -89,71 +122,123 @@ function CreateEvent({
         </div>
         <button onClick={consoleLog}>Get User</button>
         <form onSubmit={handleSubmit(createEvent)}>
-          {eventsEdit && (
-            <button
-              onClick={() =>
-                hide === "show" ? setHide("hide") : setHide("show")
-              }
-            >
-              x
-            </button>
-          )}
-          <span>
-            <p>Event Name:</p>
-            <input
-              name="eventName"
-              ref={register}
-              required
-              placeholder={eventname}
-            />
-          </span>
-          <span>
-            <p>Event Type:</p>
-            <select id="eventTypes" name="eventTypes" ref={register}>
-              <option value="education">Education</option>
-              <option value="social">Social</option>
-              <option value="community">Community</option>
-            </select>
-          </span>
-          <span>
-            <p>Date:</p>
-            <input name="date" type="date" ref={register} required />
-          </span>
-          <span>
-            <p>Time:</p>
-            <input name="time" type="time" ref={register} required />
-          </span>
-          <span>
-            <p>Description:</p>
-            <textarea
-              name="description"
-              rows="10"
-              cols="30"
-              ref={register}
-              placeholder={description}
-            ></textarea>
-          </span>
-          <span>
-            <p>Image:</p>
-            <input name="image" ref={register} required />
-          </span>
-          <span>
-            <p>Location:</p>
-            <div>
-              <Maps marker={marker} setMarker={setMarker} isEditing />
-              <button onClick={consoleLog}>Console.log</button>
-            </div>
-          </span>
-          <span>
-            <p>Volunteers:</p>
-            <select id="eventVolunteers" name="eventVolunteers" ref={register}>
-              <option value="true">Yes</option>
-              <option value="false">No</option>
-            </select>
-          </span>
-          <span>
-            <input type="submit" className="button" />
-          </span>
+          <React.Fragment>
+            <Grid container spacing={3}>
+              {eventsEdit && (
+                <button
+                  onClick={() =>
+                    hide === "show" ? setHide("hide") : setHide("show")
+                  }
+                >
+                  x
+                </button>
+              )}
+              <span>
+                <p>Event Name:</p>
+                <input
+                  name="eventName"
+                  ref={register}
+                  required
+                  placeholder={eventname}
+                />
+              </span>
+              <span>
+                <p>Event Type:</p>
+                <select id="eventTypes" name="eventTypes" ref={register}>
+                  <option value="education">Education</option>
+                  <option value="social">Social</option>
+                  <option value="community">Community</option>
+                </select>
+              </span>
+
+              {/*----------Event Type----------*/}
+              <Grid item xs={12} sm={6}>
+                <InputLabel id="demo-simple-select-label">Cohort</InputLabel>
+                <FormControl variant="outlined" fullWidth>
+                  <Controller
+                    name="cohort"
+                    as={
+                      <Select
+                        labelId="demo-simple-select-label"
+                        id="demo-simple-select"
+                        className={classes.formControl}
+                        name="eventTypes"
+                        ref={register}
+                      >
+                        <MenuItem value="education">1</MenuItem>
+                        <MenuItem value="social">2</MenuItem>
+                        <MenuItem value="community">3</MenuItem>
+                        <MenuItem value="4">4</MenuItem>
+                        <MenuItem value="5">5</MenuItem>
+                      </Select>
+                    }
+                    control={control}
+                    rules={{ required: "Required" }}
+                  />
+                </FormControl>
+              </Grid>
+
+              {/*----------Date----------*/}
+              <Grid item xs={12} sm={6}>
+                <p>Date:</p>
+                <input
+                  name="date"
+                  type="date"
+                  ref={register}
+                  required
+                  className={style.maxWidth}
+                />
+              </Grid>
+
+              {/*----------Time----------*/}
+              <Grid item xs={12} sm={6}>
+                <p>Time:</p>
+                <input
+                  name="time"
+                  type="time"
+                  ref={register}
+                  required
+                  className={style.maxWidth}
+                />
+              </Grid>
+
+              <span>
+                <p>Description:</p>
+                <textarea
+                  name="description"
+                  rows="10"
+                  cols="30"
+                  ref={register}
+                  placeholder={description}
+                ></textarea>
+              </span>
+              <span>
+                <p>Image:</p>
+                <input name="image" ref={register} required />
+              </span>
+              <span>
+                <p>Location:</p>
+                <div>
+                  <Maps marker={marker} setMarker={setMarker} isEditing />
+                  <button onClick={consoleLog}>Console.log</button>
+                </div>
+              </span>
+              <span>
+                <p>Volunteers:</p>
+                <select
+                  id="eventVolunteers"
+                  name="eventVolunteers"
+                  ref={register}
+                >
+                  <option value="true">Yes</option>
+                  <option value="false">No</option>
+                </select>
+              </span>
+              <span>
+                <input type="submit" className="button" />
+              </span>
+            </Grid>
+          </React.Fragment>
         </form>
       </div>
     );
