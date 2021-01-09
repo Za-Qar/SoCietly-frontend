@@ -1,3 +1,4 @@
+// React and Material ui
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import clsx from "clsx";
@@ -15,6 +16,9 @@ import FavoriteIcon from "@material-ui/icons/Favorite";
 import ShareIcon from "@material-ui/icons/Share";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
+
+// Cloudinary
+import { Image } from "cloudinary-react";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -81,6 +85,13 @@ export default function EventCard({ date, item }) {
         subheader={date}
       />
       <CardMedia className={classes.media} image={image} title="Paella dish" />
+      {/* <Image
+              key={index}
+              cloudName="falcons"
+              publicId={image}
+              width="300"
+              crop="scale"
+            />; */}
       <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">
           People attending this event:
