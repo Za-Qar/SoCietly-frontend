@@ -1,12 +1,13 @@
 import React, { useState, useCallback, useRef, useEffect } from "react";
 import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
 
-import "./maps.css";
+// Styling
+import style from "./maps.module.css";
 
 const libraries = ["places"];
 const mapContainerStyle = {
-  height: "100vh",
-  width: "100vw",
+  height: "100%",
+  width: "100%",
 };
 
 const center = {
@@ -16,6 +17,11 @@ const center = {
 
 const options = {
   zoomControl: true,
+};
+
+const mapStyles = {
+  width: "100%",
+  height: "100%",
 };
 
 function Maps({ marker, setMarker, isEditing }) {
@@ -44,7 +50,7 @@ function Maps({ marker, setMarker, isEditing }) {
   if (!isLoaded) return "Loading...";
 
   return (
-    <div>
+    <div className={style.maps}>
       <GoogleMap
         id="map"
         mapContainerStyle={mapContainerStyle}
@@ -74,3 +80,5 @@ function Maps({ marker, setMarker, isEditing }) {
 }
 
 export default Maps;
+
+// style="height: 100vh; width: 100%; position: relative; overflow: hidden;"

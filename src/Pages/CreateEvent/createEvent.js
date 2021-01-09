@@ -81,7 +81,12 @@ function CreateEvent({
 
   if (!complete) {
     return (
-      <div>
+      <div className="formContainer">
+        <div className="signupTitle">
+          <div className="signupTitleAligner">
+            <p>Create Event</p>
+          </div>
+        </div>
         <button onClick={consoleLog}>Get User</button>
         <form onSubmit={handleSubmit(createEvent)}>
           {eventsEdit && (
@@ -146,7 +151,9 @@ function CreateEvent({
               <option value="false">No</option>
             </select>
           </span>
-          <input type="submit" />
+          <span>
+            <input type="submit" className="button" />
+          </span>
         </form>
       </div>
     );
