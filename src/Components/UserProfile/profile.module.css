@@ -1,0 +1,39 @@
+.row {
+  display: flex;
+  margin: auto;
+  width: 90%;
+}
+
+.column {
+  float: left;
+  padding: 10px;
+}
+
+.left {
+  width: 25%;
+  /* background-color: lightpink; */
+}
+
+.right {
+  width: 75%;
+  /* background-color: lightgreen; */
+}
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 700px) {
+  .column {
+    display: flex;
+  }
+  .left {
+    width: 100%;
+  }
+  .right {
+    width: 100%;
+  }
+}
