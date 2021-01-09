@@ -183,7 +183,7 @@ export default function Signup({ signup, setSignup }) {
                   as={
                     <TextField
                       id="surname"
-                      label="surname"
+                      label="Surname"
                       fullWidth
                       required
                     />
@@ -353,8 +353,10 @@ export default function Signup({ signup, setSignup }) {
                   as={
                     <TextField
                       id="introduction"
-                      label="Introduction"
+                      label="10 Second Intro..."
                       fullWidth
+                      multiline
+                      rows={3}
                       required
                     />
                   }
