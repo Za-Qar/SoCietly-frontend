@@ -120,7 +120,6 @@ function CreateEvent({
             <p>Create Event</p>
           </div>
         </div>
-        <button onClick={consoleLog}>Get User</button>
         <form onSubmit={handleSubmit(createEvent)}>
           <React.Fragment>
             <Grid container spacing={3}>
@@ -133,44 +132,14 @@ function CreateEvent({
                   x
                 </button>
               )}
-              <span>
-                <p>Event Name:</p>
-                <input
-                  name="eventName"
-                  ref={register}
-                  required
-                  placeholder={eventname}
-                />
-              </span>
-              <span>
-                <p>Event Type:</p>
-                <select id="eventTypes" name="eventTypes" ref={register}>
-                  <option value="education">Education</option>
-                  <option value="social">Social</option>
-                  <option value="community">Community</option>
-                </select>
-              </span>
 
-              {/*----------Event Type----------*/}
-              <Grid item xs={12} sm={6}>
-                <InputLabel id="demo-simple-select-label">Cohort</InputLabel>
+              {/*----------Event Name----------*/}
+              <Grid item xs={12}>
                 <FormControl variant="outlined" fullWidth>
                   <Controller
-                    name="cohort"
+                    name="eventName"
                     as={
-                      <Select
-                        labelId="demo-simple-select-label"
-                        id="demo-simple-select"
-                        className={classes.formControl}
-                        name="eventTypes"
-                        ref={register}
-                      >
-                        <MenuItem value="education">1</MenuItem>
-                        <MenuItem value="social">2</MenuItem>
-                        <MenuItem value="community">3</MenuItem>
-                        <MenuItem value="4">4</MenuItem>
-                        <MenuItem value="5">5</MenuItem>
-                      </Select>
+                      <TextField id="eventName" label="Event Name" required />
                     }
                     control={control}
                     rules={{ required: "Required" }}
@@ -202,7 +171,8 @@ function CreateEvent({
                 />
               </Grid>
 
-              <span>
+              {/*----------Description----------*/}
+              <Grid item xs={12} sm={6}>
                 <p>Description:</p>
                 <textarea
                   name="description"
@@ -210,33 +180,86 @@ function CreateEvent({
                   cols="30"
                   ref={register}
                   placeholder={description}
+                  className={style.maxWidth}
                 ></textarea>
-              </span>
-              <span>
+              </Grid>
+
+              {/*----------Upload Image----------*/}
+              <Grid item xs={12} sm={6}>
                 <p>Image:</p>
-                <input name="image" ref={register} required />
-              </span>
-              <span>
+                <input
+                  name="image"
+                  ref={register}
+                  required
+                  className={style.maxWidth}
+                />
+              </Grid>
+
+              {/*----------Location----------*/}
+              <Grid item xs={12}>
                 <p>Location:</p>
                 <div>
                   <Maps marker={marker} setMarker={setMarker} isEditing />
                   <button onClick={consoleLog}>Console.log</button>
                 </div>
-              </span>
-              <span>
-                <p>Volunteers:</p>
-                <select
-                  id="eventVolunteers"
-                  name="eventVolunteers"
-                  ref={register}
-                >
-                  <option value="true">Yes</option>
-                  <option value="false">No</option>
-                </select>
-              </span>
-              <span>
-                <input type="submit" className="button" />
-              </span>
+              </Grid>
+
+              {/*----------Event Type----------*/}
+              <Grid item xs={12} sm={6}>
+                <InputLabel id="demo-simple-select-label">
+                  Event Type
+                </InputLabel>
+                <FormControl variant="outlined" fullWidth>
+                  <Controller
+                    name="eventTypes"
+                    as={
+                      <Select
+                        labelId="demo-simple-select-label"
+                        id="demo-simple-select"
+                        className={classes.formControl}
+                        name="eventTypes"
+                        ref={register}
+                      >
+                        <MenuItem value="education">Education</MenuItem>
+                        <MenuItem value="social">Social</MenuItem>
+                        <MenuItem value="community">Community</MenuItem>
+                      </Select>
+                    }
+                    control={control}
+                    rules={{ required: "Required" }}
+                  />
+                </FormControl>
+              </Grid>
+
+              {/*----------Volunteers----------*/}
+              <Grid item xs={12} sm={6}>
+                <InputLabel id="demo-simple-select-label">
+                  Volunteers
+                </InputLabel>
+                <FormControl variant="outlined" fullWidth>
+                  <Controller
+                    name="eventVolunteers"
+                    as={
+                      <Select
+                        labelId="demo-simple-select-label"
+                        id="demo-simple-select"
+                        className={classes.formControl}
+                        name="eventVolunteers"
+                        ref={register}
+                      >
+                        <MenuItem value="true">Yes</MenuItem>
+                        <MenuItem value="false">No</MenuItem>
+                      </Select>
+                    }
+                    control={control}
+                    rules={{ required: "Required" }}
+                  />
+                </FormControl>
+              </Grid>
+
+              <Grid item xs={12}>
+                <input type="submit" className="button maxWidth" />
+              </Grid>
             </Grid>
           </React.Fragment>
         </form>
