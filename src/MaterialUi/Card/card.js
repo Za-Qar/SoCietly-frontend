@@ -20,6 +20,9 @@ import MoreVertIcon from "@material-ui/icons/MoreVert";
 // Cloudinary
 import { Image } from "cloudinary-react";
 
+// Styling
+import "./card.css";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: "100%",
@@ -44,7 +47,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function EventCard({ date, item }) {
+export default function EventCard({ key, date, item }) {
   /*--------Props--------*/
   const {
     attendinglist,
@@ -63,6 +66,8 @@ export default function EventCard({ date, item }) {
 
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
+
+  console.log(image);
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
@@ -84,14 +89,29 @@ export default function EventCard({ date, item }) {
         title={eventname}
         subheader={date}
       />
-      <CardMedia className={classes.media} image={image} title="Paella dish" />
-      {/* <Image
-              key={index}
-              cloudName="falcons"
-              publicId={image}
-              width="300"
-              crop="scale"
-            />; */}
+      <div></div>
+      <Image
+        key={key}
+        cloudName="falcons"
+        publicId={image}
+        width="300"
+        crop="scale"
+        className="img"
+      />
+      {/* <CardMedia
+        className={classes.media}
+        image={
+          <Image
+            key={key}
+            cloudName="falcons"
+            publicId={image}
+            width="300"
+            crop="scale"
+          />
+        }
+        title="Paella dish"
+      /> */}
+
       <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">
           People attending this event:
