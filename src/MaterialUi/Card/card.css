@@ -1,3 +1,9 @@
 .img {
   width: 100%;
 }
+
+.cardContainer {
+  padding: 1rem 2rem 2rem 2rem;
+  max-height: 20rem;
+  overflow: hidden;
+}

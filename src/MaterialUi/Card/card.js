@@ -89,15 +89,16 @@ export default function EventCard({ key, date, item }) {
         title={eventname}
         subheader={date}
       />
-      <div></div>
-      <Image
-        key={key}
-        cloudName="falcons"
-        publicId={image}
-        width="300"
-        crop="scale"
-        className="img"
-      />
+      <div className="cardContainer">
+        <Image
+          key={key}
+          cloudName="falcons"
+          publicId={image}
+          width="300"
+          crop="scale"
+          className="img"
+        />
+      </div>
       {/* <CardMedia
         className={classes.media}
         image={
