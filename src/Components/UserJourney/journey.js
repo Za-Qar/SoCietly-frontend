@@ -55,7 +55,6 @@ export default function UserJourney({ showJourneyEdit, user, setUser }) {
               const edt = DateTime.fromISO(item.enddate);
               const newEndDate = edt.toISODate();
 
-
               return editJourney && journeyIndex === index ? (
                 <div key={index}>
                   <EditJourney
@@ -108,7 +107,6 @@ export default function UserJourney({ showJourneyEdit, user, setUser }) {
             })}
         </Timeline>
       </div>
-
     </div>
   );
 }

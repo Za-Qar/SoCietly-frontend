@@ -1,5 +1,4 @@
 .container {
-
   background-color: white;
   padding: 10px;
   margin-left: 10px;
@@ -13,8 +12,6 @@
   margin-left: 20px;
   font-size: 1.1rem;
   font-weight: 700;
-
-
 }
 
 .containerContent {
@@ -23,5 +20,4 @@
   border-radius: 5px;
   background-color: white;
   margin: 2rem 0 2rem 0;
-
 }

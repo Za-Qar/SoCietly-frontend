@@ -48,13 +48,17 @@ export default function UserProfilePage() {
         </div>
         {/* ---column right--- */}
         <div className={cn(style.column, style.right)}>
-          <button onClick={handleEditClick}>
-            {edit ? "Cancel" : "Edit Profile"}
-          </button>
+          <div className={style.buttonRight}>
+            <button onClick={handleEditClick} className="button">
+              {edit ? "Cancel" : "Edit Profile"}
+            </button>
+          </div>
           <UserIntro user={user} />
-          <button onClick={handleJourneyClick}>
-            {addJourney ? "Cancel" : "Update My Journey"}
-          </button>
+          <div className={style.buttonRight}>
+            <button onClick={handleJourneyClick} className="button">
+              {addJourney ? "Cancel" : "Update My Journey"}
+            </button>
+          </div>
           {addJourney && (
             <div>
               <AddNewJourney setAddJourney={setAddJourney} />
