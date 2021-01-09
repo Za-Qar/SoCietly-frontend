@@ -1,7 +1,7 @@
 //React
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Redirect } from "react-router-dom";
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import { Link } from "react-router-dom";
 
 //Context
@@ -13,6 +13,21 @@ import Loading from "../../Components/Loading/loading";
 import { set } from "date-fns";
 import UserJourney from "../UserJourney/journey";
 
+// Mat ui
+import Grid from "@material-ui/core/Grid";
+import Typography from "@material-ui/core/Typography";
+import TextField from "@material-ui/core/TextField";
+import FormControl from "@material-ui/core/FormControl";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Checkbox from "@material-ui/core/Checkbox";
+import Select from "@material-ui/core/Select";
+import MenuItem from "@material-ui/core/MenuItem";
+import { makeStyles } from "@material-ui/core/styles";
+import InputLabel from "@material-ui/core/InputLabel";
+
+// Styling
+import "./createJourney.css";
+
 export default function CreateJourney({ signup, setSignup }) {
   // Context
   const [authUser, loading, error] = useAuthContext();
@@ -23,8 +38,22 @@ export default function CreateJourney({ signup, setSignup }) {
 
   console.log(user);
 
+  // Styling
+  const useStyles = makeStyles((theme) => ({
+    formControl: {
+      margin: theme.spacing(1),
+      width: "100%",
+      height: "1erm",
+    },
+    selectEmpty: {
+      marginTop: theme.spacing(2),
+    },
+  }));
+
+  const classes = useStyles();
+
   // React Form
-  const { register, handleSubmit, watch, errors } = useForm();
+  const { register, handleSubmit, watch, errors, control } = useForm();
 
   useEffect(() => {
     async function getUser() {
@@ -92,62 +121,127 @@ export default function CreateJourney({ signup, setSignup }) {
 
   if (pendingJourney) {
     return (
-      <div>
+      <div className="singupContainer">
         <p>Would you like to add another journey entry?</p>
-        <button onClick={handleAddJourney}>Yes</button>
-        <button
-          onClick={() => {
-            setUser(null);
-            setSignup(false);
-            setPendingJourney(false);
-          }}
-        >
-          No
-        </button>
+        <div className="journeyButtonAligner">
+          <button
+            onClick={handleAddJourney}
+            className="button halfWidthJourney yesMargin"
+          >
+            Yes
+          </button>
+          <button
+            onClick={() => {
+              setUser(null);
+              setSignup(false);
+              setPendingJourney(false);
+            }}
+            className="button halfWidthJourney noMargin"
+          >
+            No
+          </button>
+        </div>
       </div>
     );
   }
 
   return (
-    <div>
+    <div className="singupContainer">
       {addJourney ? (
-        <div>
-          <h2>Continue your journey...</h2>
-          <p>Look how far you have come</p>
+        <div className="journeyTitle">
+          <div className="signupTitleAligner">
+            <h2>Continue your journey...</h2>
+            <p>Look how far you have come</p>
+          </div>
         </div>
       ) : (
-        <div>
-          <h2>Start here...</h2>
-          <p>Tell us about your School of Code journey</p>
+        <div className="journeyTitle">
+          <div className="signupTitleAligner">
+            <h2>Start here...</h2>
+            <p>Tell us about your School of Code journey</p>
+          </div>
         </div>
       )}
+
       <form onSubmit={handleSubmit(createJourney)}>
-        <label for="employer">Employer</label>
-        <input
-          name="employer"
-          ref={register}
-          defaultValue={addJourney ? null : "School of Code"}
-          required
-        />
+        <React.Fragment>
+          <Grid container spacing={3}>
+            {/*----------Employer----------*/}
+            <Grid item xs={12} sm={6}>
+              <FormControl
+                variant="outlined"
+                fullWidth
+                defaultValue={addJourney ? null : "School of Code"}
+              >
+                <Controller
+                  name="employer"
+                  as={<TextField id="employer" label="Employer" required />}
+                  control={control}
+                  rules={{ required: "Required" }}
+                />
+              </FormControl>
+            </Grid>
 
-        <label for="jobTitle">Job Title</label>
-        <input
-          name="jobTitle"
-          ref={register}
-          defaultValue={addJourney ? null : "Student Developer"}
-          required
-        />
+            {/*----------Job Title----------*/}
+            <Grid item xs={12} sm={6}>
+              <FormControl
+                variant="outlined"
+                fullWidth
+                defaultValue={addJourney ? null : "Student Developer"}
+              >
+                <Controller
+                  name="jobTitle"
+                  as={<TextField id="jobTitle" label="Job Title" required />}
+                  control={control}
+                  rules={{ required: "Required" }}
+                />
+              </FormControl>
+            </Grid>
 
-        <label for="startDate">Start Date</label>
-        <input type="date" name="startDate" ref={register} required />
+            <Grid item xs={12} sm={6}>
+              <label for="startDate">Start Date</label>
+              <br />
+              <br />
+              <input
+                type="date"
+                name="startDate"
+                ref={register}
+                required
+                className="maxWidthJourney"
+              />
+            </Grid>
 
-        <label for="endDate">End Date (if applicable)</label>
-        <input type="date" name="endDate" ref={register} />
+            <Grid item xs={12} sm={6}>
+              <label for="endDate">End Date (if applicable)</label>
+              <br />
+              <br />
+              <input
+                type="date"
+                name="endDate"
+                ref={register}
+                className="maxWidthJourney"
+              />
+            </Grid>
 
-        <label for="description">Description</label>
-        <textarea name="description" ref={register} required></textarea>
+            <Grid item xs={12}>
+              <label for="description">Description</label>
+              <br />
+              <br />
+              <textarea
+                name="description"
+                ref={register}
+                required
+                className="maxWidthJourney"
+              ></textarea>
+            </Grid>
+          </Grid>
+        </React.Fragment>
 
-        <input type="submit" value="Continue" />
+        <div className="signupSubmit">
+          <div className="signupSubmitAligner">
+            <input type="submit" value="Continue" className="button" />
+          </div>
+        </div>
       </form>
       {user?.journey && <UserJourney user={user} />}
     </div>

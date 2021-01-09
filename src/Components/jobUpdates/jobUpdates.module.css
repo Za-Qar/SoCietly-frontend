@@ -7,3 +7,359 @@
   margin-right: 4rem;
   margin-top: 5rem;
 }
+
+.secTitle {
+  padding-bottom: 1rem;
+}
+
+.newJobSec {
+  border-bottom: 0.5px solid rgba(0, 0, 0, 0.5);
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.title {
+  margin: 0;
+}
+
+.date {
+  font-weight: 400;
+  font-size: 0.8rem;
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.img {
+  width: 1px;
+}
+
+/*-------------------------Confetti----------------------------*/
+@keyframes bang {
+  from {
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+  }
+}
+.hoverme {
+  width: 240px;
+  margin: 0 auto 0;
+  text-align: center;
+  padding: 10px 0;
+  cursor: pointer;
+  position: relative;
+}
+
+.hoverme span {
+  color: #333;
+  font-size: 0.9em;
+}
+.hoverme i {
+  position: absolute;
+  display: block;
+  left: 50%;
+  top: 0;
+  width: 3px;
+  height: 5px;
+  background: red;
+  opacity: 0;
+}
+.hoverme:hover i:nth-of-type(1) {
+  transform: translate3d(-60px, -98px, 0) rotate(115deg);
+  background: rgba(0, 255, 157, 1);
+  animation: bang 700ms ease-out forwards;
+  opacity: 0;
+}
+.hoverme:hover i:nth-of-type(2) {
+  transform: translate3d(70px, -64px, 0) rotate(312deg);
+  background: rgba(255, 242, 0, 1);
+  animation: bang 700ms ease-out forwards;
+  opacity: 0;
+}
+.hoverme:hover i:nth-of-type(3) {
+  transform: translate3d(-95px, -75px, 0) rotate(72deg);
+  background: rgba(89, 255, 0, 1);
+  animation: bang 700ms ease-out forwards;
+  opacity: 0;
+}
+.hoverme:hover i:nth-of-type(4) {
+  transform: translate3d(40px, -86px, 0) rotate(159deg);
+  background: rgba(255, 0, 43, 1);
+  animation: bang 700ms ease-out forwards;
+  opacity: 0;
+}
+.hoverme:hover i:nth-of-type(5) {
+  transform: translate3d(2px, -53px, 0) rotate(250deg);
+  background: rgba(255, 0, 183, 1);
+  animation: bang 700ms ease-out forwards;
+  opacity: 0;
+}
+.hoverme:hover i:nth-of-type(6) {
+  transform: translate3d(16px, -63px, 0) rotate(207deg);
+  background: rgba(0, 200, 255, 1);
+  animation: bang 700ms ease-out forwards;
+  opacity: 0;
+}
+.hoverme:hover i:nth-of-type(7) {
+  transform: translate3d(88px, -79px, 0) rotate(286deg);
+  background: rgba(0, 115, 255, 1);
+  animation: bang 700ms ease-out forwards;
+  opacity: 0;
+}
+.hoverme:hover i:nth-of-type(8) {
+  transform: translate3d(9px, -67px, 0) rotate(25deg);
+  background: rgba(0, 255, 208, 1);
+  animation: bang 700ms ease-out forwards;
+  opacity: 0;
+}
+.hoverme:hover i:nth-of-type(9) {
+  transform: translate3d(66px, -59px, 0) rotate(100deg);
+  background: rgba(255, 149, 0, 1);
+  animation: bang 700ms ease-out forwards;
+  opacity: 0;
+}
+.hoverme:hover i:nth-of-type(10) {
+  transform: translate3d(90px, -77px, 0) rotate(208deg);
+  background: rgba(0, 166, 255, 1);
+  animation: bang 700ms ease-out forwards;
+  opacity: 0;
+}
+.hoverme:hover i:nth-of-type(11) {
+  transform: translate3d(13px, -65px, 0) rotate(153deg);
+  background: rgba(255, 230, 0, 1);
+  animation: bang 700ms ease-out forwards;
+  opacity: 0;
+}
+.hoverme:hover i:nth-of-type(12) {
+  transform: translate3d(-86px, -76px, 0) rotate(155deg);
+  background: rgba(0, 153, 255, 1);
+  animation: bang 700ms ease-out forwards;
+  opacity: 0;
+}
+.hoverme:hover i:nth-of-type(13) {
+  transform: translate3d(-17px, -61px, 0) rotate(173deg);
+  background: rgba(0, 89, 255, 1);
+  animation: bang 700ms ease-out forwards;
+  opacity: 0;
+}
+.hoverme:hover i:nth-of-type(14) {
+  transform: translate3d(-88px, -56px, 0) rotate(102deg);
+  background: rgba(255, 0, 43, 1);
+  animation: bang 700ms ease-out forwards;
+  opacity: 0;
+}
+.hoverme:hover i:nth-of-type(15) {
+  transform: translate3d(-24px, -94px, 0) rotate(286deg);
+  background: rgba(170, 255, 0, 1);
+  animation: bang 700ms ease-out forwards;
+  opacity: 0;
+}
+.hoverme:hover i:nth-of-type(16) {
+  transform: translate3d(-77px, -54px, 0) rotate(355deg);
+  background: rgba(0, 255, 255, 1);
+  animation: bang 700ms ease-out forwards;
+  opacity: 0;
+}
+.hoverme:hover i:nth-of-type(17) {
+  transform: translate3d(68px, -66px, 0) rotate(265deg);
+  background: rgba(183, 255, 0, 1);
+  animation: bang 700ms ease-out forwards;
+  opacity: 0;
+}
+.hoverme:hover i:nth-of-type(18) {
+  transform: translate3d(-86px, -89px, 0) rotate(201deg);
+  background: rgba(81, 0, 255, 1);
+  animation: bang 700ms ease-out forwards;
+  opacity: 0;
+}
+.hoverme:hover i:nth-of-type(19) {
+  transform: translate3d(-29px, -52px, 0) rotate(262deg);
+  background: rgba(255, 200, 0, 1);
+  animation: bang 700ms ease-out forwards;
+  opacity: 0;
+}
+.hoverme:hover i:nth-of-type(20) {
+  transform: translate3d(24px, -56px, 0) rotate(268deg);
+  background: rgba(255, 0, 213, 1);
+  animation: bang 700ms ease-out forwards;
+  opacity: 0;
+}
+.hoverme:hover i:nth-of-type(21) {
+  transform: translate3d(52px, -85px, 0) rotate(250deg);
+  background: rgba(0, 255, 136, 1);
+  animation: bang 700ms ease-out forwards;
+  opacity: 0;
+}
+.hoverme:hover i:nth-of-type(22) {
+  transform: translate3d(-73px, -64px, 0) rotate(273deg);
+  background: rgba(255, 0, 51, 1);
+  animation: bang 700ms ease-out forwards;
+  opacity: 0;
+}
+.hoverme:hover i:nth-of-type(23) {
+  transform: translate3d(28px, -82px, 0) rotate(3deg);
+  background: rgba(255, 0, 8, 1);
+  animation: bang 700ms ease-out forwards;
+  opacity: 0;
+}
+.hoverme:hover i:nth-of-type(24) {
+  transform: translate3d(60px, -90px, 0) rotate(18deg);
+  background: rgba(0, 43, 255, 1);
+  animation: bang 700ms ease-out forwards;
+  opacity: 0;
+}
+.hoverme:hover i:nth-of-type(25) {
+  transform: translate3d(-71px, -97px, 0) rotate(51deg);
+  background: rgba(213, 255, 0, 1);
+  animation: bang 700ms ease-out forwards;
+  opacity: 0;
+}
+.hoverme:hover i:nth-of-type(26) {
+  transform: translate3d(81px, -69px, 0) rotate(125deg);
+  background: rgba(255, 145, 0, 1);
+  animation: bang 700ms ease-out forwards;
+  opacity: 0;
+}
+.hoverme:hover i:nth-of-type(27) {
+  transform: translate3d(60px, -64px, 0) rotate(181deg);
+  background: rgba(0, 255, 140, 1);
+  animation: bang 700ms ease-out forwards;
+  opacity: 0;
+}
+.hoverme:hover i:nth-of-type(28) {
+  transform: translate3d(-19px, -73px, 0) rotate(259deg);
+  background: rgba(0, 81, 255, 1);
+  animation: bang 700ms ease-out forwards;
+  opacity: 0;
+}
+.hoverme:hover i:nth-of-type(29) {
+  transform: translate3d(-1px, -62px, 0) rotate(19deg);
+  background: rgba(0, 255, 162, 1);
+  animation: bang 700ms ease-out forwards;
+  opacity: 0;
+}
+.hoverme:hover i:nth-of-type(30) {
+  transform: translate3d(-26px, -61px, 0) rotate(350deg);
+  background: rgba(157, 255, 0, 1);
+  animation: bang 700ms ease-out forwards;
+  opacity: 0;
+}
+.hoverme:hover i:nth-of-type(31) {
+  transform: translate3d(73px, -87px, 0) rotate(62deg);
+  background: rgba(251, 255, 0, 1);
+  animation: bang 700ms ease-out forwards;
+  opacity: 0;
+}
+.hoverme:hover i:nth-of-type(32) {
+  transform: translate3d(42px, -62px, 0) rotate(108deg);
+  background: rgba(255, 221, 0, 1);
+  animation: bang 700ms ease-out forwards;
+  opacity: 0;
+}
+.hoverme:hover i:nth-of-type(33) {
+  transform: translate3d(57px, -50px, 0) rotate(47deg);
+  background: rgba(72, 0, 255, 1);
+  animation: bang 700ms ease-out forwards;
+  opacity: 0;
+}
+.hoverme:hover i:nth-of-type(34) {
+  transform: translate3d(-34px, -94px, 0) rotate(99deg);
+  background: rgba(149, 255, 0, 1);
+  animation: bang 700ms ease-out forwards;
+  opacity: 0;
+}
+.hoverme:hover i:nth-of-type(35) {
+  transform: translate3d(81px, -72px, 0) rotate(358deg);
+  background: rgba(166, 0, 255, 1);
+  animation: bang 700ms ease-out forwards;
+  opacity: 0;
+}
+.hoverme:hover i:nth-of-type(36) {
+  transform: translate3d(-52px, -74px, 0) rotate(45deg);
+  background: rgba(208, 0, 255, 1);
+  animation: bang 700ms ease-out forwards;
+  opacity: 0;
+}
+.hoverme:hover i:nth-of-type(37) {
+  transform: translate3d(-63px, -94px, 0) rotate(337deg);
+  background: rgba(64, 0, 255, 1);
+  animation: bang 700ms ease-out forwards;
+  opacity: 0;
+}
+.hoverme:hover i:nth-of-type(38) {
+  transform: translate3d(-69px, -53px, 0) rotate(45deg);
+  background: rgba(255, 0, 102, 1);
+  animation: bang 700ms ease-out forwards;
+  opacity: 0;
+}
+.hoverme:hover i:nth-of-type(39) {
+  transform: translate3d(63px, -66px, 0) rotate(80deg);
+  background: rgba(255, 0, 60, 1);
+  animation: bang 700ms ease-out forwards;
+  opacity: 0;
+}
+.hoverme:hover i:nth-of-type(40) {
+  transform: translate3d(29px, -52px, 0) rotate(313deg);
+  background: rgba(0, 225, 255, 1);
+  animation: bang 700ms ease-out forwards;
+  opacity: 0;
+}
+.hoverme:hover i:nth-of-type(41) {
+  transform: translate3d(-47px, -65px, 0) rotate(167deg);
+  background: rgba(60, 255, 0, 1);
+  animation: bang 700ms ease-out forwards;
+  opacity: 0;
+}
+.hoverme:hover i:nth-of-type(42) {
+  transform: translate3d(67px, -66px, 0) rotate(217deg);
+  background: rgba(255, 0, 38, 1);
+  animation: bang 700ms ease-out forwards;
+  opacity: 0;
+}
+.hoverme:hover i:nth-of-type(43) {
+  transform: translate3d(-89px, -50px, 0) rotate(81deg);
+  background: rgba(0, 255, 55, 1);
+  animation: bang 700ms ease-out forwards;
+  opacity: 0;
+}
+.hoverme:hover i:nth-of-type(44) {
+  transform: translate3d(-97px, -62px, 0) rotate(27deg);
+  background: rgba(21, 0, 255, 1);
+  animation: bang 700ms ease-out forwards;
+  opacity: 0;
+}
+.hoverme:hover i:nth-of-type(45) {
+  transform: translate3d(-74px, -82px, 0) rotate(204deg);
+  background: rgba(255, 47, 0, 1);
+  animation: bang 700ms ease-out forwards;
+  opacity: 0;
+}
+.hoverme:hover i:nth-of-type(46) {
+  transform: translate3d(-62px, -96px, 0) rotate(298deg);
+  background: rgba(0, 43, 255, 1);
+  animation: bang 700ms ease-out forwards;
+  opacity: 0;
+}
+.hoverme:hover i:nth-of-type(47) {
+  transform: translate3d(-7px, -74px, 0) rotate(80deg);
+  background: rgba(247, 0, 255, 1);
+  animation: bang 700ms ease-out forwards;
+  opacity: 0;
+}
+.hoverme:hover i:nth-of-type(48) {
+  transform: translate3d(-93px, -70px, 0) rotate(192deg);
+  background: rgba(255, 217, 0, 1);
+  animation: bang 700ms ease-out forwards;
+  opacity: 0;
+}
+.hoverme:hover i:nth-of-type(49) {
+  transform: translate3d(36px, -55px, 0) rotate(135deg);
+  background: rgba(255, 0, 179, 1);
+  animation: bang 700ms ease-out forwards;
+  opacity: 0;
+}
+.hoverme:hover i:nth-of-type(50) {
+  transform: translate3d(56px, -98px, 0) rotate(259deg);
+  background: rgba(255, 0, 230, 1);
+  animation: bang 700ms ease-out forwards;
+  opacity: 0;
+}

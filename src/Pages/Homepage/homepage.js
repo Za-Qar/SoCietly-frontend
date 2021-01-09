@@ -11,6 +11,7 @@ import UserImage from "../../Components/userImage/userImage";
 import JobUpdates from "../../Components/jobUpdates/jobUpdates";
 import Event from "../../Components/Event/event.js";
 import Card from "../../MaterialUi/Card/card.js";
+import UserLeftSide from "../../Components/userLeftSide/userLeftSide.js";
 
 //Context
 import { useUserContext } from "../../Context/userContext";
@@ -87,12 +88,7 @@ export default function Homepage() {
           <div class="left"></div>
 
           <div className={style.row}>
-            <section className={style.userSec}>
-              <div className={style.column2}>
-                <UserImage user={user} />
-                <UserInfo user={user} homepageEdit />
-              </div>
-            </section>
+            <UserLeftSide />
 
             {/*--------- Column 1---------*/}
             <div className={style.column1}>
@@ -144,25 +140,23 @@ export default function Homepage() {
                 <section className={style.weekEvents}>
                   <h3>This week</h3>
 
-                  <div className={style.eventContainer}>
-                    {allEvents &&
-                      allEvents.map((item, index) => {
-                        let eventTrans = new Date(item.date);
-                        let eventDate = eventTrans.setDate(
-                          eventTrans.getDate()
-                        );
+                  {allEvents &&
+                    allEvents.map((item, index) => {
+                      let eventTrans = new Date(item.date);
+                      let eventDate = eventTrans.setDate(eventTrans.getDate());
 
-                        let date = new Date();
-                        let inOneWeek = date.setDate(date.getDate() + 7);
+                      let date = new Date();
+                      let inOneWeek = date.setDate(date.getDate() + 7);
 
-                        let nowTrans = new Date();
-                        let now = nowTrans.setDate(nowTrans.getDate());
+                      let nowTrans = new Date();
+                      let now = nowTrans.setDate(nowTrans.getDate());
 
-                        let displayDate = eventTrans.toDateString();
+                      let displayDate = eventTrans.toDateString();
 
-                        if (eventDate >= now && eventDate <= inOneWeek) {
-                          console.log(item);
-                          return (
+                      if (eventDate >= now && eventDate <= inOneWeek) {
+                        console.log(item);
+                        return (
+                          <div className={style.eventCard}>
                             <Card
                               key={index}
                               date={displayDate}
@@ -170,10 +164,10 @@ export default function Homepage() {
                               styling={styling}
                               homepageTrue
                             />
-                          );
-                        }
-                      })}
-                  </div>
+                          </div>
+                        );
+                      }
+                    })}
 
                   {/* <div className={style.eventContainer}>
                     {allEvents &&

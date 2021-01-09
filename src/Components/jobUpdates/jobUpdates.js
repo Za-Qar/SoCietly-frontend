@@ -31,7 +31,7 @@ export default function JobUpdates() {
 
   return (
     <div className={style.jobSec}>
-      <h4>Job Updates</h4>
+      <h4 className={style.secTitle}>Job Updates</h4>
       {jobUpdates &&
         jobUpdates.map((item, index) => {
           // Format start date
@@ -41,18 +41,70 @@ export default function JobUpdates() {
           );
 
           return (
-            <div key={index}>
-              <h5>{newStartDate}</h5>
-
+            <div key={index} className={style.newJobSec}>
               <UserImage user={item} alt={`${item.name} profile`} />
-
-              <p>
-                🎉 {item.name} {item.surname} started a new job!
-              </p>
-              <h5>
+              <div class={style.hoverme}>
+                <span>🎉</span>
+                <i></i>
+                <i></i>
+                <i></i>
+                <i></i>
+                <i></i>
+                <i></i>
+                <i></i>
+                <i></i>
+                <i></i>
+                <i></i>
+                <i></i>
+                <i></i>
+                <i></i>
+                <i></i>
+                <i></i>
+                <i></i>
+                <i></i>
+                <i></i>
+                <i></i>
+                <i></i>
+                <i></i>
+                <i></i>
+                <i></i>
+                <i></i>
+                <i></i>
+                <i></i>
+                <i></i>
+                <i></i>
+                <i></i>
+                <i></i>
+                <i></i>
+                <i></i>
+                <i></i>
+                <i></i>
+                <i></i>
+                <i></i>
+                <i></i>
+                <i></i>
+                <i></i>
+                <i></i>
+                <i></i>
+                <i></i>
+                <i></i>
+                <i></i>
+                <i></i>
+                <i></i>
+                <i></i>
+                <i></i>
+                <i></i>
+                <i></i>
+              </div>
+              {/* <p className={style.hoverme}>
+                🎉
+                <br /> {item.name} {item.surname} started a new job!
+              </p> */}
+              <h5 className={style.title}>
                 {" "}
                 {item.jobtitle} at {item.employer}
               </h5>
+              <h5 className={style.date}>{newStartDate}</h5>
             </div>
           );
         })}
