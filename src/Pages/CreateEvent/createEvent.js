@@ -4,6 +4,7 @@ import { useForm, Controller } from "react-hook-form";
 
 // Components
 import Maps from "../../Components/Maps/maps.js";
+import UploadImage from "../../Components/Upload/upload.js";
 
 //styling
 import style from "./createEvent.module.css";
@@ -185,7 +186,7 @@ function CreateEvent({
               </Grid>
 
               {/*----------Upload Image----------*/}
-              <Grid item xs={12} sm={6}>
+              {/* <Grid item xs={12} sm={6}>
                 <p>Image:</p>
                 <input
                   name="image"
@@ -193,6 +194,11 @@ function CreateEvent({
                   required
                   className={style.maxWidth}
                 />
+              </Grid> */}
+
+              <Grid item xs={12} sm={6}>
+                <p>Image:</p>
+                <UploadImage />
               </Grid>
 
               {/*----------Location----------*/}

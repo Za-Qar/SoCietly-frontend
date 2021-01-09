@@ -3,7 +3,7 @@ import React, { useState } from "react";
 //styling
 import style from "./upload.module.css";
 
-export default function ReactUploadImage() {
+export default function UploadImage() {
   const [fileInputState, setFileInputState] = useState("");
   const [selectedFile, setSelectedFile] = useState("");
   const [previewSource, setPreviewSource] = useState("");
