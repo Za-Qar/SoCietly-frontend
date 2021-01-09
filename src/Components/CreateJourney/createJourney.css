@@ -1,0 +1,36 @@
+.maxWidthJourney {
+  width: 100%;
+}
+
+.halfWidthJourney {
+  width: 45%;
+}
+
+.journeyButtonAligner {
+  text-align: center;
+}
+
+.yesMargin {
+  margin-right: 1rem;
+}
+
+.noMargin {
+  margin-left: 1rem;
+}
+
+.journeyTitle {
+  background-color: #31986a;
+  width: 100%;
+  text-align: center;
+  height: 7rem;
+  position: relative;
+  margin-bottom: 2rem;
+}
+
+.journeyTitle p {
+  color: white;
+}
+
+.journeyTitle h2 {
+  color: white;
+}

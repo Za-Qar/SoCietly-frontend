@@ -1,0 +1,65 @@
+.root div {
+  display: "flex";
+  justify-content: "center";
+  flex-wrap: "wrap";
+  flex-direction: row;
+  margin: 0.5rem;
+  padding: 0;
+}
+
+.singupContainer {
+  width: 50%;
+  margin: 3rem auto 3rem auto;
+  padding: 2rem;
+  border: 0.5px solid rgba(0, 0, 0, 0.5);
+  border-radius: 5px;
+  background-color: white;
+}
+
+.signupTitle {
+  background-color: #31986a;
+  width: 100%;
+  text-align: center;
+  height: 5rem;
+  position: relative;
+  margin-bottom: 2rem;
+}
+
+.signupTitleAligner {
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  transform: translateY(-50%);
+}
+
+.signupTitle p {
+  color: white;
+}
+
+.signupImgSec {
+  width: 100%;
+  text-align: center;
+  margin: auto auto 2rem auto;
+}
+
+.signupImgSec img {
+  border-radius: 50px;
+}
+
+.addSkillButtonAligner button {
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.signupSubmit {
+  width: 100%;
+}
+
+.signupSubmitAligner {
+  text-align: right;
+  padding-top: 2rem;
+}
+
+.signupSubmitAligner input {
+  padding: 0.5rem 3rem 0.5rem 3rem;
+}

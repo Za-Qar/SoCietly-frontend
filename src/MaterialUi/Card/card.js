@@ -1,3 +1,4 @@
+// React and Material ui
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import clsx from "clsx";
@@ -15,6 +16,12 @@ import FavoriteIcon from "@material-ui/icons/Favorite";
 import ShareIcon from "@material-ui/icons/Share";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
+
+// Cloudinary
+import { Image } from "cloudinary-react";
+
+// Styling
+import "./card.css";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -40,7 +47,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function EventCard({ date, item }) {
+export default function EventCard({ key, date, item }) {
   /*--------Props--------*/
   const {
     attendinglist,
@@ -59,6 +66,8 @@ export default function EventCard({ date, item }) {
 
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
+
+  console.log(image);
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
@@ -80,7 +89,30 @@ export default function EventCard({ date, item }) {
         title={eventname}
         subheader={date}
       />
-      <CardMedia className={classes.media} image={image} title="Paella dish" />
+      <div className="cardContainer">
+        <Image
+          key={key}
+          cloudName="falcons"
+          publicId={image}
+          width="300"
+          crop="scale"
+          className="img"
+        />
+      </div>
+      {/* <CardMedia
+        className={classes.media}
+        image={
+          <Image
+            key={key}
+            cloudName="falcons"
+            publicId={image}
+            width="300"
+            crop="scale"
+          />
+        }
+        title="Paella dish"
+      /> */}
+
       <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">
           People attending this event:
