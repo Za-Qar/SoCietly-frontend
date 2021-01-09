@@ -367,12 +367,12 @@ export default function Signup({ signup, setSignup }) {
             <Grid item xs={12} sm={6}>
               <FormControl variant="outlined" fullWidth>
                 <Controller
-                  name="linkedIn"
+                  name="linkedin"
                   placeholder="https://example.com"
                   pattern="https://.*"
                   as={
                     <TextField
-                      id="linkedIn"
+                      id="linkedin"
                       label="LinkedIn"
                       fullWidth
                       required

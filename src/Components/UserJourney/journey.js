@@ -59,25 +59,29 @@ export default function UserJourney({ showJourneyEdit, user, setUser }) {
               </button>
             </div>
           ) : (
-            <div key={index}>
-              <h4>{item.jobtitle}</h4>
-              <h5>@ {item.employer}</h5>
-              {newEndDate && <h5>Completed: {newEndDate}</h5>}
-              <h5>Started: {newStartDate}</h5>
-              <p>{item.description}</p>
-              {showJourneyEdit && (
-                <div>
-                  <button
-                    onClick={() => {
-                      setJourneyIndex(index);
-                      setEditJourney(!editJourney);
-                    }}
-                  >
-                    Edit
-                  </button>
-                  <button onClick={() => deleteJourney(item.id)}>Delete</button>
-                </div>
-              )}
+            <div key={index} className={style.container}>
+              <div className={style.containerContent}>
+                <h4>{item.jobtitle}</h4>
+                <h5>@ {item.employer}</h5>
+                {newEndDate && <h5>Completed: {newEndDate}</h5>}
+                <h5>Started: {newStartDate}</h5>
+                <p>{item.description}</p>
+                {showJourneyEdit && (
+                  <div>
+                    <button
+                      onClick={() => {
+                        setJourneyIndex(index);
+                        setEditJourney(!editJourney);
+                      }}
+                    >
+                      Edit
+                    </button>
+                    <button onClick={() => deleteJourney(item.id)}>
+                      Delete
+                    </button>
+                  </div>
+                )}
+              </div>
             </div>
           );
         })}
