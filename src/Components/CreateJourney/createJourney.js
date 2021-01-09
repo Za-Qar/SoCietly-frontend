@@ -1,7 +1,7 @@
 //React
 import { useState, useEffect } from "react";
 import { Redirect } from "react-router-dom";
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import { Link } from "react-router-dom";
 
 //Context
@@ -13,6 +13,18 @@ import Loading from "../../Components/Loading/loading";
 import { set } from "date-fns";
 import UserJourney from "../UserJourney/journey";
 
+// Mat ui
+import Grid from "@material-ui/core/Grid";
+import Typography from "@material-ui/core/Typography";
+import TextField from "@material-ui/core/TextField";
+import FormControl from "@material-ui/core/FormControl";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Checkbox from "@material-ui/core/Checkbox";
+import Select from "@material-ui/core/Select";
+import MenuItem from "@material-ui/core/MenuItem";
+import { makeStyles } from "@material-ui/core/styles";
+import InputLabel from "@material-ui/core/InputLabel";
+
 export default function CreateJourney({ signup, setSignup }) {
   // Context
   const [authUser, loading, error] = useAuthContext();
@@ -23,8 +35,22 @@ export default function CreateJourney({ signup, setSignup }) {
 
   console.log(user);
 
+  // Styling
+  const useStyles = makeStyles((theme) => ({
+    formControl: {
+      margin: theme.spacing(1),
+      width: "100%",
+      height: "1erm",
+    },
+    selectEmpty: {
+      marginTop: theme.spacing(2),
+    },
+  }));
+
+  const classes = useStyles();
+
   // React Form
-  const { register, handleSubmit, watch, errors } = useForm();
+  const { register, handleSubmit, watch, errors, control } = useForm();
 
   useEffect(() => {
     async function getUser() {
@@ -150,6 +176,309 @@ export default function CreateJourney({ signup, setSignup }) {
         <input type="submit" value="Continue" />
       </form>
       {user?.journey && <UserJourney user={user} />}
+
+      <div className="singupContainer">
+        <div className="signupTitle">
+          <div className="signupTitleAligner">
+            <p>Signup Form</p>
+          </div>
+        </div>
+        <form onSubmit={handleSubmit(createUser)}>
+          <div className="signupImgSec">
+            <img src={authUser?.photoURL} alt="user profile" />
+          </div>
+
+          <div className="signupImgSec">
+            <button onClick={logout} className="button">
+              Return to Home
+            </button>
+          </div>
+
+          <React.Fragment>
+            {/*----------Name----------*/}
+            <Grid container spacing={3}>
+              <Grid item xs={12} sm={6}>
+                <FormControl variant="outlined" fullWidth>
+                  <Controller
+                    name="name"
+                    as={<TextField id="firstName" label="Name" required />}
+                    control={control}
+                    rules={{ required: "Required" }}
+                  />
+                </FormControl>
+              </Grid>
+
+              {/*----------Surname----------*/}
+              <Grid item xs={12} sm={6}>
+                <FormControl variant="outlined" fullWidth>
+                  <Controller
+                    name="surname"
+                    as={
+                      <TextField
+                        id="surname"
+                        label="surname"
+                        fullWidth
+                        required
+                      />
+                    }
+                    control={control}
+                    rules={{ required: "Required" }}
+                  />
+                </FormControl>
+              </Grid>
+
+              {/*----------Email----------*/}
+              <Grid item xs={12}>
+                <FormControl variant="outlined" fullWidth>
+                  <Controller
+                    name="email"
+                    as={
+                      <TextField id="email" label="email" fullWidth required />
+                    }
+                    control={control}
+                    rules={{ required: "Required" }}
+                    defaultValue={authUser.email}
+                  />
+                </FormControl>
+              </Grid>
+
+              {/*----------Cohort----------*/}
+              <Grid item xs={12} sm={6}>
+                <InputLabel id="demo-simple-select-label">Cohort</InputLabel>
+                <FormControl variant="outlined" fullWidth>
+                  <Controller
+                    name="cohort"
+                    as={
+                      <Select
+                        labelId="demo-simple-select-label"
+                        id="demo-simple-select"
+                        className={classes.formControl}
+                        name="cohort"
+                        ref={register}
+                      >
+                        <MenuItem value="1">1</MenuItem>
+                        <MenuItem value="2">2</MenuItem>
+                        <MenuItem value="3">3</MenuItem>
+                        <MenuItem value="4">4</MenuItem>
+                        <MenuItem value="5">5</MenuItem>
+                      </Select>
+                    }
+                    control={control}
+                    rules={{ required: "Required" }}
+                  />
+                </FormControl>
+              </Grid>
+
+              {/*----------Admin----------*/}
+              <Grid item xs={12} sm={6}>
+                <InputLabel id="demo-simple-select-label">Admin</InputLabel>
+                <FormControl variant="outlined" fullWidth>
+                  <Controller
+                    name="admin"
+                    as={
+                      <Select
+                        labelId="demo-simple-select-label"
+                        id="demo-simple-select"
+                        className={classes.formControl}
+                        name="admin"
+                        ref={register}
+                      >
+                        <MenuItem value="yes">Yes</MenuItem>
+                        <MenuItem value="no">No</MenuItem>
+                      </Select>
+                    }
+                    control={control}
+                    rules={{ required: "Required" }}
+                  />
+                </FormControl>
+              </Grid>
+
+              {/*----------Current Role----------*/}
+              <Grid item xs={12} sm={6}>
+                <FormControl variant="outlined" fullWidth>
+                  <Controller
+                    name="currentRole"
+                    as={
+                      <TextField
+                        id="currentRole"
+                        label="Current Role"
+                        fullWidth
+                        required
+                      />
+                    }
+                    control={control}
+                    rules={{ required: "Required" }}
+                  />
+                </FormControl>
+              </Grid>
+
+              {/*----------Current Employer----------*/}
+              <Grid item xs={12} sm={6}>
+                <FormControl variant="outlined" fullWidth>
+                  <Controller
+                    name="currentEmployer"
+                    as={
+                      <TextField
+                        id="currentEmployer"
+                        label="Current Employer"
+                        fullWidth
+                        required
+                      />
+                    }
+                    control={control}
+                    rules={{ required: "Required" }}
+                  />
+                </FormControl>
+              </Grid>
+
+              {/*----------Skills Input----------*/}
+              <Grid item xs={12} sm={6}>
+                <FormControl
+                  variant="outlined"
+                  fullWidth
+                  onChange={(e) => setSkillInput(e.target.value)}
+                  value={skillInput}
+                >
+                  <Controller
+                    name="skills"
+                    as={<TextField id="skills" label="skills" required />}
+                    control={control}
+                    rules={{ required: "Required" }}
+                  />
+                  <div className="addSkillButtonAligner">
+                    <button onClick={(e) => addToSkills(e)} className="button">
+                      Add Skill
+                    </button>
+                  </div>
+                </FormControl>
+              </Grid>
+
+              {/*----------Skills----------*/}
+              <Grid item xs={12} sm={6}>
+                <FormControl variant="outlined" fullWidth>
+                  <Controller
+                    name="skills"
+                    as={
+                      <ul>
+                        <div className="root">
+                          {skills.map((item, index) => {
+                            return (
+                              <Tags
+                                key={`${item}${index}`}
+                                item={item}
+                                index={index}
+                                deleteSkill={deleteSkill}
+                              />
+                            );
+                          })}
+                        </div>
+                      </ul>
+                    }
+                    control={control}
+                    rules={{ required: "Required" }}
+                  />
+                </FormControl>
+              </Grid>
+
+              {/*----------Scoial Links----------*/}
+              <Grid item xs={12}>
+                <FormControl variant="outlined" fullWidth>
+                  <Controller
+                    name="introduction"
+                    as={
+                      <TextField
+                        id="introduction"
+                        label="Introduction"
+                        fullWidth
+                        required
+                      />
+                    }
+                    control={control}
+                    rules={{ required: "Required" }}
+                  />
+                </FormControl>
+              </Grid>
+
+              <Grid item xs={12} sm={6}>
+                <FormControl variant="outlined" fullWidth>
+                  <Controller
+                    name="linkedIn"
+                    placeholder="https://example.com"
+                    pattern="https://.*"
+                    as={
+                      <TextField
+                        id="linkedIn"
+                        label="LinkedIn"
+                        fullWidth
+                        required
+                      />
+                    }
+                    control={control}
+                    rules={{ required: "Required" }}
+                  />
+                </FormControl>
+              </Grid>
+
+              <Grid item xs={12} sm={6}>
+                <FormControl variant="outlined" fullWidth>
+                  <Controller
+                    name="github"
+                    placeholder="https://example.com"
+                    pattern="https://.*"
+                    as={<TextField id="github" label="Github" fullWidth />}
+                    control={control}
+                  />
+                </FormControl>
+              </Grid>
+
+              <Grid item xs={12} sm={6}>
+                <FormControl variant="outlined" fullWidth>
+                  <Controller
+                    name="twitter"
+                    placeholder="https://example.com"
+                    pattern="https://.*"
+                    as={<TextField id="twitter" label="Twitter" fullWidth />}
+                    control={control}
+                  />
+                </FormControl>
+              </Grid>
+
+              <Grid item xs={12} sm={6}>
+                <FormControl variant="outlined" fullWidth>
+                  <Controller
+                    name="portfolio"
+                    placeholder="https://example.com"
+                    pattern="https://.*"
+                    as={
+                      <TextField id="portfolio" label="Portfolio" fullWidth />
+                    }
+                    control={control}
+                  />
+                </FormControl>
+              </Grid>
+
+              <Grid item xs={12}>
+                <FormControl variant="outlined" fullWidth>
+                  <Controller
+                    name="other"
+                    placeholder="https://example.com"
+                    pattern="https://.*"
+                    as={<TextField id="other" label="Other" fullWidth />}
+                    control={control}
+                  />
+                </FormControl>
+              </Grid>
+            </Grid>
+          </React.Fragment>
+
+          <div className="signupSubmit">
+            <div className="signupSubmitAligner">
+              {/* Submit form button */}
+              <input type="submit" value="Next" className="button" />
+            </div>
+          </div>
+        </form>
+      </div>
     </div>
   );
 }
