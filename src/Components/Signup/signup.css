@@ -16,19 +16,6 @@
   background-color: white;
 }
 
-.button {
-  background-color: #31986a;
-  color: white;
-  border-radius: 50px;
-  border: none;
-  padding: 0.5rem 1.5rem 0.5rem 1.5rem;
-}
-
-.button:hover {
-  background-color: #1d6142;
-  cursor: pointer;
-}
-
 .signupTitle {
   background-color: #31986a;
   width: 100%;

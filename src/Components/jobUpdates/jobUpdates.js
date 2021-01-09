@@ -43,11 +43,63 @@ export default function JobUpdates() {
           return (
             <div key={index} className={style.newJobSec}>
               <UserImage user={item} alt={`${item.name} profile`} />
-
-              <p>
+              <div class={style.hoverme}>
+                <span>🎉</span>
+                <i></i>
+                <i></i>
+                <i></i>
+                <i></i>
+                <i></i>
+                <i></i>
+                <i></i>
+                <i></i>
+                <i></i>
+                <i></i>
+                <i></i>
+                <i></i>
+                <i></i>
+                <i></i>
+                <i></i>
+                <i></i>
+                <i></i>
+                <i></i>
+                <i></i>
+                <i></i>
+                <i></i>
+                <i></i>
+                <i></i>
+                <i></i>
+                <i></i>
+                <i></i>
+                <i></i>
+                <i></i>
+                <i></i>
+                <i></i>
+                <i></i>
+                <i></i>
+                <i></i>
+                <i></i>
+                <i></i>
+                <i></i>
+                <i></i>
+                <i></i>
+                <i></i>
+                <i></i>
+                <i></i>
+                <i></i>
+                <i></i>
+                <i></i>
+                <i></i>
+                <i></i>
+                <i></i>
+                <i></i>
+                <i></i>
+                <i></i>
+              </div>
+              {/* <p className={style.hoverme}>
                 🎉
                 <br /> {item.name} {item.surname} started a new job!
-              </p>
+              </p> */}
               <h5 className={style.title}>
                 {" "}
                 {item.jobtitle} at {item.employer}
