@@ -7,11 +7,15 @@ import { useForm } from "react-hook-form";
 import { useAuthContext } from "../../Context/authContext";
 import { useUserContext } from "../../Context/userContext";
 
+//Style
+import style from "../EditUserJourney/editUserJourney.module.css";
+
 //Components
 import Loading from "../../Components/Loading/loading";
 import CreateJourney from "../../Components/CreateJourney/createJourney";
+import ModalOverlay from "../ModalOverlay/modalOverlay";
 
-export default function EditProfile({ setEdit }) {
+export default function EditProfile({ setEdit, visible }) {
   // Context
   const [authUser, loading, error] = useAuthContext();
   const [user, setUser] = useUserContext();
@@ -128,131 +132,139 @@ export default function EditProfile({ setEdit }) {
   }
 
   return authUser ? (
-    <div>
+    <ModalOverlay
+      visible={visible}
+      onClose={() => setEdit(false)}
+      onSave={handleSubmit(submitProfile)}
+      header={"Edit Profile"}
+    >
       <div>
-        <form onSubmit={handleSubmit(submitProfile)}>
-          <span>
-            <img src={user?.profileImage} alt="user profile" />
-          </span>
-          <span>
-            <p>Name:</p>
-            <input name="name" ref={register} defaultValue={user.name} />
-          </span>
-          <span>
-            <p>Surname:</p>
-            <input name="surname" ref={register} defaultValue={user.surname} />
-          </span>
-          <span>
-            <p>Cohort:</p>
-            <select name="cohort" ref={register} defaultValue={user.cohort}>
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-            </select>
-          </span>
-          <span>
-            <p>Current Role:</p>
-            <input
-              name="currentRole"
-              ref={register}
-              defaultValue={user.currentRole}
-            />
-          </span>
-          <span>
-            <p>Current Employer:</p>
-            <input
-              name="currentEmployer"
-              ref={register}
-              defaultValue={user.currentEmployer}
-            />
-          </span>
-          <span>
-            <p>Skills:</p>
-            <input
-              name="skills"
-              onChange={(e) => setSkillInput(e.target.value)}
-              value={skillInput}
-            />
-            <button onClick={(e) => addToSkills(e)}>Add Skill</button>
-            <ul>
-              {skills.map((item, index) => {
-                return (
-                  <div key={index}>
-                    <li>{item}</li>
-                    <button
-                      onClick={(e) => {
-                        deleteSkill(index, e);
-                      }}
-                    >
-                      X
-                    </button>
-                  </div>
-                );
-              })}
-            </ul>
-          </span>
-          <span>
-            <p>10 Second Intro:</p>
-            <textarea
-              name="introduction"
-              ref={register}
-              defaultValue={user.introduction}
-            />
-          </span>
-          <span>
-            <p>Social Links:</p>
-            <label for="linkedin">Linkedin: </label>
-            <input
-              name="linkedin"
-              placeholder="https://example.com"
-              pattern="https://.*"
-              ref={register}
-              defaultValue={findSocial("linkedin")}
-            ></input>
+        <div>
+          <form className={style.formContainer}>
+            <span>
+              <img src={user?.profileImage} alt="user profile" />
+            </span>
+            <span>
+              <p>Name:</p>
+              <input name="name" ref={register} defaultValue={user.name} />
+            </span>
+            <span>
+              <p>Surname:</p>
+              <input
+                name="surname"
+                ref={register}
+                defaultValue={user.surname}
+              />
+            </span>
+            <span>
+              <p>Cohort:</p>
+              <select name="cohort" ref={register} defaultValue={user.cohort}>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+              </select>
+            </span>
+            <span>
+              <p>Current Role:</p>
+              <input
+                name="currentRole"
+                ref={register}
+                defaultValue={user.currentRole}
+              />
+            </span>
+            <span>
+              <p>Current Employer:</p>
+              <input
+                name="currentEmployer"
+                ref={register}
+                defaultValue={user.currentEmployer}
+              />
+            </span>
+            <span>
+              <p>Skills:</p>
+              <input
+                name="skills"
+                onChange={(e) => setSkillInput(e.target.value)}
+                value={skillInput}
+              />
+              <button onClick={(e) => addToSkills(e)}>Add Skill</button>
+              <ul>
+                {skills.map((item, index) => {
+                  return (
+                    <div key={index}>
+                      <li>{item}</li>
+                      <button
+                        onClick={(e) => {
+                          deleteSkill(index, e);
+                        }}
+                      >
+                        X
+                      </button>
+                    </div>
+                  );
+                })}
+              </ul>
+            </span>
+            <span>
+              <p>10 Second Intro:</p>
+              <textarea
+                name="introduction"
+                ref={register}
+                defaultValue={user.introduction}
+              />
+            </span>
+            <span>
+              <p>Social Links:</p>
+              <label for="linkedin">Linkedin: </label>
+              <input
+                name="linkedin"
+                placeholder="https://example.com"
+                pattern="https://.*"
+                ref={register}
+                defaultValue={findSocial("linkedin")}
+              ></input>
 
-            <label for="Github">Github: </label>
-            <input
-              name="github"
-              placeholder="https://example.com"
-              pattern="https://.*"
-              ref={register}
-              defaultValue={findSocial("github")}
-            ></input>
+              <label for="Github">Github: </label>
+              <input
+                name="github"
+                placeholder="https://example.com"
+                pattern="https://.*"
+                ref={register}
+                defaultValue={findSocial("github")}
+              ></input>
 
-            <label for="Twitter">Twitter: </label>
-            <input
-              name="twitter"
-              placeholder="https://example.com"
-              pattern="https://.*"
-              ref={register}
-              defaultValue={findSocial("twitter")}
-            ></input>
+              <label for="Twitter">Twitter: </label>
+              <input
+                name="twitter"
+                placeholder="https://example.com"
+                pattern="https://.*"
+                ref={register}
+                defaultValue={findSocial("twitter")}
+              ></input>
 
-            <label for="Portfolio">Portfolio: </label>
-            <input
-              name="portfolio"
-              placeholder="https://example.com"
-              pattern="https://.*"
-              ref={register}
-              defaultValue={findSocial("portfolio")}
-            ></input>
+              <label for="Portfolio">Portfolio: </label>
+              <input
+                name="portfolio"
+                placeholder="https://example.com"
+                pattern="https://.*"
+                ref={register}
+                defaultValue={findSocial("portfolio")}
+              ></input>
 
-            <label for="Other">Other: </label>
-            <input
-              name="other"
-              placeholder="https://example.com"
-              pattern="https://.*"
-              ref={register}
-              defaultValue={findSocial("other")}
-            ></input>
-          </span>
-
-          {/* Submit form button */}
-          <input type="submit" value="Submit" />
-        </form>
+              <label for="Other">Other: </label>
+              <input
+                name="other"
+                placeholder="https://example.com"
+                pattern="https://.*"
+                ref={register}
+                defaultValue={findSocial("other")}
+              ></input>
+            </span>
+          </form>
+        </div>
       </div>
-    </div>
+    </ModalOverlay>
   ) : (
     <Redirect to={"/login"}></Redirect>
   );

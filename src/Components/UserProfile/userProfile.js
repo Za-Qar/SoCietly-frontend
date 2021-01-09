@@ -27,48 +27,51 @@ export default function UserProfilePage() {
     setEdit(!edit);
   }
 
-  if (edit) {
-    return (
-      <div>
-        <button onClick={handleEditClick}>
-          {edit ? "Cancel" : "Edit Profile"}
-        </button>
-        <EditProfile setEdit={setEdit} />;
-      </div>
-    );
-  }
+  // if (edit) {
+  //   return (
+  //     <div>
+  //       <button onClick={handleEditClick}>
+  //         {edit ? "Cancel" : "Edit Profile"}
+  //       </button>
+  //       <EditProfile setEdit={setEdit} />;
+  //     </div>
+  //   );
+  // }
 
   return (
     user && (
-      <div className={cn(style.row)}>
-        {/* ---column left--- */}
-        <div className={cn(style.column, style.left)}>
-          <UserInfo user={user} />
-          <UserSkills user={user} />
-        </div>
-        {/* ---column right--- */}
-        <div className={cn(style.column, style.right)}>
-          <div className={style.buttonRight}>
-            <button onClick={handleEditClick} className="button">
-              {edit ? "Cancel" : "Edit Profile"}
-            </button>
+      <div>
+        <div className={cn(style.row)}>
+          {/* ---column left--- */}
+          <div className={cn(style.column, style.left)}>
+            <UserInfo user={user} />
+            <UserSkills user={user} />
           </div>
-          <UserIntro user={user} />
-          <div className={style.buttonRight}>
-            <button onClick={handleJourneyClick} className="button">
-              {addJourney ? "Cancel" : "Update My Journey"}
-            </button>
-          </div>
-          {addJourney && (
-            <div>
-              <AddNewJourney
-                setAddJourney={setAddJourney}
-                addJourney={addJourney}
-              />
+          {/* ---column right--- */}
+          <div className={cn(style.column, style.right)}>
+            <div className={style.buttonRight}>
+              <button onClick={handleEditClick} className="button">
+                Edit Profile
+              </button>
             </div>
-          )}
-          <UserJourney showJourneyEdit={true} user={user} setUser={setUser} />
+            <UserIntro user={user} />
+            <div className={style.buttonRight}>
+              <button onClick={handleJourneyClick} className="button">
+                Update My Journey
+              </button>
+            </div>
+            {addJourney && (
+              <div>
+                <AddNewJourney
+                  setAddJourney={setAddJourney}
+                  addJourney={addJourney}
+                />
+              </div>
+            )}
+            <UserJourney showJourneyEdit={true} user={user} setUser={setUser} />
+          </div>
         </div>
+        <EditProfile setEdit={setEdit} visible={edit} />;
       </div>
     )
   );

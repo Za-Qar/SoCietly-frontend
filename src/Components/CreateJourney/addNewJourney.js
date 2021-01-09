@@ -63,7 +63,7 @@ export default function AddNewJourney({ setAddJourney, addNewJourney }) {
         visible={true}
         onClose={() => setAddJourney(false)}
         onSave={handleSubmit(createNewJourney)}
-        header={"Edit Journey Entry"}
+        header={"Add Journey Entry"}
       >
         <form className={style.formContainer}>
           <FormControl variant="outlined">
