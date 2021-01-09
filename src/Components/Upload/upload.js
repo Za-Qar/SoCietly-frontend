@@ -3,13 +3,23 @@ import React, { useState } from "react";
 //styling
 import style from "./upload.module.css";
 
-export default function UploadImage() {
+export default function UploadImage({ setImageSelected }) {
   const [fileInputState, setFileInputState] = useState("");
   const [selectedFile, setSelectedFile] = useState("");
   const [previewSource, setPreviewSource] = useState("");
 
   function fileInput(e) {
     const file = e.target.files[0];
+    const FileSize = e.target.files[0].size;
+
+    if (FileSize > 9777777) {
+      alert(
+        "File is too large, please upload an image that's less than 10 MiB"
+      );
+      return;
+    }
+
+    console.log("this is file size: ", FileSize);
     previewFile(file);
   }
 
@@ -26,32 +36,41 @@ export default function UploadImage() {
     if (!previewSource) {
       alert("please select an image to upload");
     }
-
-    uploadImage(previewSource);
+    console.log("this is submit Image: ", previewSource);
+    setImageSelected(previewSource);
+    // uploadImage(previewSource);
   };
 
-  const uploadImage = async (base64EncodedImage) => {
-    console.log(base64EncodedImage);
+  // const uploadImage = async (base64EncodedImage) => {
+  //   console.log(base64EncodedImage);
 
-    await fetch(`http://localhost:3000/users/imageupload`, {
-      method: "POST",
-      body: JSON.stringify({
-        image: base64EncodedImage,
-      }),
-      headers: { "content-type": "application/json" },
-    })
-      .then((res) => res.json())
-      .then((data) => console.log("this is the image upload data: ", data))
-      .catch((error) => console.log("image upload error: ", error));
-  };
+  //   await fetch(`http://localhost:3000/users/imageupload`, {
+  //     method: "POST",
+  //     body: JSON.stringify({
+  //       image: base64EncodedImage,
+  //     }),
+  //     headers: { "content-type": "application/json" },
+  //   })
+  //     .then((res) => res.json())
+  //     .then((data) => console.log("this is the image upload data: ", data))
+  //     .catch((error) => console.log("image upload error: ", error));
+  // };
 
   return (
     <div>
-      <form onSubmit={submitImage}>
-        <input type="file" onChange={fileInput} value={selectedFile} />
-        <button type="submit">Upload Image</button>
-      </form>
-      {previewSource && <img src={previewSource} alt="your uploaded image" />}
+      <input type="file" onChange={fileInput} value={selectedFile} />
+
+      {previewSource && (
+        <img
+          src={previewSource}
+          alt="your uploaded image"
+          className={style.img}
+        />
+      )}
+
+      <button onClick={submitImage} className="button maxWidth">
+        Upload Image
+      </button>
     </div>
   );
 }

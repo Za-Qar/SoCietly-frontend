@@ -71,18 +71,27 @@ function CreateEvent({
 
   // State
   const [complete, setComplete] = useState(false);
+  const [imageSelected, setImageSelected] = useState(null);
 
-  console.log("this is the userEventsId", userEventsId);
+  console.log("this is the userEventsId: ", userEventsId);
 
   //For Maps
   const [marker, setMarker] = useState(null);
 
   let createEvent = (msg) => {
     console.log("User Input recieved", msg, marker);
+
+    if (imageSelected === null) {
+      alert(
+        "Dear fellow SoC memeber, please upload an image before you submit"
+      );
+      return;
+    }
+
     fetch(
       eventsEdit
         ? `https://falcon5ives.herokuapp.com/events/${userEventsId}`
-        : `https://falcon5ives.herokuapp.com/events/`,
+        : `http://localhost:3000/events/`,
       {
         method: eventsEdit ? "PATCH" : "POST",
         body: JSON.stringify({
@@ -92,7 +101,7 @@ function CreateEvent({
           date: msg.date,
           time: msg.time,
           description: msg.description,
-          image: msg.image,
+          image: imageSelected,
           location: marker,
           enableVolunteers: msg.eventVolunteers,
           attendingList: eventsEdit ? null : [],
@@ -111,11 +120,12 @@ function CreateEvent({
   function consoleLog() {
     console.log(user);
     console.log(marker);
+    console.log("this is the selected image: ", imageSelected);
   }
 
   if (!complete) {
     return (
-      <div className="formContainer">
+      <div className="createContainer">
         <div className="signupTitle">
           <div className="signupTitleAligner">
             <p>Create Event</p>
@@ -198,7 +208,7 @@ function CreateEvent({
 
               <Grid item xs={12} sm={6}>
                 <p>Image:</p>
-                <UploadImage />
+                <UploadImage setImageSelected={setImageSelected} />
               </Grid>
 
               {/*----------Location----------*/}
