@@ -61,7 +61,10 @@ export default function UserProfilePage() {
           </div>
           {addJourney && (
             <div>
-              <AddNewJourney setAddJourney={setAddJourney} />
+              <AddNewJourney
+                setAddJourney={setAddJourney}
+                addJourney={addJourney}
+              />
             </div>
           )}
           <UserJourney showJourneyEdit={true} user={user} setUser={setUser} />
