@@ -83,38 +83,42 @@ export default function MyEvents() {
 
   return (
     <div>
-      <div className={style.row}>
-        <UserLeftSide />
-        {/*--------- Column 1---------*/}
-        <div className={style.column1}>
-          <section className={style.columnTwo}>
-            <div className={style.welcome}>
-              <h3>Hello {user?.username}</h3>
-              <h4>What’s new with you? Have a look around the SoC community</h4>
-            </div>
-            <h3>User events</h3>
-            {userEvents &&
-              userEvents.map((item, index) => {
-                let date = new Date(item.date).toDateString();
+      {user && (
+        <div className={style.row}>
+          <UserLeftSide />
+          {/*--------- Column 1---------*/}
+          <div className={style.column1}>
+            <section className={style.columnTwo}>
+              <div className={style.welcome}>
+                <h3>Hello {user?.username}</h3>
+                <h4>
+                  What’s new with you? Have a look around the SoC community
+                </h4>
+              </div>
+              <h3>User events</h3>
+              {userEvents &&
+                userEvents.map((item, index) => {
+                  let date = new Date(item.date).toDateString();
 
-                console.log(item);
-                return (
-                  <div className={style.card}>
-                    <Card
-                      key={uuidv4()}
-                      date={date}
-                      item={item}
-                      myEvents
-                      styling={styling}
-                      userId={user?.uid}
-                      fetchUserEvents={fetchUserEvents}
-                    />
-                  </div>
-                );
-              })}
-          </section>
+                  console.log(item);
+                  return (
+                    <div className={style.card}>
+                      <Card
+                        key={uuidv4()}
+                        date={date}
+                        item={item}
+                        myEvents
+                        styling={styling}
+                        userId={user?.uid}
+                        fetchUserEvents={fetchUserEvents}
+                      />
+                    </div>
+                  );
+                })}
+            </section>
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }
