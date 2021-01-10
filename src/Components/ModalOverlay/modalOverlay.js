@@ -1,4 +1,5 @@
 import style from "./modalOverlay.module.css";
+import cn from "classnames";
 
 export default function ModalOverlay({
   children,
@@ -18,8 +19,16 @@ export default function ModalOverlay({
           )}
           <div className={style.content}>{children}</div>
           <div className={style.actions}>
-            <button onClick={onClose}>Cancel</button>
-            <button onClick={onSave}>Save</button>
+            <div className={cn(style.cancelButtonDiv)}>
+              <button onClick={onClose} className="button-cancel">
+                Cancel
+              </button>
+            </div>
+            <div className={cn(style.confirmButtonDiv)}>
+              <button onClick={onSave} className="button">
+                Save
+              </button>
+            </div>
           </div>
         </div>
       </div>
