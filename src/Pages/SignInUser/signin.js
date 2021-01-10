@@ -13,6 +13,11 @@ import Loading from "../../Components/Loading/loading";
 
 //styling
 import style from "./signIn.module.css";
+import cn from "classnames";
+import SignInSVG from "./background";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faGoogle } from "@fortawesome/free-brands-svg-icons";
 
 export default function UserSignIn() {
   const [authUser, loading, error] = useAuthContext();
@@ -28,10 +33,19 @@ export default function UserSignIn() {
   return authUser ? (
     <Redirect to={"/"}></Redirect>
   ) : (
-    <div>
-      <h1>Sign up or Login</h1>
-
-      <button onClick={handleGoogle}>Continue with Google</button>
+    <div className={cn(style.row)}>
+      <SignInSVG />
+      <div className={cn(style.column)}>
+        <div className={cn(style.container)}>
+          <div className={cn(style.content)}>
+            <h1>Societly</h1>
+            <h2>Sign up or Login</h2>
+            <button onClick={handleGoogle} className={cn(style.buttonGoogle)}>
+              <FontAwesomeIcon icon={faGoogle} /> Continue with Google
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

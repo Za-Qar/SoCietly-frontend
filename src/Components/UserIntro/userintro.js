@@ -12,9 +12,12 @@ export default function UserIntro({ user }) {
         10 Second Intro...
       </label>
       <div name="intro" className={cn(style.container)}>
-        <UserImage width={"150px"} user={user} alt={`${name} profile`} />
-
-        <p>{introduction}</p>
+        <div className={cn(style.introImageContainer)}>
+          <UserImage width={"125px"} user={user} alt={`${name} profile`} />
+        </div>
+        <div className={cn(style.introContainer)}>
+          <p>{introduction}</p>
+        </div>
       </div>
     </div>
   );

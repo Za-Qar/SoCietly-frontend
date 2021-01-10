@@ -13,7 +13,7 @@ export default function UserLeftSide() {
   return (
     <section className={style.userSec}>
       <div className={style.column2}>
-        <UserImage user={user} />
+        <UserImage user={user} width={"100px"} />
         <UserInfo user={user} homepageEdit />
       </div>
     </section>

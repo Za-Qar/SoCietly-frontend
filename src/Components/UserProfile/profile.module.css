@@ -10,12 +10,12 @@
 }
 
 .left {
-  width: 25%;
+  width: 30%;
   /* background-color: lightpink; */
 }
 
 .right {
-  width: 75%;
+  width: 70%;
   /* background-color: lightgreen; */
 }
 /* Clear floats after the columns */
