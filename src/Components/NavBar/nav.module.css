@@ -62,3 +62,21 @@
 .navContainer {
   position: relative;
 }
+
+.logoDiv {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.logoText {
+  text-decoration: none;
+  padding-bottom: 1rem;
+  font-size: 1.25rem;
+  font-weight: bolder;
+}
+
+.logoText:link {
+  text-decoration: none;
+}
