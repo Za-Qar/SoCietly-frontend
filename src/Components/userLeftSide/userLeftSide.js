@@ -38,6 +38,7 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import InboxIcon from "@material-ui/icons/MoveToInbox";
 import MailIcon from "@material-ui/icons/Mail";
+import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
 
 const drawerWidth = 240;
 
@@ -61,6 +62,8 @@ const useStyles = makeStyles((theme) => ({
   },
   menuButton: {
     marginRight: theme.spacing(2),
+    // position: "absolute",
+    // top: "50%",
   },
   hide: {
     display: "none",
@@ -129,7 +132,7 @@ export default function UserLeftSide() {
             edge="start"
             className={clsx(classes.menuButton, open && classes.hide)}
           >
-            <MenuIcon />
+            <ArrowForwardIosIcon />
           </IconButton>
         </Toolbar>
       </AppBar>
