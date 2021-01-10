@@ -40,7 +40,7 @@ import InboxIcon from "@material-ui/icons/MoveToInbox";
 import MailIcon from "@material-ui/icons/Mail";
 import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
 
-const drawerWidth = 240;
+const drawerWidth = 300;
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -74,6 +74,7 @@ const useStyles = makeStyles((theme) => ({
   },
   drawerPaper: {
     width: drawerWidth,
+    border: "0.5px solid rgba(0, 0, 0, 0.5)",
   },
   drawerHeader: {
     display: "flex",
@@ -118,24 +119,30 @@ export default function UserLeftSide() {
   return (
     <div className={classes.root}>
       <CssBaseline />
-      <AppBar
+      {/* <AppBar
         position="fixed"
         className={clsx(classes.appBar, {
           [classes.appBarShift]: open,
         })}
-      >
-        <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleDrawerOpen}
-            edge="start"
-            className={clsx(classes.menuButton, open && classes.hide)}
-          >
-            <ArrowForwardIosIcon />
-          </IconButton>
-        </Toolbar>
-      </AppBar>
+      > */}
+      <div className={style.posContainer}>
+        <div className={style.pos}>
+          <Toolbar className={style.none}>
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              onClick={handleDrawerOpen}
+              edge="start"
+              className={clsx(classes.menuButton, open && classes.hide)}
+            >
+              <div className={style.arrowContainer}>
+                <ArrowForwardIosIcon className={style.red} />
+              </div>
+            </IconButton>
+          </Toolbar>
+        </div>
+      </div>
+      {/* </AppBar> */}
       <Drawer
         className={classes.drawer}
         variant="persistent"
@@ -154,7 +161,7 @@ export default function UserLeftSide() {
             )}
           </IconButton>
         </div>
-        <Divider />
+
         <List>
           <section className={style.userSec}>
             <UserImage user={user} />
@@ -162,16 +169,6 @@ export default function UserLeftSide() {
           </section>
         </List>
         <Divider />
-        <List>
-          {["All mail", "Trash", "Spam"].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
-        </List>
       </Drawer>
       <main
         className={clsx(classes.content, {
