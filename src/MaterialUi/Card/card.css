@@ -8,3 +8,11 @@
   max-height: 20rem;
   overflow: hidden;
 }
+
+.red {
+  color: red;
+}
+
+.yellow {
+  color: #105ea7;
+}

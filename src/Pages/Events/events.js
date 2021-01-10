@@ -10,7 +10,7 @@ function GetAllEvents() {
   const [allEvents, setAllEvents] = useState([]);
   const [attendingList, setAttendingList] = useState([]);
 
-  /*---------------Increment Counter backend----------------*/
+  /*---------------Add to Attend Patch----------------*/
   let addToAttend = (id, arr) => {
     console.log(id, arr);
     fetch(`https://falcon5ives.herokuapp.com/events/${id}`, {
