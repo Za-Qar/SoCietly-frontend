@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 
+// User Context
 import { useUserContext } from "../../Context/userContext";
 
-//components
+// Components
 import Event from "../../Components/Event/event.js";
 import CreateEvent from "../../Pages/CreateEvent/createEvent.js";
 import Card from "../../MaterialUi/Card/card.js";
@@ -91,9 +92,7 @@ export default function MyEvents() {
             <section className={style.columnTwo}>
               <div className={style.welcome}>
                 <h3>Hello {user?.username}</h3>
-                <h4>
-                  What’s new with you? Have a look around the SoC community
-                </h4>
+                <h4>Take a look at your events or create some</h4>
               </div>
               <h3>User events</h3>
               {userEvents &&

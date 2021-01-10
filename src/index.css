@@ -82,3 +82,39 @@ code {
 ::-webkit-scrollbar-thumb:hover {
   background: #1d6142;
 }
+
+/*---------Row Styling---------*/
+.row {
+  display: flex;
+}
+
+.column1 {
+  flex: 80%;
+  /* padding: 10px; */
+  margin: 0 3rem 0 3rem;
+}
+
+.column2 {
+  flex: 20%;
+  margin-top: 5rem;
+}
+
+.welcome h3 {
+  color: #31986a;
+}
+
+.welcome h4 {
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
+.columnTwo {
+  margin-top: 5rem;
+}
+
+.base {
+  background-color: white;
+  border-radius: 5px;
+  padding: 1rem;
+  border: 0.5px solid rgba(0, 0, 0, 0.5);
+}

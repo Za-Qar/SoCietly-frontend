@@ -3,6 +3,7 @@ import style from "./userLeftSide.module.css";
 // Components
 import UserImage from "../../Components/userImage/userImage.js";
 import UserInfo from "../../Components/UserInfo/userinfo.js";
+import NavBar from "../../Components/NavBar/nav.js";
 
 //Context
 import { useUserContext } from "../../Context/userContext";
