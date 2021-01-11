@@ -9,6 +9,7 @@ import UserJourney from "../UserJourney/journey";
 import { useUserContext } from "../../Context/userContext";
 import EditProfile from "../EditProfile/editProfile";
 import AddNewJourney from "../CreateJourney/addNewJourney";
+import UserEventsContainer from "../UserEventsContainer/userEventsContainer";
 
 //Style
 import style from "./profile.module.css";
@@ -46,6 +47,7 @@ export default function UserProfilePage() {
           <div className={cn(style.column, style.left)}>
             <UserInfo user={user} />
             <UserSkills user={user} />
+            <UserEventsContainer />
           </div>
           {/* ---column right--- */}
           <div className={cn(style.column, style.right)}>

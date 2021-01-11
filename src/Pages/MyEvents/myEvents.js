@@ -14,7 +14,7 @@ import UserLeftSide from "../../Components/userLeftSide/userLeftSide.js";
 //styling
 import style from "./myEvents.module.css";
 
-export default function MyEvents() {
+export default function MyEvents({ profile = false }) {
   // Importing user data
   const [user] = useUserContext();
 
@@ -63,7 +63,7 @@ export default function MyEvents() {
     <div>
       {user && (
         <div className={style.row}>
-          <UserLeftSide />
+          {!profile && <UserLeftSide />}
           {/*--------- Column 1---------*/}
           <div className={style.column1}>
             <section className={style.columnTwo}>
@@ -71,10 +71,21 @@ export default function MyEvents() {
                 <h3>Hello {user?.username}</h3>
                 <h4>Take a look at your events or create some</h4>
               </div>
-              <Link to="/createevent">
-                <button className="button">Create Event</button>
-              </Link>
-              {userEvents && <h3>User events</h3>}
+              <div>
+                <div className={style.eventButton}>
+                  <Link to="/createevent">
+                    <button className="button">Create Event</button>
+                  </Link>
+                </div>
+                <div className={style.eventButton}>
+                  {profile && (
+                    <Link to="/myevents">
+                      <button className="button">My Events</button>
+                    </Link>
+                  )}
+                </div>
+              </div>
+              {userEvents === [] && <h3>User events</h3>}
               {userEvents &&
                 userEvents.map((item, index) => {
                   let date = new Date(item.date).toDateString();
