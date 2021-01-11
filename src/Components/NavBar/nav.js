@@ -45,84 +45,82 @@ export default function NavBar() {
     hide === "hide" ? setHide("hide") : setHide("hide");
   }
 
-  return (
-    user && (
-      <div className={style.navDiv}>
-        <nav className={style.nav}>
-          <div className="container">
-            {/* Search Bar */}
-            <div className={style.navContainer}>
-              <ul>
-                <li>
-                  <Link to="/" style={{ textDecoration: "none" }}>
-                    <div className={style.logoDiv}>
-                      <img
-                        className={style.img}
-                        src={logo}
-                        alt="School of Code Logo"
-                        height="100"
-                        width="100"
-                      />
-                      <h3 className={style.logoText}>Societly</h3>
-                    </div>
-                  </Link>
-                </li>
+  return user ? (
+    <div className={style.navDiv}>
+      <nav className={style.nav}>
+        <div className="container">
+          {/* Search Bar */}
+          <div className={style.navContainer}>
+            <ul>
+              <li>
+                <Link to="/" style={{ textDecoration: "none" }}>
+                  <div className={style.logoDiv}>
+                    <img
+                      className={style.img}
+                      src={logo}
+                      alt="School of Code Logo"
+                      height="100"
+                      width="100"
+                    />
+                    <h3 className={style.logoText}>Societly</h3>
+                  </div>
+                </Link>
+              </li>
 
-                {
-                  <div className="menuContainer">
-                    {user && (
-                      <Link to="/">
-                        <li>
-                          <span onClick={signOut}>Logout</span>
-                        </li>
-                      </Link>
-                    )}
-                    <button
-                      class={`hamburger hamburger--spring ${burger} cog`}
-                      type="button"
-                      onClick={changeBurger}
-                    >
-                      <span class="hamburger-box ">
-                        <span class="hamburger-inner"></span>
-                      </span>
-                    </button>
+              {
+                <div className="menuContainer">
+                  {user && (
+                    <Link to="/">
+                      <li>
+                        <span onClick={signOut}>Logout</span>
+                      </li>
+                    </Link>
+                  )}
+                  <button
+                    class={`hamburger hamburger--spring ${burger} cog`}
+                    type="button"
+                    onClick={changeBurger}
+                  >
+                    <span class="hamburger-box ">
+                      <span class="hamburger-inner"></span>
+                    </span>
+                  </button>
 
-                    {/* <li onClick={changeHide}>
+                  {/* <li onClick={changeHide}>
                   <img
                     src="https://www.flaticon.com/svg/static/icons/svg/3601/3601082.svg"
                     className={style.cog}
                   />
                 </li> */}
-                  </div>
-                }
-              </ul>
-            </div>
+                </div>
+              }
+            </ul>
           </div>
-        </nav>
-        <div className={`burgerContent ${hide}`}>
-          <Link to="/">
-            <p>Home</p>
-          </Link>
-          <Link to="/events">
-            <p>Events</p>
-          </Link>
-          {user && (
-            <Link to={`/bootcamper/${user.uid ? user.uid : user.id}`}>
-              <p>Profile</p>
-            </Link>
-          )}
-          <Link to="/alumni">
-            <p>Alumni</p>
-          </Link>
-          <Link to="/resources">
-            <p>Resources</p>
-          </Link>
-          <Link to="/contact">
-            <p>Contact</p>
-          </Link>
         </div>
-        <div className={`burgerContent ${hideCog}`}></div>
+      </nav>
+      <div className={`burgerContent ${hide}`}>
+        <Link to="/">
+          <p>Home</p>
+        </Link>
+        <Link to="/events">
+          <p>Events</p>
+        </Link>
+        {user && (
+          <Link to={`/bootcamper/${user.uid ? user.uid : user.id}`}>
+            <p>Profile</p>
+          </Link>
+        )}
+        <Link to="/alumni">
+          <p>Alumni</p>
+        </Link>
+        <Link to="/resources">
+          <p>Resources</p>
+        </Link>
+        <Link to="/contact">
+          <p>Contact</p>
+        </Link>
       </div>
-    )
-  );
+      <div className={`burgerContent ${hideCog}`}></div>
+    </div>
+  ) : null;
 }
