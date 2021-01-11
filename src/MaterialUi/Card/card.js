@@ -175,7 +175,7 @@ export default function EventCard({
     setLike(like + 1);
     redLike === "" ? setRedLike("red") : setRedLike("red");
     // backEndLike(like, id);
-    // setUserEvents(null);
+    setUserEvents(null);
   }
 
   function attedingColour() {

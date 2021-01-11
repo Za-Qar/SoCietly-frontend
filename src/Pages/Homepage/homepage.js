@@ -154,7 +154,6 @@ export default function Homepage() {
                       let displayDate = eventTrans.toDateString();
 
                       if (eventDate >= now && eventDate <= inOneWeek) {
-                        console.log(item);
                         return (
                           <div className={style.eventCard}>
                             <Card

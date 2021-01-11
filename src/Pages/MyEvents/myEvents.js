@@ -19,50 +19,24 @@ export default function MyEvents() {
   const [user] = useUserContext();
 
   // fetchUserEvents function result
-  const [userEvents, setUserEvents] = useState(false);
+  const [userEvents, setUserEvents] = useState(null);
 
-  console.log(userEvents);
+  console.log("this is the value of userEvents: ", userEvents);
 
   async function fetchUserEvents() {
-    let res = await fetch(
-      `https://falcon5ives.herokuapp.com/userEvents/${user?.uid}`
-    );
-    let userEvents = await res.json();
-    setUserEvents(userEvents.payload);
-    console.log(userEvents.payload);
+    if (user) {
+      let res = await fetch(`http://localhost:3000/userevents/${user?.uid}`);
+      let userEvents = await res.json();
+      setUserEvents(userEvents.payload);
+      console.log(userEvents.payload);
+    }
   }
 
   useEffect(() => {
-    fetchUserEvents();
+    if (userEvents === null) {
+      fetchUserEvents();
+    }
   }, [user, userEvents]);
-
-  //   let patchEvent = (msg) => {
-  //     console.log("User Input recieved", msg);
-  //     fetch(
-  //       `https://falcon5ives.herokuapp.com/userevents/${userEvents.id}/${user?.uid}`,
-  //       {
-  //         method: "PATCH",
-  //         body: JSON.stringify({
-  //           eventName: msg.eventName,
-  //           eventType: msg.eventTypes,
-  //           uid: user.uid,
-  //           date: msg.date,
-  //           time: msg.time,
-  //           description: msg.description,
-  //           image: msg.image,
-  //           // location: marker,
-  //           enableVolunteers: msg.eventVolunteers,
-  //           attendingList: [],
-  //           likes: 0,
-  //           volunteerList: [],
-  //         }),
-  //         headers: { "Content-Type": "application/json" },
-  //       }
-  //     )
-  //       .then((res) => res.json())
-  //       .then((data) => console.log("this is the user data: ", data))
-  //       .catch((error) => console.log("user creation error error: ", error));
-  //   };
 
   const styling = {
     eventDiv: "myEventDiv",
