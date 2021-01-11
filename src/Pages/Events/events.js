@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 
 // Components
@@ -68,8 +69,12 @@ function GetAllEvents() {
                   <h4>Here are the current planned events</h4>
                 </div>
                 <div className={style.buttons}>
-                  <button className="button">Create Event</button>
-                  <button className="button">My Events</button>
+                  <Link to="/createevent">
+                    <button className="button">Create Event</button>
+                  </Link>
+                  <Link to="/myevents">
+                    <button className="button">My Events</button>
+                  </Link>
                 </div>
 
                 <div className="container"></div>
