@@ -24,3 +24,9 @@
   background-color: #1d6142;
   cursor: pointer;
 }
+
+.confirm {
+  background-color: #31986a;
+  width: 100%;
+  height: 5rem;
+}

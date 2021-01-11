@@ -46,6 +46,7 @@ const drawerWidth = 300;
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
+    // marginTop: "5rem",
   },
   appBar: {
     transition: theme.transitions.create(["margin", "width"], {
@@ -118,7 +119,6 @@ export default function UserLeftSide() {
   };
 
   return (
-
     <div className={classes.root}>
       <CssBaseline />
       {/* <AppBar
@@ -143,7 +143,6 @@ export default function UserLeftSide() {
             </IconButton>
           </Toolbar>
         </div>
-
       </div>
       {/* </AppBar> */}
       <Drawer

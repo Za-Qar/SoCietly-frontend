@@ -80,6 +80,15 @@ code {
   background-color: white;
 }
 
+.contentContainer {
+  width: 100%;
+  margin: 3rem auto 3rem auto;
+  padding: 2rem;
+  border: 0.5px solid rgba(0, 0, 0, 0.5);
+  border-radius: 5px;
+  background-color: white;
+}
+
 .maxWidth {
   width: 100%;
 }
