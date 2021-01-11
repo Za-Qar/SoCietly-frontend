@@ -24,6 +24,7 @@ import HowToRegIcon from "@material-ui/icons/HowToReg";
 // Comp
 import Maps from "../../Components/Maps/maps.js";
 import CreateEvent from "../../Pages/CreateEvent/createEvent.js";
+import UserImage from "../../Components/userImage/userImage.js";
 
 // Cloudinary
 import { Image } from "cloudinary-react";
@@ -36,6 +37,9 @@ import { useUserContext } from "../../Context/userContext";
 
 // Local svg
 import attendingIcon from "../../Images/checking-attendance.svg";
+
+// React Router Dom
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -76,7 +80,6 @@ export default function EventCard({
     enablevolunteers,
     eventname,
     eventtype,
-    id,
     image,
     likes,
     location,
@@ -84,7 +87,20 @@ export default function EventCard({
     uid,
     volunteerlist,
     eventid,
+
+    name,
+    surname,
+    profileimage,
+    id,
+    cohort,
   } = item;
+
+  const eventUser = {
+    profileimage: profileimage,
+    name: name,
+    cohort: cohort,
+    id: id,
+  };
 
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
@@ -176,8 +192,8 @@ export default function EventCard({
     <Card className={classes.root}>
       <CardHeader
         avatar={
-          <Avatar aria-label="recipe" className={classes.avatar}>
-            R
+          <Avatar aria-label="recipe">
+            <UserImage user={eventUser} width={"100%"} />
           </Avatar>
         }
         // action={
@@ -185,9 +201,19 @@ export default function EventCard({
         //     <MoreVertIcon />
         //   </IconButton>
         // }
-        title={eventname}
-        subheader={date}
+        title={
+          <Link to={`/bootcamper/${id}`}>
+            {name} {surname}
+          </Link>
+        }
+        // subheader={date}
       />
+      <div className="cardContainer">
+        <Link to={`/event/${eventid}`}>{eventname}</Link>
+        <br />
+        {date}
+      </div>
+
       <div className="cardContainer">
         <Image
           key={key}
