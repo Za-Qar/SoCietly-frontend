@@ -38,6 +38,7 @@ import MyEvents from "../../Pages/MyEvents/myEvents.js";
 import { user } from "../../Components/userData";
 import NavBar from "../../Components/NavBar/nav";
 import CloudinaryImage from "../../Components/CloudinaryImage/cloudinaryImage.js";
+import EventPage from "../../Pages/EvenPage/EventPage.js";
 
 //Material Ui
 import Tags from "../../MaterialUi/tags/tags.js";
@@ -77,7 +78,12 @@ export default function Index() {
         <Route path={"/logo"} exact>
           <SiteLogo />
         </Route>
-        <AuthGuard component={Event} path={"/event"} props={user} exact />
+        <AuthGuard
+          component={EventPage}
+          path={"/event/:id"}
+          props={user}
+          exact
+        />
 
         <AuthGuard component={Contact} path={"/contact"} exact />
 
