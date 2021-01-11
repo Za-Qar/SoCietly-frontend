@@ -303,28 +303,30 @@ function CreateEvent({
     );
   } else if (complete) {
     return (
-      <div className="container marginTop">
+      <div className="container marginTop center">
         <div className="signupTitle">
           <div className="signupTitleAligner">
             <p>Event Create Successfully</p>
-
-            <div class="success-checkmark">
-              <div class="check-icon">
-                <span class="icon-line line-tip"></span>
-                <span class="icon-line line-long"></span>
-                <div class="icon-circle"></div>
-                <div class="icon-fix"></div>
-              </div>
-            </div>
           </div>
         </div>
-        <p>Completed confirmation design comes here</p>
-        <Link to="/">
-          <button className="button">Return to Home</button>
-        </Link>
-        <Link to="/myevents">
-          <button className="button">My Events</button>
-        </Link>
+
+        <div class="success-checkmark">
+          <div class="check-icon">
+            <span class="icon-line line-tip"></span>
+            <span class="icon-line line-long"></span>
+            <div class="icon-circle"></div>
+            <div class="icon-fix"></div>
+          </div>
+        </div>
+
+        <div>
+          <Link to="/">
+            <button className="button marginRight">Return to Home</button>
+          </Link>
+          <Link to="/myevents">
+            <button className="button marginLeft">My Events</button>
+          </Link>
+        </div>
       </div>
     );
   }

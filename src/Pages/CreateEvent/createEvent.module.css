@@ -38,11 +38,18 @@
   height: 100%;
   position: relative;
   margin-bottom: 2rem;
+  margin-top: 5rem;
 }
 
 .titleAligner {
+  background-color: #31986a;
   position: absolute;
   top: 50%;
   width: 100%;
   transform: translateY(-50%);
+}
+
+.titleAligner p {
+  color: white;
+  font-weight: 800;
 }
