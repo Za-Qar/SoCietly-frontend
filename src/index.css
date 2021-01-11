@@ -149,3 +149,7 @@ code {
   padding: 1rem;
   border: 0.5px solid rgba(0, 0, 0, 0.5);
 }
+
+.marginTop {
+  margin-top: 5rem;
+}

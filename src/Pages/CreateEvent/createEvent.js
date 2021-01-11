@@ -9,6 +9,7 @@ import UploadImage from "../../Components/Upload/upload.js";
 
 //styling
 import style from "./createEvent.module.css";
+import "./createEvent.css";
 
 // userContext
 import { useUserContext } from "../../Context/userContext";
@@ -302,7 +303,7 @@ function CreateEvent({
     );
   } else if (complete) {
     return (
-      <div className="container">
+      <div className="container marginTop">
         <div className="signupTitle">
           <div className="signupTitleAligner">
             <p>Event Create Successfully</p>
@@ -330,8 +331,3 @@ function CreateEvent({
 }
 
 export default CreateEvent;
-
-// onClick={(e) => {
-//     e.preventDefault();
-//     //take the e.preventDefault(); away when it comes time for release
-//   }}

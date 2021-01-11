@@ -30,3 +30,19 @@
   width: 100%;
   height: 5rem;
 }
+
+.title {
+  background-color: #31986a;
+  width: 100%;
+  text-align: center;
+  height: 100%;
+  position: relative;
+  margin-bottom: 2rem;
+}
+
+.titleAligner {
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  transform: translateY(-50%);
+}
