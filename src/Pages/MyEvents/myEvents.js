@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 
+// User Context
 import { useUserContext } from "../../Context/userContext";
 
-//components
+// Components
 import Event from "../../Components/Event/event.js";
 import CreateEvent from "../../Pages/CreateEvent/createEvent.js";
+import Card from "../../MaterialUi/Card/card.js";
+import UserLeftSide from "../../Components/userLeftSide/userLeftSide.js";
 
 //styling
 import style from "./myEvents.module.css";
@@ -28,7 +31,7 @@ export default function MyEvents() {
 
   useEffect(() => {
     fetchUserEvents();
-  }, [user]);
+  }, [user, userEvents]);
 
   //   let patchEvent = (msg) => {
   //     console.log("User Input recieved", msg);
@@ -80,28 +83,42 @@ export default function MyEvents() {
   }
 
   return (
-    <div className="container">
-      <button onClick={logging}>logging</button>
-      <section>
-        <h3>User events</h3>
-        {userEvents &&
-          userEvents.map((item, index) => {
-            let date = new Date(item.date).toDateString();
+    <div>
+      {user && (
+        <div className={style.row}>
+          <UserLeftSide />
+          {/*--------- Column 1---------*/}
+          <div className={style.column1}>
+            <section className={style.columnTwo}>
+              <div className={style.welcome}>
+                <h3>Hello {user?.username}</h3>
+                <h4>Take a look at your events or create some</h4>
+              </div>
+              <h3>User events</h3>
+              {userEvents &&
+                userEvents.map((item, index) => {
+                  let date = new Date(item.date).toDateString();
 
-            console.log(item);
-            return (
-              <Event
-                key={uuidv4()}
-                date={date}
-                item={item}
-                myEvents
-                styling={styling}
-                userId={user?.uid}
-                fetchUserEvents={fetchUserEvents}
-              />
-            );
-          })}
-      </section>
+                  console.log(item);
+                  return (
+                    <div className={style.card}>
+                      <Card
+                        key={uuidv4()}
+                        date={date}
+                        item={item}
+                        myEvents
+                        styling={styling}
+                        userId={user?.uid}
+                        fetchUserEvents={fetchUserEvents}
+                        setUserEvents={setUserEvents}
+                      />
+                    </div>
+                  );
+                })}
+            </section>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

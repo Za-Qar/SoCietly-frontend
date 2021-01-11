@@ -1,3 +1,26 @@
 .maxWidth {
   width: 100%;
 }
+
+.closeButtonContainer {
+  width: 100%;
+  text-align: right;
+  margin-bottom: 2rem;
+}
+
+.closeButton {
+  background-color: #31986a;
+  color: white;
+  border-radius: 50px;
+  border: none;
+
+  padding: 1rem;
+  height: 1rem;
+  width: 1rem;
+  outline: none;
+}
+
+.closeButton:hover {
+  background-color: #1d6142;
+  cursor: pointer;
+}

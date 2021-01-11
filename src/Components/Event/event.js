@@ -41,6 +41,7 @@ function Event({
     time,
     uid,
     volunteerlist,
+    eventid,
   } = item;
 
   /*--------Classes--------*/
@@ -59,6 +60,8 @@ function Event({
     editButClass,
     delButClass,
   } = styling;
+
+  console.log(eventid);
 
   /*--------User context--------*/
   const [user] = useUserContext();
@@ -137,16 +140,44 @@ function Event({
   //if like was added by click another click should minus click
   //button should toggle between clicked and unclicked
 
-  let deleteEvent = (id) => {
-    console.log("delete", id);
+  // Delete Event
+  let deleteEvent = (eventId) => {
+    console.log("delete", eventId);
 
-    // fetch(`https://falcon5ives.herokuapp.com/events/${id}`, {
-    //   method: "delete",
-    // })
-    //   .then((res) => res.json())
-    //   .then((data) => console.log(data))
-    //   .catch((error) => console.log(error));
+    fetch(`http://localhost:3000/events/${eventId}`, {
+      method: "delete",
+    })
+      .then((res) => res.json())
+      .then((data) => console.log(data))
+      .catch((error) => console.log(error));
+    fetchUserEvents();
   };
+
+  // // Patch Event
+  // let patchEvent = (eventId) => {
+  //   console.log("User Input recieved", msg);
+  //   fetch(`https://falcon5ives.herokuapp.com/${eventId}`, {
+  //     method: "PATCH",
+  //     body: JSON.stringify({
+  //       eventName: msg.eventName,
+  //       eventType: msg.eventTypes,
+  //       uid: user.uid,
+  //       date: msg.date,
+  //       time: msg.time,
+  //       description: msg.description,
+  //       image: msg.image,
+  //       location: marker,
+  //       enableVolunteers: msg.eventVolunteers,
+  //       attendingList: [],
+  //       likes: 0,
+  //       volunteerList: [],
+  //     }),
+  //     headers: { "Content-Type": "application/json" },
+  //   })
+  //     .then((res) => res.json())
+  //     .then((data) => console.log("this is the user data: ", data))
+  //     .catch((error) => console.log("user creation error error: ", error));
+  // };
 
   function logging() {
     console.log(attendinglist);
@@ -208,7 +239,7 @@ function Event({
         </p>
 
         {myEvents && (
-          <button className={delButClass} onClick={() => deleteEvent(id)}>
+          <button className={delButClass} onClick={() => deleteEvent(eventid)}>
             Delete Event
           </button>
         )}
@@ -240,7 +271,7 @@ function Event({
             uid={uid}
             volunteerlist={volunteerlist}
             eventsEdit
-            userEventsId={id}
+            eventId={eventid}
             userId={user?.uid}
             hide={hide}
             setHide={setHide}
