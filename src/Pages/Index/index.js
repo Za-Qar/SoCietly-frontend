@@ -19,6 +19,9 @@ import Resources from "../Resources/resources.js";
 
 import Landing from "../Landing/landing";
 
+import Loading from "../../Components/Loading/loading";
+import SiteLogo from "../../Components/Logo/logo";
+
 import Signup from "../../Components/Signup/signup";
 
 import Event from "../../Components/Event/event.js";
@@ -67,6 +70,13 @@ export default function Index() {
           <Landing />
         </Route>
 
+        <Route path={"/loading"} exact>
+          <Loading />
+        </Route>
+
+        <Route path={"/logo"} exact>
+          <SiteLogo />
+        </Route>
         <AuthGuard component={Event} path={"/event"} props={user} exact />
 
         <AuthGuard component={Contact} path={"/contact"} exact />

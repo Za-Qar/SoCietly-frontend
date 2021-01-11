@@ -168,38 +168,34 @@ export default function CreateJourney({ signup, setSignup }) {
           <Grid container spacing={3}>
             {/*----------Employer----------*/}
             <Grid item xs={12} sm={6}>
-              <FormControl
-                variant="outlined"
-                fullWidth
-                defaultValue={addJourney ? null : "School of Code"}
-              >
+              <FormControl variant="outlined" fullWidth>
                 <Controller
                   name="employer"
                   as={<TextField id="employer" label="Employer" required />}
                   control={control}
                   rules={{ required: "Required" }}
+                  defaultValue={addJourney ? null : "School of Code"}
                 />
               </FormControl>
             </Grid>
 
             {/*----------Job Title----------*/}
             <Grid item xs={12} sm={6}>
-              <FormControl
-                variant="outlined"
-                fullWidth
-                defaultValue={addJourney ? null : "Student Developer"}
-              >
+              <FormControl variant="outlined" fullWidth>
                 <Controller
                   name="jobTitle"
                   as={<TextField id="jobTitle" label="Job Title" required />}
                   control={control}
                   rules={{ required: "Required" }}
+                  defaultValue={addJourney ? null : "Student Developer"}
                 />
               </FormControl>
             </Grid>
 
             <Grid item xs={12} sm={6}>
-              <label for="startDate">Start Date</label>
+              <label className="formLabel" for="startDate">
+                Start Date
+              </label>
               <br />
               <br />
               <input
@@ -207,32 +203,41 @@ export default function CreateJourney({ signup, setSignup }) {
                 name="startDate"
                 ref={register}
                 required
-                className="maxWidthJourney"
+                className="maxWidthJourney dateInput"
               />
             </Grid>
 
             <Grid item xs={12} sm={6}>
-              <label for="endDate">End Date (if applicable)</label>
+              <label className="formLabel" for="endDate">
+                End Date (if applicable)
+              </label>
               <br />
               <br />
               <input
                 type="date"
                 name="endDate"
                 ref={register}
-                className="maxWidthJourney"
+                className="maxWidthJourney dateInput"
               />
             </Grid>
 
-            <Grid item xs={12}>
-              <label for="description">Description</label>
-              <br />
-              <br />
-              <textarea
-                name="description"
-                ref={register}
-                required
-                className="maxWidthJourney"
-              ></textarea>
+            <Grid item xs={24} sm={12}>
+              <FormControl variant="outlined" fullWidth>
+                <Controller
+                  name="description"
+                  as={
+                    <TextField
+                      id="description"
+                      variant="outlined"
+                      label="Description"
+                      style={{ margin: 8 }}
+                      multiline
+                      rows={8}
+                    />
+                  }
+                  control={control}
+                />
+              </FormControl>
             </Grid>
           </Grid>
         </React.Fragment>

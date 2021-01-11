@@ -34,3 +34,17 @@
 .journeyTitle h2 {
   color: white;
 }
+
+.dateInput {
+  width: 100%;
+  padding: 12px 20px;
+  box-sizing: border-box;
+  border: 1px solid lightgray;
+  border-radius: 5px;
+}
+
+.formLabel {
+  color: rgb(97, 96, 96);
+  font-size: 0.8rem;
+  margin-left: 12px;
+}

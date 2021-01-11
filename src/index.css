@@ -29,15 +29,37 @@ code {
 .button {
   background-color: #31986a;
   color: white;
-  border-radius: 50px;
+  font-size: 14px;
+  font-weight: bold;
+  border-radius: 5px;
   border: none;
   padding: 0.5rem 1.5rem 0.5rem 1.5rem;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   outline: none;
 }
 
 .button:hover {
   background-color: #1d6142;
   cursor: pointer;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.button-cancel {
+  background-color: #f44336;
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+  border-radius: 5px;
+  border: none;
+  padding: 0.5rem 1.5rem 0.5rem 1.5rem;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  outline: none;
+}
+
+.button-cancel:hover {
+  background-color: #c7372c;
+  cursor: pointer;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .formContainer {

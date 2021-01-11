@@ -16,10 +16,10 @@
 
 .modal {
   max-width: 700px;
-  position: relative;
+  position: absolute;
+  top: 0.25rem;
   width: 100%;
   background-color: white;
-  padding: 20px;
   border-radius: 5px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   animation-name: animatetop;
@@ -29,18 +29,28 @@
 .actions {
   display: flex;
   justify-content: flex-end;
+  padding-right: 3rem;
+  margin-bottom: 1rem;
 }
 
 .modalHeader {
   padding: 10px 18px;
   width: 100%;
-  border-radius: 5px;
   background-color: #31986a;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
   color: white;
 }
 
 .content {
-  margin-bottom: 20px;
+  margin: 2rem 2rem 0rem 2rem;
+}
+
+.cancelButtonDiv {
+  margin-right: 0.12rem;
+}
+.confirmButtonDiv {
+  margin-left: 0.12rem;
 }
 
 @keyframes animatetop {

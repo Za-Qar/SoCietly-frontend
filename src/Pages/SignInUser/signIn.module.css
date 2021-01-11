@@ -1,0 +1,51 @@
+.row {
+  display: flex;
+  margin: auto;
+}
+
+.column {
+  flex: 50%;
+  position: relative;
+  padding: 10px;
+
+  height: 100vh;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.container {
+  display: flex;
+  position: absolute;
+  justify-content: center;
+  /* align-items: center; */
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+
+.buttonGoogle {
+  background-color: #31986a;
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+  border-radius: 5px;
+  border: none;
+  padding: 1rem 1.5rem 1rem 1.5rem;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  outline: none;
+}
+
+.content {
+  padding: 5rem;
+}
+
+.buttonGoogle:hover {
+  background-color: #1d6142;
+  cursor: pointer;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
