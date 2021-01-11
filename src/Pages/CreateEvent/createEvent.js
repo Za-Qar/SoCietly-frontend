@@ -1,5 +1,6 @@
 // React
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { useForm, Controller } from "react-hook-form";
 
 // Components
@@ -301,8 +302,14 @@ function CreateEvent({
     );
   } else if (complete) {
     return (
-      <div>
+      <div className="container">
         <p>Completed confirmation design comes here</p>
+        <Link to="/">
+          <button className="button">Return to Home</button>
+        </Link>
+        <Link to="/myevents">
+          <button className="button">My Events</button>
+        </Link>
       </div>
     );
   }

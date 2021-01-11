@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 
 // User Context
@@ -18,7 +19,9 @@ export default function MyEvents() {
   const [user] = useUserContext();
 
   // fetchUserEvents function result
-  const [userEvents, setUserEvents] = useState(null);
+  const [userEvents, setUserEvents] = useState(false);
+
+  console.log(userEvents);
 
   async function fetchUserEvents() {
     let res = await fetch(
@@ -94,7 +97,10 @@ export default function MyEvents() {
                 <h3>Hello {user?.username}</h3>
                 <h4>Take a look at your events or create some</h4>
               </div>
-              <h3>User events</h3>
+              <Link to="/createevent">
+                <button className="button">Create Event</button>
+              </Link>
+              {userEvents && <h3>User events</h3>}
               {userEvents &&
                 userEvents.map((item, index) => {
                   let date = new Date(item.date).toDateString();

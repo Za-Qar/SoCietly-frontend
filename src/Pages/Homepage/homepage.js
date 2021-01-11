@@ -33,7 +33,7 @@ export default function Homepage() {
 
   useEffect(() => {
     get();
-  }, []);
+  }, [allEvents]);
 
   function makeDate() {
     let currentdate = new Date();
@@ -163,6 +163,7 @@ export default function Homepage() {
                               item={item}
                               styling={styling}
                               homepageTrue
+                              setUserEvents={setAllEvents}
                             />
                           </div>
                         );
