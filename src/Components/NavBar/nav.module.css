@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Reem+Kufi&display=swap");
+
 .img {
   float: left;
   height: 50px;
@@ -73,8 +75,9 @@
 .logoText {
   text-decoration: none;
   padding-bottom: 1rem;
-  font-size: 1.25rem;
+  font-size: 1.5rem;
   font-weight: bolder;
+  font-family: "Reem Kufi", sans-serif;
 }
 
 .logoText:link {

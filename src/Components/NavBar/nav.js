@@ -3,6 +3,7 @@ import React, { useState } from "react";
 //images
 import soc from "../../Images/soc.png";
 import logo from "../../Images/logo.png";
+import socLogo from "../../Images/SoCietly_logo (1).svg";
 
 //components
 import { logout } from "../../Components/Firebase/auth";
@@ -16,7 +17,13 @@ import "./burgerStyle.css";
 import "./hamburger/dist/hamburgers.css";
 
 //router
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  NavLink,
+} from "react-router-dom";
 
 import SiteLogo from "../Logo/logo";
 
@@ -53,18 +60,22 @@ export default function NavBar() {
           <div className={style.navContainer}>
             <ul>
               <li>
-                <Link to="/" style={{ textDecoration: "none" }}>
+                <NavLink
+                  to="/"
+                  style={{ textDecoration: "none" }}
+                  activeStyle={{ textDecoration: "none", color: "black" }}
+                  visitedStyle={{ textDecoration: "none" }}
+                >
                   <div className={style.logoDiv}>
                     <img
                       className={style.img}
-                      src={logo}
+                      src={socLogo}
                       alt="School of Code Logo"
                       height="100"
                       width="100"
                     />
-                    <h3 className={style.logoText}>Societly</h3>
                   </div>
-                </Link>
+                </NavLink>
               </li>
 
               {
