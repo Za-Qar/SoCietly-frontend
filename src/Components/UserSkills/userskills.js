@@ -13,9 +13,13 @@ export default function UserSkills({ user }) {
           Skills
         </label>
         <div name="skills" className={cn(style.container)}>
-          <ul>
+          <ul className={cn(style.skillContainer)}>
             {skills.map((item) => {
-              return <Tags item={item} showDelete />;
+              return (
+                <div className={cn(style.skillTag)}>
+                  <Tags item={item} showDelete />
+                </div>
+              );
             })}
           </ul>
         </div>
