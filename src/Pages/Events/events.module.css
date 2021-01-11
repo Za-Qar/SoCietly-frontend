@@ -30,3 +30,13 @@
 .columnTwo {
   margin-top: 5rem;
 }
+
+.buttons {
+  width: 100%;
+  text-align: right;
+  margin-bottom: 1rem;
+}
+
+.buttons button {
+  margin-left: 1rem;
+}

@@ -67,10 +67,10 @@ function GetAllEvents() {
                   <h3>Hello {user?.username}</h3>
                   <h4>Here are the current planned events</h4>
                 </div>
-                <button onClick={() => console.log(allEvents)}>log</button>
-                <p>Get All Events</p>
-                <button className="button">Create Event</button>
-                <button className="button">My Events</button>
+                <div className={style.buttons}>
+                  <button className="button">Create Event</button>
+                  <button className="button">My Events</button>
+                </div>
 
                 <div className="container"></div>
 

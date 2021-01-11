@@ -31,7 +31,7 @@ export default function MyEvents() {
 
   useEffect(() => {
     fetchUserEvents();
-  }, [user]);
+  }, [user, userEvents]);
 
   //   let patchEvent = (msg) => {
   //     console.log("User Input recieved", msg);
@@ -110,6 +110,7 @@ export default function MyEvents() {
                         styling={styling}
                         userId={user?.uid}
                         fetchUserEvents={fetchUserEvents}
+                        setUserEvents={setUserEvents}
                       />
                     </div>
                   );

@@ -67,6 +67,7 @@ export default function EventCard({
   item,
   myEvents,
   fetchUserEvents,
+  setUserEvents,
 }) {
   /*--------Props--------*/
   const {
@@ -132,6 +133,7 @@ export default function EventCard({
     console.log(attending);
     setAttedingGet(attending);
     addToAttend(eventid, attending);
+    setUserEvents(null);
   }
 
   const handleExpandClick = () => {
@@ -147,8 +149,8 @@ export default function EventCard({
     })
       .then((res) => res.json())
       .then((data) => console.log(data))
+      .then(() => setUserEvents(null))
       .catch((error) => console.log(error));
-    fetchUserEvents();
   };
 
   // Add likes
@@ -157,6 +159,7 @@ export default function EventCard({
     setLike(like + 1);
     redLike === "" ? setRedLike("red") : setRedLike("red");
     // backEndLike(like, id);
+    // setUserEvents(null);
   }
 
   function attedingColour() {
