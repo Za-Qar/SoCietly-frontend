@@ -91,6 +91,7 @@ export default function NavBar() {
                     class={`hamburger hamburger--spring ${burger} cog`}
                     type="button"
                     onClick={changeBurger}
+                    style={{ outline: "none" }}
                   >
                     <span class="hamburger-box ">
                       <span class="hamburger-inner"></span>
