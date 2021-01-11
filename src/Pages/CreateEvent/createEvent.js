@@ -27,7 +27,7 @@ import InputLabel from "@material-ui/core/InputLabel";
 function CreateEvent({
   eventsEdit,
 
-  userEventsId,
+  eventId,
 
   hide,
   setHide,
@@ -76,8 +76,6 @@ function CreateEvent({
   const [complete, setComplete] = useState(false);
   const [imageSelected, setImageSelected] = useState(null);
 
-  console.log("this is the userEventsId: ", userEventsId);
-
   //For Maps
   const [marker, setMarker] = useState(null);
 
@@ -97,6 +95,7 @@ function CreateEvent({
 
   let createEvent = async (msg) => {
     console.log("Event data received", msg, marker);
+    console.log("this is the eventId: ", eventId);
 
     if (imageSelected === null) {
       alert(
@@ -107,7 +106,7 @@ function CreateEvent({
 
     await fetch(
       eventsEdit
-        ? `https://falcon5ives.herokuapp.com/events/${userEventsId}`
+        ? `http://localhost:3000/events/${eventId}`
         : `http://localhost:3000/events/`,
       {
         method: eventsEdit ? "PATCH" : "POST",
@@ -143,6 +142,18 @@ function CreateEvent({
   if (!complete) {
     return (
       <div className="createContainer">
+        <div className={style.closeButtonContainer}>
+          {eventsEdit && (
+            <button
+              onClick={() =>
+                hide === "show" ? setHide("hide") : setHide("show")
+              }
+              className={style.closeButton}
+            >
+              x
+            </button>
+          )}
+        </div>
         <div className="signupTitle">
           <div className="signupTitleAligner">
             <p>Create Event</p>
@@ -151,16 +162,6 @@ function CreateEvent({
         <form onSubmit={handleSubmit(createEvent)}>
           <React.Fragment>
             <Grid container spacing={3}>
-              {eventsEdit && (
-                <button
-                  onClick={() =>
-                    hide === "show" ? setHide("hide") : setHide("show")
-                  }
-                >
-                  x
-                </button>
-              )}
-
               {/*----------Event Name----------*/}
               <Grid item xs={12}>
                 <FormControl variant="outlined" fullWidth>
