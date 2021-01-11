@@ -157,7 +157,7 @@ function CreateEvent({
         </div>
         <div className="signupTitle">
           <div className="signupTitleAligner">
-            <p>Create Event</p>
+            <h3>Create Event</h3>
           </div>
         </div>
         <form onSubmit={handleSubmit(createEvent)}>
