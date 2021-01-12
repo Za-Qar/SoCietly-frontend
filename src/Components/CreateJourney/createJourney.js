@@ -148,7 +148,7 @@ export default function CreateJourney({ signup, setSignup }) {
         <div className="journeyTitle">
           <div className="signupTitleAligner">
             <h2>Continue your journey...</h2>
-            <p>Look how far you have come</p>
+            <p>Look how far you've come</p>
           </div>
         </div>
       ) : (
@@ -226,7 +226,7 @@ export default function CreateJourney({ signup, setSignup }) {
                       <TextField
                         id="description"
                         variant="outlined"
-                        label="Description"
+                        label="Summarise your experience"
                         style={{ margin: 8 }}
                         multiline
                         rows={8}
