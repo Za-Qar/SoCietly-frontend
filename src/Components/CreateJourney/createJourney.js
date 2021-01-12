@@ -35,7 +35,7 @@ export default function CreateJourney({ signup, setSignup }) {
 
   // State
   const [waiting, setWaiting] = useState(true);
-  const [pendingJourney, setPendingJourney] = useState(false);
+  // const [pendingJourney, setPendingJourney] = useState(false);
   const [addJourney, setAddJourney] = useState(false);
 
   // Styling
@@ -51,7 +51,7 @@ export default function CreateJourney({ signup, setSignup }) {
   }));
 
   // React Form
-  const { register, handleSubmit, watch, errors, control } = useForm();
+  const { register, handleSubmit, watch, errors, control, reset } = useForm();
 
   useEffect(() => {
     async function getUser() {
@@ -101,45 +101,46 @@ export default function CreateJourney({ signup, setSignup }) {
       .then(() => {
         setUser(null);
         // setSignup(false);
-        setPendingJourney(true);
+        setAddJourney(true);
+        reset();
       })
       .catch((error) => console.log("user creation error error: ", error));
   }
 
-  function handleAddJourney() {
-    setPendingJourney(false);
-    setAddJourney(true);
-  }
+  // function handleAddJourney() {
+  //   setPendingJourney(false);
+  //   setAddJourney(true);
+  // }
 
   if (waiting) {
     return <Loading />;
   }
 
-  if (pendingJourney) {
-    return (
-      <div className="addAnotherContainer">
-        <p>Would you like to add another journey entry?</p>
-        <div className="journeyButtonAligner">
-          <button
-            onClick={() => {
-              setUser(null);
-              setSignup(false);
-              setPendingJourney(false);
-            }}
-            className="button halfWidthJourney noMargin"
-          >
-            No
-          </button>
-          <button
-            onClick={handleAddJourney}
-            className="button-cancel halfWidthJourney yesMargin"
-          >
-            Yes
-          </button>
-        </div>
-      </div>
-    );
-  }
+  // if (pendingJourney) {
+  //   return (
+  //     <div className="addAnotherContainer">
+  //       <p>Would you like to add another journey entry?</p>
+  //       <div className="journeyButtonAligner">
+  //         <button
+  //           onClick={() => {
+  //             setUser(null);
+  //             setSignup(false);
+  //             setPendingJourney(false);
+  //           }}
+  //           className="button halfWidthJourney noMargin"
+  //         >
+  //           No
+  //         </button>
+  //         <button
+  //           onClick={handleAddJourney}
+  //           className="button-cancel halfWidthJourney yesMargin"
+  //         >
+  //           Yes
+  //         </button>
+  //       </div>
+  //     </div>
+  //   );
+  // }
 
   return (
     <div className="singupContainer">
@@ -170,7 +171,7 @@ export default function CreateJourney({ signup, setSignup }) {
                     as={<TextField id="employer" label="Employer" required />}
                     control={control}
                     rules={{ required: "Required" }}
-                    defaultValue={addJourney ? null : "School of Code"}
+                    defaultValue={addJourney ? "" : "School of Code"}
                   />
                 </FormControl>
               </Grid>
@@ -183,7 +184,7 @@ export default function CreateJourney({ signup, setSignup }) {
                     as={<TextField id="jobTitle" label="Job Title" required />}
                     control={control}
                     rules={{ required: "Required" }}
-                    defaultValue={addJourney ? null : "Student Developer"}
+                    defaultValue={addJourney ? "" : "Student Developer"}
                   />
                 </FormControl>
               </Grid>
@@ -233,6 +234,7 @@ export default function CreateJourney({ signup, setSignup }) {
                     }
                     control={control}
                     rules={{ required: "Required" }}
+                    defaultValue=""
                   />
                 </FormControl>
               </Grid>
@@ -241,12 +243,31 @@ export default function CreateJourney({ signup, setSignup }) {
 
           <div className="signupSubmit">
             <div className="signupSubmitAligner">
-              <input type="submit" value="Continue" className="button" />
+              <input
+                type="submit"
+                value="Add Journey"
+                className="button buttonMarginLeft"
+              />
             </div>
           </div>
         </form>
       </div>
       {user?.journey && <UserJourney user={user} />}
+      {addJourney && (
+        <div className="signupSubmit">
+          <div className="signupSubmitAligner">
+            <button
+              onClick={() => {
+                setUser(null);
+                setSignup(false);
+              }}
+              className="button-blue continueButtonMargin"
+            >
+              Continue to Home
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

@@ -147,7 +147,7 @@ export default function Signup({ signup, setSignup }) {
     <div className="singupContainer">
       <div className="signupTitle">
         <div className="signupTitleAligner">
-          <h3>Signup Form</h3>
+          <h3>This part's about you...</h3>
         </div>
       </div>
       <div className={"formContent"}>
@@ -444,7 +444,7 @@ export default function Signup({ signup, setSignup }) {
                 onClick={logout}
                 className="button-cancel buttonMarginRight"
               >
-                Return to Home
+                Return to Login
               </button>
               <input
                 type="submit"
