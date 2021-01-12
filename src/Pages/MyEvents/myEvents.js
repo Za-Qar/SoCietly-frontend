@@ -14,55 +14,29 @@ import UserLeftSide from "../../Components/userLeftSide/userLeftSide.js";
 //styling
 import style from "./myEvents.module.css";
 
-export default function MyEvents() {
+export default function MyEvents({ profile = false }) {
   // Importing user data
   const [user] = useUserContext();
 
   // fetchUserEvents function result
-  const [userEvents, setUserEvents] = useState(false);
+  const [userEvents, setUserEvents] = useState(null);
 
-  console.log(userEvents);
+  console.log("this is the value of userEvents: ", userEvents);
 
   async function fetchUserEvents() {
-    let res = await fetch(
-      `https://falcon5ives.herokuapp.com/userEvents/${user?.uid}`
-    );
-    let userEvents = await res.json();
-    setUserEvents(userEvents.payload);
-    console.log(userEvents.payload);
+    if (user) {
+      let res = await fetch(`http://localhost:3000/userevents/${user?.uid}`);
+      let userEvents = await res.json();
+      setUserEvents(userEvents.payload);
+      console.log(userEvents.payload);
+    }
   }
 
   useEffect(() => {
-    fetchUserEvents();
+    if (userEvents === null) {
+      fetchUserEvents();
+    }
   }, [user, userEvents]);
-
-  //   let patchEvent = (msg) => {
-  //     console.log("User Input recieved", msg);
-  //     fetch(
-  //       `https://falcon5ives.herokuapp.com/userevents/${userEvents.id}/${user?.uid}`,
-  //       {
-  //         method: "PATCH",
-  //         body: JSON.stringify({
-  //           eventName: msg.eventName,
-  //           eventType: msg.eventTypes,
-  //           uid: user.uid,
-  //           date: msg.date,
-  //           time: msg.time,
-  //           description: msg.description,
-  //           image: msg.image,
-  //           // location: marker,
-  //           enableVolunteers: msg.eventVolunteers,
-  //           attendingList: [],
-  //           likes: 0,
-  //           volunteerList: [],
-  //         }),
-  //         headers: { "Content-Type": "application/json" },
-  //       }
-  //     )
-  //       .then((res) => res.json())
-  //       .then((data) => console.log("this is the user data: ", data))
-  //       .catch((error) => console.log("user creation error error: ", error));
-  //   };
 
   const styling = {
     eventDiv: "myEventDiv",
@@ -89,7 +63,7 @@ export default function MyEvents() {
     <div>
       {user && (
         <div className={style.row}>
-          <UserLeftSide />
+          {!profile && <UserLeftSide />}
           {/*--------- Column 1---------*/}
           <div className={style.column1}>
             <section className={style.columnTwo}>
@@ -97,10 +71,21 @@ export default function MyEvents() {
                 <h3>Hello {user?.username}</h3>
                 <h4>Take a look at your events or create some</h4>
               </div>
-              <Link to="/createevent">
-                <button className="button">Create Event</button>
-              </Link>
-              {userEvents && <h3>User events</h3>}
+              <div>
+                <div className={style.eventButton}>
+                  <Link to="/createevent">
+                    <button className="button">Create Event</button>
+                  </Link>
+                </div>
+                <div className={style.eventButton}>
+                  {profile && (
+                    <Link to="/myevents">
+                      <button className="button">My Events</button>
+                    </Link>
+                  )}
+                </div>
+              </div>
+              {userEvents === [] && <h3>User events</h3>}
               {userEvents &&
                 userEvents.map((item, index) => {
                   let date = new Date(item.date).toDateString();

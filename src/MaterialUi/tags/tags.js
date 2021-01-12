@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Tags({ item, deleteSkill, index }) {
+export default function Tags({ item, deleteSkill, index, showDelete }) {
   const classes = useStyles();
 
   const handleDelete = (e) => {
@@ -28,5 +28,9 @@ export default function Tags({ item, deleteSkill, index }) {
     console.info("You clicked the Chip.");
   };
 
-  return <Chip label={item} onDelete={handleDelete} color="primary" />;
+  return showDelete ? (
+    <Chip label={item} color="primary" />
+  ) : (
+    <Chip label={item} onDelete={handleDelete} color="primary" />
+  );
 }

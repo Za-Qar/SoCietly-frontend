@@ -7,6 +7,7 @@ import UserInfo from "../UserInfo/userinfo";
 import UserSkills from "../UserSkills/userskills";
 import UserIntro from "../UserIntro/userintro";
 import UserJourney from "../UserJourney/journey";
+import Loading from "../Loading/loading";
 
 //Context
 import { useUserContext } from "../../Context/userContext";
@@ -73,7 +74,7 @@ export default function BootcamperProfilePage() {
 
   return (
     <div>
-      {bootcamper && (
+      {bootcamper ? (
         <div className={cn(style.row)}>
           {/* ---Column Left--- */}
           <div className={cn(style.column, style.left)}>
@@ -86,6 +87,8 @@ export default function BootcamperProfilePage() {
             <UserJourney user={bootcamper} />
           </div>
         </div>
+      ) : (
+        <Loading />
       )}
     </div>
   );
