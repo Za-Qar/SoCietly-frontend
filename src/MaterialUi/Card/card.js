@@ -123,7 +123,7 @@ export default function EventCard({
   const [attentingGet, setAttedingGet] = useState([]);
   const [like, setLike] = useState(0);
   const [redLike, setRedLike] = useState("");
-  const [attendingYellow, setAttedingYellow] = useState("");
+  const [attendingYellow, setAttendingYellow] = useState("");
 
   function getAttenting() {
     setAttedingGet(attendinglist);
@@ -154,7 +154,7 @@ export default function EventCard({
     let attending = [...attendinglist, `${user.username}`];
     console.log(attending);
     setAttedingGet(attending);
-    setAttedingYellow("yellow");
+    setAttendingYellow("yellow");
     addToAttend(eventid, attending);
     // setUserEvents(null);
   }
@@ -172,7 +172,7 @@ export default function EventCard({
     })
       .then((res) => res.json())
       .then((data) => console.log(data))
-      .then(() => setUserEvents(null))
+      // .then(() => setUserEvents(null))
       .catch((error) => console.log(error));
   };
 
@@ -182,17 +182,17 @@ export default function EventCard({
     setLike(like + 1);
     redLike === "" ? setRedLike("red") : setRedLike("red");
     // backEndLike(like, id);
-    setUserEvents(null);
+    // setUserEvents(null);
   }
 
-  function attedingColour() {
+  function attendingColour() {
     return attendinglist?.includes(user.username)
-      ? setAttedingYellow("yellow")
-      : setAttedingYellow("");
+      ? setAttendingYellow("yellow")
+      : setAttendingYellow("");
   }
 
   useEffect(() => {
-    attedingColour();
+    attendingColour();
   }, [attentingGet]);
 
   return (
@@ -262,6 +262,7 @@ export default function EventCard({
         <IconButton>
           <HowToRegIcon onClick={addToAttending} className={attendingYellow} />
           {attendinglist?.length}
+          {/* {attentingGet?.length} */}
         </IconButton>
         {myEvents && (
           <IconButton
