@@ -228,7 +228,7 @@ function CreateEvent({
 
               <Grid item xs={12} sm={6}>
                 <p>Image:</p>
-                <UploadImage setImageSelected={setImageSelected} />
+                <UploadImage setImageSelected={setImageSelected} />{" "}
               </Grid>
 
               {/*----------Location----------*/}
