@@ -25,6 +25,19 @@ function GetAllEvents() {
 
   const [allEvents, setAllEvents] = useState([]);
   const [attendingList, setAttendingList] = useState([]);
+  const [filerValue, setFilterValue] = useState("");
+
+  function getEventType() {
+    let eventTypeArr = allEvents.map((event) => event.type);
+    return eventTypeArr.reduce((acc, cur) => {
+      if (acc.includes(cur)) {
+        return acc;
+      }
+      return [...acc, cur];
+    }, []);
+  }
+
+  console.log(getEventType());
 
   /*---------------Add to Attend Patch----------------*/
   let addToAttend = (id, arr) => {
@@ -77,7 +90,26 @@ function GetAllEvents() {
                   </Link>
                 </div>
 
-                <div className="container"></div>
+                <div>
+                  <label for="filter">Filter by Cohort</label>
+                  <select
+                    name="filter"
+                    onChange={(e) => {
+                      if (e.target.value === "all") {
+                        setFilterValue(null);
+                        return;
+                      }
+                      setFilterValue(parseInt(e.target.value));
+                    }}
+                  >
+                    <option selected value={"all"}>
+                      All
+                    </option>
+                    {allEvents.map((event) => {
+                      return <option value={event}>{event.eventtype}</option>;
+                    })}
+                  </select>
+                </div>
 
                 <section className="base">
                   <h3>Education</h3>
