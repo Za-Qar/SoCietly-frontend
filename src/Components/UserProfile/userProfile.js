@@ -56,7 +56,10 @@ export default function UserProfilePage() {
           {/* ---column right--- */}
           <div className={cn(style.column, style.right)}>
             <div className={style.buttonRight}>
-              <button onClick={handleEditClick} className="button marginBottom">
+              <button
+                onClick={handleEditClick}
+                className="button marginBottom buttonMarginTop"
+              >
                 Edit Profile
               </button>
             </div>
@@ -64,7 +67,7 @@ export default function UserProfilePage() {
             <div className={style.buttonRight}>
               <button
                 onClick={handleJourneyClick}
-                className="button marginBottom"
+                className="button marginBottom buttonMarginTop"
               >
                 Update My Journey
               </button>
