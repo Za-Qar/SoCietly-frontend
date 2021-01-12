@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from "react";
 
+//Config
+import { url } from "../../config";
+
 // import cn from "classnames";
 // import css from "./event.module.css";
 import "./event.css";
@@ -144,7 +147,7 @@ function Event({
   let deleteEvent = (eventId) => {
     console.log("delete", eventId);
 
-    fetch(`https://falcon5ives.herokuapp.com/events/${eventId}`, {
+    fetch(`${url}/events/${eventId}`, {
       method: "delete",
     })
       .then((res) => res.json())

@@ -2,6 +2,9 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
+//Config
+import { url } from "../../config";
+
 // Style
 import style from "./alumni.module.css";
 
@@ -22,7 +25,7 @@ export default function GetAllAlumni() {
   }, []);
 
   async function getUserInfo() {
-    let res = await fetch("https://falcon5ives.herokuapp.com/users");
+    let res = await fetch(`${url}/users`);
     let data = await res.json();
     console.log(data);
     setAllAlumni(data.payload);

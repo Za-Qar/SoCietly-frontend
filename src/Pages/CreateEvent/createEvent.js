@@ -3,6 +3,9 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useForm, Controller } from "react-hook-form";
 
+//Config
+import { url } from "../../config";
+
 // Components
 import Maps from "../../Components/Maps/maps.js";
 import UploadImage from "../../Components/Upload/upload.js";
@@ -93,8 +96,6 @@ function CreateEvent({
   const [marker, setMarker] = useState(null);
   const [eventLinkForm, setEventLinkForm] = useState("");
 
-  console.log(error);
-
   // const createEvent = async (e) => {
   //   e.preventDefault();
   //   await fetch(`http://localhost:3000/users/imageupload`, {
@@ -120,30 +121,25 @@ function CreateEvent({
       return;
     }
 
-    await fetch(
-      eventsEdit
-        ? `https://falcon5ives.herokuapp.com/events/${eventId}`
-        : `https://falcon5ives.herokuapp.com/events/`,
-      {
-        method: eventsEdit ? "PATCH" : "POST",
-        body: JSON.stringify({
-          eventName: msg.eventName,
-          eventType: msg.eventTypes,
-          uid: user.uid,
-          date: msg.date,
-          time: msg.time,
-          description: msg.description,
-          image: imageSelected,
-          location: marker,
-          enableVolunteers: msg.eventVolunteers,
-          attendingList: eventsEdit ? null : [],
-          likes: eventsEdit ? null : [],
-          volunteerList: eventsEdit ? null : [],
-          eventLink: eventsEdit ? null : eventLinkForm,
-        }),
-        headers: { "Content-Type": "application/json" },
-      }
-    )
+    await fetch(eventsEdit ? `${url}/events/${eventId}` : `${url}/events/`, {
+      method: eventsEdit ? "PATCH" : "POST",
+      body: JSON.stringify({
+        eventName: msg.eventName,
+        eventType: msg.eventTypes,
+        uid: user.uid,
+        date: msg.date,
+        time: msg.time,
+        description: msg.description,
+        image: imageSelected,
+        location: marker,
+        enableVolunteers: msg.eventVolunteers,
+        attendingList: eventsEdit ? null : [],
+        likes: eventsEdit ? null : [],
+        volunteerList: eventsEdit ? null : [],
+        eventLink: eventsEdit ? null : eventLinkForm,
+      }),
+      headers: { "Content-Type": "application/json" },
+    })
       .then((res) => res.json())
       .then((data) => console.log("this is the user data: ", data))
       .catch((error) => {

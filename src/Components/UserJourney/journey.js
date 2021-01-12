@@ -1,6 +1,9 @@
 // React
 import { useState } from "react";
 
+//Config
+import { url } from "../../config";
+
 //styling
 import style from "./journey.module.css";
 import cn from "classnames";
@@ -27,7 +30,7 @@ export default function UserJourney({ showJourneyEdit, user, setUser }) {
     const confirm = window.confirm("Are you sure?");
 
     if (confirm) {
-      fetch(`https://falcon5ives.herokuapp.com/journeys/${id}`, {
+      fetch(`${url}/journeys/${id}`, {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
       })

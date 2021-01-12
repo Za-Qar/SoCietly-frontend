@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
+//Config
+import { url } from "../../config";
+
 // Components
 import UserImage from "../../Components/userImage/userImage";
 
@@ -16,7 +19,7 @@ export default function JobUpdates() {
 
   useEffect(() => {
     async function getJobUpdates() {
-      let res = await fetch(`https://falcon5ives.herokuapp.com/userjourneys`);
+      let res = await fetch(`${url}/userjourneys`);
       let data = await res.json();
       setJobUpdates(data.payload);
     }

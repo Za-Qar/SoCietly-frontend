@@ -4,6 +4,9 @@ import { useState } from "react";
 import { Redirect } from "react-router-dom";
 import { useForm, Controller } from "react-hook-form";
 
+//Config
+import { url } from "../../config";
+
 //Context
 import { useAuthContext } from "../../Context/authContext";
 
@@ -122,7 +125,7 @@ export default function Signup({ signup, setSignup }) {
     };
 
     // Posts user data to backend
-    fetch(`https://falcon5ives.herokuapp.com/users`, {
+    fetch(`${url}/users`, {
       method: "POST",
       body: JSON.stringify(newUser),
       headers: { "Content-Type": "application/json" },

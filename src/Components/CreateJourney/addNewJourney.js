@@ -4,6 +4,9 @@ import { Redirect } from "react-router-dom";
 import { useForm, Controller } from "react-hook-form";
 import { Link } from "react-router-dom";
 
+//Config
+import { url } from "../../config";
+
 //Context
 import { useAuthContext } from "../../Context/authContext";
 import { useUserContext } from "../../Context/userContext";
@@ -43,7 +46,7 @@ export default function AddNewJourney({ setAddJourney, addNewJourney }) {
 
     console.log(newJourney);
 
-    fetch(`https://falcon5ives.herokuapp.com/journeys`, {
+    fetch(`${url}/journeys`, {
       method: "POST",
       body: JSON.stringify(newJourney),
       headers: { "Content-Type": "application/json" },

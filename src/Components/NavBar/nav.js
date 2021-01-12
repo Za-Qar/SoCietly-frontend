@@ -64,7 +64,6 @@ export default function NavBar() {
                   to="/"
                   style={{ textDecoration: "none" }}
                   activeStyle={{ textDecoration: "none", color: "black" }}
-                  visitedStyle={{ textDecoration: "none" }}
                 >
                   <div className={style.logoDiv}>
                     <img

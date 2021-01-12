@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 
+//Config
+import { url } from "../../config";
+
 // Components
 import Event from "../../Components/Event/event.js";
 import UserLeftSide from "../../Components/userLeftSide/userLeftSide.js";
@@ -43,7 +46,7 @@ function GetAllEvents() {
   /*---------------Add to Attend Patch----------------*/
   let addToAttend = (id, arr) => {
     console.log(id, arr);
-    fetch(`https://falcon5ives.herokuapp.com/events/${id}`, {
+    fetch(`${url}/events/${id}`, {
       method: "PATCH",
       body: JSON.stringify({ attendingList: arr }),
       headers: { "Content-Type": "application/json" },
@@ -54,7 +57,7 @@ function GetAllEvents() {
   };
 
   async function get() {
-    let res = await fetch("https://falcon5ives.herokuapp.com/events");
+    let res = await fetch(`${url}/events`);
     let data = await res.json();
     console.log(data);
     setAllEvents(data.payload);

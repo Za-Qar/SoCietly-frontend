@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from "react";
 
+//Config
+import { url } from "../../config";
+
 //Images
 import edu from "../../Images/edu.jpg";
 import social from "../../Images/social4.jpg";
@@ -26,7 +29,7 @@ export default function Homepage() {
   const [date, setDate] = useState("");
 
   async function get() {
-    let res = await fetch("https://falcon5ives.herokuapp.com/events/");
+    let res = await fetch(`${url}/events/`);
     let data = await res.json();
     setAllEvents(data.payload);
   }

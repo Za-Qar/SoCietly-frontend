@@ -21,6 +21,9 @@ import EditIcon from "@material-ui/icons/Edit";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import HowToRegIcon from "@material-ui/icons/HowToReg";
 
+//Config
+import { url } from "../../config";
+
 // Comp
 import Maps from "../../Components/Maps/maps.js";
 import CreateEvent from "../../Pages/CreateEvent/createEvent.js";
@@ -130,7 +133,7 @@ export default function EventCard({
   /*---------------Add to Attend Patch----------------*/
   let addToAttend = (eventid, arr) => {
     console.log(eventid, arr);
-    fetch(`https://falcon5ives.herokuapp.com/events/${eventid}`, {
+    fetch(`${url}/events/${eventid}`, {
       method: "PATCH",
       body: JSON.stringify({ attendingList: arr }),
       headers: { "Content-Type": "application/json" },
@@ -161,7 +164,7 @@ export default function EventCard({
   let deleteEvent = (eventId) => {
     console.log("delete", eventId);
 
-    fetch(`https://falcon5ives.herokuapp.com/events/${eventid}`, {
+    fetch(`${url}/events/${eventid}`, {
       method: "delete",
     })
       .then((res) => res.json())

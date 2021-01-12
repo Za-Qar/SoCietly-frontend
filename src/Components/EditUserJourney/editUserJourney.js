@@ -2,6 +2,9 @@
 import { useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 
+//Config
+import { url } from "../../config";
+
 //Style
 import style from "./editUserJourney.module.css";
 
@@ -46,7 +49,7 @@ export default function EditJourney({
 
     console.log(newJourney);
 
-    fetch(`https://falcon5ives.herokuapp.com/journeys/${id}`, {
+    fetch(`${url}/journeys/${id}`, {
       method: "PATCH",
       body: JSON.stringify(newJourney),
       headers: { "Content-Type": "application/json" },

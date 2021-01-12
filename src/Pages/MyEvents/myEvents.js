@@ -2,6 +2,9 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 
+//Config
+import { url } from "../../config";
+
 // User Context
 import { useUserContext } from "../../Context/userContext";
 
@@ -25,9 +28,7 @@ export default function MyEvents({ profile = false }) {
 
   async function fetchUserEvents() {
     if (user) {
-      let res = await fetch(
-        `https://falcon5ives.herokuapp.com/userevents/${user?.uid}`
-      );
+      let res = await fetch(`${url}/userevents/${user?.uid}`);
       let userEvents = await res.json();
       setUserEvents(userEvents.payload);
       console.log(userEvents.payload);

@@ -1,3 +1,6 @@
+//Config
+import { url } from "../../config";
+
 //React
 import { useState, useEffect } from "react";
 import { Redirect, useParams } from "react-router-dom";
@@ -26,9 +29,7 @@ export default function BootcamperProfilePage() {
   useEffect(() => {
     async function getUser() {
       if (id) {
-        let res = await fetch(
-          `https://falcon5ives.herokuapp.com/users/?id=${id}`
-        );
+        let res = await fetch(`${url}/users/?id=${id}`);
         let data = await res.json();
         const user = data.payload[0];
         // console.log(fetchData);
@@ -42,9 +43,7 @@ export default function BootcamperProfilePage() {
   useEffect(() => {
     async function getUserJourney() {
       if (userData) {
-        let res = await fetch(
-          `https://falcon5ives.herokuapp.com/journeys/?id=${id}`
-        );
+        let res = await fetch(`${url}/journeys/?id=${id}`);
         let data = await res.json();
         setJourney(data.payload);
       }

@@ -3,6 +3,9 @@ import { useState, useEffect } from "react";
 import { Redirect } from "react-router-dom";
 import { useForm, Controller } from "react-hook-form";
 
+//Config
+import { url } from "../../config";
+
 //Context
 import { useAuthContext } from "../../Context/authContext";
 import { useUserContext } from "../../Context/userContext";
@@ -124,7 +127,7 @@ export default function EditProfile({ setEdit, visible }) {
     console.log(newUser);
 
     // Posts user data to backend
-    fetch(`https://falcon5ives.herokuapp.com/users/${user.uid}`, {
+    fetch(`${url}/users/${user.uid}`, {
       method: "PATCH",
       body: JSON.stringify(newUser),
       headers: { "Content-Type": "application/json" },

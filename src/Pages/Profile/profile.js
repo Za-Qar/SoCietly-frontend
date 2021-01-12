@@ -3,6 +3,9 @@ import { useState, useEffect } from "react";
 
 import { Redirect, useParams } from "react-router-dom";
 
+//Config
+import { url } from "../../config";
+
 // Context
 import { useUserContext } from "../../Context/userContext";
 
@@ -26,9 +29,7 @@ export default function ProfilePage() {
   useEffect(() => {
     async function getUser() {
       if (id) {
-        let res = await fetch(
-          `https://falcon5ives.herokuapp.com/users/?id=${id}`
-        );
+        let res = await fetch(`${url}/users/?id=${id}`);
         let data = await res.json();
         const user = data.payload[0];
         // console.log(fetchData);
