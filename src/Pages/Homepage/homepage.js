@@ -21,7 +21,7 @@ import style from "./homepage.module.css";
 
 export default function Homepage() {
   const [user, setUser] = useUserContext();
-  const [allEvents, setAllEvents] = useState([]);
+  const [allEvents, setAllEvents] = useState(null);
 
   const [date, setDate] = useState("");
 
@@ -32,8 +32,10 @@ export default function Homepage() {
   }
 
   useEffect(() => {
-    get();
-  }, [allEvents]);
+    if (allEvents === null) {
+      get();
+    }
+  }, [user, allEvents]);
 
   function makeDate() {
     let currentdate = new Date();

@@ -87,8 +87,13 @@ function CreateEvent({
   const [hideMap, setHideMap] = useState("");
   const [hideLink, setHideLink] = useState("hide");
 
-  //For Maps
+  const [error, setError] = useState(false);
+
+  //For Maps and eventlink
   const [marker, setMarker] = useState(null);
+  const [eventLinkForm, setEventLinkForm] = useState("");
+
+  console.log(error);
 
   // const createEvent = async (e) => {
   //   e.preventDefault();
@@ -132,16 +137,19 @@ function CreateEvent({
           location: marker,
           enableVolunteers: msg.eventVolunteers,
           attendingList: eventsEdit ? null : [],
-          likes: eventsEdit ? null : 0,
+          likes: eventsEdit ? null : [],
           volunteerList: eventsEdit ? null : [],
-          eventlink: msg.eventlink,
+          eventLink: eventsEdit ? null : eventLinkForm,
         }),
         headers: { "Content-Type": "application/json" },
       }
     )
       .then((res) => res.json())
       .then((data) => console.log("this is the user data: ", data))
-      .catch((error) => console.log("user creation error error: ", error));
+      .catch((error) => {
+        console.log("user creation error error: ", error);
+        setError(true);
+      });
     setComplete(true);
   };
 
@@ -267,22 +275,21 @@ function CreateEvent({
                 </div>
               </Grid>
 
-              {/*----------Event Name----------*/}
+              {/*----------Event Link----------*/}
               <Grid item xs={12}>
                 <div className={`${hideLink}`}>
                   <FormControl variant="outlined" fullWidth>
-                    <Controller
-                      name="eventlink"
-                      as={
-                        <TextField id="eventlink" label="Event Link" required />
-                      }
-                      control={control}
-                      rules={{ required: "Required" }}
+                    <TextField
+                      name="eventLink"
+                      id="eventLink"
+                      label="Event Link"
+                      onChange={(e) => setEventLinkForm(e.target.value)}
                     />
                   </FormControl>
                 </div>
               </Grid>
 
+              {/*----------Event Location - Map----------*/}
               <Grid item xs={12}>
                 <div className={`${hideMap}`}>
                   <p>Location:</p>
@@ -352,6 +359,25 @@ function CreateEvent({
             </Grid>
           </React.Fragment>
         </form>
+      </div>
+    );
+  } else if (error) {
+    return (
+      <div className="container marginTop center">
+        <div className="signupTitle red">
+          <div className="signupTitleAligner red">
+            <p>Event Creation Error</p>
+          </div>
+        </div>
+
+        <div>
+          <Link to="/">
+            <button className="button marginRight">Return to Home</button>
+          </Link>
+          <Link to="/myevents">
+            <button className="button marginLeft">My Events</button>
+          </Link>
+        </div>
       </div>
     );
   } else if (complete) {

@@ -165,3 +165,7 @@ code {
 .marginTop {
   margin-top: 5rem;
 }
+
+.red {
+  background-color: red;
+}
