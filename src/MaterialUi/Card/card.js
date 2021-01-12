@@ -126,9 +126,11 @@ export default function EventCard({
   const [hideCard, setHideCard] = useState("");
 
   const [attentingGet, setAttedingGet] = useState([]);
-  const [like, setLike] = useState(0);
-  const [redLike, setRedLike] = useState("");
   const [attendingYellow, setAttendingYellow] = useState("");
+
+  // const [like, setLike] = useState(0);
+  const [redLike, setRedLike] = useState("");
+  const [likeGet, setLikeGet] = useState([]);
 
   function getAttenting() {
     setAttedingGet(attendinglist);
@@ -202,27 +204,55 @@ export default function EventCard({
     });
   }
 
+  /*---------------Add to Like Patch----------------*/
+  let addToLike = (eventid, arr) => {
+    console.log(eventid, arr);
+    fetch(`${url}/events/${eventid}`, {
+      method: "PATCH",
+      body: JSON.stringify({ likes: arr }),
+      headers: { "Content-Type": "application/json" },
+    })
+      .then((res) => res.json())
+      .then((data) => console.log(data))
+      .catch((error) => console.log(error));
+  };
+
   // Add likes
   function addLikes() {
-    console.log(like);
-    setLike(like + 1);
-    redLike === "" ? setRedLike("red") : setRedLike("red");
+    // console.log(like);
+    // setLike(like + 1);
+    // redLike === "" ? setRedLike("red") : setRedLike("red");
     // backEndLike(like, id);
+    // setUserEvents(null);
+    for (let i = 0; i <= likes.length; i++) {
+      if (likes[i] === `${user.username}`) {
+        return alert("You've already decalred you're attending :)");
+      }
+    }
+    let likesArr = [...likes, `${user.username}`];
+    console.log(likes);
+    setLikeGet(likesArr);
+    setRedLike("red");
+    addToLike(eventid, likesArr);
     // setUserEvents(null);
   }
 
-  function attendingColour() {
+  // Setting icon colours
+  function setIconColour() {
     // return attendinglist?.includes(user.username)
     //   ? setAttendingYellow("yellow")
     //   : setAttendingYellow("");
     if (attendinglist?.includes(user.username)) {
       setAttendingYellow("yellow");
     }
+    if (likes?.includes(user.username)) {
+      setRedLike("red");
+    }
     return;
   }
 
   useEffect(() => {
-    attendingColour();
+    setIconColour();
   }, [attentingGet]);
 
   return (
@@ -287,7 +317,7 @@ export default function EventCard({
       <CardActions disableSpacing>
         <IconButton aria-label="add to favorites" onClick={addLikes}>
           <FavoriteIcon className={redLike} />
-          {like}
+          {likes.length}
         </IconButton>
         <IconButton>
           <HowToRegIcon onClick={addToAttending} className={attendingYellow} />
