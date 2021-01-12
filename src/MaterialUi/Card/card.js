@@ -186,9 +186,13 @@ export default function EventCard({
   }
 
   function attendingColour() {
-    return attendinglist?.includes(user.username)
-      ? setAttendingYellow("yellow")
-      : setAttendingYellow("");
+    // return attendinglist?.includes(user.username)
+    //   ? setAttendingYellow("yellow")
+    //   : setAttendingYellow("");
+    if (attendinglist?.includes(user.username)) {
+      setAttendingYellow("yellow");
+    }
+    return;
   }
 
   useEffect(() => {
@@ -261,8 +265,8 @@ export default function EventCard({
         </IconButton>
         <IconButton>
           <HowToRegIcon onClick={addToAttending} className={attendingYellow} />
-          {attendinglist?.length}
-          {/* {attentingGet?.length} */}
+          {/* {attendinglist?.length} */}
+          {attentingGet?.length}
         </IconButton>
         {myEvents && (
           <IconButton
