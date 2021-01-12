@@ -156,11 +156,7 @@ export default function Signup({ signup, setSignup }) {
             <img src={authUser?.photoURL} alt="user profile" />
           </div>
 
-          <div className="signupImgSec">
-            <button onClick={logout} className="button">
-              Return to Home
-            </button>
-          </div>
+          <div className="signupImgSec"></div>
 
           <React.Fragment>
             {/*----------Name----------*/}
@@ -444,7 +440,17 @@ export default function Signup({ signup, setSignup }) {
           <div className="signupSubmit">
             <div className="signupSubmitAligner">
               {/* Submit form button */}
-              <input type="submit" value="Next" className="button" />
+              <button
+                onClick={logout}
+                className="button-cancel buttonMarginRight"
+              >
+                Return to Home
+              </button>
+              <input
+                type="submit"
+                value="Next"
+                className="button buttonMarginLeft"
+              />
             </div>
           </div>
         </form>

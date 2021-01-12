@@ -9,10 +9,8 @@ export default function UserSkills({ user }) {
   return (
     skills && (
       <div>
-        <label for="skills" className={cn(style.labelHeader)}>
-          Skills
-        </label>
         <div name="skills" className={cn(style.container)}>
+          <p className={cn(style.labelHeader)}>Skills</p>
           <ul className={cn(style.skillContainer)}>
             {skills.map((item) => {
               return (

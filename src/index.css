@@ -108,6 +108,24 @@ code {
 /*---------Row Styling---------*/
 .row {
   display: flex;
+  margin: auto;
+  width: 90%;
+}
+
+.column {
+  float: left;
+  padding: 10px;
+}
+
+.left {
+  width: 30%;
+  background-color: lightpink;
+}
+
+.right {
+  width: 70%;
+  margin-top: 3.5rem;
+  background-color: lightgreen;
 }
 
 .column1 {
@@ -130,8 +148,8 @@ code {
   font-size: 0.95rem;
 }
 
-.columnTwo {
-  margin-top: 5rem;
+.marginTop {
+  margin-top: 3rem;
 }
 
 .base {
@@ -139,4 +157,35 @@ code {
   border-radius: 5px;
   padding: 1rem;
   border: 0.5px solid rgba(0, 0, 0, 0.5);
+}
+
+.contentContainer {
+  background-color: white;
+  padding: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 2rem;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgb(0 0 0 / 9%);
+}
+
+.flex {
+  display: flex;
+}
+
+.pHeader {
+  margin-left: 20px;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.marginBottom {
+  margin-bottom: 1rem;
+}
+
+.buttonMarginLeft {
+  margin-left: 0.12rem;
+}
+.buttonMarginRight {
+  margin-right: 0.12rem;
 }

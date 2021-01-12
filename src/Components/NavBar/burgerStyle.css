@@ -2,6 +2,10 @@
   text-align: center;
 }
 
+.burgerContent a {
+  text-decoration: none;
+}
+
 .burgerContent p {
   padding: 1rem;
   margin: 0;
