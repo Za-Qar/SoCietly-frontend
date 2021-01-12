@@ -45,6 +45,9 @@ import attendingIcon from "../../Images/checking-attendance.svg";
 // React Router Dom
 import { Link } from "react-router-dom";
 
+// React confrim-alert box
+import { confirmAlert } from "react-confirm-alert";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: "100%",
@@ -166,17 +169,38 @@ export default function EventCard({
   };
 
   // Delete Event
-  let deleteEvent = (eventId) => {
-    console.log("delete", eventId);
+  async function deleteEvent(eventId) {
+    console.log("clicked");
+    //linting rule which is why confirm doesn't work.
+    //I can still window.confirm
+    confirmAlert({
+      title: "Are you sure you want to delete this event?",
+      message: "This action is irreversible",
+      buttons: [
+        {
+          label: "Yes",
+          onClick: () => {
+            console.log("delete", eventId);
+            setHideCard("hide");
 
-    fetch(`${url}/events/${eventid}`, {
-      method: "delete",
-    })
-      .then((res) => res.json())
-      .then((data) => console.log(data))
-      // .then(() => setUserEvents(null))
-      .catch((error) => console.log(error));
-  };
+            fetch(`${url}/events/${eventid}`, {
+              method: "delete",
+            })
+              .then((res) => res.json())
+              .then((data) => console.log(data))
+              // .then(() => setUserEvents(null))
+              .catch((error) => console.log(error));
+          },
+        },
+        {
+          label: "No",
+          onClick: () => {
+            return;
+          },
+        },
+      ],
+    });
+  }
 
   // Add likes
   function addLikes() {
