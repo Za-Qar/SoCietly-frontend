@@ -16,7 +16,7 @@ export default function UserIntro({ user }) {
           <UserImage width={"125px"} user={user} alt={`${name} profile`} />
         </div>
         <div className={cn(style.introContainer)}>
-          <p>{introduction}</p>
+          <p className={cn(style.introText)}>{introduction}</p>
         </div>
       </div>
     </div>

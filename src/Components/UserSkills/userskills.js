@@ -1,6 +1,7 @@
 //styling
 import style from "./userSkills.module.css";
 import cn from "classnames";
+import Tags from "../../MaterialUi/tags/tags";
 
 export default function UserSkills({ user }) {
   const { skills } = user;
@@ -14,7 +15,7 @@ export default function UserSkills({ user }) {
         <div name="skills" className={cn(style.container)}>
           <ul>
             {skills.map((item) => {
-              return <li key={item}>{item}</li>;
+              return <Tags item={item} showDelete />;
             })}
           </ul>
         </div>
