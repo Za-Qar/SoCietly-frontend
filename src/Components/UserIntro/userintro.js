@@ -8,7 +8,7 @@ export default function UserIntro({ user }) {
   const { name, introduction, profileImage } = user;
   return (
     <div>
-      <div name="intro" className={cn("contentContainer")}>
+      <div name="intro" className={cn(style.container)}>
         <p className={cn(style.labelHeader)}>10 Second Intro...</p>
         <div className={cn("flex")}>
           <div className={cn(style.introImageContainer)}>
