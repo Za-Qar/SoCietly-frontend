@@ -77,6 +77,7 @@ function CreateEvent({
   // State
   const [complete, setComplete] = useState(false);
   const [imageSelected, setImageSelected] = useState(null);
+  const [onlineEvent, setOnlineEvent] = useState(false);
 
   //For Maps
   const [marker, setMarker] = useState(null);
@@ -233,12 +234,36 @@ function CreateEvent({
 
               {/*----------Location----------*/}
               <Grid item xs={12}>
-                <p>Location:</p>
                 <div>
-                  <Maps marker={marker} setMarker={setMarker} isEditing />
-                  <button onClick={consoleLog}>Console.log</button>
+                  <h3>Is this event online?</h3>
+                  <br />
+                  <input type="checkbox" />
                 </div>
               </Grid>
+
+              {/*----------Event Name----------*/}
+              <Grid item xs={12}>
+                <FormControl variant="outlined" fullWidth>
+                  <Controller
+                    name="eventlink"
+                    as={
+                      <TextField id="eventlink" label="Event Link" required />
+                    }
+                    control={control}
+                    rules={{ required: "Required" }}
+                  />
+                </FormControl>
+              </Grid>
+
+              <div className="hide">
+                <Grid item xs={12}>
+                  <p>Location:</p>
+                  <div>
+                    <Maps marker={marker} setMarker={setMarker} isEditing />
+                    <button onClick={consoleLog}>Console.log</button>
+                  </div>
+                </Grid>
+              </div>
 
               {/*----------Event Type----------*/}
               <Grid item xs={12} sm={6}>
