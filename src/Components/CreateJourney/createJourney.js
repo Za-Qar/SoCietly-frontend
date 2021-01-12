@@ -32,11 +32,11 @@ export default function CreateJourney({ signup, setSignup }) {
   // Context
   const [authUser, loading, error] = useAuthContext();
   const [user, setUser] = useUserContext();
+
+  // State
   const [waiting, setWaiting] = useState(true);
   const [pendingJourney, setPendingJourney] = useState(false);
   const [addJourney, setAddJourney] = useState(false);
-
-  console.log(user);
 
   // Styling
   const useStyles = makeStyles((theme) => ({
@@ -49,8 +49,6 @@ export default function CreateJourney({ signup, setSignup }) {
       marginTop: theme.spacing(2),
     },
   }));
-
-  const classes = useStyles();
 
   // React Form
   const { register, handleSubmit, watch, errors, control } = useForm();
@@ -93,8 +91,6 @@ export default function CreateJourney({ signup, setSignup }) {
       description: description,
     };
 
-    console.log(newJourney);
-
     fetch(`https://falcon5ives.herokuapp.com/journeys`, {
       method: "POST",
       body: JSON.stringify(newJourney),
@@ -125,12 +121,6 @@ export default function CreateJourney({ signup, setSignup }) {
         <p>Would you like to add another journey entry?</p>
         <div className="journeyButtonAligner">
           <button
-            onClick={handleAddJourney}
-            className="button halfWidthJourney yesMargin"
-          >
-            Yes
-          </button>
-          <button
             onClick={() => {
               setUser(null);
               setSignup(false);
@@ -139,6 +129,12 @@ export default function CreateJourney({ signup, setSignup }) {
             className="button halfWidthJourney noMargin"
           >
             No
+          </button>
+          <button
+            onClick={handleAddJourney}
+            className="button-cancel halfWidthJourney yesMargin"
+          >
+            Yes
           </button>
         </div>
       </div>
