@@ -26,6 +26,11 @@ import MenuItem from "@material-ui/core/MenuItem";
 import { makeStyles } from "@material-ui/core/styles";
 import InputLabel from "@material-ui/core/InputLabel";
 
+import { withStyles } from "@material-ui/core/styles";
+import { purple } from "@material-ui/core/colors";
+import FormGroup from "@material-ui/core/FormGroup";
+import Switch from "@material-ui/core/Switch";
+
 function CreateEvent({
   eventsEdit,
 
@@ -79,6 +84,9 @@ function CreateEvent({
   const [imageSelected, setImageSelected] = useState(null);
   const [onlineEvent, setOnlineEvent] = useState(false);
 
+  const [hideMap, setHideMap] = useState("");
+  const [hideLink, setHideLink] = useState("hide");
+
   //For Maps
   const [marker, setMarker] = useState(null);
 
@@ -126,6 +134,7 @@ function CreateEvent({
           attendingList: eventsEdit ? null : [],
           likes: eventsEdit ? null : 0,
           volunteerList: eventsEdit ? null : [],
+          eventlink: msg.eventlink,
         }),
         headers: { "Content-Type": "application/json" },
       }
@@ -135,6 +144,11 @@ function CreateEvent({
       .catch((error) => console.log("user creation error error: ", error));
     setComplete(true);
   };
+
+  function checkUncheck() {
+    hideMap === "" ? setHideMap("hide") : setHideMap("");
+    hideLink === "hide" ? setHideLink("") : setHideLink("hide");
+  }
 
   function consoleLog() {
     console.log(user);
@@ -237,33 +251,47 @@ function CreateEvent({
                 <div>
                   <h3>Is this event online?</h3>
                   <br />
-                  <input type="checkbox" />
+                  <input type="checkbox" onChange={checkUncheck} />
+                  <Switch
+                    focusVisibleClassName={classes.focusVisible}
+                    disableRipple
+                    onChange={checkUncheck}
+                    classes={{
+                      root: classes.root,
+                      switchBase: classes.switchBase,
+                      thumb: classes.thumb,
+                      track: classes.track,
+                      checked: classes.checked,
+                    }}
+                  />
                 </div>
               </Grid>
 
               {/*----------Event Name----------*/}
               <Grid item xs={12}>
-                <FormControl variant="outlined" fullWidth>
-                  <Controller
-                    name="eventlink"
-                    as={
-                      <TextField id="eventlink" label="Event Link" required />
-                    }
-                    control={control}
-                    rules={{ required: "Required" }}
-                  />
-                </FormControl>
+                <div className={`${hideLink}`}>
+                  <FormControl variant="outlined" fullWidth>
+                    <Controller
+                      name="eventlink"
+                      as={
+                        <TextField id="eventlink" label="Event Link" required />
+                      }
+                      control={control}
+                      rules={{ required: "Required" }}
+                    />
+                  </FormControl>
+                </div>
               </Grid>
 
-              <div className="hide">
-                <Grid item xs={12}>
+              <Grid item xs={12}>
+                <div className={`${hideMap}`}>
                   <p>Location:</p>
                   <div>
                     <Maps marker={marker} setMarker={setMarker} isEditing />
                     <button onClick={consoleLog}>Console.log</button>
                   </div>
-                </Grid>
-              </div>
+                </div>
+              </Grid>
 
               {/*----------Event Type----------*/}
               <Grid item xs={12} sm={6}>
