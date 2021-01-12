@@ -20,7 +20,7 @@ export default function UserSignIn({
   props,
   exact = false,
 }) {
-  const [authUser, loading, error] = useAuthContext();
+  const [authUser, loading] = useAuthContext();
   // user info returned from firebase - context
 
   const [userData, setUserData] = useState();
