@@ -21,6 +21,7 @@
     "@testing-library/user-event": "^12.6.0",
     "classnames": "^2.2.6",
     "cloudinary-react": "^1.6.8",
+    "cypress": "^6.2.1",
     "date-fns": "^2.16.1",
     "dotenv": "^8.2.0",
     "firebase": "^8.2.1",
@@ -44,7 +45,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "cy:open": "cypress open"
   },
   "eslintConfig": {
     "extends": [
@@ -63,5 +65,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "cypress-firebase": "^1.6.0",
+    "firebase-admin": "^9.4.2"
   }
 }

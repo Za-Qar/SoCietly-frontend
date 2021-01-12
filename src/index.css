@@ -38,6 +38,18 @@ code {
   outline: none;
 }
 
+.buttonComplete {
+  background-color: #1d6142;
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+  border-radius: 5px;
+  border: none;
+  padding: 0.5rem 1.5rem 0.5rem 1.5rem;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  outline: none;
+}
+
 .button:hover {
   background-color: #1d6142;
   cursor: pointer;
@@ -91,6 +103,15 @@ code {
 
 .createContainer {
   width: 90%;
+  margin: 3rem auto 3rem auto;
+  padding: 2rem;
+  border: 0.5px solid rgba(0, 0, 0, 0.5);
+  border-radius: 5px;
+  background-color: white;
+}
+
+.contentContainer {
+  width: 100%;
   margin: 3rem auto 3rem auto;
   padding: 2rem;
   border: 0.5px solid rgba(0, 0, 0, 0.5);
@@ -177,6 +198,7 @@ code {
   border: 0.5px solid rgba(0, 0, 0, 0.5);
 }
 
+
 .contentContainer {
   background-color: white;
   padding: 10px;
@@ -206,4 +228,9 @@ code {
 }
 .buttonMarginRight {
   margin-right: 0.12rem;
+
+
+.red {
+  background-color: red;
+
 }

@@ -9,6 +9,7 @@ import UploadImage from "../../Components/Upload/upload.js";
 
 //styling
 import style from "./createEvent.module.css";
+import "./createEvent.css";
 
 // userContext
 import { useUserContext } from "../../Context/userContext";
@@ -24,6 +25,11 @@ import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 import { makeStyles } from "@material-ui/core/styles";
 import InputLabel from "@material-ui/core/InputLabel";
+
+import { withStyles } from "@material-ui/core/styles";
+import { purple } from "@material-ui/core/colors";
+import FormGroup from "@material-ui/core/FormGroup";
+import Switch from "@material-ui/core/Switch";
 
 function CreateEvent({
   eventsEdit,
@@ -76,9 +82,18 @@ function CreateEvent({
   // State
   const [complete, setComplete] = useState(false);
   const [imageSelected, setImageSelected] = useState(null);
+  const [onlineEvent, setOnlineEvent] = useState(false);
 
-  //For Maps
+  const [hideMap, setHideMap] = useState("");
+  const [hideLink, setHideLink] = useState("hide");
+
+  const [error, setError] = useState(false);
+
+  //For Maps and eventlink
   const [marker, setMarker] = useState(null);
+  const [eventLinkForm, setEventLinkForm] = useState("");
+
+  console.log(error);
 
   // const createEvent = async (e) => {
   //   e.preventDefault();
@@ -122,17 +137,26 @@ function CreateEvent({
           location: marker,
           enableVolunteers: msg.eventVolunteers,
           attendingList: eventsEdit ? null : [],
-          likes: eventsEdit ? null : 0,
+          likes: eventsEdit ? null : [],
           volunteerList: eventsEdit ? null : [],
+          eventLink: eventsEdit ? null : eventLinkForm,
         }),
         headers: { "Content-Type": "application/json" },
       }
     )
       .then((res) => res.json())
       .then((data) => console.log("this is the user data: ", data))
-      .catch((error) => console.log("user creation error error: ", error));
+      .catch((error) => {
+        console.log("user creation error error: ", error);
+        setError(true);
+      });
     setComplete(true);
   };
+
+  function checkUncheck() {
+    hideMap === "" ? setHideMap("hide") : setHideMap("");
+    hideLink === "hide" ? setHideLink("") : setHideLink("hide");
+  }
 
   function consoleLog() {
     console.log(user);
@@ -227,15 +251,52 @@ function CreateEvent({
 
               <Grid item xs={12} sm={6}>
                 <p>Image:</p>
-                <UploadImage setImageSelected={setImageSelected} />
+                <UploadImage setImageSelected={setImageSelected} />{" "}
               </Grid>
 
               {/*----------Location----------*/}
               <Grid item xs={12}>
-                <p>Location:</p>
                 <div>
-                  <Maps marker={marker} setMarker={setMarker} isEditing />
-                  <button onClick={consoleLog}>Console.log</button>
+                  <h3>Is this event online?</h3>
+                  <br />
+                  <input type="checkbox" onChange={checkUncheck} />
+                  <Switch
+                    focusVisibleClassName={classes.focusVisible}
+                    disableRipple
+                    onChange={checkUncheck}
+                    classes={{
+                      root: classes.root,
+                      switchBase: classes.switchBase,
+                      thumb: classes.thumb,
+                      track: classes.track,
+                      checked: classes.checked,
+                    }}
+                  />
+                </div>
+              </Grid>
+
+              {/*----------Event Link----------*/}
+              <Grid item xs={12}>
+                <div className={`${hideLink}`}>
+                  <FormControl variant="outlined" fullWidth>
+                    <TextField
+                      name="eventLink"
+                      id="eventLink"
+                      label="Event Link"
+                      onChange={(e) => setEventLinkForm(e.target.value)}
+                    />
+                  </FormControl>
+                </div>
+              </Grid>
+
+              {/*----------Event Location - Map----------*/}
+              <Grid item xs={12}>
+                <div className={`${hideMap}`}>
+                  <p>Location:</p>
+                  <div>
+                    <Maps marker={marker} setMarker={setMarker} isEditing />
+                    <button onClick={consoleLog}>Console.log</button>
+                  </div>
                 </div>
               </Grid>
 
@@ -300,24 +361,54 @@ function CreateEvent({
         </form>
       </div>
     );
+  } else if (error) {
+    return (
+      <div className="container marginTop center">
+        <div className="signupTitle red">
+          <div className="signupTitleAligner red">
+            <p>Event Creation Error</p>
+          </div>
+        </div>
+
+        <div>
+          <Link to="/">
+            <button className="button marginRight">Return to Home</button>
+          </Link>
+          <Link to="/myevents">
+            <button className="button marginLeft">My Events</button>
+          </Link>
+        </div>
+      </div>
+    );
   } else if (complete) {
     return (
-      <div className="container">
-        <p>Completed confirmation design comes here</p>
-        <Link to="/">
-          <button className="button">Return to Home</button>
-        </Link>
-        <Link to="/myevents">
-          <button className="button">My Events</button>
-        </Link>
+      <div className="container marginTop center">
+        <div className="signupTitle">
+          <div className="signupTitleAligner">
+            <p>Event Create Successfully</p>
+          </div>
+        </div>
+
+        <div class="success-checkmark">
+          <div class="check-icon">
+            <span class="icon-line line-tip"></span>
+            <span class="icon-line line-long"></span>
+            <div class="icon-circle"></div>
+            <div class="icon-fix"></div>
+          </div>
+        </div>
+
+        <div>
+          <Link to="/">
+            <button className="button marginRight">Return to Home</button>
+          </Link>
+          <Link to="/myevents">
+            <button className="button marginLeft">My Events</button>
+          </Link>
+        </div>
       </div>
     );
   }
 }
 
 export default CreateEvent;
-
-// onClick={(e) => {
-//     e.preventDefault();
-//     //take the e.preventDefault(); away when it comes time for release
-//   }}
