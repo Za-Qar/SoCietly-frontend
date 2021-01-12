@@ -8,6 +8,8 @@ export default function UploadImage({ setImageSelected }) {
   const [selectedFile, setSelectedFile] = useState("");
   const [previewSource, setPreviewSource] = useState("");
 
+  const [uploaded, setUploaded] = useState(false);
+
   function fileInput(e) {
     const file = e.target.files[0];
     const FileSize = e.target.files[0].size;
@@ -34,10 +36,11 @@ export default function UploadImage({ setImageSelected }) {
   const submitImage = (e) => {
     e.preventDefault();
     if (!previewSource) {
-      alert("please select an image to upload");
+      return alert("please select an image to upload");
     }
     console.log("this is submit Image: ", previewSource);
     setImageSelected(previewSource);
+    setUploaded(true);
     // uploadImage(previewSource);
   };
 
@@ -68,9 +71,17 @@ export default function UploadImage({ setImageSelected }) {
         />
       )}
 
-      <button onClick={submitImage} className="button maxWidth">
-        Upload Image
-      </button>
+      {!uploaded && (
+        <button onClick={submitImage} className="button maxWidth">
+          Upload Image
+        </button>
+      )}
+
+      {uploaded && (
+        <button onClick={submitImage} className="buttonComplete maxWidth">
+          <i class="fas fa-check"></i> Uploaded Successfull
+        </button>
+      )}
     </div>
   );
 }

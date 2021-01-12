@@ -87,6 +87,7 @@ export default function EventCard({
     uid,
     volunteerlist,
     eventid,
+    eventlink,
 
     name,
     surname,
@@ -290,7 +291,15 @@ export default function EventCard({
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
           <Typography paragraph>{description}</Typography>
-          <Maps marker={marker} setMarker={setMarker} />
+          {eventlink && (
+            <div>
+              <h3>Event Link:</h3>
+              <a href={eventlink}>
+                <Typography paragraph>{eventlink}</Typography>
+              </a>
+            </div>
+          )}
+          {!eventlink && <Maps marker={marker} setMarker={setMarker} />}
         </CardContent>
       </Collapse>
 

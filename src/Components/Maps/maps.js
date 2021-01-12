@@ -54,7 +54,7 @@ function Maps({ marker, setMarker, isEditing }) {
       <GoogleMap
         id="map"
         mapContainerStyle={mapContainerStyle}
-        zoom={13}
+        zoom={isEditing ? 13 : 15}
         center={isEditing ? center : marker}
         options={options}
         onClick={(e) => {
