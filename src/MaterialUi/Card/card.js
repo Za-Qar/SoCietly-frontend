@@ -105,6 +105,8 @@ export default function EventCard({
     cohort: cohort,
     id: id,
   };
+  console.log(item);
+  console.log(attendinglist);
 
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
