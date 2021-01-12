@@ -34,6 +34,7 @@ import { Image } from "cloudinary-react";
 
 // Styling
 import "./card.css";
+import cn from "classnames";
 
 // User context
 import { useUserContext } from "../../Context/userContext";
@@ -119,6 +120,7 @@ export default function EventCard({
 
   //To show and hide createEvents
   const [hide, setHide] = useState("hide");
+  const [hideCard, setHideCard] = useState("");
 
   const [attentingGet, setAttedingGet] = useState([]);
   const [like, setLike] = useState(0);
@@ -200,7 +202,7 @@ export default function EventCard({
   }, [attentingGet]);
 
   return (
-    <Card className={classes.root}>
+    <Card className={cn(classes.root, hideCard)}>
       <CardHeader
         avatar={
           <Avatar aria-label="recipe">
