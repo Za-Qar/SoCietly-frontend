@@ -239,16 +239,16 @@ export default function EventCard({
         //   </IconButton>
         // }
         title={
-          <Link to={`/bootcamper/${id}`}>
+          <Link to={`/bootcamper/${id}`} className="cardName">
             {name} {surname}
           </Link>
         }
         // subheader={date}
       />
-      <div className="cardContainer">
+      <div className="cardContainer cardTitle">
         <Link to={`/event/${eventid}`}>{eventname}</Link>
         <br />
-        {date}
+        <p>{date}</p>
       </div>
 
       <div className="cardContainer">
