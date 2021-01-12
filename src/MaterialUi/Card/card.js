@@ -154,8 +154,9 @@ export default function EventCard({
     let attending = [...attendinglist, `${user.username}`];
     console.log(attending);
     setAttedingGet(attending);
+    setAttedingYellow("yellow");
     addToAttend(eventid, attending);
-    setUserEvents(null);
+    // setUserEvents(null);
   }
 
   const handleExpandClick = () => {
