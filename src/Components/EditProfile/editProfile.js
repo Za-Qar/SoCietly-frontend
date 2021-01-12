@@ -322,15 +322,9 @@ export default function EditProfile({ setEdit, visible }) {
                 name="linkedin"
                 placeholder="https://example.com"
                 pattern="https://.*"
-                as={
-                  <TextField
-                    id="linkedin"
-                    label="LinkedIn"
-                    fullWidth
-                    defaultValue={findSocial("linkedin")}
-                  />
-                }
+                as={<TextField id="linkedin" label="LinkedIn" fullWidth />}
                 control={control}
+                defaultValue={findSocial("linkedin")}
               />
             </FormControl>
           </Grid>
