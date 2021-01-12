@@ -122,8 +122,8 @@ function CreateEvent({
 
     await fetch(
       eventsEdit
-        ? `http://localhost:3000/events/${eventId}`
-        : `http://localhost:3000/events/`,
+        ? `https://falcon5ives.herokuapp.com/events/${eventId}`
+        : `https://falcon5ives.herokuapp.com/events/`,
       {
         method: eventsEdit ? "PATCH" : "POST",
         body: JSON.stringify({

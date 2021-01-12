@@ -26,7 +26,7 @@ export default function Homepage() {
   const [date, setDate] = useState("");
 
   async function get() {
-    let res = await fetch("http://localhost:3000/events/");
+    let res = await fetch("https://falcon5ives.herokuapp.com/events/");
     let data = await res.json();
     setAllEvents(data.payload);
   }

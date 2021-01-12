@@ -27,17 +27,18 @@ function GetAllEvents() {
   const [attendingList, setAttendingList] = useState([]);
   const [filerValue, setFilterValue] = useState("");
 
-  function getEventType() {
-    let eventTypeArr = allEvents.map((event) => event.type);
-    return eventTypeArr.reduce((acc, cur) => {
-      if (acc.includes(cur)) {
+  function getEventType(event) {
+    let eventTypeArr = event.map((event) => event.eventtype);
+    console.log(eventTypeArr);
+    return eventTypeArr.reduce((acc, curr) => {
+      if (acc.find((value) => value === curr)) {
         return acc;
       }
-      return [...acc, cur];
+      return [...acc, curr];
     }, []);
   }
 
-  console.log(getEventType());
+  // console.log(getEventType());
 
   /*---------------Add to Attend Patch----------------*/
   let addToAttend = (id, arr) => {
@@ -105,8 +106,8 @@ function GetAllEvents() {
                     <option selected value={"all"}>
                       All
                     </option>
-                    {allEvents.map((event) => {
-                      return <option value={event}>{event.eventtype}</option>;
+                    {getEventType(allEvents).map((event) => {
+                      return <option value={event}>{event}</option>;
                     })}
                   </select>
                 </div>

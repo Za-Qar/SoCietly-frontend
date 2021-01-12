@@ -144,7 +144,7 @@ function Event({
   let deleteEvent = (eventId) => {
     console.log("delete", eventId);
 
-    fetch(`http://localhost:3000/events/${eventId}`, {
+    fetch(`https://falcon5ives.herokuapp.com/events/${eventId}`, {
       method: "delete",
     })
       .then((res) => res.json())

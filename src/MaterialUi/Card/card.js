@@ -130,7 +130,7 @@ export default function EventCard({
   /*---------------Add to Attend Patch----------------*/
   let addToAttend = (eventid, arr) => {
     console.log(eventid, arr);
-    fetch(`http://localhost:3000/events/${eventid}`, {
+    fetch(`https://falcon5ives.herokuapp.com/events/${eventid}`, {
       method: "PATCH",
       body: JSON.stringify({ attendingList: arr }),
       headers: { "Content-Type": "application/json" },
@@ -161,7 +161,7 @@ export default function EventCard({
   let deleteEvent = (eventId) => {
     console.log("delete", eventId);
 
-    fetch(`http://localhost:3000/events/${eventid}`, {
+    fetch(`https://falcon5ives.herokuapp.com/events/${eventid}`, {
       method: "delete",
     })
       .then((res) => res.json())

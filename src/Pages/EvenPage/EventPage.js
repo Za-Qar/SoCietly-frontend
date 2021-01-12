@@ -25,7 +25,7 @@ export default function EventPage() {
   useEffect(() => {
     async function fetchEvent() {
       if (id) {
-        let res = await fetch(`http://localhost:3000/events/${id}`);
+        let res = await fetch(`https://falcon5ives.herokuapp.com/events/${id}`);
         let data = await res.json();
         setEvent(data.payload[0]);
       }
