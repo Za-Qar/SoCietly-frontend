@@ -183,7 +183,7 @@ export default function EventCard({
   }
 
   function attedingColour() {
-    return attendinglist.includes(user.username)
+    return attendinglist?.includes(user.username)
       ? setAttedingYellow("yellow")
       : setAttedingYellow("");
   }
@@ -246,9 +246,9 @@ export default function EventCard({
         <Typography variant="body2" color="textSecondary" component="p">
           People attending this event:
           <br />
-          {attendinglist.includes(user?.username)
+          {attendinglist?.includes(user?.username)
             ? "You"
-            : attentingGet.join(", ")}
+            : attentingGet?.join(", ")}
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
@@ -258,7 +258,7 @@ export default function EventCard({
         </IconButton>
         <IconButton>
           <HowToRegIcon onClick={addToAttending} className={attendingYellow} />
-          {attendinglist.length}
+          {attendinglist?.length}
         </IconButton>
         {myEvents && (
           <IconButton
