@@ -198,7 +198,6 @@ code {
   border: 0.5px solid rgba(0, 0, 0, 0.5);
 }
 
-
 .contentContainer {
   background-color: white;
   padding: 10px;
@@ -228,9 +227,8 @@ code {
 }
 .buttonMarginRight {
   margin-right: 0.12rem;
-
+}
 
 .red {
   background-color: red;
-
 }
