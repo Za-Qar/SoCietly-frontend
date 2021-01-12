@@ -1,7 +1,7 @@
 //React
 import { useState, useEffect } from "react";
 import { Redirect } from "react-router-dom";
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 
 //Context
 import { useAuthContext } from "../../Context/authContext";
@@ -12,9 +12,19 @@ import style from "../EditUserJourney/editUserJourney.module.css";
 
 //Components
 import Loading from "../../Components/Loading/loading";
-import CreateJourney from "../../Components/CreateJourney/createJourney";
+
 import ModalOverlay from "../ModalOverlay/modalOverlay";
 import UserImage from "../userImage/userImage";
+import Tags from "../../MaterialUi/tags/tags";
+
+// Mat ui
+import Grid from "@material-ui/core/Grid";
+
+import TextField from "@material-ui/core/TextField";
+import FormControl from "@material-ui/core/FormControl";
+import Select from "@material-ui/core/Select";
+import MenuItem from "@material-ui/core/MenuItem";
+import InputLabel from "@material-ui/core/InputLabel";
 
 export default function EditProfile({ setEdit, visible }) {
   // Context
@@ -22,7 +32,7 @@ export default function EditProfile({ setEdit, visible }) {
   const [user, setUser] = useUserContext();
 
   // React Form
-  const { register, handleSubmit, watch, errors } = useForm();
+  const { register, handleSubmit, watch, errors, control } = useForm();
 
   // State
   const [skills, setSkills] = useState([]);
@@ -139,124 +149,241 @@ export default function EditProfile({ setEdit, visible }) {
       onSave={handleSubmit(submitProfile)}
       header={"Edit Profile"}
     >
+      <UserImage user={user} width={"100px"} />
       <form className={style.formContainer}>
-        <span>
-          {/* <img src={user?.profileImage} alt="user profile" /> */}
-          <UserImage user={user} width={"100px"} />
-        </span>
-        <span>
-          <p>Name:</p>
-          <input name="name" ref={register} defaultValue={user.name} />
-        </span>
-        <span>
-          <p>Surname:</p>
-          <input name="surname" ref={register} defaultValue={user.surname} />
-        </span>
-        <span>
-          <p>Cohort:</p>
-          <select name="cohort" ref={register} defaultValue={user.cohort}>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-          </select>
-        </span>
-        <span>
-          <p>Current Role:</p>
-          <input
-            name="currentRole"
-            ref={register}
-            defaultValue={user.currentRole}
-          />
-        </span>
-        <span>
-          <p>Current Employer:</p>
-          <input
-            name="currentEmployer"
-            ref={register}
-            defaultValue={user.currentEmployer}
-          />
-        </span>
-        <span>
-          <p>Skills:</p>
-          <input
-            name="skills"
-            onChange={(e) => setSkillInput(e.target.value)}
-            value={skillInput}
-          />
-          <button onClick={(e) => addToSkills(e)}>Add Skill</button>
-          <ul>
-            {skills.map((item, index) => {
-              return (
-                <div key={index}>
-                  <li>{item}</li>
-                  <button
-                    onClick={(e) => {
-                      deleteSkill(index, e);
-                    }}
+        {/*----------Name----------*/}
+        <Grid container spacing={3}>
+          <Grid item xs={12} sm={6}>
+            <FormControl variant="outlined" fullWidth>
+              <Controller
+                name="name"
+                as={<TextField id="firstName" label="Name" />}
+                control={control}
+                defaultValue={user.name}
+              />
+            </FormControl>
+          </Grid>
+
+          {/*----------Surname----------*/}
+          <Grid item xs={12} sm={6}>
+            <FormControl variant="outlined" fullWidth>
+              <Controller
+                name="surname"
+                as={<TextField id="surname" label="Surname" fullWidth />}
+                control={control}
+                defaultValue={user.surname}
+              />
+            </FormControl>
+          </Grid>
+
+          {/*----------Email----------*/}
+          <Grid item xs={12}>
+            <FormControl variant="outlined" fullWidth>
+              <Controller
+                name="email"
+                as={<TextField id="email" label="email" fullWidth />}
+                control={control}
+                defaultValue={authUser.email}
+              />
+            </FormControl>
+          </Grid>
+
+          {/*----------Cohort----------*/}
+          <Grid item xs={12}>
+            <InputLabel id="demo-simple-select-label">Cohort</InputLabel>
+            <FormControl variant="outlined" fullWidth>
+              <Controller
+                name="cohort"
+                as={
+                  <Select
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    name="cohort"
+                    ref={register}
                   >
-                    X
-                  </button>
-                </div>
-              );
-            })}
-          </ul>
-        </span>
-        <span>
-          <p>10 Second Intro:</p>
-          <textarea
-            name="introduction"
-            ref={register}
-            defaultValue={user.introduction}
-          />
-        </span>
-        <span>
-          <p>Social Links:</p>
-          <label for="linkedin">Linkedin: </label>
-          <input
-            name="linkedin"
-            placeholder="https://example.com"
-            pattern="https://.*"
-            ref={register}
-            defaultValue={findSocial("linkedin")}
-          ></input>
+                    <MenuItem value="1">1</MenuItem>
+                    <MenuItem value="2">2</MenuItem>
+                    <MenuItem value="3">3</MenuItem>
+                    <MenuItem value="4">4</MenuItem>
+                    <MenuItem value="5">5</MenuItem>
+                  </Select>
+                }
+                control={control}
+                defaultValue={user.cohort}
+              />
+            </FormControl>
+          </Grid>
 
-          <label for="Github">Github: </label>
-          <input
-            name="github"
-            placeholder="https://example.com"
-            pattern="https://.*"
-            ref={register}
-            defaultValue={findSocial("github")}
-          ></input>
+          {/*----------Current Role----------*/}
+          <Grid item xs={12} sm={6}>
+            <FormControl variant="outlined" fullWidth>
+              <Controller
+                name="currentRole"
+                as={
+                  <TextField id="currentRole" label="Current Role" fullWidth />
+                }
+                control={control}
+                defaultValue={user.currentRole}
+              />
+            </FormControl>
+          </Grid>
 
-          <label for="Twitter">Twitter: </label>
-          <input
-            name="twitter"
-            placeholder="https://example.com"
-            pattern="https://.*"
-            ref={register}
-            defaultValue={findSocial("twitter")}
-          ></input>
+          {/*----------Current Employer----------*/}
+          <Grid item xs={12} sm={6}>
+            <FormControl variant="outlined" fullWidth>
+              <Controller
+                name="currentEmployer"
+                as={
+                  <TextField
+                    id="currentEmployer"
+                    label="Current Employer"
+                    fullWidth
+                  />
+                }
+                control={control}
+                defaultValue={user.currentEmployer}
+              />
+            </FormControl>
+          </Grid>
 
-          <label for="Portfolio">Portfolio: </label>
-          <input
-            name="portfolio"
-            placeholder="https://example.com"
-            pattern="https://.*"
-            ref={register}
-            defaultValue={findSocial("portfolio")}
-          ></input>
+          {/*----------Skills Input----------*/}
+          <Grid item xs={12} sm={6}>
+            <FormControl
+              variant="outlined"
+              fullWidth
+              onChange={(e) => setSkillInput(e.target.value)}
+              value={skillInput}
+            >
+              <Controller
+                name="skills"
+                as={<TextField id="skills" label="skills" />}
+                control={control}
+              />
+              <div className="addSkillButtonAligner">
+                <button onClick={(e) => addToSkills(e)} className="button">
+                  Add Skill
+                </button>
+              </div>
+            </FormControl>
+          </Grid>
 
-          <label for="Other">Other: </label>
-          <input
-            name="other"
-            placeholder="https://example.com"
-            pattern="https://.*"
-            ref={register}
-            defaultValue={findSocial("other")}
-          ></input>
-        </span>
+          {/*----------Skills----------*/}
+          <Grid item xs={12} sm={6}>
+            <FormControl variant="outlined" fullWidth>
+              <Controller
+                name="skills"
+                as={
+                  <ul>
+                    <div className="root">
+                      {skills.map((item, index) => {
+                        return (
+                          <Tags
+                            key={`${item}${index}`}
+                            item={item}
+                            index={index}
+                            deleteSkill={deleteSkill}
+                          />
+                        );
+                      })}
+                    </div>
+                  </ul>
+                }
+                control={control}
+              />
+            </FormControl>
+          </Grid>
+
+          {/*----------Introduction----------*/}
+          <Grid item xs={12}>
+            <FormControl variant="outlined" fullWidth>
+              <Controller
+                name="introduction"
+                as={
+                  <TextField
+                    id="introduction"
+                    label="10 Second Intro..."
+                    fullWidth
+                    multiline
+                    rows={3}
+                  />
+                }
+                control={control}
+                defaultValue={user.introduction}
+              />
+            </FormControl>
+          </Grid>
+
+          <Grid item xs={12} sm={6}>
+            <FormControl variant="outlined" fullWidth>
+              <Controller
+                name="linkedin"
+                placeholder="https://example.com"
+                pattern="https://.*"
+                as={
+                  <TextField
+                    id="linkedin"
+                    label="LinkedIn"
+                    fullWidth
+                    defaultValue={findSocial("linkedin")}
+                  />
+                }
+                control={control}
+              />
+            </FormControl>
+          </Grid>
+
+          <Grid item xs={12} sm={6}>
+            <FormControl variant="outlined" fullWidth>
+              <Controller
+                name="github"
+                placeholder="https://example.com"
+                pattern="https://.*"
+                as={<TextField id="github" label="Github" fullWidth />}
+                control={control}
+                defaultValue={findSocial("github")}
+              />
+            </FormControl>
+          </Grid>
+
+          <Grid item xs={12} sm={6}>
+            <FormControl variant="outlined" fullWidth>
+              <Controller
+                name="twitter"
+                placeholder="https://example.com"
+                pattern="https://.*"
+                as={<TextField id="twitter" label="Twitter" fullWidth />}
+                control={control}
+                defaultValue={findSocial("twitter")}
+              />
+            </FormControl>
+          </Grid>
+
+          <Grid item xs={12} sm={6}>
+            <FormControl variant="outlined" fullWidth>
+              <Controller
+                name="portfolio"
+                placeholder="https://example.com"
+                pattern="https://.*"
+                as={<TextField id="portfolio" label="Portfolio" fullWidth />}
+                control={control}
+                defaultValue={findSocial("portfolio")}
+              />
+            </FormControl>
+          </Grid>
+
+          <Grid item xs={12}>
+            <FormControl variant="outlined" fullWidth>
+              <Controller
+                name="other"
+                placeholder="https://example.com"
+                pattern="https://.*"
+                as={<TextField id="other" label="Other" fullWidth />}
+                control={control}
+                defaultValue={findSocial("other")}
+              />
+            </FormControl>
+          </Grid>
+        </Grid>
       </form>
     </ModalOverlay>
   ) : (

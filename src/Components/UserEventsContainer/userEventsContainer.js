@@ -7,10 +7,8 @@ import cn from "classnames";
 export default function UserEventsContainer() {
   return (
     <div>
-      <label for="skills" className={cn(style.labelHeader)}>
-        My Events
-      </label>
       <div className={cn(style.container)}>
+        <p className={cn(style.labelHeader)}>My Events</p>
         <MyEvents profile />
       </div>
     </div>

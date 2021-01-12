@@ -38,7 +38,8 @@ export default function UserSignIn() {
       <div className={cn(style.column)}>
         <div className={cn(style.container)}>
           <div className={cn(style.content)}>
-            <h1>Societly</h1>
+            <h1 className={cn(style.logoText)}> SoCietly</h1>
+            <h3 className={cn(style.logoSubText)}> by SoC</h3>
             <h2>Sign up or Login</h2>
             <button onClick={handleGoogle} className={cn(style.buttonGoogle)}>
               <FontAwesomeIcon icon={faGoogle} /> Continue with Google

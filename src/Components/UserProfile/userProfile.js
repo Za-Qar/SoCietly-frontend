@@ -41,10 +41,14 @@ export default function UserProfilePage() {
 
   return (
     user && (
-      <div>
+      <div className="marginTop">
         <div className={cn(style.row)}>
           {/* ---column left--- */}
           <div className={cn(style.column, style.left)}>
+            <div className={style.welcome}>
+              <h3>Hello {user.username}</h3>
+              <h4>What's new with you? Have a look around the SoC community</h4>
+            </div>
             <UserInfo user={user} />
             <UserSkills user={user} />
             <UserEventsContainer />
@@ -52,13 +56,16 @@ export default function UserProfilePage() {
           {/* ---column right--- */}
           <div className={cn(style.column, style.right)}>
             <div className={style.buttonRight}>
-              <button onClick={handleEditClick} className="button">
+              <button onClick={handleEditClick} className="button marginBottom">
                 Edit Profile
               </button>
             </div>
             <UserIntro user={user} />
             <div className={style.buttonRight}>
-              <button onClick={handleJourneyClick} className="button">
+              <button
+                onClick={handleJourneyClick}
+                className="button marginBottom"
+              >
                 Update My Journey
               </button>
             </div>

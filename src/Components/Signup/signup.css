@@ -10,10 +10,10 @@
 .singupContainer {
   width: 50%;
   margin: 3rem auto 3rem auto;
-  padding: 2rem;
-  border: 0.5px solid rgba(0, 0, 0, 0.5);
   border-radius: 5px;
   background-color: white;
+  padding-bottom: 0.75rem;
+  box-shadow: 0 2px 5px rgb(0 0 0 / 9%);
 }
 
 .signupTitle {
@@ -23,6 +23,8 @@
   height: 5rem;
   position: relative;
   margin-bottom: 2rem;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
 }
 
 .signupTitleAligner {
@@ -32,7 +34,7 @@
   transform: translateY(-50%);
 }
 
-.signupTitle p {
+.signupTitle h3 {
   color: white;
 }
 
@@ -62,4 +64,8 @@
 
 .signupSubmitAligner input {
   padding: 0.5rem 3rem 0.5rem 3rem;
+}
+
+.formContent {
+  margin: 2rem;
 }

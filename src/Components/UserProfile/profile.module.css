@@ -16,24 +16,24 @@
 
 .right {
   width: 70%;
+  margin-top: 3.5rem;
   /* background-color: lightgreen; */
 }
 /* Clear floats after the columns */
-.row:after {
+/* .row:after {
   content: "";
   display: table;
   clear: both;
-}
+} */
 
 .buttonRight {
   width: 100%;
   text-align: right;
   padding-right: 1rem;
-  padding-top: 1rem;
 }
 
 /* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
-@media screen and (max-width: 700px) {
+/* @media screen and (max-width: 700px) {
   .column {
     display: flex;
   }
@@ -43,4 +43,22 @@
   .right {
     width: 100%;
   }
+} */
+
+.leftMargin {
+  margin-top: 1rem;
+}
+
+.welcome h4 {
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+.welcome h3 {
+  color: #31986a;
+  margin-top: 0;
+}
+
+.welcome {
+  padding: 10px;
+  margin: 0, 10, 10, 10;
 }

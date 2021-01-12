@@ -40,10 +40,8 @@ export default function UserJourney({ showJourneyEdit, user, setUser }) {
 
   return (
     <div>
-      <label className={cn(style.labelHeader)} for="journey">
-        My Journey
-      </label>
       <div className={cn(style.container)}>
+        <p className={cn(style.labelHeader)}>My Journey</p>
         <Timeline>
           {journey &&
             journey.map((item, index) => {

@@ -1,18 +1,29 @@
 .container {
   background-color: white;
-  padding-left: 50px;
-  padding-right: 50px;
+  padding-left: 10px;
+  padding-right: 10px;
   padding-top: 10px;
   padding-bottom: 10px;
   margin-left: 10px;
   margin-right: 10px;
   margin-bottom: 10px;
-  border-radius: 3px;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgb(0 0 0 / 9%);
 }
 
 .labelHeader {
   margin-left: 20px;
   font-size: 1.1rem;
   font-weight: 700;
+}
+
+.skillContainer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.skillTag {
+  margin: 0.1rem;
 }

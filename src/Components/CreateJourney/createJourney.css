@@ -25,6 +25,8 @@
   height: 7rem;
   position: relative;
   margin-bottom: 2rem;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
 }
 
 .journeyTitle p {
@@ -47,4 +49,22 @@
   color: rgb(97, 96, 96);
   font-size: 0.8rem;
   margin-left: 12px;
+}
+
+.formContent {
+  margin: 2rem;
+}
+
+.addAnotherContainer {
+  width: 50%;
+  margin: 3rem auto 3rem auto;
+  border-radius: 5px;
+  background-color: white;
+  padding: 2rem;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.continueButtonMargin {
+  margin-right: 2rem;
+  margin-bottom: 2rem;
 }

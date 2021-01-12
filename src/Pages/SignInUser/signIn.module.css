@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Reem+Kufi&display=swap");
+
 .row {
   display: flex;
   margin: auto;
@@ -48,4 +50,15 @@
   background-color: #1d6142;
   cursor: pointer;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.logoText {
+  font-family: "Reem Kufi", sans-serif;
+  font-size: 3rem;
+  margin: 0;
+}
+.logoSubText {
+  font-family: "Reem Kufi", sans-serif;
+  font-size: 1rem;
+  margin: 0;
 }

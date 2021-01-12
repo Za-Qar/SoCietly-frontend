@@ -2,16 +2,20 @@
   text-align: center;
 }
 
+.burgerContent a {
+  text-decoration: none;
+}
+
 .burgerContent p {
   padding: 1rem;
   margin: 0;
+  font-weight: bold;
 }
 
 .burgerContent p:hover {
   background-color: #31986a;
   color: white;
-  border-radius: 0.3rem;
-  border: 0.5px solid rgba(0, 0, 0, 0.5);
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   cursor: pointer;
 }
 

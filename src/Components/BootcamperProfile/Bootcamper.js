@@ -77,7 +77,7 @@ export default function BootcamperProfilePage() {
       {bootcamper ? (
         <div className={cn(style.row)}>
           {/* ---Column Left--- */}
-          <div className={cn(style.column, style.left)}>
+          <div className={cn(style.column, style.left, "marginTop")}>
             <UserInfo user={bootcamper} />
             <UserSkills user={bootcamper} />
           </div>

@@ -44,7 +44,11 @@ export default function UserInfo({ user, link, homepageEdit }) {
         <h4 className={style.h4}>
           {currentEmployer ? currentEmployer : currentemployer}
         </h4>
-        {!homepageEdit && <h5>{email}</h5>}
+        {!homepageEdit && (
+          <a className={style.anchor} href={`mailto:${email}`}>
+            <h5>{email}</h5>
+          </a>
+        )}
         {!homepageEdit && <SocialMedia social={social} />}
       </div>
     )
