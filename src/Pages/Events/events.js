@@ -73,12 +73,37 @@ function GetAllEvents() {
     }, 300000);
   }, []);
 
+  // Filter
+  const [hideEducation, setHideEducation] = useState("");
+  const [hideSocial, setHideSocial] = useState("");
+  const [hideCommunity, setHideCommunity] = useState("");
+
+  function filter(val) {
+    if (val === "social") {
+      setHideEducation("hide");
+      setHideCommunity("hide");
+      setHideSocial("");
+    } else if (val === "community") {
+      setHideEducation("hide");
+      setHideSocial("hide");
+      setHideCommunity("");
+    } else if (val === "education") {
+      setHideCommunity("hide");
+      setHideSocial("hide");
+      setHideEducation("");
+    } else if (val === "all") {
+      setHideCommunity("");
+      setHideSocial("");
+      setHideEducation("");
+    }
+  }
+  console.log(getEventType(allEvents));
   return (
     <div>
       {user && (
         <div className={style.row}>
           <UserLeftSide />
-          <div className="container">
+          <div className="container marginTop">
             <div className="column1">
               <section className="columnTwo">
                 <div className="welcome">
@@ -99,11 +124,7 @@ function GetAllEvents() {
                   <select
                     name="filter"
                     onChange={(e) => {
-                      if (e.target.value === "all") {
-                        setFilterValue(null);
-                        return;
-                      }
-                      setFilterValue(parseInt(e.target.value));
+                      filter(e.target.value);
                     }}
                   >
                     <option selected value={"all"}>
@@ -115,7 +136,7 @@ function GetAllEvents() {
                   </select>
                 </div>
 
-                <section className="base">
+                <section className={`contentContainer ${hideEducation}`}>
                   <h3>Education</h3>
                   <div>
                     <Grid container spacing={3}>
@@ -141,7 +162,7 @@ function GetAllEvents() {
                   </div>
                 </section>
 
-                <section className="base">
+                <section className={`contentContainer ${hideSocial}`}>
                   <h3>Social</h3>
 
                   <Grid container spacing={3}>
@@ -166,7 +187,7 @@ function GetAllEvents() {
                   </Grid>
                 </section>
 
-                <section className="base">
+                <section className={`contentContainer ${hideCommunity}`}>
                   <h3>Community</h3>
                   <Grid container spacing={3}>
                     {allEvents.map((item, index) => {

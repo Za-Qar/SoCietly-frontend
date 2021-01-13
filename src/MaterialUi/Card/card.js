@@ -20,6 +20,7 @@ import AddCircleIcon from "@material-ui/icons/AddCircle";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import HowToRegIcon from "@material-ui/icons/HowToReg";
+import PanToolIcon from "@material-ui/icons/PanTool";
 
 //Config
 import { url } from "../../config";
@@ -34,6 +35,7 @@ import { Image } from "cloudinary-react";
 
 // Styling
 import "./card.css";
+import cn from "classnames";
 
 // User context
 import { useUserContext } from "../../Context/userContext";
@@ -43,6 +45,9 @@ import attendingIcon from "../../Images/checking-attendance.svg";
 
 // React Router Dom
 import { Link } from "react-router-dom";
+
+// React confrim-alert box
+import { confirmAlert } from "react-confirm-alert";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -74,7 +79,7 @@ export default function EventCard({
   item,
   myEvents,
   fetchUserEvents,
-  setUserEvents,
+  userLeftSide,
 }) {
   /*--------Props--------*/
   const {
@@ -105,6 +110,8 @@ export default function EventCard({
     cohort: cohort,
     id: id,
   };
+  console.log(item);
+  console.log(attendinglist);
 
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
@@ -117,14 +124,20 @@ export default function EventCard({
 
   //To show and hide createEvents
   const [hide, setHide] = useState("hide");
+  const [hideCard, setHideCard] = useState("");
 
   const [attentingGet, setAttedingGet] = useState([]);
-  const [like, setLike] = useState(0);
+  const [attendingYellow, setAttendingYellow] = useState("");
+
+  // const [like, setLike] = useState(0);
   const [redLike, setRedLike] = useState("");
-  const [attendingYellow, setAttedingYellow] = useState("");
+  const [likeGet, setLikeGet] = useState([]);
+  const [propLike, setPropLike] = useState([]);
 
   function getAttenting() {
     setAttedingGet(attendinglist);
+    setPropLike(likes);
+    setLikeGet(propLike);
   }
   useEffect(() => {
     getAttenting();
@@ -152,8 +165,9 @@ export default function EventCard({
     let attending = [...attendinglist, `${user.username}`];
     console.log(attending);
     setAttedingGet(attending);
+    setAttendingYellow("yellow");
     addToAttend(eventid, attending);
-    setUserEvents(null);
+    // setUserEvents(null);
   }
 
   const handleExpandClick = () => {
@@ -161,74 +175,149 @@ export default function EventCard({
   };
 
   // Delete Event
-  let deleteEvent = (eventId) => {
-    console.log("delete", eventId);
+  async function deleteEvent(eventId) {
+    console.log("clicked");
+    //linting rule which is why confirm doesn't work.
+    //I can still window.confirm
+    confirmAlert({
+      title: "Are you sure you want to delete this event?",
+      message: "This action is irreversible",
+      buttons: [
+        {
+          label: "Yes",
+          onClick: () => {
+            console.log("delete", eventId);
+            setHideCard("hide");
 
+            fetch(`${url}/events/${eventid}`, {
+              method: "delete",
+            })
+              .then((res) => res.json())
+              .then((data) => console.log(data))
+              // .then(() => setUserEvents(null))
+              .catch((error) => console.log(error));
+          },
+        },
+        {
+          label: "No",
+          onClick: () => {
+            return;
+          },
+        },
+      ],
+    });
+  }
+
+  /*---------------Add to Like Patch----------------*/
+  let addToLike = (eventid, arr) => {
+    console.log(eventid, arr);
     fetch(`${url}/events/${eventid}`, {
-      method: "delete",
+      method: "PATCH",
+      body: JSON.stringify({ likes: arr }),
+      headers: { "Content-Type": "application/json" },
     })
       .then((res) => res.json())
       .then((data) => console.log(data))
-      .then(() => setUserEvents(null))
       .catch((error) => console.log(error));
   };
 
   // Add likes
+  /*
+  - If person's is not in the array, then add is
+  - If person's name is in the array then remove it
+  */
   function addLikes() {
-    console.log(like);
-    setLike(like + 1);
-    redLike === "" ? setRedLike("red") : setRedLike("red");
+    if (propLike?.includes(user.username)) {
+      let index = propLike.indexOf(user.username);
+      let removeLike = [
+        ...propLike.slice(0, index),
+        ...propLike.slice(index + 1),
+      ];
+      setLikeGet(removeLike);
+      setPropLike(removeLike);
+      setRedLike("");
+      console.log("red like should be nothing here");
+      addToLike(eventid, removeLike);
+    } else {
+      let likesArr = [...propLike, `${user.username}`];
+      console.log(likes);
+      setLikeGet(likesArr);
+      setPropLike(likesArr);
+      setRedLike("red");
+      addToLike(eventid, likesArr);
+    }
+
+    // console.log(like);
+    // setLike(like + 1);
+    // redLike === "" ? setRedLike("red") : setRedLike("red");
     // backEndLike(like, id);
-    setUserEvents(null);
+    // setUserEvents(null);
+
+    // for (let i = 0; i <= likes.length; i++) {
+    //   if (likes[i] === `${user.username}`) {
+    //     return alert("You've already decalred you're attending :)");
+    //   }
+    // }
+
+    // setUserEvents(null);
   }
 
-  function attedingColour() {
-    return attendinglist?.includes(user.username)
-      ? setAttedingYellow("yellow")
-      : setAttedingYellow("");
+  // Setting icon colours
+  function setIconColour() {
+    // return attendinglist?.includes(user.username)
+    //   ? setAttendingYellow("yellow")
+    //   : setAttendingYellow("");
+    if (attendinglist?.includes(user.username)) {
+      setAttendingYellow("yellow");
+    }
+    if (likes?.includes(user.username)) {
+      setRedLike("red");
+    }
+    return;
   }
 
   useEffect(() => {
-    attedingColour();
-  }, [attentingGet]);
+    setIconColour();
+  }, [attentingGet, likeGet]);
 
-  return (
-    <Card className={classes.root}>
-      <CardHeader
-        avatar={
-          <Avatar aria-label="recipe">
-            <UserImage user={eventUser} width={"100%"} />
-          </Avatar>
-        }
-        // action={
-        //   <IconButton aria-label="settings">
-        //     <MoreVertIcon />
-        //   </IconButton>
-        // }
-        title={
-          <Link to={`/bootcamper/${id}`}>
-            {name} {surname}
-          </Link>
-        }
-        // subheader={date}
-      />
-      <div className="cardContainer">
-        <Link to={`/event/${eventid}`}>{eventname}</Link>
-        <br />
-        {date}
-      </div>
-
-      <div className="cardContainer">
-        <Image
-          key={key}
-          cloudName="falcons"
-          publicId={image}
-          width="300"
-          crop="scale"
-          className="img"
+  if (!userLeftSide) {
+    return (
+      <Card className={cn(classes.root, hideCard)}>
+        <CardHeader
+          avatar={
+            <Avatar aria-label="recipe">
+              <UserImage user={eventUser} width={"100%"} />
+            </Avatar>
+          }
+          // action={
+          //   <IconButton aria-label="settings">
+          //     <MoreVertIcon />
+          //   </IconButton>
+          // }
+          title={
+            <Link to={`/bootcamper/${id}`} className="cardName">
+              {name} {surname}
+            </Link>
+          }
+          // subheader={date}
         />
-      </div>
-      {/* <CardMedia
+        <div className="cardContainer cardTitle">
+          <Link to={`/event/${eventid}`}>{eventname}</Link>
+          <br />
+          <p>{date}</p>
+        </div>
+
+        <div className="cardContainer">
+          <Image
+            key={key}
+            cloudName="falcons"
+            publicId={image}
+            width="300"
+            crop="scale"
+            className="img"
+          />
+        </div>
+        {/* <CardMedia
         className={classes.media}
         image={
           <Image
@@ -242,93 +331,110 @@ export default function EventCard({
         title="Paella dish"
       /> */}
 
-      <CardContent>
-        <Typography variant="body2" color="textSecondary" component="p">
-          People attending this event:
-          <br />
-          {attendinglist?.includes(user?.username)
-            ? "You"
-            : attentingGet?.join(", ")}
-        </Typography>
-      </CardContent>
-      <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites" onClick={addLikes}>
-          <FavoriteIcon className={redLike} />
-          {like}
-        </IconButton>
-        <IconButton>
-          <HowToRegIcon onClick={addToAttending} className={attendingYellow} />
-          {attendinglist?.length}
-        </IconButton>
-        {myEvents && (
-          <IconButton
-            onClick={() =>
-              hide === "hide" ? setHide("show") : setHide("hide")
-            }
-          >
-            <EditIcon />
-          </IconButton>
-        )}
-
-        {myEvents && (
-          <IconButton
-            onClick={() => {
-              deleteEvent(eventid);
-            }}
-          >
-            <DeleteForeverIcon />
-          </IconButton>
-        )}
-
-        <IconButton
-          className={clsx(classes.expand, {
-            [classes.expandOpen]: expanded,
-          })}
-          onClick={handleExpandClick}
-          aria-expanded={expanded}
-          aria-label="show more"
-        >
-          <ExpandMoreIcon />
-        </IconButton>
-      </CardActions>
-      <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
-          <Typography paragraph>{description}</Typography>
-          {eventlink && (
-            <div>
-              <h3>Event Link:</h3>
-              <a href={eventlink}>
-                <Typography paragraph>{eventlink}</Typography>
-              </a>
-            </div>
-          )}
-          {!eventlink && <Maps marker={marker} setMarker={setMarker} />}
+          <Typography variant="body2" color="textSecondary" component="p">
+            People attending this event:
+            <br />
+            {attendinglist?.includes(user?.username)
+              ? "You"
+              : attentingGet?.join(", ")}
+          </Typography>
         </CardContent>
-      </Collapse>
+        <CardActions disableSpacing>
+          <IconButton aria-label="add to favorites" onClick={addLikes}>
+            <FavoriteIcon className={redLike} />
+            {propLike?.length}
+          </IconButton>
+          <IconButton>
+            <HowToRegIcon
+              onClick={addToAttending}
+              className={attendingYellow}
+            />
+            {/* {attendinglist?.length} */}
+            {attentingGet?.length}
+          </IconButton>
+          {myEvents && (
+            <IconButton
+              onClick={() =>
+                hide === "hide" ? setHide("show") : setHide("hide")
+              }
+            >
+              <EditIcon />
+            </IconButton>
+          )}
 
-      <section className={hide}>
-        <CreateEvent
-          attendinglist={attendinglist}
-          date={date}
-          description={description}
-          enablevolunteers={enablevolunteers}
-          eventname={eventname}
-          eventtype={eventtype}
-          id={id}
-          image={image}
-          likes={likes}
-          location={location}
-          time={time}
-          uid={uid}
-          volunteerlist={volunteerlist}
-          eventsEdit
-          eventId={eventid}
-          userId={user?.uid}
-          hide={hide}
-          setHide={setHide}
-          fetchUserEvents={fetchUserEvents}
-        />
-      </section>
-    </Card>
-  );
+          {myEvents && (
+            <IconButton
+              onClick={() => {
+                deleteEvent(eventid);
+              }}
+            >
+              <DeleteForeverIcon />
+            </IconButton>
+          )}
+
+          <IconButton
+            className={clsx(classes.expand, {
+              [classes.expandOpen]: expanded,
+            })}
+            onClick={handleExpandClick}
+            aria-expanded={expanded}
+            aria-label="show more"
+          >
+            <ExpandMoreIcon />
+          </IconButton>
+        </CardActions>
+        <Collapse in={expanded} timeout="auto" unmountOnExit>
+          <CardContent>
+            <Typography paragraph>{description}</Typography>
+            {eventlink && (
+              <div>
+                <h3>Event Link:</h3>
+                <a href={eventlink}>
+                  <Typography paragraph>{eventlink}</Typography>
+                </a>
+              </div>
+            )}
+            {!eventlink && <Maps marker={marker} setMarker={setMarker} />}
+          </CardContent>
+        </Collapse>
+
+        <section className={hide}>
+          <CreateEvent
+            attendinglist={attendinglist}
+            date={date}
+            description={description}
+            enablevolunteers={enablevolunteers}
+            eventname={eventname}
+            eventtype={eventtype}
+            id={id}
+            image={image}
+            likes={likes}
+            location={location}
+            time={time}
+            uid={uid}
+            volunteerlist={volunteerlist}
+            eventsEdit
+            eventId={eventid}
+            userId={user?.uid}
+            hide={hide}
+            setHide={setHide}
+            fetchUserEvents={fetchUserEvents}
+          />
+        </section>
+      </Card>
+    );
+  } else if (userLeftSide) {
+    return (
+      <div className="attendingContainer">
+        <Card className={cn(classes.root, hideCard)}>
+          <div className="cardContainer attendingStyle">
+            <Link to={`/event/${eventid}`}>{eventname}</Link>
+            <br />
+            <p>{date}</p>
+          </div>
+        </Card>
+      </div>
+    );
+  }
 }

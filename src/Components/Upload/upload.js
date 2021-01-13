@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 //styling
 import style from "./upload.module.css";
+import cn from "classnames";
 
 export default function UploadImage({ setImageSelected }) {
   const [fileInputState, setFileInputState] = useState("");
@@ -78,8 +79,11 @@ export default function UploadImage({ setImageSelected }) {
       )}
 
       {uploaded && (
-        <button onClick={submitImage} className="buttonComplete maxWidth">
-          <i class="fas fa-check"></i> Uploaded Successfull
+        <button
+          onClick={submitImage}
+          className={cn(style.buttonComplete, "maxWidth")}
+        >
+          <i class="fas fa-check"></i> Upload Successful
         </button>
       )}
     </div>
