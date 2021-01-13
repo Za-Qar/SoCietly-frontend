@@ -110,9 +110,11 @@ export default function NavBar() {
         </div>
       </nav>
       <div className={`burgerContent ${hide}`}>
-        <Link to="/">
-          <p onClick={changeHide}>Home</p>
-        </Link>
+        <div className="topBurger">
+          <Link to="/">
+            <p onClick={changeHide}>Home</p>
+          </Link>
+        </div>
         <Link to="/events">
           <p onClick={changeHide}>Events</p>
         </Link>
