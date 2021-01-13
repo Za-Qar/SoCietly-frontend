@@ -13,6 +13,7 @@ import UploadImage from "../../Components/Upload/upload.js";
 //styling
 import style from "./createEvent.module.css";
 import "./createEvent.css";
+import cn from "classnames";
 
 // userContext
 import { useUserContext } from "../../Context/userContext";
@@ -44,25 +45,6 @@ function CreateEvent({
 
   description,
 }) {
-  /*
-  userId,
-  patchEvent,
-  attendinglist,
-  date,
-  enablevolunteers,
-  eventname,
-  eventtype,
-  id,
-  image,
-  likes,
-  location,
-  time,
-  uid,
-  volunteerlist,
-  setAttendindList,
-  addToAttend,
-  fetchUserEvents,*/
-  // Styling
   const useStyles = makeStyles((theme) => ({
     formControl: {
       margin: theme.spacing(1),
@@ -154,16 +136,15 @@ function CreateEvent({
     hideLink === "hide" ? setHideLink("") : setHideLink("hide");
   }
 
-  function consoleLog() {
-    console.log(user);
-    console.log(marker);
-    console.log("this is the selected image: ", imageSelected);
-  }
-
   if (!complete) {
     return (
-      <div className="container marginTop">
-        <div className="contentContainer">
+      <div className="singupContainer marginTop">
+        <div className="signupTitle">
+          <div className="signupTitleAligner">
+            <h3>Create Event</h3>
+          </div>
+        </div>
+        <div className="formContent">
           <div className={style.closeButtonContainer}>
             {eventsEdit && (
               <button
@@ -176,11 +157,7 @@ function CreateEvent({
               </button>
             )}
           </div>
-          <div className="signupTitle">
-            <div className="signupTitleAligner">
-              <h3>Create Event</h3>
-            </div>
-          </div>
+
           <form onSubmit={handleSubmit(createEvent)}>
             <React.Fragment>
               <Grid container spacing={3}>
@@ -194,45 +171,70 @@ function CreateEvent({
                       }
                       control={control}
                       rules={{ required: "Required" }}
+                      // defaultValue={}
                     />
                   </FormControl>
                 </Grid>
 
                 {/*----------Date----------*/}
                 <Grid item xs={12} sm={6}>
-                  <p>Date:</p>
+                  <p className={style.formLabel}>Date:</p>
                   <input
                     name="date"
                     type="date"
                     ref={register}
                     required
-                    className={style.maxWidth}
+                    className={cn(style.maxWidth, style.dateInput)}
                   />
                 </Grid>
 
                 {/*----------Time----------*/}
                 <Grid item xs={12} sm={6}>
-                  <p>Time:</p>
+                  <p className={style.formLabel}>Time:</p>
                   <input
                     name="time"
                     type="time"
                     ref={register}
                     required
-                    className={style.maxWidth}
+                    className={cn(style.maxWidth, style.dateInput)}
                   />
                 </Grid>
 
                 {/*----------Description----------*/}
+
+                {/* <Grid item xs={12} sm={6}>
+                  <div className={`${hideLink}`}>
+                    <FormControl variant="outlined" fullWidth>
+                      <Controller>
+                        <TextField
+                          name="description"
+                          rows="10"
+                          cols="30"
+                          multiLine=""
+                        />
+                      </Controller>
+                    </FormControl>
+                  </div>
+                </Grid> */}
+
                 <Grid item xs={12} sm={6}>
-                  <p>Description:</p>
-                  <textarea
-                    name="description"
-                    rows="10"
-                    cols="30"
-                    ref={register}
-                    placeholder={description}
-                    className={style.maxWidth}
-                  ></textarea>
+                  <FormControl variant="outlined" fullWidth>
+                    <Controller
+                      name="description"
+                      as={
+                        <TextField
+                          id="description"
+                          variant="outlined"
+                          label="Description"
+                          style={{ margin: 8 }}
+                          multiline
+                          rows={8}
+                        />
+                      }
+                      control={control}
+                      defaultValue={description}
+                    />
+                  </FormControl>
                 </Grid>
 
                 {/*----------Upload Image----------*/}
@@ -247,7 +249,7 @@ function CreateEvent({
               </Grid> */}
 
                 <Grid item xs={12} sm={6}>
-                  <p>Image:</p>
+                  <p className={style.formLabel}>Image:</p>
                   <UploadImage setImageSelected={setImageSelected} />{" "}
                 </Grid>
 
@@ -255,8 +257,6 @@ function CreateEvent({
                 <Grid item xs={12}>
                   <div>
                     <h3>Is this event online?</h3>
-                    <br />
-                    <input type="checkbox" onChange={checkUncheck} />
                     <Switch
                       focusVisibleClassName={classes.focusVisible}
                       disableRipple
@@ -289,10 +289,9 @@ function CreateEvent({
                 {/*----------Event Location - Map----------*/}
                 <Grid item xs={12}>
                   <div className={`${hideMap}`}>
-                    <p>Location:</p>
+                    <p className={style.formLabel}>Location:</p>
                     <div>
                       <Maps marker={marker} setMarker={setMarker} isEditing />
-                      <button onClick={consoleLog}>Console.log</button>
                     </div>
                   </div>
                 </Grid>
@@ -327,7 +326,7 @@ function CreateEvent({
                 {/*----------Volunteers----------*/}
                 <Grid item xs={12} sm={6}>
                   <InputLabel id="demo-simple-select-label">
-                    Volunteers
+                    Open to volunteers?
                   </InputLabel>
                   <FormControl variant="outlined" fullWidth>
                     <Controller
@@ -364,7 +363,7 @@ function CreateEvent({
       <div className="container marginTop center">
         <div className="signupTitle red">
           <div className="signupTitleAligner red">
-            <p>Event Creation Error</p>
+            <h3>Event Creation Error</h3>
           </div>
         </div>
 
@@ -383,7 +382,7 @@ function CreateEvent({
       <div className="container marginTop center">
         <div className="signupTitle">
           <div className="signupTitleAligner">
-            <p>Event Create Successfully</p>
+            <h3>Event Create Successfully</h3>
           </div>
         </div>
 

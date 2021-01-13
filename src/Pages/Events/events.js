@@ -120,7 +120,7 @@ function GetAllEvents() {
                 </div>
 
                 <div>
-                  <label for="filter">Filter by Cohort</label>
+                  <p for="filter">Filter by event type:</p>
                   <select
                     name="filter"
                     onChange={(e) => {

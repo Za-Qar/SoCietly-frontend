@@ -62,7 +62,12 @@ export default function UploadImage({ setImageSelected }) {
 
   return (
     <div>
-      <input type="file" onChange={fileInput} value={selectedFile} />
+      <input
+        type="file"
+        onChange={fileInput}
+        value={selectedFile}
+        className="marginBottom"
+      />
 
       {previewSource && (
         <img
