@@ -20,6 +20,7 @@ import AddCircleIcon from "@material-ui/icons/AddCircle";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import HowToRegIcon from "@material-ui/icons/HowToReg";
+import PanToolIcon from "@material-ui/icons/PanTool";
 
 //Config
 import { url } from "../../config";
@@ -134,6 +135,7 @@ export default function EventCard({
 
   function getAttenting() {
     setAttedingGet(attendinglist);
+    setLikeGet(likes);
   }
   useEffect(() => {
     getAttenting();
@@ -218,22 +220,40 @@ export default function EventCard({
   };
 
   // Add likes
+  /*
+  - If person's is not in the array, then add is
+  - If person's name is in the array then remove it
+  */
   function addLikes() {
+    if (likes?.includes(user.username)) {
+      let index = likes.indexOf(user.username);
+      let removeLike = [...likes.slice(0, index), ...likes.slice(index + 1)];
+      setLikeGet(removeLike);
+      setLikeGet(removeLike);
+      setRedLike("");
+      console.log("red like should be nothing here");
+      addToLike(eventid, removeLike);
+    } else {
+      let likesArr = [...likes, `${user.username}`];
+      console.log(likes);
+      setLikeGet(likesArr);
+      setLikeGet(likesArr);
+      setRedLike("red");
+      addToLike(eventid, likesArr);
+    }
+
     // console.log(like);
     // setLike(like + 1);
     // redLike === "" ? setRedLike("red") : setRedLike("red");
     // backEndLike(like, id);
     // setUserEvents(null);
-    for (let i = 0; i <= likes.length; i++) {
-      if (likes[i] === `${user.username}`) {
-        return alert("You've already decalred you're attending :)");
-      }
-    }
-    let likesArr = [...likes, `${user.username}`];
-    console.log(likes);
-    setLikeGet(likesArr);
-    setRedLike("red");
-    addToLike(eventid, likesArr);
+
+    // for (let i = 0; i <= likes.length; i++) {
+    //   if (likes[i] === `${user.username}`) {
+    //     return alert("You've already decalred you're attending :)");
+    //   }
+    // }
+
     // setUserEvents(null);
   }
 
@@ -253,7 +273,7 @@ export default function EventCard({
 
   useEffect(() => {
     setIconColour();
-  }, [attentingGet]);
+  }, [attentingGet, likeGet]);
 
   return (
     <Card className={cn(classes.root, hideCard)}>
@@ -317,7 +337,7 @@ export default function EventCard({
       <CardActions disableSpacing>
         <IconButton aria-label="add to favorites" onClick={addLikes}>
           <FavoriteIcon className={redLike} />
-          {likes.length}
+          {likeGet?.length}
         </IconButton>
         <IconButton>
           <HowToRegIcon onClick={addToAttending} className={attendingYellow} />
