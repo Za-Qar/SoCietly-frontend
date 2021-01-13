@@ -1,0 +1,13 @@
+.eventPage {
+  margin-left: 20rem;
+  margin-right: 20rem;
+  margin-bottom: 5rem;
+}
+
+.eventPageContainer {
+  background-color: white;
+  padding: 5rem;
+  margin-bottom: 5rem;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgb(0 0 0 / 9%);
+}
