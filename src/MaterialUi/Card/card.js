@@ -420,6 +420,7 @@ export default function EventCard({
             hide={hide}
             setHide={setHide}
             fetchUserEvents={fetchUserEvents}
+            editEvent
           />
         </section>
       </Card>

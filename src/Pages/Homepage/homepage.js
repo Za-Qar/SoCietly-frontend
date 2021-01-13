@@ -22,6 +22,9 @@ import { useUserContext } from "../../Context/userContext";
 //styling
 import style from "./homepage.module.css";
 
+// React Router Dom
+import { Link } from "react-router-dom";
+
 export default function Homepage() {
   const [user, setUser] = useUserContext();
   const [allEvents, setAllEvents] = useState(null);
@@ -108,36 +111,42 @@ export default function Homepage() {
                 <section>
                   <div className={style.eventSec}>
                     <span className={style.eventSecSpan}>
-                      <h4>Guest Lectures</h4>
-                      <div className={style.img}>
-                        <img
-                          className={style.eventImage}
-                          src={edu}
-                          alt="education"
-                        />
-                      </div>
+                      <Link to="/events">
+                        <h4>Guest Lectures</h4>
+                        <div className={style.img}>
+                          <img
+                            className={style.eventImage}
+                            src={edu}
+                            alt="education"
+                          />
+                        </div>
+                      </Link>
                     </span>
 
                     <span className={style.eventSecSpan}>
-                      <h4>Community</h4>
-                      <div className={style.img}>
-                        <img
-                          className={style.eventImage}
-                          src={social}
-                          alt="community"
-                        />
-                      </div>
+                      <Link to="/events">
+                        <h4>Community</h4>
+                        <div className={style.img}>
+                          <img
+                            className={style.eventImage}
+                            src={social}
+                            alt="community"
+                          />
+                        </div>
+                      </Link>
                     </span>
 
                     <span className={style.eventSecSpan}>
-                      <h4>Social</h4>
-                      <div className={style.img}>
-                        <img
-                          className={style.eventImage}
-                          src={social2}
-                          alt="social"
-                        />
-                      </div>
+                      <Link to="/events">
+                        <h4>Social</h4>
+                        <div className={style.img}>
+                          <img
+                            className={style.eventImage}
+                            src={social2}
+                            alt="social"
+                          />
+                        </div>
+                      </Link>
                     </span>
                   </div>
                 </section>

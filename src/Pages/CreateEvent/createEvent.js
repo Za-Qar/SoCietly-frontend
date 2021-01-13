@@ -18,6 +18,9 @@ import cn from "classnames";
 // userContext
 import { useUserContext } from "../../Context/userContext";
 
+// Modal
+import ModalOverlay from "../../Components/ModalOverlay/modalOverlay.js";
+
 // Mat ui
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
@@ -47,6 +50,7 @@ function CreateEvent({
   eventname,
   time,
   date,
+  editEvent,
 }) {
   const useStyles = makeStyles((theme) => ({
     formControl: {
@@ -161,53 +165,64 @@ function CreateEvent({
             )}
           </div>
 
-          <form onSubmit={handleSubmit(createEvent)}>
-            <React.Fragment>
-              <Grid container spacing={3}>
-                {/*----------Event Name----------*/}
-                <Grid item xs={12}>
-                  <FormControl variant="outlined" fullWidth>
-                    <Controller
-                      name="eventName"
-                      as={
-                        <TextField id="eventName" label="Event Name" required />
-                      }
-                      control={control}
-                      rules={{ required: "Required" }}
-                      defaultValue={eventname}
-                    />
-                  </FormControl>
-                </Grid>
+          {editEvent && (
+            <ModalOverlay
+              header={"Edit Event"}
+              visible={true}
+              onSave={handleSubmit(createEvent)}
+              onClose={() => setHide("hide")}
+            >
+              <form>
+                <React.Fragment>
+                  <Grid container spacing={3}>
+                    {/*----------Event Name----------*/}
+                    <Grid item xs={12}>
+                      <FormControl variant="outlined" fullWidth>
+                        <Controller
+                          name="eventName"
+                          as={
+                            <TextField
+                              id="eventName"
+                              label="Event Name"
+                              required
+                            />
+                          }
+                          control={control}
+                          rules={{ required: "Required" }}
+                          defaultValue={eventname}
+                        />
+                      </FormControl>
+                    </Grid>
 
-                {/*----------Date----------*/}
-                <Grid item xs={12} sm={6}>
-                  <p className={style.formLabel}>Date:</p>
-                  <input
-                    name="date"
-                    type="date"
-                    ref={register}
-                    required
-                    className={cn(style.maxWidth, style.dateInput)}
-                    defaultValue={date}
-                  />
-                </Grid>
+                    {/*----------Date----------*/}
+                    <Grid item xs={12} sm={6}>
+                      <p className={style.formLabel}>Date:</p>
+                      <input
+                        name="date"
+                        type="date"
+                        ref={register}
+                        required
+                        className={cn(style.maxWidth, style.dateInput)}
+                        defaultValue={date}
+                      />
+                    </Grid>
 
-                {/*----------Time----------*/}
-                <Grid item xs={12} sm={6}>
-                  <p className={style.formLabel}>Time:</p>
-                  <input
-                    name="time"
-                    type="time"
-                    ref={register}
-                    required
-                    className={cn(style.maxWidth, style.dateInput)}
-                    defaultValue={time}
-                  />
-                </Grid>
+                    {/*----------Time----------*/}
+                    <Grid item xs={12} sm={6}>
+                      <p className={style.formLabel}>Time:</p>
+                      <input
+                        name="time"
+                        type="time"
+                        ref={register}
+                        required
+                        className={cn(style.maxWidth, style.dateInput)}
+                        defaultValue={time}
+                      />
+                    </Grid>
 
-                {/*----------Description----------*/}
+                    {/*----------Description----------*/}
 
-                {/* <Grid item xs={12} sm={6}>
+                    {/* <Grid item xs={12} sm={6}>
                   <div className={`${hideLink}`}>
                     <FormControl variant="outlined" fullWidth>
                       <Controller>
@@ -222,28 +237,28 @@ function CreateEvent({
                   </div>
                 </Grid> */}
 
-                <Grid item xs={12} sm={6}>
-                  <FormControl variant="outlined" fullWidth>
-                    <Controller
-                      name="description"
-                      as={
-                        <TextField
-                          id="description"
-                          variant="outlined"
-                          label="Description"
-                          style={{ margin: 8 }}
-                          multiline
-                          rows={8}
+                    <Grid item xs={12} sm={6}>
+                      <FormControl variant="outlined" fullWidth>
+                        <Controller
+                          name="description"
+                          as={
+                            <TextField
+                              id="description"
+                              variant="outlined"
+                              label="Description"
+                              style={{ margin: 8 }}
+                              multiline
+                              rows={8}
+                            />
+                          }
+                          control={control}
+                          defaultValue={description}
                         />
-                      }
-                      control={control}
-                      defaultValue={description}
-                    />
-                  </FormControl>
-                </Grid>
+                      </FormControl>
+                    </Grid>
 
-                {/*----------Upload Image----------*/}
-                {/* <Grid item xs={12} sm={6}>
+                    {/*----------Upload Image----------*/}
+                    {/* <Grid item xs={12} sm={6}>
                 <p>Image:</p>
                 <input
                   name="image"
@@ -253,113 +268,321 @@ function CreateEvent({
                 />
               </Grid> */}
 
-                <Grid item xs={12} sm={6}>
-                  <p className={style.formLabel}>Image:</p>
-                  <UploadImage setImageSelected={setImageSelected} />{" "}
-                </Grid>
+                    <Grid item xs={12} sm={6}>
+                      <p className={style.formLabel}>Image:</p>
+                      <UploadImage setImageSelected={setImageSelected} />{" "}
+                    </Grid>
 
-                {/*----------Location----------*/}
-                <Grid item xs={12}>
-                  <div>
-                    <h3>Is this event online?</h3>
-                    <Switch
-                      focusVisibleClassName={classes.focusVisible}
-                      disableRipple
-                      onChange={checkUncheck}
-                      classes={{
-                        root: classes.root,
-                        switchBase: classes.switchBase,
-                        thumb: classes.thumb,
-                        track: classes.track,
-                        checked: classes.checked,
-                      }}
-                    />
-                  </div>
-                </Grid>
+                    {/*----------Location----------*/}
+                    <Grid item xs={12}>
+                      <div>
+                        <h3>Is this event online?</h3>
+                        <Switch
+                          focusVisibleClassName={classes.focusVisible}
+                          disableRipple
+                          onChange={checkUncheck}
+                          classes={{
+                            root: classes.root,
+                            switchBase: classes.switchBase,
+                            thumb: classes.thumb,
+                            track: classes.track,
+                            checked: classes.checked,
+                          }}
+                        />
+                      </div>
+                    </Grid>
 
-                {/*----------Event Link----------*/}
-                <Grid item xs={12}>
-                  <div className={`${hideLink}`}>
+                    {/*----------Event Link----------*/}
+                    <Grid item xs={12}>
+                      <div className={`${hideLink}`}>
+                        <FormControl variant="outlined" fullWidth>
+                          <TextField
+                            name="eventLink"
+                            id="eventLink"
+                            label="Event Link"
+                            onChange={(e) => setEventLinkForm(e.target.value)}
+                          />
+                        </FormControl>
+                      </div>
+                    </Grid>
+
+                    {/*----------Event Location - Map----------*/}
+                    <Grid item xs={12}>
+                      <div className={`${hideMap}`}>
+                        <p className={style.formLabel}>Location:</p>
+                        <div>
+                          <Maps
+                            marker={marker}
+                            setMarker={setMarker}
+                            isEditing
+                          />
+                        </div>
+                      </div>
+                    </Grid>
+
+                    {/*----------Event Type----------*/}
+                    <Grid item xs={12} sm={6}>
+                      <InputLabel id="demo-simple-select-label">
+                        Event Type
+                      </InputLabel>
+                      <FormControl variant="outlined" fullWidth>
+                        <Controller
+                          name="eventTypes"
+                          as={
+                            <Select
+                              labelId="demo-simple-select-label"
+                              id="demo-simple-select"
+                              className={classes.formControl}
+                              name="eventTypes"
+                              ref={register}
+                            >
+                              <MenuItem value="education">Education</MenuItem>
+                              <MenuItem value="social">Social</MenuItem>
+                              <MenuItem value="community">Community</MenuItem>
+                            </Select>
+                          }
+                          control={control}
+                          rules={{ required: "Required" }}
+                        />
+                      </FormControl>
+                    </Grid>
+
+                    {/*----------Volunteers----------*/}
+                    <Grid item xs={12} sm={6}>
+                      <InputLabel id="demo-simple-select-label">
+                        Open to volunteers?
+                      </InputLabel>
+                      <FormControl variant="outlined" fullWidth>
+                        <Controller
+                          name="eventVolunteers"
+                          as={
+                            <Select
+                              labelId="demo-simple-select-label"
+                              id="demo-simple-select"
+                              className={classes.formControl}
+                              name="eventVolunteers"
+                              ref={register}
+                            >
+                              <MenuItem value="true">Yes</MenuItem>
+                              <MenuItem value="false">No</MenuItem>
+                            </Select>
+                          }
+                          control={control}
+                          rules={{ required: "Required" }}
+                        />
+                      </FormControl>
+                    </Grid>
+                  </Grid>
+                </React.Fragment>
+              </form>
+            </ModalOverlay>
+          )}
+
+          {!editEvent && (
+            <form onSubmit={handleSubmit(createEvent)}>
+              <React.Fragment>
+                <Grid container spacing={3}>
+                  {/*----------Event Name----------*/}
+                  <Grid item xs={12}>
                     <FormControl variant="outlined" fullWidth>
-                      <TextField
-                        name="eventLink"
-                        id="eventLink"
-                        label="Event Link"
-                        onChange={(e) => setEventLinkForm(e.target.value)}
+                      <Controller
+                        name="eventName"
+                        as={
+                          <TextField
+                            id="eventName"
+                            label="Event Name"
+                            required
+                          />
+                        }
+                        control={control}
+                        rules={{ required: "Required" }}
+                        defaultValue={eventname}
                       />
                     </FormControl>
-                  </div>
-                </Grid>
+                  </Grid>
 
-                {/*----------Event Location - Map----------*/}
-                <Grid item xs={12}>
-                  <div className={`${hideMap}`}>
-                    <p className={style.formLabel}>Location:</p>
+                  {/*----------Date----------*/}
+                  <Grid item xs={12} sm={6}>
+                    <p className={style.formLabel}>Date:</p>
+                    <input
+                      name="date"
+                      type="date"
+                      ref={register}
+                      required
+                      className={cn(style.maxWidth, style.dateInput)}
+                      defaultValue={date}
+                    />
+                  </Grid>
+
+                  {/*----------Time----------*/}
+                  <Grid item xs={12} sm={6}>
+                    <p className={style.formLabel}>Time:</p>
+                    <input
+                      name="time"
+                      type="time"
+                      ref={register}
+                      required
+                      className={cn(style.maxWidth, style.dateInput)}
+                      defaultValue={time}
+                    />
+                  </Grid>
+
+                  {/*----------Description----------*/}
+
+                  {/* <Grid item xs={12} sm={6}>
+                  <div className={`${hideLink}`}>
+                    <FormControl variant="outlined" fullWidth>
+                      <Controller>
+                        <TextField
+                          name="description"
+                          rows="10"
+                          cols="30"
+                          multiLine=""
+                        />
+                      </Controller>
+                    </FormControl>
+                  </div>
+                </Grid> */}
+
+                  <Grid item xs={12} sm={6}>
+                    <FormControl variant="outlined" fullWidth>
+                      <Controller
+                        name="description"
+                        as={
+                          <TextField
+                            id="description"
+                            variant="outlined"
+                            label="Description"
+                            style={{ margin: 8 }}
+                            multiline
+                            rows={8}
+                          />
+                        }
+                        control={control}
+                        defaultValue={description}
+                      />
+                    </FormControl>
+                  </Grid>
+
+                  {/*----------Upload Image----------*/}
+                  {/* <Grid item xs={12} sm={6}>
+                <p>Image:</p>
+                <input
+                  name="image"
+                  ref={register}
+                  required
+                  className={style.maxWidth}
+                />
+              </Grid> */}
+
+                  <Grid item xs={12} sm={6}>
+                    <p className={style.formLabel}>Image:</p>
+                    <UploadImage setImageSelected={setImageSelected} />{" "}
+                  </Grid>
+
+                  {/*----------Location----------*/}
+                  <Grid item xs={12}>
                     <div>
-                      <Maps marker={marker} setMarker={setMarker} isEditing />
+                      <h3>Is this event online?</h3>
+                      <Switch
+                        focusVisibleClassName={classes.focusVisible}
+                        disableRipple
+                        onChange={checkUncheck}
+                        classes={{
+                          root: classes.root,
+                          switchBase: classes.switchBase,
+                          thumb: classes.thumb,
+                          track: classes.track,
+                          checked: classes.checked,
+                        }}
+                      />
                     </div>
-                  </div>
-                </Grid>
+                  </Grid>
 
-                {/*----------Event Type----------*/}
-                <Grid item xs={12} sm={6}>
-                  <InputLabel id="demo-simple-select-label">
-                    Event Type
-                  </InputLabel>
-                  <FormControl variant="outlined" fullWidth>
-                    <Controller
-                      name="eventTypes"
-                      as={
-                        <Select
-                          labelId="demo-simple-select-label"
-                          id="demo-simple-select"
-                          className={classes.formControl}
-                          name="eventTypes"
-                          ref={register}
-                        >
-                          <MenuItem value="education">Education</MenuItem>
-                          <MenuItem value="social">Social</MenuItem>
-                          <MenuItem value="community">Community</MenuItem>
-                        </Select>
-                      }
-                      control={control}
-                      rules={{ required: "Required" }}
-                    />
-                  </FormControl>
-                </Grid>
+                  {/*----------Event Link----------*/}
+                  <Grid item xs={12}>
+                    <div className={`${hideLink}`}>
+                      <FormControl variant="outlined" fullWidth>
+                        <TextField
+                          name="eventLink"
+                          id="eventLink"
+                          label="Event Link"
+                          onChange={(e) => setEventLinkForm(e.target.value)}
+                        />
+                      </FormControl>
+                    </div>
+                  </Grid>
 
-                {/*----------Volunteers----------*/}
-                <Grid item xs={12} sm={6}>
-                  <InputLabel id="demo-simple-select-label">
-                    Open to volunteers?
-                  </InputLabel>
-                  <FormControl variant="outlined" fullWidth>
-                    <Controller
-                      name="eventVolunteers"
-                      as={
-                        <Select
-                          labelId="demo-simple-select-label"
-                          id="demo-simple-select"
-                          className={classes.formControl}
-                          name="eventVolunteers"
-                          ref={register}
-                        >
-                          <MenuItem value="true">Yes</MenuItem>
-                          <MenuItem value="false">No</MenuItem>
-                        </Select>
-                      }
-                      control={control}
-                      rules={{ required: "Required" }}
-                    />
-                  </FormControl>
-                </Grid>
+                  {/*----------Event Location - Map----------*/}
+                  <Grid item xs={12}>
+                    <div className={`${hideMap}`}>
+                      <p className={style.formLabel}>Location:</p>
+                      <div>
+                        <Maps marker={marker} setMarker={setMarker} isEditing />
+                      </div>
+                    </div>
+                  </Grid>
 
-                <Grid item xs={12}>
-                  <input type="submit" className="button maxWidth" />
+                  {/*----------Event Type----------*/}
+                  <Grid item xs={12} sm={6}>
+                    <InputLabel id="demo-simple-select-label">
+                      Event Type
+                    </InputLabel>
+                    <FormControl variant="outlined" fullWidth>
+                      <Controller
+                        name="eventTypes"
+                        as={
+                          <Select
+                            labelId="demo-simple-select-label"
+                            id="demo-simple-select"
+                            className={classes.formControl}
+                            name="eventTypes"
+                            ref={register}
+                          >
+                            <MenuItem value="education">Education</MenuItem>
+                            <MenuItem value="social">Social</MenuItem>
+                            <MenuItem value="community">Community</MenuItem>
+                          </Select>
+                        }
+                        control={control}
+                        rules={{ required: "Required" }}
+                      />
+                    </FormControl>
+                  </Grid>
+
+                  {/*----------Volunteers----------*/}
+                  <Grid item xs={12} sm={6}>
+                    <InputLabel id="demo-simple-select-label">
+                      Open to volunteers?
+                    </InputLabel>
+                    <FormControl variant="outlined" fullWidth>
+                      <Controller
+                        name="eventVolunteers"
+                        as={
+                          <Select
+                            labelId="demo-simple-select-label"
+                            id="demo-simple-select"
+                            className={classes.formControl}
+                            name="eventVolunteers"
+                            ref={register}
+                          >
+                            <MenuItem value="true">Yes</MenuItem>
+                            <MenuItem value="false">No</MenuItem>
+                          </Select>
+                        }
+                        control={control}
+                        rules={{ required: "Required" }}
+                      />
+                    </FormControl>
+                  </Grid>
+
+                  <Grid item xs={12}>
+                    <input type="submit" className="button maxWidth" />
+                  </Grid>
                 </Grid>
-              </Grid>
-            </React.Fragment>
-          </form>
+              </React.Fragment>
+            </form>
+          )}
         </div>
       </div>
     );
