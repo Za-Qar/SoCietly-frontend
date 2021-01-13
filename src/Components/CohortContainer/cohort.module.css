@@ -1,0 +1,4 @@
+.alumniContainer {
+  display: flex;
+  flex-wrap: wrap;
+}

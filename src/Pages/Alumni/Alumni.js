@@ -36,7 +36,7 @@ export default function GetAllAlumni() {
   }, []);
 
   return (
-    <div>
+    <div className={style.container}>
       <h3>Alumni</h3>
       <div>
         <label for="filter">Filter by Cohort</label>
