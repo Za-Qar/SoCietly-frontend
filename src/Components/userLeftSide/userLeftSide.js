@@ -8,6 +8,9 @@ import NavBar from "../../Components/NavBar/nav.js";
 //Context
 import { useUserContext } from "../../Context/userContext";
 
+//Config
+import { url } from "../../config";
+
 // export default function UserLeftSide() {
 //   const [user, setUser] = useUserContext();
 //   return (
@@ -20,7 +23,7 @@ import { useUserContext } from "../../Context/userContext";
 //   );
 // }
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import clsx from "clsx";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
@@ -40,6 +43,10 @@ import ListItemText from "@material-ui/core/ListItemText";
 import InboxIcon from "@material-ui/icons/MoveToInbox";
 import MailIcon from "@material-ui/icons/Mail";
 import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
+
+import Card from "../../MaterialUi/Card/card.js";
+import Paper from "@material-ui/core/Paper";
+import Grid from "@material-ui/core/Grid";
 
 const drawerWidth = 300;
 
@@ -111,6 +118,19 @@ export default function UserLeftSide() {
   const theme = useTheme();
   const [open, setOpen] = React.useState(true);
 
+  const [allEvents, setAllEvents] = useState([]);
+
+  async function get() {
+    let res = await fetch(`${url}/events`);
+    let data = await res.json();
+    console.log(data);
+    setAllEvents(data.payload);
+  }
+
+  useEffect(() => {
+    get();
+  }, []);
+
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -146,6 +166,7 @@ export default function UserLeftSide() {
         </div>
       </div>
       {/* </AppBar> */}
+
       <Drawer
         className={classes.drawer}
         variant="persistent"
@@ -169,8 +190,32 @@ export default function UserLeftSide() {
           <section className={style.userSec}>
             <UserImage user={user} />
             <UserInfo user={user} homepageEdit />
+
+            <section className={`contentContainer`}>
+              <h3>Events you're attending</h3>
+              <div className="marginTop">
+                <Grid container spacing={3}>
+                  {allEvents.map((item, index) => {
+                    if (item.attendinglist.includes(user.username)) {
+                      let date = new Date(item.date).toDateString();
+                      return (
+                        <div className="maxWidth">
+                          <Card
+                            key={index}
+                            date={date}
+                            item={item}
+                            userLeftSide
+                          />
+                        </div>
+                      );
+                    }
+                  })}
+                </Grid>
+              </div>
+            </section>
           </section>
         </List>
+
         <Divider />
       </Drawer>
       <main

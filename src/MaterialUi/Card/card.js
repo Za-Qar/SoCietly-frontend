@@ -79,7 +79,7 @@ export default function EventCard({
   item,
   myEvents,
   fetchUserEvents,
-  setUserEvents,
+  userLeftSide,
 }) {
   /*--------Props--------*/
   const {
@@ -280,43 +280,44 @@ export default function EventCard({
     setIconColour();
   }, [attentingGet, likeGet]);
 
-  return (
-    <Card className={cn(classes.root, hideCard)}>
-      <CardHeader
-        avatar={
-          <Avatar aria-label="recipe">
-            <UserImage user={eventUser} width={"100%"} />
-          </Avatar>
-        }
-        // action={
-        //   <IconButton aria-label="settings">
-        //     <MoreVertIcon />
-        //   </IconButton>
-        // }
-        title={
-          <Link to={`/bootcamper/${id}`} className="cardName">
-            {name} {surname}
-          </Link>
-        }
-        // subheader={date}
-      />
-      <div className="cardContainer cardTitle">
-        <Link to={`/event/${eventid}`}>{eventname}</Link>
-        <br />
-        <p>{date}</p>
-      </div>
-
-      <div className="cardContainer">
-        <Image
-          key={key}
-          cloudName="falcons"
-          publicId={image}
-          width="300"
-          crop="scale"
-          className="img"
+  if (!userLeftSide) {
+    return (
+      <Card className={cn(classes.root, hideCard)}>
+        <CardHeader
+          avatar={
+            <Avatar aria-label="recipe">
+              <UserImage user={eventUser} width={"100%"} />
+            </Avatar>
+          }
+          // action={
+          //   <IconButton aria-label="settings">
+          //     <MoreVertIcon />
+          //   </IconButton>
+          // }
+          title={
+            <Link to={`/bootcamper/${id}`} className="cardName">
+              {name} {surname}
+            </Link>
+          }
+          // subheader={date}
         />
-      </div>
-      {/* <CardMedia
+        <div className="cardContainer cardTitle">
+          <Link to={`/event/${eventid}`}>{eventname}</Link>
+          <br />
+          <p>{date}</p>
+        </div>
+
+        <div className="cardContainer">
+          <Image
+            key={key}
+            cloudName="falcons"
+            publicId={image}
+            width="300"
+            crop="scale"
+            className="img"
+          />
+        </div>
+        {/* <CardMedia
         className={classes.media}
         image={
           <Image
@@ -330,94 +331,110 @@ export default function EventCard({
         title="Paella dish"
       /> */}
 
-      <CardContent>
-        <Typography variant="body2" color="textSecondary" component="p">
-          People attending this event:
-          <br />
-          {attendinglist?.includes(user?.username)
-            ? "You"
-            : attentingGet?.join(", ")}
-        </Typography>
-      </CardContent>
-      <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites" onClick={addLikes}>
-          <FavoriteIcon className={redLike} />
-          {propLike?.length}
-        </IconButton>
-        <IconButton>
-          <HowToRegIcon onClick={addToAttending} className={attendingYellow} />
-          {/* {attendinglist?.length} */}
-          {attentingGet?.length}
-        </IconButton>
-        {myEvents && (
-          <IconButton
-            onClick={() =>
-              hide === "hide" ? setHide("show") : setHide("hide")
-            }
-          >
-            <EditIcon />
-          </IconButton>
-        )}
-
-        {myEvents && (
-          <IconButton
-            onClick={() => {
-              deleteEvent(eventid);
-            }}
-          >
-            <DeleteForeverIcon />
-          </IconButton>
-        )}
-
-        <IconButton
-          className={clsx(classes.expand, {
-            [classes.expandOpen]: expanded,
-          })}
-          onClick={handleExpandClick}
-          aria-expanded={expanded}
-          aria-label="show more"
-        >
-          <ExpandMoreIcon />
-        </IconButton>
-      </CardActions>
-      <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
-          <Typography paragraph>{description}</Typography>
-          {eventlink && (
-            <div>
-              <h3>Event Link:</h3>
-              <a href={eventlink}>
-                <Typography paragraph>{eventlink}</Typography>
-              </a>
-            </div>
-          )}
-          {!eventlink && <Maps marker={marker} setMarker={setMarker} />}
+          <Typography variant="body2" color="textSecondary" component="p">
+            People attending this event:
+            <br />
+            {attendinglist?.includes(user?.username)
+              ? "You"
+              : attentingGet?.join(", ")}
+          </Typography>
         </CardContent>
-      </Collapse>
+        <CardActions disableSpacing>
+          <IconButton aria-label="add to favorites" onClick={addLikes}>
+            <FavoriteIcon className={redLike} />
+            {propLike?.length}
+          </IconButton>
+          <IconButton>
+            <HowToRegIcon
+              onClick={addToAttending}
+              className={attendingYellow}
+            />
+            {/* {attendinglist?.length} */}
+            {attentingGet?.length}
+          </IconButton>
+          {myEvents && (
+            <IconButton
+              onClick={() =>
+                hide === "hide" ? setHide("show") : setHide("hide")
+              }
+            >
+              <EditIcon />
+            </IconButton>
+          )}
 
-      <section className={hide}>
-        <CreateEvent
-          attendinglist={attendinglist}
-          date={date}
-          description={description}
-          enablevolunteers={enablevolunteers}
-          eventname={eventname}
-          eventtype={eventtype}
-          id={id}
-          image={image}
-          likes={likes}
-          location={location}
-          time={time}
-          uid={uid}
-          volunteerlist={volunteerlist}
-          eventsEdit
-          eventId={eventid}
-          userId={user?.uid}
-          hide={hide}
-          setHide={setHide}
-          fetchUserEvents={fetchUserEvents}
-        />
-      </section>
-    </Card>
-  );
+          {myEvents && (
+            <IconButton
+              onClick={() => {
+                deleteEvent(eventid);
+              }}
+            >
+              <DeleteForeverIcon />
+            </IconButton>
+          )}
+
+          <IconButton
+            className={clsx(classes.expand, {
+              [classes.expandOpen]: expanded,
+            })}
+            onClick={handleExpandClick}
+            aria-expanded={expanded}
+            aria-label="show more"
+          >
+            <ExpandMoreIcon />
+          </IconButton>
+        </CardActions>
+        <Collapse in={expanded} timeout="auto" unmountOnExit>
+          <CardContent>
+            <Typography paragraph>{description}</Typography>
+            {eventlink && (
+              <div>
+                <h3>Event Link:</h3>
+                <a href={eventlink}>
+                  <Typography paragraph>{eventlink}</Typography>
+                </a>
+              </div>
+            )}
+            {!eventlink && <Maps marker={marker} setMarker={setMarker} />}
+          </CardContent>
+        </Collapse>
+
+        <section className={hide}>
+          <CreateEvent
+            attendinglist={attendinglist}
+            date={date}
+            description={description}
+            enablevolunteers={enablevolunteers}
+            eventname={eventname}
+            eventtype={eventtype}
+            id={id}
+            image={image}
+            likes={likes}
+            location={location}
+            time={time}
+            uid={uid}
+            volunteerlist={volunteerlist}
+            eventsEdit
+            eventId={eventid}
+            userId={user?.uid}
+            hide={hide}
+            setHide={setHide}
+            fetchUserEvents={fetchUserEvents}
+          />
+        </section>
+      </Card>
+    );
+  } else if (userLeftSide) {
+    return (
+      <div className="attendingContainer">
+        <Card className={cn(classes.root, hideCard)}>
+          <div className="cardContainer attendingStyle">
+            <Link to={`/event/${eventid}`}>{eventname}</Link>
+            <br />
+            <p>{date}</p>
+          </div>
+        </Card>
+      </div>
+    );
+  }
 }
