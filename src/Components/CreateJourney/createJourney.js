@@ -4,9 +4,6 @@ import { Redirect } from "react-router-dom";
 import { useForm, Controller } from "react-hook-form";
 import { Link } from "react-router-dom";
 
-//Config
-import { url } from "../../config";
-
 //Context
 import { useAuthContext } from "../../Context/authContext";
 import { useUserContext } from "../../Context/userContext";
@@ -59,7 +56,9 @@ export default function CreateJourney({ signup, setSignup }) {
   useEffect(() => {
     async function getUser() {
       if (authUser) {
-        const res = await fetch(`${url}users/?email=${authUser.email}`);
+        const res = await fetch(
+          `https://falcon5ives.herokuapp.com/users/?email=${authUser.email}`
+        );
         console.log("fetch");
         const data = await res.json();
 
@@ -92,7 +91,7 @@ export default function CreateJourney({ signup, setSignup }) {
       description: description,
     };
 
-    fetch(`${url}/journeys`, {
+    fetch(`https://falcon5ives.herokuapp.com/journeys`, {
       method: "POST",
       body: JSON.stringify(newJourney),
       headers: { "Content-Type": "application/json" },
@@ -108,9 +107,40 @@ export default function CreateJourney({ signup, setSignup }) {
       .catch((error) => console.log("user creation error error: ", error));
   }
 
+  // function handleAddJourney() {
+  //   setPendingJourney(false);
+  //   setAddJourney(true);
+  // }
+
   if (waiting) {
     return <Loading />;
   }
+
+  // if (pendingJourney) {
+  //   return (
+  //     <div className="addAnotherContainer">
+  //       <p>Would you like to add another journey entry?</p>
+  //       <div className="journeyButtonAligner">
+  //         <button
+  //           onClick={() => {
+  //             setUser(null);
+  //             setSignup(false);
+  //             setPendingJourney(false);
+  //           }}
+  //           className="button halfWidthJourney noMargin"
+  //         >
+  //           No
+  //         </button>
+  //         <button
+  //           onClick={handleAddJourney}
+  //           className="button-cancel halfWidthJourney yesMargin"
+  //         >
+  //           Yes
+  //         </button>
+  //       </div>
+  //     </div>
+  //   );
+  // }
 
   return (
     <div className="singupContainer">
