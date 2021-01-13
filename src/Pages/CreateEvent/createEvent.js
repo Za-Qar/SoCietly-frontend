@@ -44,6 +44,9 @@ function CreateEvent({
   setHide,
 
   description,
+  eventname,
+  time,
+  date,
 }) {
   const useStyles = makeStyles((theme) => ({
     formControl: {
@@ -171,7 +174,7 @@ function CreateEvent({
                       }
                       control={control}
                       rules={{ required: "Required" }}
-                      // defaultValue={}
+                      defaultValue={eventname}
                     />
                   </FormControl>
                 </Grid>
@@ -185,6 +188,7 @@ function CreateEvent({
                     ref={register}
                     required
                     className={cn(style.maxWidth, style.dateInput)}
+                    defaultValue={date}
                   />
                 </Grid>
 
@@ -197,6 +201,7 @@ function CreateEvent({
                     ref={register}
                     required
                     className={cn(style.maxWidth, style.dateInput)}
+                    defaultValue={time}
                   />
                 </Grid>
 
