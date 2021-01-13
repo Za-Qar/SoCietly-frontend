@@ -4,4 +4,10 @@
   margin-right: 12rem;
   margin-bottom: 5rem;
   width: auto;
+  margin-top: 6rem;
+}
+
+.welcome h3 {
+  color: #31986a;
+  margin-top: 0;
 }

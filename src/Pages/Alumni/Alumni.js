@@ -17,7 +17,6 @@ import InputLabel from "@material-ui/core/InputLabel";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 
-
 export default function GetAllAlumni() {
   const [allAlumni, setAllAlumni] = useState([]);
   const [filter, setFilter] = useState(null);
@@ -44,7 +43,9 @@ export default function GetAllAlumni() {
 
   return (
     <div className={style.container}>
-      <h3>Alumni</h3>
+      <div className={style.welcome}>
+        <h3>Check out your fellow Alumni</h3>
+      </div>
       <div>
         {/* <label for="filter">Filter by Cohort</label>
         <br /> */}

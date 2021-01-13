@@ -7,7 +7,7 @@
 .modalHeader {
   padding: 10px 18px;
   width: 100%;
-  background-color: #31986a;
+  /* background-color: #31986a; */
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
   color: white;
@@ -19,4 +19,28 @@
   margin-bottom: 2rem;
   border-radius: 5px;
   box-shadow: 0 2px 5px rgb(0 0 0 / 9%);
+}
+
+.cohort1 {
+  background-color: #bcd926;
+}
+
+.cohort2 {
+  background-color: #bf4051;
+}
+
+.cohort3 {
+  background-color: #7ab4c8;
+}
+
+.cohort4 {
+  background-color: #ae80de;
+}
+
+.cohort5 {
+  background-color: #e2a31d;
+}
+
+.defaultCohort {
+  background-color: #31986a;
 }
