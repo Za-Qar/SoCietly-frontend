@@ -162,7 +162,7 @@ function CreateEvent({
 
   if (!complete) {
     return (
-      <div className="createContainer">
+      <div className="contentContainer">
         <div className={style.closeButtonContainer}>
           {eventsEdit && (
             <button
