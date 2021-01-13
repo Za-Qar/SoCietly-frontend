@@ -132,10 +132,12 @@ export default function EventCard({
   // const [like, setLike] = useState(0);
   const [redLike, setRedLike] = useState("");
   const [likeGet, setLikeGet] = useState([]);
+  const [propLike, setPropLike] = useState([]);
 
   function getAttenting() {
     setAttedingGet(attendinglist);
-    setLikeGet(likes);
+    setPropLike(likes);
+    setLikeGet(propLike);
   }
   useEffect(() => {
     getAttenting();
@@ -225,19 +227,22 @@ export default function EventCard({
   - If person's name is in the array then remove it
   */
   function addLikes() {
-    if (likes?.includes(user.username)) {
-      let index = likes.indexOf(user.username);
-      let removeLike = [...likes.slice(0, index), ...likes.slice(index + 1)];
+    if (propLike?.includes(user.username)) {
+      let index = propLike.indexOf(user.username);
+      let removeLike = [
+        ...propLike.slice(0, index),
+        ...propLike.slice(index + 1),
+      ];
       setLikeGet(removeLike);
-      setLikeGet(removeLike);
+      setPropLike(removeLike);
       setRedLike("");
       console.log("red like should be nothing here");
       addToLike(eventid, removeLike);
     } else {
-      let likesArr = [...likes, `${user.username}`];
+      let likesArr = [...propLike, `${user.username}`];
       console.log(likes);
       setLikeGet(likesArr);
-      setLikeGet(likesArr);
+      setPropLike(likesArr);
       setRedLike("red");
       addToLike(eventid, likesArr);
     }
@@ -337,7 +342,7 @@ export default function EventCard({
       <CardActions disableSpacing>
         <IconButton aria-label="add to favorites" onClick={addLikes}>
           <FavoriteIcon className={redLike} />
-          {likeGet?.length}
+          {propLike?.length}
         </IconButton>
         <IconButton>
           <HowToRegIcon onClick={addToAttending} className={attendingYellow} />
