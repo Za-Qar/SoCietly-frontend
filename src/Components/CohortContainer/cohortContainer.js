@@ -1,10 +1,13 @@
 import UserInfo from "../../Components/UserInfo/userinfo";
 import style from "./cohort.module.css";
+import cn from "classnames";
 
 export default function CohortContainer({ allAlumni, cohortValue }) {
   return (
-    <div>
-      <h3>Cohort {cohortValue}</h3>
+    <div className={cn(style.cohortContainer)}>
+      <div className={cn(style.modalHeader)}>
+        <h3>Cohort {cohortValue}</h3>
+      </div>
       <div className={style.alumniContainer}>
         {allAlumni &&
           allAlumni.map((item, index) => {

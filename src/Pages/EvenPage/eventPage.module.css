@@ -1,7 +1,7 @@
 .eventPage {
-  margin-left: 20rem;
-  margin-right: 20rem;
-  margin-bottom: 5rem;
+  display: flex;
+  margin: auto;
+  width: 80%;
 }
 
 .eventPageContainer {

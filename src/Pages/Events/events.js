@@ -11,6 +11,9 @@ import UserLeftSide from "../../Components/userLeftSide/userLeftSide.js";
 
 // Material Ui
 import Card from "../../MaterialUi/Card/card.js";
+import InputLabel from "@material-ui/core/InputLabel";
+import Select from "@material-ui/core/Select";
+import MenuItem from "@material-ui/core/MenuItem";
 
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
@@ -28,7 +31,7 @@ function GetAllEvents() {
 
   const [allEvents, setAllEvents] = useState([]);
   const [attendingList, setAttendingList] = useState([]);
-  const [filerValue, setFilterValue] = useState("");
+  const [filterValue, setFilterValue] = useState("");
 
   function getEventType(event) {
     let eventTypeArr = event.map((event) => event.eventtype);
@@ -119,7 +122,7 @@ function GetAllEvents() {
                   </Link>
                 </div>
 
-                <div>
+                {/* <div>
                   <p for="filter">Filter by event type:</p>
                   <select
                     name="filter"
@@ -134,6 +137,28 @@ function GetAllEvents() {
                       return <option value={event}>{event}</option>;
                     })}
                   </select>
+                </div> */}
+                <div className="marginBottom">
+                  <InputLabel
+                    shrink
+                    id="demo-simple-select-placeholder-label-label"
+                  >
+                    Filter by Event Type
+                  </InputLabel>
+                  <Select
+                    labelId="demo-simple-select-placeholder-label-label"
+                    id="demo-simple-select-placeholder-label"
+                    value={filterValue ? filterValue : "all"}
+                    onChange={(e) => {
+                      filter(e.target.value);
+                      setFilterValue(e.target.value);
+                    }}
+                  >
+                    <MenuItem value={"all"}>All</MenuItem>
+                    {getEventType(allEvents).map((event) => {
+                      return <MenuItem value={event}>{event}</MenuItem>;
+                    })}
+                  </Select>
                 </div>
 
                 <section className={`contentContainer ${hideEducation}`}>
