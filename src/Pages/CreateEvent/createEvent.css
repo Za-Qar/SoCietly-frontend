@@ -15,7 +15,7 @@
   position: relative;
   border-radius: 50%;
   box-sizing: content-box;
-  border: 4px solid white;
+  border: 4px solid #f6f7f9;
 }
 .success-checkmark .check-icon::before {
   top: 3px;
@@ -37,7 +37,7 @@
   content: "";
   height: 100px;
   position: absolute;
-  background: white;
+  background: #f6f7f9;
   transform: rotate(-45deg);
 }
 .success-checkmark .check-icon .icon-line {
@@ -81,7 +81,7 @@
   height: 85px;
   position: absolute;
   transform: rotate(-45deg);
-  background-color: white;
+  background-color: #f6f7f9;
 }
 @keyframes rotate-circle {
   0% {

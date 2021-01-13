@@ -99,10 +99,9 @@ export default function JobUpdates() {
                 <i></i>
                 <i></i>
               </div>
-              {/* <p className={style.hoverme}>
-                🎉
-                <br /> {item.name} {item.surname} started a new job!
-              </p> */}
+              <p className={style.name}>
+                {item.name} {item.surname} started a new job!
+              </p>
               <h5 className={style.title}>
                 {" "}
                 {item.jobtitle} at {item.employer}

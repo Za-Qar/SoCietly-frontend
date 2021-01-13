@@ -83,7 +83,8 @@ const useStyles = makeStyles((theme) => ({
   },
   drawerPaper: {
     width: drawerWidth,
-    border: "0.5px solid rgba(0, 0, 0, 0.5)",
+    boxShadow: "0 2px 5px rgb(0 0 0 / 9%)",
+    borderRadius: "5px",
     marginTop: "5rem",
   },
   drawerHeader: {

@@ -312,7 +312,7 @@ export default function EventCard({
             key={key}
             cloudName="falcons"
             publicId={image}
-            width="300"
+            width="1500"
             crop="scale"
             className="img"
           />
@@ -336,7 +336,7 @@ export default function EventCard({
             People attending this event:
             <br />
             {attendinglist?.includes(user?.username)
-              ? "You"
+              ? `${attentingGet?.join(", ")}`
               : attentingGet?.join(", ")}
           </Typography>
         </CardContent>
@@ -420,6 +420,7 @@ export default function EventCard({
             hide={hide}
             setHide={setHide}
             fetchUserEvents={fetchUserEvents}
+            editEvent
           />
         </section>
       </Card>

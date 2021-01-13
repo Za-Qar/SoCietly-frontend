@@ -4,6 +4,10 @@ import React, { useState } from "react";
 import style from "./upload.module.css";
 import cn from "classnames";
 
+// Font-awesome
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCloudUploadAlt } from "@fortawesome/free-solid-svg-icons";
+
 export default function UploadImage({ setImageSelected }) {
   const [fileInputState, setFileInputState] = useState("");
   const [selectedFile, setSelectedFile] = useState("");
@@ -62,8 +66,25 @@ export default function UploadImage({ setImageSelected }) {
 
   return (
     <div>
-      <input type="file" onChange={fileInput} value={selectedFile} />
-
+      <label for="fileUpload">
+        <div
+          className={cn(
+            style.uploadButton,
+            "button-blue",
+            "marginBottom",
+            "maxWidth"
+          )}
+        >
+          <FontAwesomeIcon icon={faCloudUploadAlt} /> Choose Event Image
+        </div>
+      </label>
+      <input
+        type="file"
+        onChange={fileInput}
+        value={selectedFile}
+        className={cn(style.inputButton)}
+        id="fileUpload"
+      />
       {previewSource && (
         <img
           src={previewSource}

@@ -210,7 +210,7 @@ export default function Signup({ signup, setSignup }) {
               </Grid>
 
               {/*----------Cohort----------*/}
-              <Grid item xs={12} sm={6}>
+              <Grid item xs={12}>
                 <InputLabel id="demo-simple-select-label">Cohort</InputLabel>
                 <FormControl variant="outlined" fullWidth>
                   <Controller
@@ -237,7 +237,7 @@ export default function Signup({ signup, setSignup }) {
               </Grid>
 
               {/*----------Admin----------*/}
-              <Grid item xs={12} sm={6}>
+              {/* <Grid item xs={12} sm={6}>
                 <InputLabel id="demo-simple-select-label">Admin</InputLabel>
                 <FormControl variant="outlined" fullWidth>
                   <Controller
@@ -258,7 +258,7 @@ export default function Signup({ signup, setSignup }) {
                     rules={{ required: "Required" }}
                   />
                 </FormControl>
-              </Grid>
+              </Grid> */}
 
               {/*----------Current Role----------*/}
               <Grid item xs={12} sm={6}>
