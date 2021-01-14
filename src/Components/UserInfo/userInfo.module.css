@@ -18,3 +18,7 @@
 .anchor {
   color: black;
 }
+
+.infoMaxWidth {
+  width: 20rem;
+}

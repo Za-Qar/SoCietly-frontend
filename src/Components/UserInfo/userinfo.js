@@ -5,11 +5,11 @@ import style from "./userInfo.module.css";
 import cn from "classnames";
 
 //link
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 import UserImage from "../userImage/userImage";
 
-export default function UserInfo({ user, link, homepageEdit }) {
+export default function UserInfo({ user, link, homepageEdit, alumni }) {
   const {
     uid,
     id,
@@ -27,12 +27,16 @@ export default function UserInfo({ user, link, homepageEdit }) {
 
   return (
     user && (
-      <div className={cn(style.container)}>
+      <div className={cn(style.container, alumni && style.infoMaxWidth)}>
         {link ? (
-          <Link to={`/bootcamper/${id ? id : uid}`}>
+          <NavLink
+            to={`/bootcamper/${id ? id : uid}`}
+            style={{ textDecoration: "none", color: "black" }}
+            activeStyle={{ textDecoration: "none", color: "black" }}
+          >
             <UserImage user={user} />
             <h3>{username ? username : `${name} ${surname}`}</h3>
-          </Link>
+          </NavLink>
         ) : (
           <h3>{username ? username : `${name} ${surname}`}</h3>
         )}

@@ -13,6 +13,11 @@
   width: 30%;
   /* background-color: lightpink; */
 }
+.leftProfile {
+  width: 30%;
+  margin-top: 3rem;
+  /* background-color: lightpink; */
+}
 
 .right {
   width: 70%;
