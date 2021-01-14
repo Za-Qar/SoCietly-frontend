@@ -14,6 +14,9 @@ import { useParams } from "react-router-dom";
 // User context
 import { useUserContext } from "../../Context/userContext";
 
+//Style
+import style from "./eventPage.module.css";
+
 export default function EventPage() {
   // Importing user data
   const [user] = useUserContext();
@@ -63,8 +66,12 @@ export default function EventPage() {
   return user && date ? (
     <div>
       <UserLeftSide />
-      <div className="container">
-        <Card item={event} date={date} />
+      <div className={style.eventPage}>
+        <div className={style.eventPageContainer}>
+          <div className="container">
+            <Card item={event} date={date} />
+          </div>
+        </div>
       </div>
     </div>
   ) : (

@@ -12,6 +12,10 @@
   font-weight: bold;
 }
 
+.topBurger {
+  margin-top: 5rem;
+}
+
 .burgerContent p:hover {
   background-color: #31986a;
   color: white;

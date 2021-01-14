@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 // Testing that the URL brings us to the correct web page
 describe("The Landing Page", () => {
   it("Successfully loads", () => {

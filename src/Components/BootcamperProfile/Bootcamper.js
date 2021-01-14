@@ -72,11 +72,11 @@ export default function BootcamperProfilePage() {
   }, [userData && journey]);
 
   return (
-    <div>
+    <div className="marginTop">
       {bootcamper ? (
         <div className={cn(style.row)}>
           {/* ---Column Left--- */}
-          <div className={cn(style.column, style.left, "marginTop")}>
+          <div className={cn(style.column, style.leftProfile)}>
             <UserInfo user={bootcamper} />
             <UserSkills user={bootcamper} />
           </div>

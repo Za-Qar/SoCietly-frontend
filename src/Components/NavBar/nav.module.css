@@ -16,11 +16,16 @@
   width: 100%;
   min-height: 5rem;
   box-shadow: 0 3px 5px rgb(0 0 0 / 9%);
+  position: fixed;
+  z-index: 1500;
+  top: 0;
 }
 
 .nav {
   width: 100%;
   min-height: 5rem;
+  position: absolute;
+  top: 0;
 }
 
 .nav ul {
