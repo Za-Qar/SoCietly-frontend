@@ -128,8 +128,6 @@ export default function EditProfile({ setEdit, visible }) {
       social: socialArray,
     };
 
-    console.log(newUser);
-
     // Posts user data to backend
     fetch(`${url}/users/${user.uid}`, {
       method: "PATCH",

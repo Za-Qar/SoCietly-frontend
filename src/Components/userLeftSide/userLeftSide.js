@@ -125,7 +125,7 @@ export default function UserLeftSide() {
   async function get() {
     let res = await fetch(`${url}/events`);
     let data = await res.json();
-    console.log(data);
+
     setAllEvents(data.payload);
   }
 

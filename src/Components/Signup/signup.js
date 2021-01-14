@@ -64,13 +64,9 @@ export default function Signup({ signup, setSignup }) {
 
     if (skills.includes(skillInput)) {
       e.preventDefault();
-      console.log("item already added");
       return;
     }
     const newSkill = [...skills, skillInput];
-
-    console.log("this is skill input val: ", skillInput);
-    console.log("this is the newSkill val: ", newSkill);
 
     if (skillInput) {
       const skillsForm = document.getElementById("skills");
@@ -82,7 +78,7 @@ export default function Signup({ signup, setSignup }) {
 
   function deleteSkill(index, e) {
     e.preventDefault();
-    console.log(index);
+
     const newSkills = [...skills.slice(0, index), ...skills.slice(index + 1)];
     setSkills(newSkills);
   }

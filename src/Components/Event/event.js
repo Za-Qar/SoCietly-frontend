@@ -27,9 +27,6 @@ function Event({
 
   fetchUserEvents,
 }) {
-  console.log(styling);
-  console.log(item);
-
   /*--------Props--------*/
   const {
     attendinglist,
@@ -64,8 +61,6 @@ function Event({
     delButClass,
   } = styling;
 
-  console.log(eventid);
-
   /*--------User context--------*/
   const [user] = useUserContext();
 
@@ -95,7 +90,7 @@ function Event({
       }
     }
     let attending = [...attendinglist, `${user.username}`];
-    console.log(attending);
+
     setAttedingGet(attending);
     addToAttend(id, attending);
   }
@@ -127,7 +122,6 @@ function Event({
   // };
   // Click like button to add to likes
   function addLikes() {
-    console.log(like);
     setLike(like + 1);
     // backEndLike(like, id);
   }

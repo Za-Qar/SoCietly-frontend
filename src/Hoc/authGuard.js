@@ -34,21 +34,15 @@ export default function UserSignIn({
 
   const [signup, setSignup] = useState();
 
-  console.log(authUser);
-
-  console.log(user);
-
-  console.log(userData);
-
   useEffect(() => {
     async function getUser() {
       if (authUser) {
         const userPath = `/users/?email=${authUser.email}`;
-        console.log(userPath);
+
         const data = await fetchData(userPath);
-        console.log(data);
+
         const payload = data.payload[0];
-        console.log(payload);
+
         // if data is null - set some not sign up to true
         // if not sign up is true redirect to sign up form
         payload ? setUserData(payload) : setSignup(true);

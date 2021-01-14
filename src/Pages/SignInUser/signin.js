@@ -33,7 +33,7 @@ export default function UserSignIn() {
   return authUser ? (
     <Redirect to={"/"}></Redirect>
   ) : (
-    <div className={cn(style.row)}>
+    <div className={cn(style.row, style.backgroundImage)}>
       <SignInSVG />
       <div className={cn(style.column)}>
         <div className={cn(style.container)}>

@@ -24,8 +24,6 @@ export default function MyEvents({ profile = false }) {
   // fetchUserEvents function result
   const [userEvents, setUserEvents] = useState(null);
 
-  console.log("this is the value of userEvents: ", userEvents);
-
   async function fetchUserEvents() {
     if (user) {
       let res = await fetch(`${url}/userevents/${user?.uid}`);
