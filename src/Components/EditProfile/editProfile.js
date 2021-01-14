@@ -35,7 +35,7 @@ export default function EditProfile({ setEdit, visible }) {
   const [user, setUser] = useUserContext();
 
   // React Form
-  const { register, handleSubmit, watch, errors, control } = useForm();
+  const { register, handleSubmit, watch, errors, control, reset } = useForm();
 
   // State
   const [skills, setSkills] = useState([]);
@@ -71,8 +71,12 @@ export default function EditProfile({ setEdit, visible }) {
       return;
     }
     const newSkill = [...skills, skillInput];
-    setSkills(newSkill);
-    setSkillInput("");
+    if (skillInput) {
+      const skillsForm = document.getElementById("skills");
+      skillsForm.value = "";
+      setSkills(newSkill);
+      setSkillInput("");
+    }
   }
 
   function deleteSkill(index, e) {
@@ -251,23 +255,17 @@ export default function EditProfile({ setEdit, visible }) {
 
           {/*----------Skills Input----------*/}
           <Grid item xs={12} sm={6}>
-            <FormControl
-              variant="outlined"
+            <TextField
+              id="skills"
+              label="Skills"
               fullWidth
               onChange={(e) => setSkillInput(e.target.value)}
-              value={skillInput}
-            >
-              <Controller
-                name="skills"
-                as={<TextField id="skills" label="skills" />}
-                control={control}
-              />
-              <div className="addSkillButtonAligner">
-                <button onClick={(e) => addToSkills(e)} className="button">
-                  Add Skill
-                </button>
-              </div>
-            </FormControl>
+            />
+            <div className="addSkillButtonAligner">
+              <button onClick={(e) => addToSkills(e)} className="button">
+                Add Skill
+              </button>
+            </div>
           </Grid>
 
           {/*----------Skills----------*/}

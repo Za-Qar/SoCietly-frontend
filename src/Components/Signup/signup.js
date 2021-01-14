@@ -52,7 +52,7 @@ export default function Signup({ signup, setSignup }) {
   const [authUser, loading, error] = useAuthContext();
 
   // React Form
-  const { register, handleSubmit, watch, errors, control } = useForm();
+  const { register, handleSubmit, watch, errors, control, reset } = useForm();
 
   // State
   const [complete, setComplete] = useState(false);
@@ -61,6 +61,7 @@ export default function Signup({ signup, setSignup }) {
 
   function addToSkills(e) {
     e.preventDefault();
+
     if (skills.includes(skillInput)) {
       e.preventDefault();
       console.log("item already added");
@@ -71,8 +72,12 @@ export default function Signup({ signup, setSignup }) {
     console.log("this is skill input val: ", skillInput);
     console.log("this is the newSkill val: ", newSkill);
 
-    setSkills(newSkill);
-    setSkillInput("");
+    if (skillInput) {
+      const skillsForm = document.getElementById("skills");
+      skillsForm.value = "";
+      setSkills(newSkill);
+      setSkillInput("");
+    }
   }
 
   function deleteSkill(index, e) {
@@ -300,24 +305,17 @@ export default function Signup({ signup, setSignup }) {
 
               {/*----------Skills Input----------*/}
               <Grid item xs={12} sm={6}>
-                <FormControl
-                  variant="outlined"
+                <TextField
+                  id="skills"
+                  label="Skills"
                   fullWidth
                   onChange={(e) => setSkillInput(e.target.value)}
-                  value={skillInput}
-                >
-                  <Controller
-                    name="skills"
-                    as={<TextField id="skills" label="skills" required />}
-                    control={control}
-                    rules={{ required: "Required" }}
-                  />
-                  <div className="addSkillButtonAligner">
-                    <button onClick={(e) => addToSkills(e)} className="button">
-                      Add Skill
-                    </button>
-                  </div>
-                </FormControl>
+                />
+                <div className="addSkillButtonAligner">
+                  <button onClick={(e) => addToSkills(e)} className="button">
+                    Add Skill
+                  </button>
+                </div>
               </Grid>
 
               {/*----------Skills----------*/}

@@ -72,6 +72,7 @@ export default function NavBar() {
                       alt="School of Code Logo"
                       height="100"
                       width="100"
+                      onClick={changeHide}
                     />
                   </div>
                 </NavLink>

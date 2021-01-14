@@ -42,7 +42,8 @@ export default function UserSignIn() {
             <h3 className={cn(style.logoSubText)}> by SoC</h3>
             <br />
             <button onClick={handleGoogle} className={cn(style.buttonGoogle)}>
-              <FontAwesomeIcon icon={faGoogle} /> Continue with Google
+              <FontAwesomeIcon icon={faGoogle} style={{ marginRight: "7px" }} />{" "}
+              Continue with Google
             </button>
           </div>
         </div>
