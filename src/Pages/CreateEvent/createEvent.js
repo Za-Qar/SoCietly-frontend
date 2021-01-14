@@ -100,9 +100,6 @@ function CreateEvent({
   // };
 
   let createEvent = async (msg) => {
-    console.log("Event data received", msg, marker);
-    console.log("this is the eventId: ", eventId);
-
     if (imageSelected === null) {
       alert(
         "Dear fellow SoC memeber, please upload an image before you submit"
@@ -132,10 +129,28 @@ function CreateEvent({
       .then((res) => res.json())
       .then((data) => console.log("this is the user data: ", data))
       .catch((error) => {
-        console.log("user creation error error: ", error);
+        console.log("event creation error: ", error);
         setError(true);
       });
     setComplete(true);
+
+    console.log("about to send email");
+    await fetch(`http://localhost:3000/mail`, {
+      method: "POST",
+      body: JSON.stringify({
+        to: ["za.qa@outlook.com", "qarout.zaid@gmail.com"],
+        subject: `SoC: ${msg.eventName}`,
+        text: msg.description,
+      }),
+      headers: { "Content-Type": "application/json" },
+    })
+      .then((res) => res.json())
+      .then((data) => console.log("this is the user data: ", data))
+      .catch((error) => {
+        console.log("event email error: ", error);
+        setError(true);
+      });
+    console.log("email should've sent");
   };
 
   function checkUncheck() {
@@ -180,15 +195,8 @@ function CreateEvent({
                       <FormControl variant="outlined" fullWidth>
                         <Controller
                           name="eventName"
-                          as={
-                            <TextField
-                              id="eventName"
-                              label="Event Name"
-                              required
-                            />
-                          }
+                          as={<TextField id="eventName" label="Event Name" />}
                           control={control}
-                          rules={{ required: "Required" }}
                           defaultValue={eventname}
                         />
                       </FormControl>
