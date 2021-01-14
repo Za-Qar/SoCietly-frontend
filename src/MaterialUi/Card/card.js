@@ -110,8 +110,6 @@ export default function EventCard({
     cohort: cohort,
     id: id,
   };
-  console.log(item);
-  console.log(attendinglist);
 
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
@@ -145,7 +143,6 @@ export default function EventCard({
 
   /*---------------Add to Attend Patch----------------*/
   let addToAttend = (eventid, arr) => {
-    console.log(eventid, arr);
     fetch(`${url}/events/${eventid}`, {
       method: "PATCH",
       body: JSON.stringify({ attendingList: arr }),
@@ -163,7 +160,7 @@ export default function EventCard({
       }
     }
     let attending = [...attendinglist, `${user.username}`];
-    console.log(attending);
+
     setAttedingGet(attending);
     setAttendingYellow("yellow");
     addToAttend(eventid, attending);
@@ -176,7 +173,6 @@ export default function EventCard({
 
   // Delete Event
   async function deleteEvent(eventId) {
-    console.log("clicked");
     //linting rule which is why confirm doesn't work.
     //I can still window.confirm
     confirmAlert({
@@ -236,11 +232,11 @@ export default function EventCard({
       setLikeGet(removeLike);
       setPropLike(removeLike);
       setRedLike("");
-      console.log("red like should be nothing here");
+
       addToLike(eventid, removeLike);
     } else {
       let likesArr = [...propLike, `${user.username}`];
-      console.log(likes);
+
       setLikeGet(likesArr);
       setPropLike(likesArr);
       setRedLike("red");

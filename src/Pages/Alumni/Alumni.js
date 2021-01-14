@@ -33,7 +33,7 @@ export default function GetAllAlumni() {
   async function getUserInfo() {
     let res = await fetch(`${url}/users`);
     let data = await res.json();
-    console.log(data);
+
     setAllAlumni(data.payload);
   }
 

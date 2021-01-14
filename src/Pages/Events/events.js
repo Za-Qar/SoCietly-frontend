@@ -35,7 +35,7 @@ function GetAllEvents() {
 
   function getEventType(event) {
     let eventTypeArr = event.map((event) => event.eventtype);
-    console.log(eventTypeArr);
+
     return eventTypeArr.reduce((acc, curr) => {
       if (acc.find((value) => value === curr)) {
         return acc;
@@ -48,7 +48,6 @@ function GetAllEvents() {
 
   /*---------------Add to Attend Patch----------------*/
   let addToAttend = (id, arr) => {
-    console.log(id, arr);
     fetch(`${url}/events/${id}`, {
       method: "PATCH",
       body: JSON.stringify({ attendingList: arr }),
@@ -62,7 +61,7 @@ function GetAllEvents() {
   async function get() {
     let res = await fetch(`${url}/events`);
     let data = await res.json();
-    console.log(data);
+
     setAllEvents(data.payload);
   }
 

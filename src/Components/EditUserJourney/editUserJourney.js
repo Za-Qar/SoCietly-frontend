@@ -47,8 +47,6 @@ export default function EditJourney({
       description: description,
     };
 
-    console.log(newJourney);
-
     fetch(`${url}/journeys/${id}`, {
       method: "PATCH",
       body: JSON.stringify(newJourney),

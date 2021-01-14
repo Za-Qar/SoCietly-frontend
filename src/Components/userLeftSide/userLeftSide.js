@@ -86,6 +86,7 @@ const useStyles = makeStyles((theme) => ({
     boxShadow: "0 2px 5px rgb(0 0 0 / 9%)",
     borderRadius: "5px",
     marginTop: "5rem",
+    zIndex: "500",
   },
   drawerHeader: {
     display: "flex",
@@ -124,7 +125,7 @@ export default function UserLeftSide() {
   async function get() {
     let res = await fetch(`${url}/events`);
     let data = await res.json();
-    console.log(data);
+
     setAllEvents(data.payload);
   }
 
