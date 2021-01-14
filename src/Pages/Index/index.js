@@ -67,17 +67,14 @@ export default function Index() {
           exact
         />
 
-        <Route path={"/landing"} exact>
+        {/* <Route path={"/landing"} exact>
           <Landing />
-        </Route>
+        </Route> */}
 
         <Route path={"/loading"} exact>
           <Loading />
         </Route>
 
-        <Route path={"/logo"} exact>
-          <SiteLogo />
-        </Route>
         <AuthGuard
           component={EventPage}
           path={"/event/:id"}

@@ -52,7 +52,7 @@ export default function Signup({ signup, setSignup }) {
   const [authUser, loading, error] = useAuthContext();
 
   // React Form
-  const { register, handleSubmit, watch, errors, control, reset } = useForm();
+  const { register, handleSubmit, watch, errors, control } = useForm();
 
   // State
   const [complete, setComplete] = useState(false);
@@ -336,12 +336,12 @@ export default function Signup({ signup, setSignup }) {
                       </ul>
                     }
                     control={control}
-                    rules={{ required: "Required" }}
+                    // rules={{ required: "Required" }}
                   />
                 </FormControl>
               </Grid>
 
-              {/*----------Scoial Links----------*/}
+              {/*----------Intro----------*/}
               <Grid item xs={12}>
                 <FormControl variant="outlined" fullWidth>
                   <Controller
