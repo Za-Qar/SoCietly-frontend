@@ -159,7 +159,7 @@ export default function EventCard({
   function addToAttending() {
     for (let i = 0; i <= attendinglist.length; i++) {
       if (attendinglist[i] === `${user.username}`) {
-        return alert("You've already decalred you're attending :)");
+        return alert("You've already declared you're attending :)");
       }
     }
     let attending = [...attendinglist, `${user.username}`];
