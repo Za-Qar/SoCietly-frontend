@@ -34,7 +34,9 @@ export default function UserSignIn() {
     <Redirect to={"/"}></Redirect>
   ) : (
     <div className={cn(style.row)}>
-      <SignInSVG />
+      <div>
+        <SignInSVG />
+      </div>
       <div className={cn(style.column)}>
         <div className={cn(style.container)}>
           <div className={cn(style.content)}>
