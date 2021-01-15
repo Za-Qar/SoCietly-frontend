@@ -155,7 +155,7 @@ function CreateEvent({
       }
     )
       .then((res) => res.json())
-      .then((data) => sendEmail(data, msg))
+      // .then((data) => sendEmail(data, msg))
       .catch((error) => {
         console.log("event creation error: ", error);
         setError(true);

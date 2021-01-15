@@ -208,7 +208,7 @@ export default function EventCard({
             })
               .then((res) => res.json())
               .then((data) => console.log(data))
-              .then(() => deleteEmail())
+              // .then(() => deleteEmail())
               .catch((error) => console.log(error));
           },
         },
