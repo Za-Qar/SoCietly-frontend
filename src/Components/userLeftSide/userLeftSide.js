@@ -11,6 +11,8 @@ import { useUserContext } from "../../Context/userContext";
 //Config
 import { url } from "../../config";
 
+import cn from "classnames";
+
 // export default function UserLeftSide() {
 //   const [user, setUser] = useUserContext();
 //   return (
@@ -195,24 +197,26 @@ export default function UserLeftSide() {
 
             <section className={`contentContainer`}>
               <h3>Events you're attending</h3>
-              <div className="marginTop">
-                <Grid container spacing={3}>
-                  {allEvents.map((item, index) => {
-                    if (item.attendinglist.includes(user.username)) {
-                      let date = new Date(item.date).toDateString();
-                      return (
-                        <div className="maxWidth">
-                          <Card
-                            key={index}
-                            date={date}
-                            item={item}
-                            userLeftSide
-                          />
-                        </div>
-                      );
-                    }
-                  })}
-                </Grid>
+              <div className={style.scroll}>
+                <div className={style.marginTop}>
+                  <Grid container spacing={3}>
+                    {allEvents.map((item, index) => {
+                      if (item.attendinglist.includes(user.username)) {
+                        let date = new Date(item.date).toDateString();
+                        return (
+                          <div className="maxWidth">
+                            <Card
+                              key={index}
+                              date={date}
+                              item={item}
+                              userLeftSide
+                            />
+                          </div>
+                        );
+                      }
+                    })}
+                  </Grid>
+                </div>
               </div>
             </section>
           </section>

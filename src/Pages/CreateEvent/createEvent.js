@@ -1,5 +1,5 @@
 // React
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useForm, Controller } from "react-hook-form";
 
@@ -85,54 +85,79 @@ function CreateEvent({
   const [marker, setMarker] = useState(null);
   const [eventLinkForm, setEventLinkForm] = useState("");
 
-  // const createEvent = async (e) => {
-  //   e.preventDefault();
-  //   await fetch(`http://localhost:3000/users/imageupload`, {
-  //     method: "POST",
-  //     body: JSON.stringify({
-  //       image: imageSelected,
-  //     }),
-  //     headers: { "content-type": "application/json" },
-  //   })
-  //     .then((res) => res.json())
-  //     .then((data) => console.log("this is the image upload data: ", data))
-  //     .catch((error) => console.log("image upload error: ", error));
-  // };
+  // All user emails
+  const [userEmails, setUserEmail] = useState("");
 
+  // Get user emails
+  let getAllUserEmails = async () => {
+    let res = await fetch(`${url}/users`);
+    let data = await res.json();
+
+    return data.payload.map((user) => {
+      setUserEmail(user.email);
+    });
+  };
+
+  useEffect(() => {
+    getAllUserEmails();
+  }, []);
+
+  // Send email function
+  async function sendEmail(data, msg) {
+    if (msg.description === undefined) {
+      msg.description = "";
+    } else {
+      msg.description = msg.description + ".";
+    }
+    await fetch(`http://localhost:3000/mail`, {
+      method: "POST",
+      body: JSON.stringify({
+        to: ["za.qa@outlook.com", "qarout.zaid@gmail.com"],
+        subject: `SoC: ${msg.eventName}`,
+        text: `${user.username} has created a new School of Code event. ${msg.description} You can view more details here: https://societly.netlify.app/event/${data.eventid}`,
+      }),
+      headers: { "Content-Type": "application/json" },
+    })
+      .then((res) => res.json())
+      .then((data) => console.log("this is the user data: ", data))
+      .catch((error) => console.log("event creation error: ", error));
+  }
+
+  // PATCH/POST Event
   let createEvent = async (msg) => {
-    console.log("Event data received", msg, marker);
-    console.log("this is the eventId: ", eventId);
-
-    if (imageSelected === null) {
+    if (imageSelected === null && !eventsEdit) {
       alert(
         "Dear fellow SoC memeber, please upload an image before you submit"
       );
       return;
     }
 
-    await fetch(eventsEdit ? `${url}/events/${eventId}` : `${url}/events/`, {
-      method: eventsEdit ? "PATCH" : "POST",
-      body: JSON.stringify({
-        eventName: msg.eventName,
-        eventType: msg.eventTypes,
-        uid: user.uid,
-        date: msg.date,
-        time: msg.time,
-        description: msg.description,
-        image: imageSelected,
-        location: marker,
-        enableVolunteers: msg.eventVolunteers,
-        attendingList: eventsEdit ? null : [],
-        likes: eventsEdit ? null : [],
-        volunteerList: eventsEdit ? null : [],
-        eventLink: eventsEdit ? null : eventLinkForm,
-      }),
-      headers: { "Content-Type": "application/json" },
-    })
+    await fetch(
+      eventsEdit ? `${url}/events/${eventId}` : `http://localhost:3000/events/`,
+      {
+        method: eventsEdit ? "PATCH" : "POST",
+        body: JSON.stringify({
+          eventName: msg.eventName,
+          eventType: msg.eventTypes,
+          uid: user.uid,
+          date: msg.date,
+          time: msg.time,
+          description: msg.description,
+          image: imageSelected,
+          location: marker,
+          enableVolunteers: msg.eventVolunteers,
+          attendingList: eventsEdit ? null : [],
+          likes: eventsEdit ? null : [],
+          volunteerList: eventsEdit ? null : [],
+          eventLink: eventsEdit ? null : eventLinkForm,
+        }),
+        headers: { "Content-Type": "application/json" },
+      }
+    )
       .then((res) => res.json())
-      .then((data) => console.log("this is the user data: ", data))
+      .then((data) => sendEmail(data, msg))
       .catch((error) => {
-        console.log("user creation error error: ", error);
+        console.log("event creation error: ", error);
         setError(true);
       });
     setComplete(true);
@@ -180,15 +205,8 @@ function CreateEvent({
                       <FormControl variant="outlined" fullWidth>
                         <Controller
                           name="eventName"
-                          as={
-                            <TextField
-                              id="eventName"
-                              label="Event Name"
-                              required
-                            />
-                          }
+                          as={<TextField id="eventName" label="Event Name" />}
                           control={control}
-                          rules={{ required: "Required" }}
                           defaultValue={eventname}
                         />
                       </FormControl>
