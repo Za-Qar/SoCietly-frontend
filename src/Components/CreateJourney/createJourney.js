@@ -59,7 +59,7 @@ export default function CreateJourney({ signup, setSignup }) {
         const res = await fetch(
           `https://falcon5ives.herokuapp.com/users/?email=${authUser.email}`
         );
-        console.log("fetch");
+
         const data = await res.json();
 
         const payload = data.payload[0];
@@ -73,7 +73,6 @@ export default function CreateJourney({ signup, setSignup }) {
   useEffect(() => {
     setTimeout(() => {
       setWaiting(false);
-      console.log("timeout complete");
     }, 3000);
   }, []);
 

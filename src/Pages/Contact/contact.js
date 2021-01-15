@@ -11,6 +11,10 @@ export default function Contact() {
       <br />
       <Intro name="chris" />
       <br />
+      <Intro name="lucyrose" />
+      <br />
+      <Intro name="devon" />
+      <br />
       <Intro name="ben" />
       <br />
       <Intro name="tim" />

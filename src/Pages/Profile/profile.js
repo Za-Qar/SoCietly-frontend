@@ -23,9 +23,6 @@ export default function ProfilePage() {
 
   const { id } = useParams();
 
-  console.log(userData);
-  console.log(user);
-
   useEffect(() => {
     async function getUser() {
       if (id) {

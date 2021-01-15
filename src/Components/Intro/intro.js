@@ -143,6 +143,28 @@ export default function Intro({ name }) {
           </div>
         </div>
       );
+    case "devon":
+      return (
+        <div className={style.main}>
+          <Photo photo="devon" />
+          <h3>Devon Geary</h3>
+          <p>
+            NEED TO FND THIS OUT
+            <br />
+            <br />
+            WAITING FOR THIS TOO
+          </p>
+          <div className={style.socials}>
+            <a
+              href="linkedin.com/in/devon-geary"
+              rel="noreferrer"
+              target="_blank"
+            >
+              <Logo logo="linkedin" />
+            </a>
+          </div>
+        </div>
+      );
     case "james":
       return (
         <div className={style.main}>
@@ -259,6 +281,42 @@ export default function Intro({ name }) {
             &nbsp;&nbsp;
             <a
               href="https://twitter.com/EdropLiz"
+              rel="noreferrer"
+              target="_blank"
+            >
+              <Logo logo="twitter" />
+            </a>
+          </div>
+        </div>
+      );
+    case "lucyrose":
+      return (
+        <div className={style.main}>
+          <Photo photo="lucyrose" />
+          <h3>Lucy-Rose Walker</h3>
+          <p>
+            Chief Operating Officer
+            <br />
+            <br />
+            With a background in psychology and a history of working with
+            business start-ups I co-founded Entrepreneurial Spark (ES) in 2012
+            enabling the mindset of over 4000 entrepreneurs in 12 accelerator
+            Hubs across the UK. I’m now supporting the entrepreneurial teaching
+            of tech to diverse groups of people at School of Code, helping get
+            more and different people into tech. I love long walks with my fur
+            baby and cooking (and eating!) Mexican food.
+          </p>
+          <div className={style.socials}>
+            <a
+              href="https://www.linkedin.com/in/lucyrosewalker/"
+              rel="noreferrer"
+              target="_blank"
+            >
+              <Logo logo="linkedin" />
+            </a>
+            &nbsp;&nbsp;
+            <a
+              href="https://twitter.com/LucyRoseW"
               rel="noreferrer"
               target="_blank"
             >

@@ -44,8 +44,6 @@ export default function AddNewJourney({ setAddJourney, addNewJourney }) {
       description: description,
     };
 
-    console.log(newJourney);
-
     fetch(`${url}/journeys`, {
       method: "POST",
       body: JSON.stringify(newJourney),

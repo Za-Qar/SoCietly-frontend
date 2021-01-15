@@ -61,23 +61,24 @@ export default function Signup({ signup, setSignup }) {
 
   function addToSkills(e) {
     e.preventDefault();
+
     if (skills.includes(skillInput)) {
       e.preventDefault();
-      console.log("item already added");
       return;
     }
     const newSkill = [...skills, skillInput];
 
-    console.log("this is skill input val: ", skillInput);
-    console.log("this is the newSkill val: ", newSkill);
-
-    setSkills(newSkill);
-    setSkillInput("");
+    if (skillInput) {
+      const skillsForm = document.getElementById("skills");
+      skillsForm.value = "";
+      setSkills(newSkill);
+      setSkillInput("");
+    }
   }
 
   function deleteSkill(index, e) {
     e.preventDefault();
-    console.log(index);
+
     const newSkills = [...skills.slice(0, index), ...skills.slice(index + 1)];
     setSkills(newSkills);
   }
@@ -300,24 +301,17 @@ export default function Signup({ signup, setSignup }) {
 
               {/*----------Skills Input----------*/}
               <Grid item xs={12} sm={6}>
-                <FormControl
-                  variant="outlined"
+                <TextField
+                  id="skills"
+                  label="Skills"
                   fullWidth
                   onChange={(e) => setSkillInput(e.target.value)}
-                  value={skillInput}
-                >
-                  <Controller
-                    name="skills"
-                    as={<TextField id="skills" label="skills" required />}
-                    control={control}
-                    rules={{ required: "Required" }}
-                  />
-                  <div className="addSkillButtonAligner">
-                    <button onClick={(e) => addToSkills(e)} className="button">
-                      Add Skill
-                    </button>
-                  </div>
-                </FormControl>
+                />
+                <div className="addSkillButtonAligner">
+                  <button onClick={(e) => addToSkills(e)} className="button">
+                    Add Skill
+                  </button>
+                </div>
               </Grid>
 
               {/*----------Skills----------*/}
@@ -342,12 +336,12 @@ export default function Signup({ signup, setSignup }) {
                       </ul>
                     }
                     control={control}
-                    rules={{ required: "Required" }}
+                    // rules={{ required: "Required" }}
                   />
                 </FormControl>
               </Grid>
 
-              {/*----------Scoial Links----------*/}
+              {/*----------Intro----------*/}
               <Grid item xs={12}>
                 <FormControl variant="outlined" fullWidth>
                   <Controller
