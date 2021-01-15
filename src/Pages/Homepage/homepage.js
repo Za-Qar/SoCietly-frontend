@@ -102,8 +102,16 @@ export default function Homepage() {
             <div className={style.column1}>
               <section className={style.columnTwo}>
                 <div className={style.welcome}>
-                  <h3>Hello {user.username}</h3>
-                  <h4>
+                  <h3
+                    style={{
+                      fontSize: "1.8rem",
+                      marginTop: "0",
+                      marginBottom: "0",
+                    }}
+                  >
+                    Hello {user.username} 👋
+                  </h3>
+                  <h4 style={{ marginTop: "0" }}>
                     What’s new with you? Have a look around the SoC community
                   </h4>
                 </div>
