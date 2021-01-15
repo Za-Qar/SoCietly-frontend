@@ -40,8 +40,6 @@ import NavBar from "../../Components/NavBar/nav";
 import CloudinaryImage from "../../Components/CloudinaryImage/cloudinaryImage.js";
 import EventPage from "../../Pages/EvenPage/EventPage.js";
 
-import navBar2 from "../../Components/navBar2/navBar2.js";
-
 //Material Ui
 import Tags from "../../MaterialUi/tags/tags.js";
 
@@ -98,8 +96,6 @@ export default function Index() {
         <AuthGuard component={Alumni} path={"/alumni"} exact />
 
         <AuthGuard component={Tags} path={"/card"} exact />
-
-        <AuthGuard component={navBar2} path={"/delete"} exact />
 
         <AuthGuard
           component={Resources}
