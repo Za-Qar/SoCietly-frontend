@@ -89,7 +89,7 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: "5px",
     marginTop: "5rem",
     zIndex: "500",
-    paddingBottom: "200px",
+    paddingBottom: "500px",
   },
   drawerHeader: {
     display: "flex",
