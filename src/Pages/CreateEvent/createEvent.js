@@ -102,6 +102,28 @@ function CreateEvent({
     getAllUserEmails();
   }, []);
 
+  // Send email function
+  async function sendEmail(data, msg) {
+    if (msg.description === undefined) {
+      msg.description = "";
+    } else {
+      msg.description = msg.description + ".";
+    }
+    await fetch(`http://localhost:3000/mail`, {
+      method: "POST",
+      body: JSON.stringify({
+        to: ["za.qa@outlook.com", "qarout.zaid@gmail.com"],
+        subject: `SoC: ${msg.eventName}`,
+        text: `${user.username} has created a new School of Code event. ${msg.description} You can view more details here: https://societly.netlify.app/event/${data.eventid}`,
+      }),
+      headers: { "Content-Type": "application/json" },
+    })
+      .then((res) => res.json())
+      .then((data) => console.log("this is the user data: ", data))
+      .catch((error) => console.log("event creation error: ", error));
+  }
+
+  // PATCH/POST Event
   let createEvent = async (msg) => {
     if (imageSelected === null && !eventsEdit) {
       alert(
@@ -133,22 +155,7 @@ function CreateEvent({
       }
     )
       .then((res) => res.json())
-      .then((data) => {
-        console.log("about to send email");
-        fetch(`http://localhost:3000/mail`, {
-          method: "POST",
-          body: JSON.stringify({
-            to: ["za.qa@outlook.com", "qarout.zaid@gmail.com"],
-            subject: `SoC: ${msg.eventName}`,
-            text: `${user.username} has created a new event, ${msg.description}. You can view more details here: https://societly.netlify.app/event/${data.eventid}`,
-          }),
-          headers: { "Content-Type": "application/json" },
-        })
-          .then((res) => res.json())
-          .then((data) => console.log("this is the user data: ", data));
-
-        console.log("email should've sent");
-      })
+      .then((data) => sendEmail(data, msg))
       .catch((error) => {
         console.log("event creation error: ", error);
         setError(true);
