@@ -192,8 +192,8 @@ export default function UserLeftSide() {
 
         <List>
           <section className={style.userSec}>
-            <UserImage user={user} width={"85px"} />
-            <UserInfo user={user} homepageEdit />
+            {/* <UserImage user={user} width={"85px"} /> */}
+            <UserInfo user={user} homepageEdit link width={"85px"} />
 
             <section className={`contentContainer`}>
               <h3>Events you're attending</h3>

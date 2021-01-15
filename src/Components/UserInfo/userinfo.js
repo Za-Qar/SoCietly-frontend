@@ -9,7 +9,7 @@ import { Link, NavLink } from "react-router-dom";
 
 import UserImage from "../userImage/userImage";
 
-export default function UserInfo({ user, link, homepageEdit, alumni }) {
+export default function UserInfo({ user, link, homepageEdit, alumni, width }) {
   const {
     uid,
     id,
@@ -34,7 +34,7 @@ export default function UserInfo({ user, link, homepageEdit, alumni }) {
             style={{ textDecoration: "none", color: "black" }}
             activeStyle={{ textDecoration: "none", color: "black" }}
           >
-            <UserImage user={user} />
+            <UserImage user={user} width={width} />
             <h3>{username ? username : `${name} ${surname}`}</h3>
           </NavLink>
         ) : (
