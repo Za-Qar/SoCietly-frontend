@@ -70,7 +70,7 @@ export default function MyEvents({ profile = false }) {
             <section className={style.columnTwo}>
               <div className={style.welcome}>
                 <h3>Hello {user?.username}</h3>
-                <h4>Take a look at your events or create some</h4>
+                <h4>Take a look at your events or create one</h4>
               </div>
               <div>
                 <div className={style.eventButton}>

@@ -59,6 +59,22 @@ export default function Signup({ signup, setSignup }) {
   const [skills, setSkills] = useState([]);
   const [skillInput, setSkillInput] = useState("");
 
+  function getFirstName() {
+    if (authUser) {
+      const nameArray = authUser.displayName.split(" ");
+      const firstName = nameArray[0];
+      return firstName;
+    }
+  }
+
+  function getSurname() {
+    if (authUser) {
+      const nameArray = authUser.displayName.split(" ");
+      const lastName = nameArray[nameArray.length - 1];
+      return lastName;
+    }
+  }
+
   function addToSkills(e) {
     e.preventDefault();
 
@@ -172,6 +188,7 @@ export default function Signup({ signup, setSignup }) {
                     as={<TextField id="firstName" label="Name" required />}
                     control={control}
                     rules={{ required: "Required" }}
+                    defaultValue={getFirstName()}
                   />
                 </FormControl>
               </Grid>
@@ -191,6 +208,7 @@ export default function Signup({ signup, setSignup }) {
                     }
                     control={control}
                     rules={{ required: "Required" }}
+                    defaultValue={getSurname()}
                   />
                 </FormControl>
               </Grid>
