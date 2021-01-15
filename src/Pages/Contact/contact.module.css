@@ -6,6 +6,11 @@
   margin-top: 6rem;
 }
 
-p {
-  color: black;
+.welcome h3 {
+  color: #31986a;
+}
+
+.welcome h4 {
+  font-weight: 500;
+  font-size: 0.95rem;
 }
