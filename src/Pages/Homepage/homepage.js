@@ -163,7 +163,7 @@ export default function Homepage() {
                       let inOneWeek = date.setDate(date.getDate() + 7);
 
                       let nowTrans = new Date();
-                      let now = nowTrans.setDate(nowTrans.getDate());
+                      let now = nowTrans.setDate(nowTrans.getDate() - 1);
 
                       let displayDate = eventTrans.toDateString();
 

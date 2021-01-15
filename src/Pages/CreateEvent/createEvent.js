@@ -132,28 +132,25 @@ function CreateEvent({
       return;
     }
 
-    await fetch(
-      eventsEdit ? `${url}/events/${eventId}` : `http://localhost:3000/events/`,
-      {
-        method: eventsEdit ? "PATCH" : "POST",
-        body: JSON.stringify({
-          eventName: msg.eventName,
-          eventType: msg.eventTypes,
-          uid: user.uid,
-          date: msg.date,
-          time: msg.time,
-          description: msg.description,
-          image: imageSelected,
-          location: marker,
-          enableVolunteers: msg.eventVolunteers,
-          attendingList: eventsEdit ? null : [],
-          likes: eventsEdit ? null : [],
-          volunteerList: eventsEdit ? null : [],
-          eventLink: eventsEdit ? null : eventLinkForm,
-        }),
-        headers: { "Content-Type": "application/json" },
-      }
-    )
+    await fetch(eventsEdit ? `${url}/events/${eventId}` : `${url}/events/`, {
+      method: eventsEdit ? "PATCH" : "POST",
+      body: JSON.stringify({
+        eventName: msg.eventName,
+        eventType: msg.eventTypes,
+        uid: user.uid,
+        date: msg.date,
+        time: msg.time,
+        description: msg.description,
+        image: imageSelected,
+        location: marker,
+        enableVolunteers: msg.eventVolunteers,
+        attendingList: eventsEdit ? null : [],
+        likes: eventsEdit ? null : [],
+        volunteerList: eventsEdit ? null : [],
+        eventLink: eventsEdit ? null : eventLinkForm,
+      }),
+      headers: { "Content-Type": "application/json" },
+    })
       .then((res) => res.json())
       // .then((data) => sendEmail(data, msg))
       .catch((error) => {
