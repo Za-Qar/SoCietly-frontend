@@ -46,8 +46,23 @@ export default function UserProfilePage() {
           {/* ---column left--- */}
           <div className={cn(style.column, style.left)}>
             <div className={style.welcome}>
-              <h3>Hello {user.username}</h3>
-              <h4>What's new with you? Have a look around the SoC community</h4>
+              <h3
+                style={{
+                  fontSize: "1.5rem",
+                  marginTop: "0",
+                  marginBottom: "0",
+                }}
+              >
+                Hello {user.username}
+              </h3>
+              <h4
+                style={{
+                  marginTop: "0",
+                }}
+              >
+                Welcome to your profile. Update your skills or add to your
+                journey.
+              </h4>
             </div>
             <UserInfo user={user} />
             <UserSkills user={user} />
