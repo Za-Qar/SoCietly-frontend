@@ -174,6 +174,24 @@ export default function EventCard({
     setExpanded(!expanded);
   };
 
+  // Send email function
+  async function deleteEmail() {
+    await fetch(`http://localhost:3000/mail`, {
+      method: "POST",
+      body: JSON.stringify({
+        to: ["za.qa@outlook.com", "qarout.zaid@gmail.com"],
+        subject: `SoC: Event canceled, ${eventname}`,
+        text: `The event created by ${user.username} has been deleted. Apologies of any inconvinienced this may have caused. You can view visit SoCietly here: https://societly.netlify.app`,
+      }),
+      headers: { "Content-Type": "application/json" },
+    })
+      .then((res) => res.json())
+      .then((data) =>
+        console.log("this is the delete event email data: ", data)
+      )
+      .catch((error) => console.log("delete event email error: ", error));
+  }
+
   // Delete Event
   async function deleteEvent(eventId) {
     console.log("clicked");
@@ -194,7 +212,7 @@ export default function EventCard({
             })
               .then((res) => res.json())
               .then((data) => console.log(data))
-              // .then(() => setUserEvents(null))
+              .then(() => deleteEmail())
               .catch((error) => console.log(error));
           },
         },
