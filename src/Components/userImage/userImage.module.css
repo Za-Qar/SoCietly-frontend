@@ -32,3 +32,17 @@ profImgContainer {
   border: 5px solid #e2a31d;
   border-radius: 50%;
 }
+
+.image {
+  position: relative;
+}
+
+.cohort {
+  position: absolute;
+  right: 35%;
+  top: 70%;
+  width: 1.5rem;
+  height: 1.5rem;
+  color: white;
+  border-radius: 50px;
+}
