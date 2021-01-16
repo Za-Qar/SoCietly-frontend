@@ -54,7 +54,7 @@ import { confirmAlert } from "react-confirm-alert";
 const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: "100%",
-    backgroundColor: "#F0F7F4",
+    backgroundColor: "white",
   },
   media: {
     height: 0,

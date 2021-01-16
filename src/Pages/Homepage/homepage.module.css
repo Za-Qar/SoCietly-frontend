@@ -4,7 +4,7 @@
 }
 
 .columnTwo {
-  margin-top: 5rem;
+  margin-top: 1rem;
 }
 
 .welcome h3 {
@@ -33,24 +33,30 @@
 }
 
 .eventSecSpan {
-  background-color: #31986a65;
-  padding: 1rem;
+  background-color: #1a5139;
+  padding: 0.1rem;
   margin: 0 0.5rem 1rem 0.5rem;
   border-radius: 5px;
   box-shadow: 0 2px 5px rgb(0 0 0 / 9%);
-
+  /* opacity: 90%; */
   flex-grow: 1;
   width: 30%;
-  height: 10rem;
+  /* height: 10rem; */
   z-index: 1;
+  position: relative;
 }
 
 .eventSecSpan h4 {
-  margin: 0 0 1rem 0;
+  margin: 0;
+  position: absolute;
+  bottom: 8px;
+  color: white;
+  font-size: 1.2rem;
+  margin-left: 0.5rem;
 }
 
 .eventSecSpan img {
-  transform: translateY(-50%);
+  /* transform: translateY(-50%); */
 }
 
 .eventSecSpan a {
@@ -61,21 +67,22 @@
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   font-weight: 600;
 }
-
+/* 
 .img {
   height: 70%;
   overflow: hidden;
   border-radius: 10px;
-}
+} */
 
 .weekEvents {
-  background-color: white;
-  padding: 2rem;
+  /* background-color: white; */
+  /* padding: 2rem; */
   margin-left: 10px;
   margin-right: 10px;
   margin-bottom: 2rem;
-  border-radius: 5px;
-  box-shadow: 0 2px 5px rgb(0 0 0 / 9%);
+  margin-top: 1rem;
+  /* border-radius: 5px; */
+  /* box-shadow: 0 2px 5px rgb(0 0 0 / 9%); */
 }
 
 .test {
@@ -103,5 +110,7 @@
 }
 
 .eventCard {
-  margin: 2rem;
+  margin-bottom: 2rem;
+  /* margin-left: 2rem;
+  margin-right: 2rem; */
 }
