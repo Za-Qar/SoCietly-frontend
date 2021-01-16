@@ -22,7 +22,12 @@ export default function Comment({ id, comments }) {
     cohort,
     likes,
   } = comments;
-  console.log(comments);
+  console.log("this is comments: ", comments);
+
+  // Formating dateTime
+  const commentDateTime = new Date(timedate);
+  const displayDate = commentDateTime.toLocaleDateString();
+  const displayTime = commentDateTime.toLocaleTimeString();
 
   let userImageUser = {
     profileimage: profileimage,
@@ -38,15 +43,14 @@ export default function Comment({ id, comments }) {
   if (user) {
     return (
       <div>
-        {/* <UserImage user={userImageUser}/> */}
+        <UserImage user={userImageUser} />
         <Link to={`/bootcamper/${commentuserid}`}>
-          <img src={profileimage} />
           <p>
             {name} {surname}
           </p>
         </Link>
         <p>{comment}</p>
-        <p>{timedate}</p>
+        <p>{`${displayDate} ${displayTime}`}</p>
         <p>{likes.length}</p>
       </div>
     );

@@ -29,6 +29,35 @@ export default function Comments({ eventid }) {
     getAllComments();
   }, []);
 
+  // Formating dateTime
+  const dateTime = new Date();
+  let commentDateTime = new Date(dateTime);
+  let displayDate = commentDateTime.toLocaleDateString();
+  let displayTime = commentDateTime.toLocaleTimeString();
+
+  // Post Comment
+  // PATCH/POST Event
+  let createComment = async (msg) => {
+    await fetch(`http://localhost:3000/comments`, {
+      method: "POST",
+      body: JSON.stringify({
+        commentUserId: user.id,
+        name: user.name,
+        surname: user.surname,
+        timeDate: dateTime,
+        commentEventId: eventid,
+        profileImage: user.profileImage,
+        cohort: user.cohort,
+        comment: msg,
+        likes: [],
+      }),
+      headers: { "Content-Type": "application/json" },
+    })
+      .then((res) => res.json())
+      .then((date) => console.log(date))
+      .catch((error) => console.log("comment creation error: ", error));
+  };
+
   // Add comment function
   function addComment() {
     const newComment = [
@@ -37,13 +66,15 @@ export default function Comments({ eventid }) {
         commentuserid: user.id,
         name: user.name,
         surname: user.surname,
-        timedate: "date",
-        profileimage: user.profileimage,
+        timedate: dateTime,
+        profileimage: user.profileImage,
+        cohort: user.cohort,
         comment: inputValue,
         likes: [],
       },
     ];
     setComment(newComment);
+    createComment(inputValue);
     console.log("this is comment: ", comment);
     setInputValue("");
   }
