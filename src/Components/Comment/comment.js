@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 // React Router Dom
 import { Link } from "react-router-dom";
@@ -13,7 +13,11 @@ import UserImage from "../userImage/userImage.js";
 import style from "./comment.module.css";
 import cn from "classnames";
 
-export default function Comment({ id, comments }) {
+// Material ui
+import IconButton from "@material-ui/core/IconButton";
+import FavoriteIcon from "@material-ui/icons/Favorite";
+
+export default function Comment({ id, comments, newCommentId }) {
   const {
     commentid,
     commentuserid,
@@ -43,6 +47,53 @@ export default function Comment({ id, comments }) {
   /*--------User context--------*/
   const [user] = useUserContext();
 
+  let commendIdForPatch = newCommentId ? newCommentId : commentid;
+
+  // Likes
+  const [redLike, setRedLike] = useState("");
+  const [likeGet, setLikeGet] = useState([]);
+  const [propLike, setPropLike] = useState([]);
+
+  useEffect(() => {
+    setPropLike(likes);
+    setLikeGet(propLike);
+  }, []);
+
+  function addLikes() {
+    if (propLike?.includes(user.username)) {
+      let index = propLike.indexOf(user.username);
+      let removeLike = [
+        ...propLike.slice(0, index),
+        ...propLike.slice(index + 1),
+      ];
+      setLikeGet(removeLike);
+      setPropLike(removeLike);
+      setRedLike("");
+
+      addToLike(removeLike);
+    } else {
+      let likesArr = [...propLike, `${user.username}`];
+
+      setLikeGet(likesArr);
+      setPropLike(likesArr);
+      setRedLike("red");
+      addToLike(likesArr);
+    }
+  }
+
+  /*---------------Add to Like Patch----------------*/
+  let addToLike = (arr) => {
+    console.log(arr);
+    fetch(`http://localhost:3000/comments/${commendIdForPatch}`, {
+      method: "PATCH",
+      body: JSON.stringify({ likes: arr }),
+      headers: { "Content-Type": "application/json" },
+    })
+      .then((res) => res.json())
+      .then((data) => console.log(data))
+      .catch((error) => console.log(error));
+  };
+
   if (user) {
     return (
       <div className="contentContainer">
@@ -60,7 +111,15 @@ export default function Comment({ id, comments }) {
           </div>
         </div>
         <p className={style.comment}>{comment}</p>
-        <p className={style.likes}>{likes.length}</p>
+        <IconButton
+          aria-label="add to favorites"
+          onClick={addLikes}
+          className={style.likes}
+        >
+          <FavoriteIcon className={redLike} />
+          {propLike?.length}
+        </IconButton>
+        {/* <p className={style.likes}>{likes.length}</p> */}
       </div>
     );
   }

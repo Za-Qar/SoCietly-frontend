@@ -17,6 +17,8 @@ export default function Comments({ eventid }) {
   const [inputValue, setInputValue] = useState("");
   const [comment, setComment] = useState([]);
 
+  const [newCommentId, setNewCommentId] = useState(null);
+
   // Fetching all comments
   async function getAllComments() {
     const res = await fetch("http://localhost:3000/comments");
@@ -54,7 +56,7 @@ export default function Comments({ eventid }) {
       headers: { "Content-Type": "application/json" },
     })
       .then((res) => res.json())
-      .then((date) => console.log(date))
+      .then((date) => setNewCommentId(date?.commentid))
       .catch((error) => console.log("comment creation error: ", error));
   };
 
@@ -84,12 +86,18 @@ export default function Comments({ eventid }) {
       {allComments &&
         allComments.map((comment, index) => {
           return comment.commenteventid === eventid ? (
-            <Comment key={index} comments={comment} />
+            <Comment
+              key={index}
+              comments={comment}
+              newCommentId={newCommentId}
+            />
           ) : null;
         })}
 
       {comment.map((comment, index) => {
-        return <Comment key={index} comments={comment} />;
+        return (
+          <Comment key={index} comments={comment} newCommentId={newCommentId} />
+        );
       })}
 
       <div>
