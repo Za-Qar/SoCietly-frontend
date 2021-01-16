@@ -1,9 +1,16 @@
 .img {
+  max-height: 100%;
   width: 100%;
-  transform: translateY(-25%);
+  transform: translateY(-20%);
 }
 
 .cardContainer {
+  margin: 1rem 1rem 1rem 1rem;
+  max-height: 10rem;
+  overflow: hidden;
+}
+
+.cardContainer2 {
   padding: 1rem 1rem 1rem 1rem;
   max-height: 20rem;
   overflow: hidden;

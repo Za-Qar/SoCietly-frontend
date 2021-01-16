@@ -21,6 +21,7 @@ import EditIcon from "@material-ui/icons/Edit";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import HowToRegIcon from "@material-ui/icons/HowToReg";
 import PanToolIcon from "@material-ui/icons/PanTool";
+import CommentIcon from "@material-ui/icons/Comment";
 
 //Config
 import { url } from "../../config";
@@ -315,7 +316,7 @@ export default function EventCard({
           }
           // subheader={date}
         />
-        <div className="cardContainer cardTitle">
+        <div className="cardContainer2 cardTitle">
           <Link to={`/event/${eventid}`}>{eventname}</Link>
           <br />
           <p>{date}</p>
@@ -387,6 +388,10 @@ export default function EventCard({
             </IconButton>
           )}
 
+          <IconButton>
+            <CommentIcon />
+          </IconButton>
+
           <IconButton
             className={clsx(classes.expand, {
               [classes.expandOpen]: expanded,
@@ -412,6 +417,21 @@ export default function EventCard({
             {!eventlink && <Maps marker={marker} setMarker={setMarker} />}
           </CardContent>
         </Collapse>
+
+        {/* <Collapse in={expanded} timeout="auto" unmountOnExit>
+          <CardContent>
+            <Typography paragraph>{description}</Typography>
+            {eventlink && (
+              <div>
+                <h3>Event Link:</h3>
+                <a href={eventlink}>
+                  <Typography paragraph>{eventlink}</Typography>
+                </a>
+              </div>
+            )}
+            {!eventlink && <Maps marker={marker} setMarker={setMarker} />}
+          </CardContent>
+        </Collapse> */}
 
         <section className={hide}>
           <CreateEvent
