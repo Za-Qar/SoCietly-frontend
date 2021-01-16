@@ -194,3 +194,15 @@ body.react-confirm-alert-body-element {
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   font-weight: 600;
 }
+
+.commentColour {
+  color: rgb(159, 50, 231);
+}
+
+.commentContainer {
+  padding: 1rem 1rem 1rem 1rem;
+}
+
+.commentInput {
+  width: 100%;
+}

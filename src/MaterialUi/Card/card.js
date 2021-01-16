@@ -30,6 +30,7 @@ import { url } from "../../config";
 import Maps from "../../Components/Maps/maps.js";
 import CreateEvent from "../../Pages/CreateEvent/createEvent.js";
 import UserImage from "../../Components/userImage/userImage.js";
+import Comment from "../../Components/Comment/comment.js";
 
 // Cloudinary
 import { Image } from "cloudinary-react";
@@ -124,6 +125,11 @@ export default function EventCard({
   //To show and hide createEvents
   const [hide, setHide] = useState("hide");
   const [hideCard, setHideCard] = useState("");
+
+  // Comments
+  const [hideComment, setHideComment] = useState("hide");
+  const [commentColour, setCommentColour] = useState("");
+  const [allComments, setAllComments] = useState("");
 
   const [attentingGet, setAttedingGet] = useState([]);
   const [attendingYellow, setAttendingYellow] = useState("");
@@ -261,27 +267,10 @@ export default function EventCard({
       setRedLike("red");
       addToLike(eventid, likesArr);
     }
-
-    // console.log(like);
-    // setLike(like + 1);
-    // redLike === "" ? setRedLike("red") : setRedLike("red");
-    // backEndLike(like, id);
-    // setUserEvents(null);
-
-    // for (let i = 0; i <= likes.length; i++) {
-    //   if (likes[i] === `${user.username}`) {
-    //     return alert("You've already decalred you're attending :)");
-    //   }
-    // }
-
-    // setUserEvents(null);
   }
 
   // Setting icon colours
   function setIconColour() {
-    // return attendinglist?.includes(user.username)
-    //   ? setAttendingYellow("yellow")
-    //   : setAttendingYellow("");
     if (attendinglist?.includes(user.username)) {
       setAttendingYellow("yellow");
     }
@@ -295,6 +284,28 @@ export default function EventCard({
     setIconColour();
   }, [attentingGet, likeGet]);
 
+  function showComment() {
+    if (hideComment === "hide") {
+      setHideComment("");
+      setCommentColour("commentColour");
+    } else {
+      setHideComment("hide");
+      setCommentColour("");
+    }
+  }
+
+  // Fetching all comments
+  async function getAllComments() {
+    const res = await fetch("http://localhost:3000/comments");
+    const data = await res.json();
+    setAllComments(data.payload);
+    console.log(data.payload);
+  }
+
+  useEffect(() => {
+    getAllComments();
+  }, []);
+
   if (!userLeftSide) {
     return (
       <Card className={cn(classes.root, hideCard)}>
@@ -304,17 +315,11 @@ export default function EventCard({
               <UserImage user={eventUser} width={"100%"} />
             </Avatar>
           }
-          // action={
-          //   <IconButton aria-label="settings">
-          //     <MoreVertIcon />
-          //   </IconButton>
-          // }
           title={
             <Link to={`/bootcamper/${id}`} className="cardName">
               {name} {surname}
             </Link>
           }
-          // subheader={date}
         />
         <div className="cardContainer2 cardTitle">
           <Link to={`/event/${eventid}`}>{eventname}</Link>
@@ -332,20 +337,6 @@ export default function EventCard({
             className="img"
           />
         </div>
-        {/* <CardMedia
-        className={classes.media}
-        image={
-          <Image
-            key={key}
-            cloudName="falcons"
-            publicId={image}
-            width="300"
-            crop="scale"
-          />
-        }
-        title="Paella dish"
-      /> */}
-
         <CardContent>
           <Typography variant="body2" color="textSecondary" component="p">
             People attending this event:
@@ -388,8 +379,8 @@ export default function EventCard({
             </IconButton>
           )}
 
-          <IconButton>
-            <CommentIcon />
+          <IconButton onClick={() => showComment()}>
+            <CommentIcon className={commentColour} />
           </IconButton>
 
           <IconButton
@@ -418,20 +409,19 @@ export default function EventCard({
           </CardContent>
         </Collapse>
 
-        {/* <Collapse in={expanded} timeout="auto" unmountOnExit>
-          <CardContent>
-            <Typography paragraph>{description}</Typography>
-            {eventlink && (
-              <div>
-                <h3>Event Link:</h3>
-                <a href={eventlink}>
-                  <Typography paragraph>{eventlink}</Typography>
-                </a>
-              </div>
-            )}
-            {!eventlink && <Maps marker={marker} setMarker={setMarker} />}
-          </CardContent>
-        </Collapse> */}
+        <section className={`${hideComment} commentContainer`}>
+          {allComments &&
+            allComments.map((comment, index) => {
+              return comment.commenteventid === eventid ? (
+                <Comment key={index} id={id} comments={comment} />
+              ) : null;
+            })}
+
+          <div>
+            <input type="text" className="commentInput" />
+            <button>Reply</button>
+          </div>
+        </section>
 
         <section className={hide}>
           <CreateEvent
