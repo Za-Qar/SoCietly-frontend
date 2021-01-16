@@ -30,7 +30,7 @@ import { url } from "../../config";
 import Maps from "../../Components/Maps/maps.js";
 import CreateEvent from "../../Pages/CreateEvent/createEvent.js";
 import UserImage from "../../Components/userImage/userImage.js";
-import Comment from "../../Components/Comment/comment.js";
+import Comments from "../../Components/Comments/comments.js";
 
 // Cloudinary
 import { Image } from "cloudinary-react";
@@ -129,7 +129,6 @@ export default function EventCard({
   // Comments
   const [hideComment, setHideComment] = useState("hide");
   const [commentColour, setCommentColour] = useState("");
-  const [allComments, setAllComments] = useState("");
 
   const [attentingGet, setAttedingGet] = useState([]);
   const [attendingYellow, setAttendingYellow] = useState("");
@@ -294,18 +293,6 @@ export default function EventCard({
     }
   }
 
-  // Fetching all comments
-  async function getAllComments() {
-    const res = await fetch("http://localhost:3000/comments");
-    const data = await res.json();
-    setAllComments(data.payload);
-    console.log(data.payload);
-  }
-
-  useEffect(() => {
-    getAllComments();
-  }, []);
-
   if (!userLeftSide) {
     return (
       <Card className={cn(classes.root, hideCard)}>
@@ -410,17 +397,7 @@ export default function EventCard({
         </Collapse>
 
         <section className={`${hideComment} commentContainer`}>
-          {allComments &&
-            allComments.map((comment, index) => {
-              return comment.commenteventid === eventid ? (
-                <Comment key={index} id={id} comments={comment} />
-              ) : null;
-            })}
-
-          <div>
-            <input type="text" className="commentInput" />
-            <button>Reply</button>
-          </div>
+          <Comments eventid={eventid} />
         </section>
 
         <section className={hide}>
