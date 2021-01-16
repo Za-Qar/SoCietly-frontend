@@ -57,6 +57,9 @@ export default function Comment({ id, comments, newCommentId }) {
   useEffect(() => {
     setPropLike(likes);
     setLikeGet(propLike);
+    if (likes?.includes(user.username)) {
+      setRedLike("red");
+    }
   }, []);
 
   function addLikes() {
