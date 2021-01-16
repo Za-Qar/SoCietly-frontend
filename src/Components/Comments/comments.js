@@ -47,7 +47,7 @@ export default function Comments({ eventid }) {
   // Post Comment
   // PATCH/POST Event
   let createComment = async (msg) => {
-    await fetch(`http://localhost:3000/comments`, {
+    await fetch(`${url}/comments`, {
       method: "POST",
       body: JSON.stringify({
         commentUserId: user.id,
