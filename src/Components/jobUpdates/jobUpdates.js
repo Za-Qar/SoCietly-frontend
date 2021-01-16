@@ -46,7 +46,9 @@ export default function JobUpdates() {
           return (
             index < 49 && (
               <div key={index} className={style.newJobSec}>
-                <UserImage user={item} alt={`${item.name} profile`} />
+                <div style={{ marginTop: "1rem" }}>
+                  <UserImage user={item} alt={`${item.name} profile`} />
+                </div>
                 <div className={style.textAlignLeft}>
                   <div class={style.hoverme}>
                     <span>🎉</span>

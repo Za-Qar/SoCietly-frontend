@@ -38,7 +38,7 @@
   margin: 0 0.5rem 1rem 0.5rem;
   border-radius: 5px;
   box-shadow: 0 2px 5px rgb(0 0 0 / 9%);
-  opacity: 90%;
+  /* opacity: 90%; */
   flex-grow: 1;
   width: 30%;
   /* height: 10rem; */

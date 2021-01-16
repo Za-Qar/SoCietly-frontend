@@ -2,7 +2,7 @@
 @import url("https://fonts.googleapis.com/icon?family=Material+Icons");
 
 body {
-  background-color: #f6f7f9;
+  background-color: #f3f7f3;
   margin: 0;
   color: rgb(24, 24, 24);
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
@@ -138,13 +138,13 @@ code {
 
 .left {
   width: 30%;
-  background-color: lightpink;
+  /* background-color: lightpink; */
 }
 
 .right {
   width: 70%;
   margin-top: 3.5rem;
-  background-color: lightgreen;
+  /* background-color: lightgreen; */
 }
 
 .column1 {
