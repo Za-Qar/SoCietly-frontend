@@ -179,7 +179,7 @@ export default function EventCard({
 
   // Send email function
   async function deleteEmail() {
-    await fetch(`http://localhost:3000/mail`, {
+    await fetch(`${url}/mail`, {
       method: "POST",
       body: JSON.stringify({
         to: ["za.qa@outlook.com", "qarout.zaid@gmail.com"],
@@ -214,7 +214,7 @@ export default function EventCard({
             })
               .then((res) => res.json())
               .then((data) => console.log(data))
-              // .then(() => deleteEmail())
+              .then(() => deleteEmail())
               .catch((error) => console.log(error));
           },
         },

@@ -9,6 +9,10 @@ import { useUserContext } from "../../Context/userContext";
 // Components
 import Comment from "../Comment/comment.js";
 
+// Styling
+import style from "./comments.module.css";
+import cn from "classnames";
+
 export default function Comments({ eventid }) {
   /*--------User context--------*/
   const [user] = useUserContext();
@@ -62,6 +66,9 @@ export default function Comments({ eventid }) {
 
   // Add comment function
   function addComment() {
+    if (inputValue === "") {
+      return;
+    }
     const newComment = [
       ...comment,
       {
@@ -103,11 +110,15 @@ export default function Comments({ eventid }) {
       <div>
         <input
           type="text"
-          className="commentInput"
+          className={style.commentInput}
           onChange={(e) => setInputValue(e.target.value)}
           value={inputValue}
         />
-        <button onClick={addComment}>Reply</button>
+        <div className={style.buttonAligner}>
+          <button onClick={addComment} className="button">
+            Reply
+          </button>
+        </div>
       </div>
     </div>
   );

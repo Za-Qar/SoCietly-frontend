@@ -1,13 +1,14 @@
 /* Create two equal columns that floats next to each other */
 .column1 {
   float: left;
-  width: 15%;
+  width: 45px;
   /* padding: 10px; */
 }
 
 .column2 {
+  padding-left: 1.2rem;
   float: left;
-  width: 85%;
+  width: 80%;
   /* padding: 10px; */
 }
 
@@ -18,18 +19,53 @@
   clear: both;
 }
 
+.column2 a {
+  text-decoration: none;
+  font-weight: 400;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+
 .column2 p {
-  padding: 0.35rem 0 0.35rem 0;
+  padding: 0.13rem 0 0.13rem 0;
   margin: 0;
+}
+
+.timeDate {
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.4);
 }
 
 .likes {
   padding: 0;
   margin: 0;
-  font-size: 0.8rem;
+  font-size: 0.1rem;
+  /* width: 1px;
+  height: 1px; */
+}
+
+.likes button {
+  width: 1px;
+  height: 1px;
 }
 
 .comment {
   font-size: 1.1rem;
   font-weight: 600;
+  margin: 0.5rem 0 0.5rem 0;
+  /* margin: 0; */
+}
+
+.contentContainer {
+  background-color: white;
+  /* padding: 10px; */
+  /* margin-left: 10px;
+  margin-right: 10px; */
+  margin-bottom: 0.5rem;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgb(0 0 0 / 9%);
+}
+
+.commentContent {
+  padding: 1rem;
 }

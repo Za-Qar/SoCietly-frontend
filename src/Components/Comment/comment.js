@@ -3,6 +3,9 @@ import React, { useState, useEffect } from "react";
 // React Router Dom
 import { Link } from "react-router-dom";
 
+// Config
+import { url } from "../../config.js";
+
 // User context
 import { useUserContext } from "../../Context/userContext";
 
@@ -87,7 +90,7 @@ export default function Comment({ id, comments, newCommentId }) {
   /*---------------Add to Like Patch----------------*/
   let addToLike = (arr) => {
     console.log(arr);
-    fetch(`http://localhost:3000/comments/${commendIdForPatch}`, {
+    fetch(`${url}/comments/${commendIdForPatch}`, {
       method: "PATCH",
       body: JSON.stringify({ likes: arr }),
       headers: { "Content-Type": "application/json" },
@@ -99,30 +102,33 @@ export default function Comment({ id, comments, newCommentId }) {
 
   if (user) {
     return (
-      <div className="contentContainer">
-        <div className={style.row}>
-          <div className={style.column1}>
-            <UserImage user={userImageUser} />
+      <div className={style.contentContainer}>
+        <div className={style.commentContent}>
+          <div className={style.row}>
+            <div className={style.column1}>
+              <UserImage user={userImageUser} width="45px" />
+            </div>
+            <div className={style.column2}>
+              <Link to={`/bootcamper/${commentuserid}`}>
+                <p>
+                  {name} {surname}
+                </p>
+              </Link>
+              <p
+                className={style.timeDate}
+              >{`${displayDate} - ${displayTime}`}</p>
+            </div>
           </div>
-          <div className={style.column2}>
-            <Link to={`/bootcamper/${commentuserid}`}>
-              <p>
-                {name} {surname}
-              </p>
-            </Link>
-            <p>{`${displayDate} - ${displayTime}`}</p>
-          </div>
+          <p className={style.comment}>{comment}</p>
+          <IconButton
+            aria-label="add to favorites"
+            onClick={addLikes}
+            className={style.likes}
+          >
+            <FavoriteIcon className={redLike} />
+            {propLike?.length}
+          </IconButton>
         </div>
-        <p className={style.comment}>{comment}</p>
-        <IconButton
-          aria-label="add to favorites"
-          onClick={addLikes}
-          className={style.likes}
-        >
-          <FavoriteIcon className={redLike} />
-          {propLike?.length}
-        </IconButton>
-        {/* <p className={style.likes}>{likes.length}</p> */}
       </div>
     );
   }
