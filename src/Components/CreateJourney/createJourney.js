@@ -226,7 +226,7 @@ export default function CreateJourney({ signup, setSignup }) {
                         id="description"
                         variant="outlined"
                         label="Summarise your experience"
-                        style={{ margin: 8 }}
+                        style={{ margin: 0 }}
                         multiline
                         rows={8}
                       />
@@ -261,6 +261,18 @@ export default function CreateJourney({ signup, setSignup }) {
                 setSignup(false);
               }}
               className="button-blue continueButtonMargin"
+            >
+              Continue to Home
+            </button>
+          </div>
+        </div>
+      )}
+      {!addJourney && (
+        <div className="signupSubmit">
+          <div className="signupSubmitAligner">
+            <button
+              className="button continueButtonMargin"
+              style={{ opacity: 0.6, cursor: "not-allowed" }}
             >
               Continue to Home
             </button>

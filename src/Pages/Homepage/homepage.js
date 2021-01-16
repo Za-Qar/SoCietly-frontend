@@ -7,6 +7,9 @@ import { url } from "../../config";
 import edu from "../../Images/edu.jpg";
 import social from "../../Images/social4.jpg";
 import social2 from "../../Images/social2.jpg";
+import undrawEdu from "../../Images/undraw_Graduation_ktn0.svg";
+import undrawSocial from "../../Images/undraw_goal_0v5v.svg";
+import undrawComm from "../../Images/undraw_community_8nwl.svg";
 
 //components
 import UserInfo from "../../Components/UserInfo/userinfo";
@@ -102,26 +105,32 @@ export default function Homepage() {
             <div className={style.column1}>
               <section className={style.columnTwo}>
                 <div className={style.welcome}>
-                  <h3>Hello {user.username}</h3>
-                  <h4>
+                  <h3
+                    style={{
+                      fontSize: "1.9rem",
+                      marginTop: "0",
+                      marginBottom: "0",
+                    }}
+                  >
+                    Hello {user.username} 👋
+                  </h3>
+                  <h4 style={{ marginTop: "0" }}>
                     What’s new with you? Have a look around the SoC community
                   </h4>
                 </div>
 
                 <section>
                   <div className={style.eventSec}>
-                    <span className={style.eventSecSpan}>
+                    <div className={style.eventSecSpan}>
                       <Link to="/events">
-                        <h4>Guest Lectures</h4>
-                        <div className={style.img}>
-                          <img
-                            className={style.eventImage}
-                            src={edu}
-                            alt="education"
-                          />
-                        </div>
+                        <img
+                          className={style.eventImage}
+                          src={undrawEdu}
+                          alt="education"
+                        />
+                        <h4>Education</h4>
                       </Link>
-                    </span>
+                    </div>
 
                     <span className={style.eventSecSpan}>
                       <Link to="/events">
@@ -129,7 +138,7 @@ export default function Homepage() {
                         <div className={style.img}>
                           <img
                             className={style.eventImage}
-                            src={social}
+                            src={undrawComm}
                             alt="community"
                           />
                         </div>
@@ -142,7 +151,7 @@ export default function Homepage() {
                         <div className={style.img}>
                           <img
                             className={style.eventImage}
-                            src={social2}
+                            src={undrawSocial}
                             alt="social"
                           />
                         </div>
@@ -152,7 +161,7 @@ export default function Homepage() {
                 </section>
 
                 <section className={style.weekEvents}>
-                  <h3>This week</h3>
+                  <h3 style={{ fontSize: "1.2rem" }}>Event This Week</h3>
 
                   {allEvents &&
                     allEvents.map((item, index) => {

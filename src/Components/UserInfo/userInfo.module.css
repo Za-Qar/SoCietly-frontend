@@ -16,9 +16,15 @@
 }
 
 .anchor {
-  color: black;
+  color: #31986a;
+  text-decoration: none;
 }
 
 .infoMaxWidth {
   width: 20rem;
+}
+
+.cohortText {
+  margin-top: 0;
+  color: rgb(68, 68, 68);
 }
