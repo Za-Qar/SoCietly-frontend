@@ -3,6 +3,9 @@ import React, { useState, useEffect } from "react";
 // React Router Dom
 import { Link } from "react-router-dom";
 
+// Config
+import { url } from "../../config.js";
+
 // User context
 import { useUserContext } from "../../Context/userContext";
 
@@ -25,7 +28,7 @@ export default function Comments({ eventid }) {
 
   // Fetching all comments
   async function getAllComments() {
-    const res = await fetch("http://localhost:3000/comments");
+    const res = await fetch(`${url}/comments`);
     const data = await res.json();
     setAllComments(data.payload);
     console.log(data.payload);
