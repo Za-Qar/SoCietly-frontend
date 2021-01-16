@@ -1,0 +1,35 @@
+/* Create two equal columns that floats next to each other */
+.column1 {
+  float: left;
+  width: 15%;
+  /* padding: 10px; */
+}
+
+.column2 {
+  float: left;
+  width: 85%;
+  /* padding: 10px; */
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.column2 p {
+  padding: 0.35rem 0 0.35rem 0;
+  margin: 0;
+}
+
+.likes {
+  padding: 0;
+  margin: 0;
+  font-size: 0.8rem;
+}
+
+.comment {
+  font-size: 1.1rem;
+  font-weight: 600;
+}

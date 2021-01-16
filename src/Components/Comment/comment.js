@@ -9,6 +9,10 @@ import { useUserContext } from "../../Context/userContext";
 // Components
 import UserImage from "../userImage/userImage.js";
 
+// Styling
+import style from "./comment.module.css";
+import cn from "classnames";
+
 export default function Comment({ id, comments }) {
   const {
     commentid,
@@ -22,7 +26,6 @@ export default function Comment({ id, comments }) {
     cohort,
     likes,
   } = comments;
-  console.log("this is comments: ", comments);
 
   // Formating dateTime
   const commentDateTime = new Date(timedate);
@@ -42,16 +45,22 @@ export default function Comment({ id, comments }) {
 
   if (user) {
     return (
-      <div>
-        <UserImage user={userImageUser} />
-        <Link to={`/bootcamper/${commentuserid}`}>
-          <p>
-            {name} {surname}
-          </p>
-        </Link>
-        <p>{comment}</p>
-        <p>{`${displayDate} ${displayTime}`}</p>
-        <p>{likes.length}</p>
+      <div className="contentContainer">
+        <div className={style.row}>
+          <div className={style.column1}>
+            <UserImage user={userImageUser} />
+          </div>
+          <div className={style.column2}>
+            <Link to={`/bootcamper/${commentuserid}`}>
+              <p>
+                {name} {surname}
+              </p>
+            </Link>
+            <p>{`${displayDate} - ${displayTime}`}</p>
+          </div>
+        </div>
+        <p className={style.comment}>{comment}</p>
+        <p className={style.likes}>{likes.length}</p>
       </div>
     );
   }
