@@ -1,26 +1,36 @@
 .jobSec {
-  padding: 1rem;
+  /* padding: 1rem; */
   background-color: white;
   border-radius: 5px;
   /* margin-top: -100vh; */
   box-shadow: 0 2px 5px rgb(0 0 0 / 9%);
   margin-right: 4rem;
-  margin-top: 5rem;
+  margin-top: 3rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  width: fit-content;
 }
 
 .secTitle {
-  padding-bottom: 1rem;
+  font-size: 1.2rem;
+  margin-bottom: 0;
 }
 
 .newJobSec {
-  box-shadow: 0 2px 6px rgb(0 0 0 / 15%);
+  /* box-shadow: 0 2px 6px rgb(0 0 0 / 15%); */
+  border-bottom: 1px solid rgb(0 0 0 / 6%);
   text-align: center;
-  margin-top: 1rem;
-  padding: 1rem;
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
 .title {
-  margin: 0;
+  /* margin: 0; */
+  margin-top: 1rem;
 }
 
 .date {
@@ -39,6 +49,11 @@
   font-size: 0.9rem;
   padding: 0;
   margin: 0;
+}
+
+.textAlignLeft {
+  text-align: left;
+  margin-left: 1rem;
 }
 
 /*-------------------------Confetti----------------------------*/

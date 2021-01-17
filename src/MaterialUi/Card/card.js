@@ -21,6 +21,7 @@ import EditIcon from "@material-ui/icons/Edit";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import HowToRegIcon from "@material-ui/icons/HowToReg";
 import PanToolIcon from "@material-ui/icons/PanTool";
+import CommentIcon from "@material-ui/icons/Comment";
 
 //Config
 import { url } from "../../config";
@@ -29,6 +30,7 @@ import { url } from "../../config";
 import Maps from "../../Components/Maps/maps.js";
 import CreateEvent from "../../Pages/CreateEvent/createEvent.js";
 import UserImage from "../../Components/userImage/userImage.js";
+import Comments from "../../Components/Comments/comments.js";
 
 // Cloudinary
 import { Image } from "cloudinary-react";
@@ -52,7 +54,7 @@ import { confirmAlert } from "react-confirm-alert";
 const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: "100%",
-    backgroundColor: "#F0F7F4",
+    backgroundColor: "white",
   },
   media: {
     height: 0,
@@ -124,6 +126,10 @@ export default function EventCard({
   const [hide, setHide] = useState("hide");
   const [hideCard, setHideCard] = useState("");
 
+  // Comments
+  const [hideComment, setHideComment] = useState("hide");
+  const [commentColour, setCommentColour] = useState("");
+
   const [attentingGet, setAttedingGet] = useState([]);
   const [attendingYellow, setAttendingYellow] = useState("");
 
@@ -156,7 +162,7 @@ export default function EventCard({
   function addToAttending() {
     for (let i = 0; i <= attendinglist.length; i++) {
       if (attendinglist[i] === `${user.username}`) {
-        return alert("You've already decalred you're attending :)");
+        return alert("You've already declared you're attending :)");
       }
     }
     let attending = [...attendinglist, `${user.username}`];
@@ -170,6 +176,24 @@ export default function EventCard({
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
+
+  // Send email function
+  async function deleteEmail() {
+    await fetch(`${url}/mail`, {
+      method: "POST",
+      body: JSON.stringify({
+        to: ["za.qa@outlook.com", "qarout.zaid@gmail.com"],
+        subject: `SoC: Event canceled, ${eventname}`,
+        text: `The event created by ${user.username} has been deleted. Apologies of any inconvinienced this may have caused. You can view visit SoCietly here: https://societly.netlify.app`,
+      }),
+      headers: { "Content-Type": "application/json" },
+    })
+      .then((res) => res.json())
+      .then((data) =>
+        console.log("this is the delete event email data: ", data)
+      )
+      .catch((error) => console.log("delete event email error: ", error));
+  }
 
   // Delete Event
   async function deleteEvent(eventId) {
@@ -190,7 +214,7 @@ export default function EventCard({
             })
               .then((res) => res.json())
               .then((data) => console.log(data))
-              // .then(() => setUserEvents(null))
+              .then(() => deleteEmail())
               .catch((error) => console.log(error));
           },
         },
@@ -242,27 +266,10 @@ export default function EventCard({
       setRedLike("red");
       addToLike(eventid, likesArr);
     }
-
-    // console.log(like);
-    // setLike(like + 1);
-    // redLike === "" ? setRedLike("red") : setRedLike("red");
-    // backEndLike(like, id);
-    // setUserEvents(null);
-
-    // for (let i = 0; i <= likes.length; i++) {
-    //   if (likes[i] === `${user.username}`) {
-    //     return alert("You've already decalred you're attending :)");
-    //   }
-    // }
-
-    // setUserEvents(null);
   }
 
   // Setting icon colours
   function setIconColour() {
-    // return attendinglist?.includes(user.username)
-    //   ? setAttendingYellow("yellow")
-    //   : setAttendingYellow("");
     if (attendinglist?.includes(user.username)) {
       setAttendingYellow("yellow");
     }
@@ -276,28 +283,45 @@ export default function EventCard({
     setIconColour();
   }, [attentingGet, likeGet]);
 
+  function showComment() {
+    if (hideComment === "hide") {
+      setHideComment("");
+      setCommentColour("commentColour");
+    } else {
+      setHideComment("hide");
+      setCommentColour("");
+    }
+  }
+
+  // <CardHeader
+  //         avatar={
+  //           <Avatar aria-label="recipe">
+  //             <UserImage user={eventUser} width={"100%"} />
+  //           </Avatar>
+  //         }
+  //         title={
+  //           <Link to={`/bootcamper/${id}`} className="cardName">
+  //             {name} {surname}
+  //           </Link>
+  //         }
+  //       />
+
   if (!userLeftSide) {
     return (
       <Card className={cn(classes.root, hideCard)}>
         <CardHeader
           avatar={
-            <Avatar aria-label="recipe">
+            <div className="imgAvatar">
               <UserImage user={eventUser} width={"100%"} />
-            </Avatar>
+            </div>
           }
-          // action={
-          //   <IconButton aria-label="settings">
-          //     <MoreVertIcon />
-          //   </IconButton>
-          // }
           title={
             <Link to={`/bootcamper/${id}`} className="cardName">
               {name} {surname}
             </Link>
           }
-          // subheader={date}
         />
-        <div className="cardContainer cardTitle">
+        <div className="cardContainer2 cardTitle">
           <Link to={`/event/${eventid}`}>{eventname}</Link>
           <br />
           <p>{date}</p>
@@ -313,20 +337,6 @@ export default function EventCard({
             className="img"
           />
         </div>
-        {/* <CardMedia
-        className={classes.media}
-        image={
-          <Image
-            key={key}
-            cloudName="falcons"
-            publicId={image}
-            width="300"
-            crop="scale"
-          />
-        }
-        title="Paella dish"
-      /> */}
-
         <CardContent>
           <Typography variant="body2" color="textSecondary" component="p">
             People attending this event:
@@ -369,6 +379,10 @@ export default function EventCard({
             </IconButton>
           )}
 
+          <IconButton onClick={() => showComment()}>
+            <CommentIcon className={commentColour} />
+          </IconButton>
+
           <IconButton
             className={clsx(classes.expand, {
               [classes.expandOpen]: expanded,
@@ -394,6 +408,10 @@ export default function EventCard({
             {!eventlink && <Maps marker={marker} setMarker={setMarker} />}
           </CardContent>
         </Collapse>
+
+        <section className={`${hideComment} commentContainer`}>
+          <Comments eventid={eventid} />
+        </section>
 
         <section className={hide}>
           <CreateEvent

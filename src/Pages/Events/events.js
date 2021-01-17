@@ -168,7 +168,7 @@ function GetAllEvents() {
                         if (item.eventtype === "education") {
                           let date = new Date(item.date).toDateString();
                           return (
-                            <Grid item xs={3}>
+                            <Grid item xs={4}>
                               <Paper>
                                 <Card
                                   key={uuidv4()}
@@ -194,7 +194,7 @@ function GetAllEvents() {
                       if (item.eventtype === "social") {
                         let date = new Date(item.date).toDateString();
                         return (
-                          <Grid item xs={3}>
+                          <Grid item xs={4}>
                             <Paper>
                               <Card
                                 key={uuidv4()}
@@ -218,7 +218,7 @@ function GetAllEvents() {
                       if (item.eventtype === "community") {
                         let date = new Date(item.date).toDateString();
                         return (
-                          <Grid item xs={3}>
+                          <Grid item xs={4}>
                             <Paper>
                               <Card
                                 key={uuidv4()}

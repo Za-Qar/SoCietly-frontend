@@ -46,68 +46,72 @@ export default function JobUpdates() {
           return (
             index < 49 && (
               <div key={index} className={style.newJobSec}>
-                <UserImage user={item} alt={`${item.name} profile`} />
-                <div class={style.hoverme}>
-                  <span>🎉</span>
-                  <i></i>
-                  <i></i>
-                  <i></i>
-                  <i></i>
-                  <i></i>
-                  <i></i>
-                  <i></i>
-                  <i></i>
-                  <i></i>
-                  <i></i>
-                  <i></i>
-                  <i></i>
-                  <i></i>
-                  <i></i>
-                  <i></i>
-                  <i></i>
-                  <i></i>
-                  <i></i>
-                  <i></i>
-                  <i></i>
-                  <i></i>
-                  <i></i>
-                  <i></i>
-                  <i></i>
-                  <i></i>
-                  <i></i>
-                  <i></i>
-                  <i></i>
-                  <i></i>
-                  <i></i>
-                  <i></i>
-                  <i></i>
-                  <i></i>
-                  <i></i>
-                  <i></i>
-                  <i></i>
-                  <i></i>
-                  <i></i>
-                  <i></i>
-                  <i></i>
-                  <i></i>
-                  <i></i>
-                  <i></i>
-                  <i></i>
-                  <i></i>
-                  <i></i>
-                  <i></i>
-                  <i></i>
-                  <i></i>
-                  <i></i>
+                <div style={{ marginTop: "1rem" }}>
+                  <UserImage user={item} alt={`${item.name} profile`} />
                 </div>
-                <p className={style.name}>
-                  {item.name} {item.surname} started a new job!
-                </p>
-                <h5 className={style.title}>
-                  {" "}
-                  {item.jobtitle} at {item.employer}
-                </h5>
-                <h5 className={style.date}>{newStartDate}</h5>
+                <div className={style.textAlignLeft}>
+                  <div class={style.hoverme}>
+                    <span>🎉</span>
+                    <i></i>
+                    <i></i>
+                    <i></i>
+                    <i></i>
+                    <i></i>
+                    <i></i>
+                    <i></i>
+                    <i></i>
+                    <i></i>
+                    <i></i>
+                    <i></i>
+                    <i></i>
+                    <i></i>
+                    <i></i>
+                    <i></i>
+                    <i></i>
+                    <i></i>
+                    <i></i>
+                    <i></i>
+                    <i></i>
+                    <i></i>
+                    <i></i>
+                    <i></i>
+                    <i></i>
+                    <i></i>
+                    <i></i>
+                    <i></i>
+                    <i></i>
+                    <i></i>
+                    <i></i>
+                    <i></i>
+                    <i></i>
+                    <i></i>
+                    <i></i>
+                    <i></i>
+                    <i></i>
+                    <i></i>
+                    <i></i>
+                    <i></i>
+                    <i></i>
+                    <i></i>
+                    <i></i>
+                    <i></i>
+                    <i></i>
+                    <i></i>
+                    <i></i>
+                    <i></i>
+                    <i></i>
+                    <i></i>
+                    <i></i>
+                  </div>
+                  <p className={style.name}>
+                    {item.name} {item.surname} started a new job!
+                  </p>
+                  <h5 style={{ margin: "0" }}>
+                    {" "}
+                    {item.jobtitle} at {item.employer}
+                  </h5>
+                  <h5 className={style.date}>{newStartDate}</h5>
+                </div>
               </div>
             )
           );

@@ -12,26 +12,31 @@ profImgContainer {
 }
 
 .cohort1 {
-  border: 5px solid #bcd926;
+  background-color: #d7be69;
+  border: 5px solid #d7be69;
   border-radius: 50%;
 }
 
 .cohort2 {
-  border: 5px solid #bf4051;
+  border: 5px solid #bcd926;
+  background-color: #bcd926;
   border-radius: 50%;
 }
 
 .cohort3 {
   border: 5px solid #7ab4c8;
+  background-color: #7ab4c8;
   border-radius: 50%;
 }
 
 .cohort4 {
-  border: 5px solid #ae80de;
+  border: 5px solid #4169e1;
+  background-color: #4169e1;
   border-radius: 50%;
 }
 
 .cohort5 {
-  border: 5px solid #e2a31d;
+  border: 5px solid #ae80de;
+  background-color: #ae80de;
   border-radius: 50%;
 }

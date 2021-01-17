@@ -11,6 +11,8 @@ import { useUserContext } from "../../Context/userContext";
 //Config
 import { url } from "../../config";
 
+import cn from "classnames";
+
 // export default function UserLeftSide() {
 //   const [user, setUser] = useUserContext();
 //   return (
@@ -87,6 +89,7 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: "5px",
     marginTop: "5rem",
     zIndex: "500",
+    paddingBottom: "500px",
   },
   drawerHeader: {
     display: "flex",
@@ -190,29 +193,31 @@ export default function UserLeftSide() {
 
         <List>
           <section className={style.userSec}>
-            <UserImage user={user} width={"85px"} />
-            <UserInfo user={user} homepageEdit />
+            {/* <UserImage user={user} width={"85px"} /> */}
+            <UserInfo user={user} homepageEdit link width={"85px"} />
 
             <section className={`contentContainer`}>
               <h3>Events you're attending</h3>
-              <div className="marginTop">
-                <Grid container spacing={3}>
-                  {allEvents.map((item, index) => {
-                    if (item.attendinglist.includes(user.username)) {
-                      let date = new Date(item.date).toDateString();
-                      return (
-                        <div className="maxWidth">
-                          <Card
-                            key={index}
-                            date={date}
-                            item={item}
-                            userLeftSide
-                          />
-                        </div>
-                      );
-                    }
-                  })}
-                </Grid>
+              <div className={style.scroll}>
+                <div className={style.marginTop}>
+                  <Grid container spacing={3}>
+                    {allEvents.map((item, index) => {
+                      if (item.attendinglist.includes(user.username)) {
+                        let date = new Date(item.date).toDateString();
+                        return (
+                          <div className="maxWidth">
+                            <Card
+                              key={index}
+                              date={date}
+                              item={item}
+                              userLeftSide
+                            />
+                          </div>
+                        );
+                      }
+                    })}
+                  </Grid>
+                </div>
               </div>
             </section>
           </section>
