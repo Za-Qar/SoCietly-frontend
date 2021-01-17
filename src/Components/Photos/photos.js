@@ -12,9 +12,6 @@ import soc from "../../Images/soc_headshot.png";
 import tao from "../../Images/tao_headshot.jpg";
 import tim from "../../Images/tim_headshot.png";
 
-//styling
-import style from "./photos.module.css";
-
 export default function Photo({ photo }) {
   switch (photo) {
     case "ben":
