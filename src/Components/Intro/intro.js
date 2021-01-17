@@ -149,10 +149,18 @@ export default function Intro({ name }) {
           <Photo photo="devon" />
           <h3>Devon Geary</h3>
           <p>
-            NEED TO FND THIS OUT
+            Project Manager
             <br />
-            <br />
-            WAITING FOR THIS TOO
+            <br />I care about connecting people to build businesses, enhance
+            team performance, and facilitate inclusive and socially responsible
+            growth.
+            <br /> Broadly speaking, I enhance performance through
+            collaboration.
+            <br /> I’m an energetic, enthusiastic, and encouraging leader who
+            brings a fair dose of redheaded spunk to my teams to keep things
+            fun. I have expertise in trauma-informed Tech and theatre practice
+            (TBRIs, specifically) and am passionate about integrating diversity
+            and inclusion into every corner of professional life.
           </p>
           <div className={style.socials}>
             <a
@@ -228,7 +236,7 @@ export default function Intro({ name }) {
           <Photo photo="liz" />
           <h3>Liz Kaufman</h3>
           <p>
-            Course Assistant/Coach
+            Code Coach
             <br />
             <br />
             Hi, I'm Liz. I studied history and archaeology at uni, which was
@@ -362,7 +370,7 @@ export default function Intro({ name }) {
           <Photo photo="tao" />
           <h3>Tao Sharma</h3>
           <p>
-            Course Assistant/Coach
+            Code Coach
             <br />
             <br />
             Hello, my name's Tao. I used to be a social worker. I still want to
