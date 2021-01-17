@@ -18,3 +18,20 @@
   justify-content: space-evenly;
   align-items: flex-start;
 }
+
+.welcome {
+  margin-left: 2rem;
+}
+
+.welcome h3 {
+  color: #31986a;
+}
+
+.welcome h4 {
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
+html {
+  margin-top: 5rem;
+}

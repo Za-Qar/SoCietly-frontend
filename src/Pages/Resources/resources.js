@@ -17,7 +17,10 @@ import style from "./resources.module.css";
 export default function ResourcesPage() {
   return (
     <div>
-      <h3>Resources</h3>
+      <div className={style.welcome}>
+        <h3>Resources</h3>
+        <h4>Check out these helpful links!</h4>
+      </div>
       <div className={style.links}>
         <div className={style.card}>
           <a

@@ -7,10 +7,6 @@ import style from "./contact.module.css";
 export default function Contact() {
   return (
     <div>
-      <div className={style.welcome}>
-        <h3>Resources</h3>
-        <h4>Check out these helpful links!</h4>
-      </div>
       <div className={style.contacts}>
         <Intro name="soc" />
         <br />
