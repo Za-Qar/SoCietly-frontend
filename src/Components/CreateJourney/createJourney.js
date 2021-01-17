@@ -260,7 +260,7 @@ export default function CreateJourney({ signup, setSignup }) {
                 setUser(null);
                 setSignup(false);
               }}
-              className="button-blue continueButtonMargin"
+              className="button continueButtonMargin"
             >
               Continue to Home
             </button>

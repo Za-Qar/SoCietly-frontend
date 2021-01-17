@@ -37,7 +37,13 @@ export default function CohortContainer({ allAlumni, cohortValue }) {
               return (
                 <div key={item.name}>
                   {/* <UserImage user={item} /> */}
-                  <UserInfo link={true} key={index} user={item} alumni />
+                  <UserInfo
+                    link={true}
+                    key={index}
+                    user={item}
+                    alumni
+                    centre={false}
+                  />
                 </div>
               );
             }

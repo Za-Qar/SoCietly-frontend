@@ -10,7 +10,7 @@ import { Link } from "react-router-dom";
 import style from "./userImage.module.css";
 import cn from "classnames";
 
-export default function UserImage({ user, width = "60px" }) {
+export default function UserImage({ user, width = "60px", centre }) {
   const { profileimage, profileImage, name, cohort, id, uid } = user;
   const [styling, setStyling] = useState(null);
   const [cohortNumber, setCohortNumber] = useState(null);
@@ -41,7 +41,10 @@ export default function UserImage({ user, width = "60px" }) {
   }, []);
 
   return (
-    <div style={{ width: `${width}` }} className={style.image}>
+    <div
+      style={{ width: `${width}` }}
+      className={cn(style.image, centre && style.imageMargin)}
+    >
       <Link to={`/bootcamper/${id ? id : uid}`}>
         <img
           class={styling}

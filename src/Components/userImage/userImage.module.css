@@ -36,6 +36,9 @@ profImgContainer {
 .image {
   position: relative;
   /* width: 60px; */
+}
+
+.imageMargin {
   margin: auto;
 }
 
