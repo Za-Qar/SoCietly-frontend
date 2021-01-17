@@ -41,7 +41,7 @@ export default function UserImage({ user, width = "60px" }) {
   }, []);
 
   return (
-    <div className={style.image}>
+    <div style={{ width: `${width}` }} className={style.image}>
       <Link to={`/bootcamper/${id ? id : uid}`}>
         <img
           class={styling}

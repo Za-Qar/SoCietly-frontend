@@ -293,14 +293,27 @@ export default function EventCard({
     }
   }
 
+  // <CardHeader
+  //         avatar={
+  //           <Avatar aria-label="recipe">
+  //             <UserImage user={eventUser} width={"100%"} />
+  //           </Avatar>
+  //         }
+  //         title={
+  //           <Link to={`/bootcamper/${id}`} className="cardName">
+  //             {name} {surname}
+  //           </Link>
+  //         }
+  //       />
+
   if (!userLeftSide) {
     return (
       <Card className={cn(classes.root, hideCard)}>
         <CardHeader
           avatar={
-            <Avatar aria-label="recipe">
+            <div className="imgAvatar">
               <UserImage user={eventUser} width={"100%"} />
-            </Avatar>
+            </div>
           }
           title={
             <Link to={`/bootcamper/${id}`} className="cardName">

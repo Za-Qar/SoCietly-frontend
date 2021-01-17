@@ -109,7 +109,7 @@ function CreateEvent({
     } else {
       msg.description = msg.description + ".";
     }
-    await fetch(`http://localhost:3000/mail`, {
+    await fetch(`${url}/mail`, {
       method: "POST",
       body: JSON.stringify({
         to: ["za.qa@outlook.com", "qarout.zaid@gmail.com"],
