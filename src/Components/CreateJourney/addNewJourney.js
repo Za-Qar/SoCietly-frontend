@@ -8,11 +8,9 @@ import { Link } from "react-router-dom";
 import { url } from "../../config";
 
 //Context
-import { useAuthContext } from "../../Context/authContext";
 import { useUserContext } from "../../Context/userContext";
 
-//Components
-import Loading from "../../Components/Loading/loading";
+
 
 //Style
 import style from "../EditUserJourney/editUserJourney.module.css";

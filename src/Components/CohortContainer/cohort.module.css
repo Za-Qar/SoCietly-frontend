@@ -22,23 +22,23 @@
 }
 
 .cohort1 {
-  background-color: #bcd926;
+  background-color: #d7be69;
 }
 
 .cohort2 {
-  background-color: #bf4051;
-}
-
-.cohort3 {
   background-color: #7ab4c8;
 }
 
+.cohort3 {
+  background-color: #bcd926;
+}
+
 .cohort4 {
-  background-color: #ae80de;
+  background-color: #4169e1;
 }
 
 .cohort5 {
-  background-color: #e2a31d;
+  background-color: #ae80de;
 }
 
 .defaultCohort {

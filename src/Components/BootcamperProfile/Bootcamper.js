@@ -3,7 +3,7 @@ import { url } from "../../config";
 
 //React
 import { useState, useEffect } from "react";
-import { Redirect, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 //Components
 import UserInfo from "../UserInfo/userinfo";
@@ -11,9 +11,6 @@ import UserSkills from "../UserSkills/userskills";
 import UserIntro from "../UserIntro/userintro";
 import UserJourney from "../UserJourney/journey";
 import Loading from "../Loading/loading";
-
-//Context
-import { useUserContext } from "../../Context/userContext";
 
 //Style
 import style from "../UserProfile/profile.module.css";
