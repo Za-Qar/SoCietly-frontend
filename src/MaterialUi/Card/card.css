@@ -208,3 +208,7 @@ body.react-confirm-alert-body-element {
 .commentInput {
   width: 100%;
 }
+
+.imgAvatar {
+  width: 4rem;
+}
