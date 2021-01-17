@@ -16,6 +16,7 @@ import { useUserContext } from "../../Context/userContext";
 
 //Style
 import style from "./eventPage.module.css";
+import cn from "classnames";
 
 export default function EventPage() {
   // Importing user data
@@ -64,7 +65,7 @@ export default function EventPage() {
   //   }, [event]);
 
   return user && date ? (
-    <div>
+    <div className={style.row}>
       <UserLeftSide />
       <div className={style.eventPage}>
         <div className={style.eventPageContainer}>
