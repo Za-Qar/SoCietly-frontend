@@ -10,7 +10,7 @@ import { Link } from "react-router-dom";
 import style from "./userImage.module.css";
 import cn from "classnames";
 
-export default function UserImage({ user, width = "60px", centre }) {
+export default function UserImage({ user, width = "60px", centre, alumni }) {
   const { profileimage, profileImage, name, cohort, id, uid } = user;
   const [styling, setStyling] = useState(null);
   const [cohortNumber, setCohortNumber] = useState(null);
@@ -38,6 +38,13 @@ export default function UserImage({ user, width = "60px", centre }) {
     styleCohort();
   }, []);
 
+  let smallWidth = parseInt(width) / 4.5;
+  // style={{
+  //   width: `${smallWidth}px`,
+  //   height: `${smallWidth}px`,
+  //   fontSize: `${smallWidth}px`,
+  // }}
+
   return (
     <div
       style={{ width: `${width}` }}
@@ -52,7 +59,9 @@ export default function UserImage({ user, width = "60px", centre }) {
           className={`profImg ${styling}`}
         />
       </Link>
-      <div className={cn(style.cohort, styling)}>{cohortNumber}</div>
+      {!alumni && (
+        <div className={cn(style.cohort, styling)}>{cohortNumber}</div>
+      )}
     </div>
   );
 }

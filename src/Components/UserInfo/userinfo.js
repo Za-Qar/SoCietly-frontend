@@ -41,7 +41,7 @@ export default function UserInfo({
             style={{ textDecoration: "none", color: "black" }}
             activeStyle={{ textDecoration: "none", color: "black" }}
           >
-            <UserImage user={user} width={width} centre={centre} />
+            <UserImage user={user} width={width} centre={centre} alumni />
             <h3>{username ? username : `${name} ${surname}`}</h3>
           </NavLink>
         ) : (
