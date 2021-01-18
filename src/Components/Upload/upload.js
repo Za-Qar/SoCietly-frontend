@@ -9,7 +9,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCloudUploadAlt } from "@fortawesome/free-solid-svg-icons";
 
 export default function UploadImage({ setImageSelected }) {
-  const [fileInputState, setFileInputState] = useState("");
+  // const [fileInputState, setFileInputState] = useState("");
   const [selectedFile, setSelectedFile] = useState("");
   const [previewSource, setPreviewSource] = useState("");
 
@@ -26,7 +26,6 @@ export default function UploadImage({ setImageSelected }) {
       return;
     }
 
-    console.log("this is file size: ", FileSize);
     previewFile(file);
   }
 
@@ -43,7 +42,6 @@ export default function UploadImage({ setImageSelected }) {
     if (!previewSource) {
       return alert("please select an image to upload");
     }
-    console.log("this is submit Image: ", previewSource);
     setImageSelected(previewSource);
     setUploaded(true);
     // uploadImage(previewSource);
@@ -84,7 +82,7 @@ export default function UploadImage({ setImageSelected }) {
       {previewSource && (
         <img
           src={previewSource}
-          alt="your uploaded image"
+          alt="user uploaded document"
           className={style.img}
         />
       )}

@@ -32,9 +32,9 @@
 } */
 
 .buttonRight {
-  width: 100%;
+  /*width: 100%;*/
   text-align: right;
-  padding-right: 1rem;
+  padding-right: 0.5rem;
 }
 
 /* Responsive layout - makes the two columns stack on top of each other instead of next to each other */

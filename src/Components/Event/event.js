@@ -69,7 +69,7 @@ function Event({
 
   /*--------useStates--------*/
   const [like, setLike] = useState(0);
-  let [clicked, setClicked] = useState(false);
+  // let [clicked, setClicked] = useState(false);
 
   //To show and hide createEvents
   const [hide, setHide] = useState("hide");
@@ -96,7 +96,6 @@ function Event({
   }
 
   // let backEndLike = (likes, id) => {
-  //   console.log("User Input recieved", likes);
 
   //   fetch(`https://falcon5ives.herokuapp.com/events/${id}`, {
   //     method: "PATCH",
@@ -127,9 +126,7 @@ function Event({
   }
 
   // function likeClicked() {
-  //   console.log(clicked);
   //   clicked = false;
-  //   console.log("button clicked");
   // }
 
   //When button is clicked it re renders backend and displays on front end
@@ -139,8 +136,6 @@ function Event({
 
   // Delete Event
   let deleteEvent = (eventId) => {
-    console.log("delete", eventId);
-
     fetch(`${url}/events/${eventId}`, {
       method: "delete",
     })
@@ -152,7 +147,6 @@ function Event({
 
   // // Patch Event
   // let patchEvent = (eventId) => {
-  //   console.log("User Input recieved", msg);
   //   fetch(`https://falcon5ives.herokuapp.com/${eventId}`, {
   //     method: "PATCH",
   //     body: JSON.stringify({
@@ -176,19 +170,13 @@ function Event({
   //     .catch((error) => console.log("user creation error error: ", error));
   // };
 
-  function logging() {
-    console.log(attendinglist);
-    console.log(user.username);
-    console.log(id);
-  }
-
   if (volunteerlist)
     return (
       <div className={eventDiv}>
         <div className="row">
           <div className="column1">
             <div className="imgContainer">
-              <img src={image} className={imgClass} />
+              <img src={image} className={imgClass} alt="volunteers" />
             </div>
           </div>
           <div className="column2">

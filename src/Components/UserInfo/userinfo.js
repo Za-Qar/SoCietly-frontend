@@ -5,7 +5,7 @@ import style from "./userInfo.module.css";
 import cn from "classnames";
 
 //link
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 import UserImage from "../userImage/userImage";
 

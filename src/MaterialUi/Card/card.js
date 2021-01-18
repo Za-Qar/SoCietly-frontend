@@ -4,23 +4,17 @@ import { makeStyles } from "@material-ui/core/styles";
 import clsx from "clsx";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
-import CardMedia from "@material-ui/core/CardMedia";
 import CardContent from "@material-ui/core/CardContent";
 import CardActions from "@material-ui/core/CardActions";
 import Collapse from "@material-ui/core/Collapse";
-import Avatar from "@material-ui/core/Avatar";
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 import { red } from "@material-ui/core/colors";
 import FavoriteIcon from "@material-ui/icons/Favorite";
-import ShareIcon from "@material-ui/icons/Share";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import MoreVertIcon from "@material-ui/icons/MoreVert";
-import AddCircleIcon from "@material-ui/icons/AddCircle";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteForeverIcon from "@material-ui/icons/DeleteForever";
 import HowToRegIcon from "@material-ui/icons/HowToReg";
-import PanToolIcon from "@material-ui/icons/PanTool";
 import CommentIcon from "@material-ui/icons/Comment";
 
 //Config
@@ -41,9 +35,6 @@ import cn from "classnames";
 
 // User context
 import { useUserContext } from "../../Context/userContext";
-
-// Local svg
-import attendingIcon from "../../Images/checking-attendance.svg";
 
 // React Router Dom
 import { Link } from "react-router-dom";
@@ -206,7 +197,6 @@ export default function EventCard({
         {
           label: "Yes",
           onClick: () => {
-            console.log("delete", eventId);
             setHideCard("hide");
 
             fetch(`${url}/events/${eventid}`, {
@@ -230,7 +220,6 @@ export default function EventCard({
 
   /*---------------Add to Like Patch----------------*/
   let addToLike = (eventid, arr) => {
-    console.log(eventid, arr);
     fetch(`${url}/events/${eventid}`, {
       method: "PATCH",
       body: JSON.stringify({ likes: arr }),

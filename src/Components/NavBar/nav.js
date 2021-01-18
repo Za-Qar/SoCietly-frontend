@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 
 //images
-import soc from "../../Images/soc.png";
-import logo from "../../Images/logo.png";
 import socLogo from "../../Images/SoCietly_logo (2).svg";
 
 //components
@@ -18,14 +16,9 @@ import "./hamburger/dist/hamburgers.css";
 
 //router
 import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
+  BrowserRouter as Link,
   NavLink,
 } from "react-router-dom";
-
-import SiteLogo from "../Logo/logo";
 
 export default function NavBar() {
   const [user, setUser] = useUserContext();

@@ -31,11 +31,11 @@ import InputLabel from "@material-ui/core/InputLabel";
 
 export default function EditProfile({ setEdit, visible }) {
   // Context
-  const [authUser, loading, error] = useAuthContext();
+  const [authUser, loading] = useAuthContext();
   const [user, setUser] = useUserContext();
 
   // React Form
-  const { register, handleSubmit, watch, errors, control, reset } = useForm();
+  const { register, handleSubmit, control } = useForm();
 
   // State
   const [skills, setSkills] = useState([]);
@@ -67,7 +67,6 @@ export default function EditProfile({ setEdit, visible }) {
   function addToSkills(e) {
     e.preventDefault();
     if (skills.includes(skillInput)) {
-      console.log("item already added");
       return;
     }
     const newSkill = [...skills, skillInput];
@@ -81,14 +80,11 @@ export default function EditProfile({ setEdit, visible }) {
 
   function deleteSkill(index, e) {
     e.preventDefault();
-    console.log(index);
     const newSkills = [...skills.slice(0, index), ...skills.slice(index + 1)];
     setSkills(newSkills);
   }
 
   function submitProfile(msg) {
-    console.log("User Input recieved", msg);
-
     const {
       admin,
       name,

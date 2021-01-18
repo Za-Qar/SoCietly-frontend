@@ -16,7 +16,6 @@ import { useUserContext } from "../../Context/userContext";
 
 //Style
 import style from "./eventPage.module.css";
-import cn from "classnames";
 
 export default function EventPage() {
   // Importing user data
@@ -26,7 +25,7 @@ export default function EventPage() {
 
   const [event, setEvent] = useState("");
   const [date, setDate] = useState("");
-  const [eventUser, setEventUser] = useState("");
+  //const [eventUser, setEventUser] = useState("");
 
   // Fetch event by id
   useEffect(() => {

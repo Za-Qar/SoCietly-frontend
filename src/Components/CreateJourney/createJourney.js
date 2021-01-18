@@ -1,8 +1,6 @@
 //React
 import React, { useState, useEffect } from "react";
-import { Redirect } from "react-router-dom";
 import { useForm, Controller } from "react-hook-form";
-import { Link } from "react-router-dom";
 
 //Context
 import { useAuthContext } from "../../Context/authContext";
@@ -10,27 +8,20 @@ import { useUserContext } from "../../Context/userContext";
 
 //Components
 import Loading from "../../Components/Loading/loading";
-import { set } from "date-fns";
 import UserJourney from "../UserJourney/journey";
 
 // Mat ui
 import Grid from "@material-ui/core/Grid";
-import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
 import FormControl from "@material-ui/core/FormControl";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
-import Select from "@material-ui/core/Select";
-import MenuItem from "@material-ui/core/MenuItem";
 import { makeStyles } from "@material-ui/core/styles";
-import InputLabel from "@material-ui/core/InputLabel";
 
 // Styling
 import "./createJourney.css";
 
 export default function CreateJourney({ signup, setSignup }) {
   // Context
-  const [authUser, loading, error] = useAuthContext();
+  const [authUser] = useAuthContext();
   const [user, setUser] = useUserContext();
 
   // State
@@ -51,7 +42,7 @@ export default function CreateJourney({ signup, setSignup }) {
   }));
 
   // React Form
-  const { register, handleSubmit, watch, errors, control, reset } = useForm();
+  const { register, handleSubmit, control, reset } = useForm();
 
   useEffect(() => {
     async function getUser() {
@@ -77,8 +68,6 @@ export default function CreateJourney({ signup, setSignup }) {
   }, []);
 
   function createJourney(msg) {
-    console.log("User Input recieved", msg);
-
     const { employer, jobTitle, startDate, endDate, description } = msg;
 
     const newJourney = {

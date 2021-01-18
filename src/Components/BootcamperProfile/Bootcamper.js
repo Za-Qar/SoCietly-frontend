@@ -29,7 +29,6 @@ export default function BootcamperProfilePage() {
         let res = await fetch(`${url}/users/?id=${id}`);
         let data = await res.json();
         const user = data.payload[0];
-        // console.log(fetchData);
 
         setUserData(user);
       }

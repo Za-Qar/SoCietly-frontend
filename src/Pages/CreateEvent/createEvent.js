@@ -23,19 +23,12 @@ import ModalOverlay from "../../Components/ModalOverlay/modalOverlay.js";
 
 // Mat ui
 import Grid from "@material-ui/core/Grid";
-import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
 import FormControl from "@material-ui/core/FormControl";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 import { makeStyles } from "@material-ui/core/styles";
 import InputLabel from "@material-ui/core/InputLabel";
-
-import { withStyles } from "@material-ui/core/styles";
-import { purple } from "@material-ui/core/colors";
-import FormGroup from "@material-ui/core/FormGroup";
 import Switch from "@material-ui/core/Switch";
 
 function CreateEvent({
@@ -69,12 +62,12 @@ function CreateEvent({
   const [user] = useUserContext();
 
   // React Form
-  const { register, handleSubmit, watch, errors, control } = useForm();
+  const { register, handleSubmit, control } = useForm();
 
   // State
   const [complete, setComplete] = useState(false);
   const [imageSelected, setImageSelected] = useState(null);
-  const [onlineEvent, setOnlineEvent] = useState(false);
+  //const [onlineEvent, setOnlineEvent] = useState(false);
 
   const [hideMap, setHideMap] = useState("");
   const [hideLink, setHideLink] = useState("hide");
@@ -154,7 +147,6 @@ function CreateEvent({
       .then((res) => res.json())
       .then((data) => sendEmail(data, msg))
       .catch((error) => {
-        console.log("event creation error: ", error);
         setError(true);
       });
     setComplete(true);

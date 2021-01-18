@@ -1,6 +1,6 @@
 //React
 import React from "react";
-import { Redirect, Link } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 
 //Context
 import { useAuthContext } from "../../Context/authContext";
@@ -20,7 +20,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGoogle } from "@fortawesome/free-brands-svg-icons";
 
 export default function UserSignIn() {
-  const [authUser, loading, error] = useAuthContext();
+  const [authUser, loading] = useAuthContext();
 
   function handleGoogle() {
     signInWithGoogle();

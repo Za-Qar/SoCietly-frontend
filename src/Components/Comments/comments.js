@@ -1,8 +1,5 @@
 import React, { useState, useEffect } from "react";
 
-// React Router Dom
-import { Link } from "react-router-dom";
-
 // Config
 import { url } from "../../config.js";
 
@@ -14,7 +11,6 @@ import Comment from "../Comment/comment.js";
 
 // Styling
 import style from "./comments.module.css";
-import cn from "classnames";
 
 export default function Comments({ eventid }) {
   /*--------User context--------*/
@@ -31,7 +27,6 @@ export default function Comments({ eventid }) {
     const res = await fetch(`${url}/comments`);
     const data = await res.json();
     setAllComments(data.payload);
-    console.log(data.payload);
   }
 
   useEffect(() => {
@@ -87,7 +82,6 @@ export default function Comments({ eventid }) {
     ];
     setComment(newComment);
     createComment(inputValue);
-    console.log("this is comment: ", comment);
     setInputValue("");
   }
 

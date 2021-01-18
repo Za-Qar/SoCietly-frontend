@@ -1,13 +1,11 @@
 //React
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 
 //Config
 import { url } from "../../config";
 
 // Style
 import style from "./alumni.module.css";
-import cn from "classnames";
 
 // Components
 import CohortContainer from "../../Components/CohortContainer/cohortContainer";
