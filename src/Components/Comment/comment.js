@@ -14,7 +14,6 @@ import UserImage from "../userImage/userImage.js";
 
 // Styling
 import style from "./comment.module.css";
-import cn from "classnames";
 
 // Material ui
 import IconButton from "@material-ui/core/IconButton";
@@ -27,7 +26,6 @@ export default function Comment({ id, comments, newCommentId }) {
     name,
     surname,
     timedate,
-    commenteventid,
     profileimage,
     comment,
     cohort,
@@ -89,7 +87,6 @@ export default function Comment({ id, comments, newCommentId }) {
 
   /*---------------Add to Like Patch----------------*/
   let addToLike = (arr) => {
-    console.log(arr);
     fetch(`${url}/comments/${commendIdForPatch}`, {
       method: "PATCH",
       body: JSON.stringify({ likes: arr }),

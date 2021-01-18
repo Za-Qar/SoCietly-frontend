@@ -4,18 +4,12 @@ import React, { useState, useEffect } from "react";
 import { url } from "../../config";
 
 //Images
-import edu from "../../Images/edu.jpg";
-import social from "../../Images/social4.jpg";
-import social2 from "../../Images/social2.jpg";
 import undrawEdu from "../../Images/undraw_Graduation_ktn0.svg";
 import undrawSocial from "../../Images/undraw_goal_0v5v.svg";
 import undrawComm from "../../Images/undraw_community_8nwl.svg";
 
 //components
-import UserInfo from "../../Components/UserInfo/userinfo";
-import UserImage from "../../Components/userImage/userImage";
 import JobUpdates from "../../Components/jobUpdates/jobUpdates";
-import Event from "../../Components/Event/event.js";
 import Card from "../../MaterialUi/Card/card.js";
 import UserLeftSide from "../../Components/userLeftSide/userLeftSide.js";
 
@@ -209,7 +203,6 @@ export default function Homepage() {
                         let displayDate = eventTrans.toDateString();
 
                         if (eventDate >= now && eventDate <= inOneWeek) {
-                          console.log(item);
                           return (
                             <Event
                               key={index}

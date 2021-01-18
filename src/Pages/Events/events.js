@@ -6,7 +6,6 @@ import { v4 as uuidv4 } from "uuid";
 import { url } from "../../config";
 
 // Components
-import Event from "../../Components/Event/event.js";
 import UserLeftSide from "../../Components/userLeftSide/userLeftSide.js";
 
 // Material Ui
@@ -14,8 +13,6 @@ import Card from "../../MaterialUi/Card/card.js";
 import InputLabel from "@material-ui/core/InputLabel";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
-
-import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 
@@ -43,8 +40,6 @@ function GetAllEvents() {
       return [...acc, curr];
     }, []);
   }
-
-  // console.log(getEventType());
 
   /*---------------Add to Attend Patch----------------*/
   let addToAttend = (id, arr) => {
@@ -99,7 +94,6 @@ function GetAllEvents() {
       setHideEducation("");
     }
   }
-  console.log(getEventType(allEvents));
   return (
     <div>
       {user && (

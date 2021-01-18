@@ -17,7 +17,6 @@ import { DateTime } from "luxon";
 // Material UI
 import CustomizedTimeline from "../../MaterialUi/Timeline/timeline";
 import Timeline from "@material-ui/lab/Timeline";
-import IconButtons from "../../MaterialUi/Buttons/iconButton";
 
 export default function UserJourney({ showJourneyEdit, user, setUser }) {
   // Edit Journey State

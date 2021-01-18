@@ -1,7 +1,6 @@
 // React
 import { useState, useEffect } from "react";
-
-import { Redirect, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 //Config
 import { url } from "../../config";
@@ -9,17 +8,14 @@ import { url } from "../../config";
 // Context
 import { useUserContext } from "../../Context/userContext";
 
-//styling
-import style from "./profile.module.css";
-
 import BootCamperProfile from "../../Components/BootcamperProfile/Bootcamper";
 import UserProfilePage from "../../Components/UserProfile/userProfile";
 
 export default function ProfilePage() {
   const [user] = useUserContext();
-  const [edit, setEdit] = useState(false);
+  //const [edit, setEdit] = useState(false);
   const [userData, setUserData] = useState();
-  const [addJourney, setAddJourney] = useState(false);
+  //const [addJourney, setAddJourney] = useState(false);
 
   const { id } = useParams();
 
@@ -29,7 +25,6 @@ export default function ProfilePage() {
         let res = await fetch(`${url}/users/?id=${id}`);
         let data = await res.json();
         const user = data.payload[0];
-        // console.log(fetchData);
 
         setUserData(user);
       }

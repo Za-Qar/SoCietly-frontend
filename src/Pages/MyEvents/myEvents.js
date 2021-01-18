@@ -9,8 +9,6 @@ import { url } from "../../config";
 import { useUserContext } from "../../Context/userContext";
 
 // Components
-import Event from "../../Components/Event/event.js";
-import CreateEvent from "../../Pages/CreateEvent/createEvent.js";
 import Card from "../../MaterialUi/Card/card.js";
 import UserLeftSide from "../../Components/userLeftSide/userLeftSide.js";
 
@@ -29,7 +27,6 @@ export default function MyEvents({ profile = false }) {
       let res = await fetch(`${url}/userevents/${user?.uid}`);
       let userEvents = await res.json();
       setUserEvents(userEvents.payload);
-      console.log(userEvents.payload);
     }
   }
 
@@ -55,10 +52,9 @@ export default function MyEvents({ profile = false }) {
     delButClass: "myDelButClass",
   };
 
-  function logging() {
-    console.log(user);
-    fetchUserEvents();
-  }
+  // function logging() {
+  //   fetchUserEvents();
+  // }
 
   return (
     <div>
@@ -90,8 +86,6 @@ export default function MyEvents({ profile = false }) {
               {userEvents &&
                 userEvents.map((item, index) => {
                   let date = new Date(item.date).toDateString();
-
-                  console.log(item);
                   return (
                     <div className={style.card}>
                       <Card

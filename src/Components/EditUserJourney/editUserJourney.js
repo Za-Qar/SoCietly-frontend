@@ -1,5 +1,4 @@
 //React
-import { useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 
 //Config
@@ -31,11 +30,9 @@ export default function EditJourney({
   const { jobtitle, employer, description, id } = journeyItem;
 
   // React Form
-  const { handleSubmit, watch, errors, control } = useForm();
+  const { handleSubmit, control } = useForm();
 
   function submitJourney(msg) {
-    console.log("User Input recieved", msg);
-
     const { employer, jobTitle, startDate, endDate, description } = msg;
 
     const newJourney = {

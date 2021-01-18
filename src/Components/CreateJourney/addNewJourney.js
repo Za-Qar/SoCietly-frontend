@@ -1,16 +1,11 @@
 //React
-import { useState, useEffect } from "react";
-import { Redirect } from "react-router-dom";
 import { useForm, Controller } from "react-hook-form";
-import { Link } from "react-router-dom";
 
 //Config
 import { url } from "../../config";
 
 //Context
 import { useUserContext } from "../../Context/userContext";
-
-
 
 //Style
 import style from "../EditUserJourney/editUserJourney.module.css";
@@ -26,11 +21,9 @@ export default function AddNewJourney({ setAddJourney, addNewJourney }) {
   const [user, setUser] = useUserContext();
 
   // React Form
-  const { handleSubmit, watch, errors, control } = useForm();
+  const { handleSubmit, control } = useForm();
 
   function createNewJourney(msg) {
-    console.log("User Input recieved", msg);
-
     const { employer, jobTitle, startDate, endDate, description } = msg;
 
     const newJourney = {

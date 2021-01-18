@@ -5,7 +5,7 @@ import cn from "classnames";
 import UserImage from "../../Components/userImage/userImage";
 
 export default function UserIntro({ user }) {
-  const { name, introduction, profileImage } = user;
+  const { name, introduction } = user;
   return (
     <div>
       <div name="intro" className={cn(style.container)}>

@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useRef, useEffect } from "react";
+import React, { useCallback, useRef } from "react";
 import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
 
 // Styling
@@ -19,10 +19,10 @@ const options = {
   zoomControl: true,
 };
 
-const mapStyles = {
-  width: "100%",
-  height: "100%",
-};
+// const mapStyles = {
+//   width: "100%",
+//   height: "100%",
+// };
 
 function Maps({ marker, setMarker, isEditing }) {
   const { isLoaded, loadError } = useLoadScript({
@@ -31,10 +31,6 @@ function Maps({ marker, setMarker, isEditing }) {
   });
 
   function onMapClick(e) {
-    console.log({
-      lat: e.latLng.lat(),
-      lng: e.latLng.lng(),
-    });
     setMarker({
       lat: e.latLng.lat(),
       lng: e.latLng.lng(),

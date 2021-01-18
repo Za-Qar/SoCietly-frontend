@@ -37,7 +37,6 @@ function MapTwo() {
         setViewport(viewport);
       }}
       onClick={(e) => {
-        console.log(e.lngLat);
         setMarkers(e.lngLat);
       }}
     >

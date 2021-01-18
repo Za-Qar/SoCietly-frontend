@@ -8,7 +8,6 @@ export default function CloudinaryImage() {
     let res = await fetch("http://localhost:3000/users/imageupload");
     let data = await res.json();
     setImages(data);
-    console.log(data);
   }
 
   useEffect(() => {

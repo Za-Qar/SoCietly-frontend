@@ -11,7 +11,7 @@ import { url } from "../../config";
 import { useAuthContext } from "../../Context/authContext";
 
 //Auth
-import { signInWithGoogle, logout } from "../Firebase/auth";
+import { logout } from "../Firebase/auth";
 
 //Components
 import Loading from "../Loading/loading";
@@ -20,11 +20,8 @@ import Tags from "../../MaterialUi/tags/tags.js";
 
 // Mat ui
 import Grid from "@material-ui/core/Grid";
-import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
 import FormControl from "@material-ui/core/FormControl";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
 import { makeStyles } from "@material-ui/core/styles";
@@ -49,10 +46,10 @@ export default function Signup({ signup, setSignup }) {
   const classes = useStyles();
 
   // Context
-  const [authUser, loading, error] = useAuthContext();
+  const [authUser, loading] = useAuthContext();
 
   // React Form
-  const { register, handleSubmit, watch, errors, control } = useForm();
+  const { register, handleSubmit, control } = useForm();
 
   // State
   const [complete, setComplete] = useState(false);
@@ -100,8 +97,6 @@ export default function Signup({ signup, setSignup }) {
   }
 
   function createUser(msg) {
-    console.log("User Input recieved", msg);
-
     const {
       admin,
       name,

@@ -15,8 +15,6 @@ export default function UserImage({ user, width = "60px", centre }) {
   const [styling, setStyling] = useState(null);
   const [cohortNumber, setCohortNumber] = useState(null);
 
-  console.log("this is userImage: ", user);
-
   function styleCohort() {
     if (cohort === 1) {
       setStyling("cohort1");
