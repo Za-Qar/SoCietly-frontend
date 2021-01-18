@@ -16,9 +16,14 @@ import "./hamburger/dist/hamburgers.css";
 
 //router
 import {
-  BrowserRouter as Link,
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
   NavLink,
 } from "react-router-dom";
+
+import SiteLogo from "../Logo/logo";
 
 export default function NavBar() {
   const [user, setUser] = useUserContext();
