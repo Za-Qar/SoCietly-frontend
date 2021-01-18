@@ -444,9 +444,11 @@ export default function EventCard({
       <div className="attendingContainer">
         <Card className={cn(classes.root, hideCard)}>
           <div className="cardContainer attendingStyle">
-            <Link to={`/event/${eventid}`}>{eventname}</Link>
-            <br />
-            <p>{date}</p>
+            <Link to={`/event/${eventid}`} style={{ fontSize: "0.9rem" }}>
+              {eventname}
+            </Link>
+            {/* <br /> */}
+            <p style={{ margin: 0 }}>{date}</p>
           </div>
         </Card>
       </div>
