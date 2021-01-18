@@ -109,8 +109,18 @@ function GetAllEvents() {
             <div className="column1">
               <section className="columnTwo">
                 <div className="welcome">
-                  <h3>Hello {user?.username}</h3>
-                  <h4>Here are the current planned events</h4>
+                  <h3
+                    style={{
+                      fontSize: "1.9rem",
+                      marginTop: "0",
+                      marginBottom: "0",
+                    }}
+                  >
+                    Hello {user?.username} 👋
+                  </h3>
+                  <h4 style={{ marginTop: "0" }}>
+                    Here are the current planned events
+                  </h4>
                 </div>
                 <div className={style.buttons}>
                   <Link to="/createevent">
@@ -155,7 +165,10 @@ function GetAllEvents() {
                   >
                     <MenuItem value={"all"}>All</MenuItem>
                     {getEventType(allEvents).map((event) => {
-                      return <MenuItem value={event}>{event}</MenuItem>;
+                      const eventTitle = `${event
+                        .charAt(0)
+                        .toUpperCase()}${event.slice(1)}`;
+                      return <MenuItem value={event}>{eventTitle}</MenuItem>;
                     })}
                   </Select>
                 </div>

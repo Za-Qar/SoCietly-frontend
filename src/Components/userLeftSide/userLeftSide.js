@@ -196,8 +196,11 @@ export default function UserLeftSide() {
             {/* <UserImage user={user} width={"85px"} /> */}
             <UserInfo user={user} homepageEdit link width={"85px"} centre />
 
-            <section className={`contentContainer`}>
-              <h3>Events you're attending</h3>
+            <section
+              className={`contentContainer`}
+              style={{ paddingLeft: 0, paddingRight: 0, boxShadow: "none" }}
+            >
+              <h3>Events you're attending 📅</h3>
               <br />
               <div className={style.scroll}>
                 <div className={style.marginTop}>
