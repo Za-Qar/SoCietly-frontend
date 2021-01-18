@@ -68,12 +68,8 @@ export default function UploadImage({ setImageSelected }) {
     <div>
       <label for="fileUpload">
         <div
-          className={cn(
-            style.uploadButton,
-            "button-blue",
-            "marginBottom",
-            "maxWidth"
-          )}
+          style={{ width: "auto" }}
+          className={cn(style.uploadButton, "button-blue", "marginBottom")}
         >
           <FontAwesomeIcon icon={faCloudUploadAlt} /> Choose Event Image
         </div>
