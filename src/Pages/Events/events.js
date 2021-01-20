@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 
 //Config
@@ -30,6 +30,8 @@ function GetAllEvents() {
   const [attendingList, setAttendingList] = useState([]);
   const [filterValue, setFilterValue] = useState("");
 
+  const { id } = useParams();
+
   function getEventType(event) {
     let eventTypeArr = event.map((event) => event.eventtype);
 
@@ -58,6 +60,10 @@ function GetAllEvents() {
     let data = await res.json();
 
     setAllEvents(data.payload);
+    if (id) {
+      filter(id);
+      setFilterValue(id);
+    }
   }
 
   useEffect(() => {

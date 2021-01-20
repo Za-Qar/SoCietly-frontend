@@ -116,7 +116,7 @@ export default function Homepage() {
                 <section>
                   <div className={style.eventSec}>
                     <div className={style.eventSecSpan}>
-                      <Link to="/events">
+                      <Link to="/events/education">
                         <img
                           className={style.eventImage}
                           src={undrawEdu}
@@ -127,7 +127,7 @@ export default function Homepage() {
                     </div>
 
                     <span className={style.eventSecSpan}>
-                      <Link to="/events">
+                      <Link to="/events/community">
                         <h4>Community</h4>
                         <div className={style.img}>
                           <img
@@ -140,7 +140,7 @@ export default function Homepage() {
                     </span>
 
                     <span className={style.eventSecSpan}>
-                      <Link to="/events">
+                      <Link to="/events/social">
                         <h4>Social</h4>
                         <div className={style.img}>
                           <img

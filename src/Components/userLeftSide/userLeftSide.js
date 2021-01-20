@@ -193,7 +193,7 @@ export default function UserLeftSide() {
                 <div className={style.marginTop}>
                   <Grid container spacing={3}>
                     {allEvents.map((item, index) => {
-                      if (item.attendinglist.includes(user.username)) {
+                      if (item.attendinglist?.includes(user.username)) {
                         let date = new Date(item.date).toDateString();
                         return (
                           <div className="maxWidth">

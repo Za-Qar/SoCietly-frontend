@@ -47,6 +47,12 @@ export default function Index() {
           props={user}
           exact
         />
+        <AuthGuard
+          component={GetAllEvents}
+          path={"/events/:id"}
+          props={user}
+          exact
+        />
 
         <Route path={"/loading"} exact>
           <Loading />
