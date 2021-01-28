@@ -1,6 +1,6 @@
 # SoCietly
 
-## Community app for School of Code alumni
+## Community app for School of Code alumni. [View project](https://societly.netlify.app).
 ### Keeping all bootcampers connected after the School of Code
 
 *December 2020 - January 2021 - 4 week project*
